@@ -1,0 +1,35 @@
+---
+import "@fontsource-variable/geist";
+import "@fontsource-variable/geist-mono";
+import "@styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "One Construction · Жилые комплексы в Бишкеке",
+  description = "Премиальный девелопер. Архитектура без компромиссов, жилые комплексы в Бишкеке.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0B0F19" />
+    <link rel="icon" type="image/jpeg" href="/img/logo-watermark.jpeg" />
+    <title>{title}</title>
+  </head>
+  <body class="bg-ink-950 text-ink-100 font-sans antialiased">
+    <slot />
+    <div class="noise-overlay" aria-hidden="true"></div>
+
+    <script>
+      import "@/scripts/motion.ts";
+    </script>
+  </body>
+</html>

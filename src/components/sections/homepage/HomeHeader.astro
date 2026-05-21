@@ -1,0 +1,66 @@
+---
+/**
+ * HomeHeader — премиальный прозрачный header поверх Hero.
+ *
+ * Защита от любого фона:
+ *  - `top scrim`: linear gradient от ink-950/65 → transparent. Гарантирует
+ *    читаемость моно-меню даже на ярком дневном небе видео.
+ *  - Z-index = 50 (выше Hero и noise overlay 60? — noise ниже, у нас 60 на
+ *    глобальной странице. Header перекрывает Hero, носис идёт поверх).
+ *  - Подложка не блокирует pointer, скрим — pointer-events-none.
+ */
+const nav = [
+  { label: "ОБЪЕКТЫ", href: "#projects" },
+  { label: "О КОМПАНИИ", href: "#about" },
+  { label: "ПЛАНИРОВКИ", href: "#apartments" },
+  { label: "КОНТАКТЫ", href: "#contact" },
+];
+---
+
+<header class="header-enter fixed top-0 inset-x-0 z-50">
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-ink-950/65 via-ink-950/25 to-transparent"
+  >
+  </div>
+
+  <div class="flex items-center justify-between px-6 md:px-10 py-5">
+    <a href="/" class="group flex items-center gap-3" aria-label="One Construction — на главную">
+      <img
+        src="/img/logo-silver.jpeg"
+        alt=""
+        width="32"
+        height="32"
+        class="h-8 w-8 object-contain select-none"
+        draggable="false"
+      />
+      <span class="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-100 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-cobalt-400">
+        ONE CONSTRUCTION
+      </span>
+    </a>
+
+    <nav aria-label="Главное меню" class="hidden md:flex items-center gap-8">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class="group relative font-mono text-[11px] uppercase tracking-[0.22em] text-ink-100/85 hover:text-ink-100 transition-colors duration-300"
+          >
+            {item.label}
+            <span
+              aria-hidden="true"
+              class="absolute -bottom-1.5 left-0 h-px w-0 bg-cobalt-400 transition-[width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:w-full"
+            />
+          </a>
+        ))
+      }
+    </nav>
+
+    <a
+      href="#contact"
+      class="md:hidden font-mono text-[11px] uppercase tracking-[0.22em] text-ink-100"
+    >
+      МЕНЮ
+    </a>
+  </div>
+</header>

@@ -1,0 +1,42 @@
+---
+import Layout from "@layouts/Layout.astro";
+import HomeHeader from "@sections/homepage/HomeHeader.astro";
+import HomeHero from "@sections/homepage/HomeHero.astro";
+import HomeAbout from "@sections/homepage/HomeAbout.astro";
+import HomeProjects from "@sections/homepage/HomeProjects.astro";
+import HomeContact from "@sections/homepage/HomeContact.astro";
+---
+
+<Layout>
+  <HomeHeader />
+  <main>
+    <HomeHero />
+    <HomeAbout />
+    <HomeProjects />
+    <HomeContact />
+  </main>
+
+  <footer class="bg-ink-950 border-t-[0.5px] border-white/10 px-6 md:px-10 py-10 md:py-14">
+    <div class="grid grid-cols-12 gap-6 items-end">
+      <div class="col-span-12 md:col-span-6 flex items-center gap-3">
+        <img
+          src="/img/logo-silver.jpeg"
+          alt=""
+          width="28"
+          height="28"
+          class="h-7 w-7 object-contain select-none"
+          draggable="false"
+        />
+        <span class="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-300">
+          © 2026 ONE CONSTRUCTION KG · ВСЕ ПРАВА ЗАЩИЩЕНЫ
+        </span>
+      </div>
+      <div class="col-span-12 md:col-span-6 flex md:justify-end gap-6 mt-4 md:mt-0">
+        <span class="mono-detail">BUILD 0.1.0</span>
+        <span class="mono-detail">ASTRO 6.3</span>
+        <span class="mono-detail">BISHKEK · KG</span>
+      </div>
+    </div>
+  </footer>
+</Layout>
+

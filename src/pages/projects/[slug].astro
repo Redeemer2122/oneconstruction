@@ -1,0 +1,22 @@
+---
+/**
+ * Динамический роут страницы ЖК.
+ * Полная реализация — Фаза 2 (контент + галерея + спеки).
+ */
+import Layout from "@layouts/Layout.astro";
+
+export function getStaticPaths() {
+  // Phase 2: подтянуть из getCollection("projects").
+  return [];
+}
+
+const { slug } = Astro.params;
+---
+
+<Layout title={`ЖК · ${slug}`}>
+  <main class="min-h-[100dvh] px-6 py-24">
+    <p class="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-300">
+      PROJECT / {slug} / TBD_PHASE_02
+    </p>
+  </main>
+</Layout>

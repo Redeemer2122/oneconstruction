@@ -1,0 +1,89 @@
+---
+/**
+ * HomeHero — фулл-вьюпорт герой со светлым дневным видео-фоном.
+ *
+ * Стратегия читаемости (для любого контента, в т.ч. яркого дневного):
+ *   1. <video> autoplay/loop/muted/playsinline + poster fallback (если
+ *      видео не загрузится — Unsplash poster держит композицию).
+ *   2. Vignette overlay: radial gradient от прозрачного центра к ink-950
+ *      по краям. Углы и низ всегда тёмные, мягко.
+ *   3. Bottom scrim: linear gradient bottom→top, обеспечивает кобальтовое
+ *      пятно под мономикродеталями и подножием Hero.
+ *   4. Главная типографика `mix-blend-mode: difference` — буквы автоматом
+ *      становятся тёмными на белом небе и белыми на тенях. Никаких glow и
+ *      text-shadow. Это инженерное решение, не декорация.
+ *
+ * Видео-источник: stub-URL Pexels (общий CDN). В Фазе 3 заменится на
+ * собственное видео из public/video/hero-day.mp4 (съёмка Бишкека).
+ */
+const heroVideo =
+  "https://videos.pexels.com/video-files/3214448/3214448-uhd_3840_2160_25fps.mp4";
+const heroPoster =
+  "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=2400&q=85&auto=format&fit=crop";
+---
+
+<section
+  id="hero"
+  class="relative isolate min-h-[100dvh] w-full overflow-hidden bg-ink-950"
+>
+  <video
+    class="absolute inset-0 -z-10 h-full w-full object-cover"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    poster={heroPoster}
+    aria-hidden="true"
+  >
+    <source src={heroVideo} type="video/mp4" />
+  </video>
+
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10"
+    style="background: radial-gradient(ellipse at 50% 40%, transparent 0%, transparent 35%, oklch(0.16 0.018 258 / 0.55) 75%, oklch(0.16 0.018 258 / 0.85) 100%);"
+  >
+  </div>
+
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-1/3 bg-gradient-to-t from-ink-950 via-ink-950/55 to-transparent"
+  >
+  </div>
+
+  <div class="relative min-h-[100dvh] grid grid-cols-12 gap-0 px-6 md:px-10 pt-28 md:pt-40 pb-16">
+    <div class="col-span-12 md:col-span-9 flex flex-col justify-end">
+      <p class="mono-detail mb-8 md:mb-10 text-ink-100/75">
+        ID: 000 / DIGITAL SHOWROOM / BISHKEK · 2026
+      </p>
+      <h1
+        class="display text-[17vw] md:text-[11vw] leading-[0.86] tracking-[-0.045em] text-white"
+        style="mix-blend-mode: difference;"
+      >
+        <span class="headline-mask"><span>АРХИТЕКТУРА</span></span>
+        <span class="headline-mask"><span>БЕЗ КОМПРОМИССА</span></span>
+      </h1>
+    </div>
+
+    <aside class="col-span-12 md:col-span-3 md:pl-10 flex flex-col justify-end gap-5 mt-10 md:mt-0">
+      <span class="h-px w-12 bg-white/30" aria-hidden="true"></span>
+      <p class="text-sm text-ink-100/85 max-w-[36ch] leading-relaxed">
+        One Construction. Премиальные жилые комплексы в Бишкеке.
+        Стекло, сталь, кобальтовый ритм фасадов.
+      </p>
+      <a
+        href="#projects"
+        class="self-start mt-2 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-100 border-b-[0.5px] border-white/40 pb-1.5 transition-colors duration-300 hover:text-cobalt-400 hover:border-cobalt-400"
+      >
+        Смотреть объекты ↘
+      </a>
+    </aside>
+  </div>
+
+  <div class="absolute bottom-6 left-6 right-6 md:left-10 md:right-10 flex items-end justify-between text-ink-100/70 pointer-events-none">
+    <span class="mono-detail">42.8746° N · 74.5698° E</span>
+    <span class="mono-detail hidden md:inline">SCROLL ↓</span>
+  </div>
+</section>
+

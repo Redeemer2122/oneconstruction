@@ -1,0 +1,30 @@
+---
+/**
+ * Input — поле ввода со стальной hairline-границей.
+ * Фокус через тонкое кобальтовое подчеркивание, без glow и без скруглений.
+ */
+import type { HTMLAttributes } from "astro/types";
+
+type InputType = NonNullable<HTMLAttributes<"input">["type"]>;
+
+interface Props {
+  name: string;
+  label: string;
+  type?: InputType;
+  placeholder?: string;
+  required?: boolean;
+}
+
+const { name, label, type = "text", placeholder = "", required = false } = Astro.props;
+---
+
+<label class="flex flex-col gap-2">
+  <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-300">{label}</span>
+  <input
+    {name}
+    {type}
+    {placeholder}
+    {required}
+    class="bg-transparent border-0 border-b-[0.5px] border-white/15 px-0 py-3 text-base text-ink-100 placeholder:text-ink-500 outline-none transition-[border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] focus:border-cobalt-500"
+  />
+</label>

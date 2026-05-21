@@ -1,0 +1,106 @@
+---
+/**
+ * ProjectCard — карточка ЖК как «дорогая картина в стальной раме».
+ *
+ * Композиция:
+ *  - hairline-рамка (border-[0.5px] border-white/10), rounded-none.
+ *  - изображение в овер-обёртке overflow-hidden + scale-105 на hover
+ *    (медленный, 1.2s, ease-out-expo). НЕ дёрганый, НЕ bouncy.
+ *  - технические моно-детали выложены под фото в виде матрицы (ID,
+ *    координаты, статус). Никаких generic «Узнать больше →».
+ *
+ * Защита от любого фото: лёгкая scrim-маска снизу изображения для
+ * читаемости имени проекта, если хочется поверх; здесь имя вынесено
+ * под фото, scrim не нужен.
+ */
+interface Props {
+  slug: string;
+  name: string;
+  index: string;
+  cover: string;
+  location: string;
+  coordinates: string;
+  status: string;
+  units?: string;
+  /** Tailwind aspect class, e.g. `aspect-[4/5]` (default) or `aspect-[3/5]`. */
+  aspect?: string;
+}
+
+const {
+  slug,
+  name,
+  index,
+  cover,
+  location,
+  coordinates,
+  status,
+  units,
+  aspect = "aspect-[4/5]",
+} = Astro.props;
+---
+
+<article class="group flex flex-col">
+  <a
+    href={`/projects/${slug}`}
+    class="block border-[0.5px] border-white/10 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white/30 focus-visible:border-cobalt-400 focus-visible:outline-none"
+  >
+    <div class={`relative ${aspect} overflow-hidden bg-ink-900`}>
+      <img
+        src={cover}
+        alt={`ЖК ${name} — дневной рендер`}
+        loading="lazy"
+        decoding="async"
+        class="absolute inset-0 h-full w-full object-cover will-change-transform transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+      />
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/55 via-transparent to-transparent"
+      >
+      </div>
+      <span class="absolute top-4 left-4 font-mono text-[10px] uppercase tracking-[0.22em] text-ink-100/90">
+        {index}
+      </span>
+      <span class="absolute top-4 right-4 font-mono text-[10px] uppercase tracking-[0.22em] text-ink-100/90">
+        {status}
+      </span>
+    </div>
+
+    <div class="px-5 md:px-6 pt-6 pb-5 flex flex-col gap-5 border-t-[0.5px] border-white/10">
+      <h3 class="display text-3xl md:text-5xl leading-[0.92] tracking-tighter text-ink-100 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-cobalt-400">
+        {name}
+      </h3>
+
+      <dl class="grid grid-cols-2 gap-x-6 gap-y-3 mt-1">
+        <div class="flex flex-col gap-1">
+          <dt class="font-mono text-[9px] uppercase tracking-[0.22em] text-ink-400">
+            КООРДИНАТЫ
+          </dt>
+          <dd class="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-200">
+            {coordinates}
+          </dd>
+        </div>
+        <div class="flex flex-col gap-1">
+          <dt class="font-mono text-[9px] uppercase tracking-[0.22em] text-ink-400">
+            ЛОКАЦИЯ
+          </dt>
+          <dd class="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-200">
+            {location}
+          </dd>
+        </div>
+        {
+          units && (
+            <div class="flex flex-col gap-1 col-span-2">
+              <dt class="font-mono text-[9px] uppercase tracking-[0.22em] text-ink-400">
+                ПЛАНИРОВКИ
+              </dt>
+              <dd class="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-200">
+                {units}
+              </dd>
+            </div>
+          )
+        }
+      </dl>
+    </div>
+  </a>
+</article>
+

@@ -1,0 +1,107 @@
+---
+/**
+ * HomeProjects — секция объектов: Lotos, Yacht Village, Medina.
+ *
+ * Композиция: 3-column grid на desktop, single-column на mobile.
+ * НЕ identical 3-card pattern: каждой карточке свой ритм через
+ * разный index + status, плюс одна карточка чуть смещена по
+ * вертикали (zig-zag) для устранения слаженного 3-grid AI-look'а.
+ *
+ * Изображения — Unsplash, дневные модернистские рендеры. Phase 3:
+ * заменяются на собственные рендеры заказчика через Keystatic.
+ */
+import ProjectCard from "@modules/ProjectCard.astro";
+
+const projects = [
+  {
+    slug: "lotos",
+    name: "ЖК LOTOS",
+    index: "ID: 001",
+    cover:
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1600&q=85&auto=format&fit=crop",
+    location: "БИШКЕК, БОТАН. САД",
+    coordinates: "42.8412° N · 74.5891° E",
+    status: "СДАН · 2024",
+    units: "1 / 2 / 3-КОМН · 78 КВАРТИР",
+  },
+  {
+    slug: "yacht-village",
+    name: "YACHT VILLAGE",
+    index: "ID: 002",
+    cover:
+      "https://images.unsplash.com/photo-1542640244-7e672d6cef4e?w=1600&q=85&auto=format&fit=crop",
+    location: "ИССЫК-КУЛЬ · ЧОЛПОН-АТА",
+    coordinates: "42.6481° N · 77.0810° E",
+    status: "СТРОИТСЯ · СДАЧА 2026",
+    units: "ВИЛЛЫ + АПАРТАМЕНТЫ · 142 ЕДИНИЦЫ",
+  },
+  {
+    slug: "medina",
+    name: "ЖК MEDINA",
+    index: "ID: 003",
+    cover:
+      "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=85&auto=format&fit=crop",
+    location: "БИШКЕК, ЦЕНТР",
+    coordinates: "42.8746° N · 74.5698° E",
+    status: "СДАЁТСЯ · Q3 2025",
+    units: "1 / 2 / 3 / 4-КОМН · 264 КВАРТИРЫ",
+  },
+];
+---
+
+<section
+  id="projects"
+  class="relative bg-ink-950 px-6 md:px-10 py-32 md:py-44"
+>
+  <span data-reveal-line class="block h-px w-full bg-white/10 absolute top-0 left-0" aria-hidden="true"></span>
+
+  <header class="flex items-end justify-between mb-20 md:mb-32 pb-4 relative">
+    <div class="flex flex-col gap-4">
+      <span class="mono-detail" data-reveal>ОБЪЕКТЫ · 03</span>
+      <h2
+        class="display text-4xl md:text-7xl leading-[0.92] tracking-tighter text-ink-100"
+        data-reveal
+        style="--reveal-delay: 0.08s;"
+      >
+        Три проекта,<br />три температуры.
+      </h2>
+    </div>
+    <a
+      href="#contact"
+      data-reveal
+      style="--reveal-delay: 0.16s;"
+      class="hidden md:inline-block font-mono text-[11px] uppercase tracking-[0.22em] text-ink-200 border-b-[0.5px] border-white/40 pb-1.5 transition-colors duration-300 hover:text-cobalt-400 hover:border-cobalt-400"
+    >
+      Каталог планировок ↘
+    </a>
+    <span data-reveal-line class="block h-px w-full bg-white/10 absolute -bottom-4 left-0" aria-hidden="true"></span>
+  </header>
+
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-y-16 md:gap-y-0 md:gap-x-8">
+    <div
+      class="md:col-span-4 md:translate-y-0"
+      data-reveal
+      style="--reveal-delay: 0.05s;"
+    >
+      <ProjectCard {...projects[0]} aspect="aspect-[4/5]" />
+    </div>
+
+    <div
+      class="md:col-span-4 md:translate-y-24 lg:translate-y-32"
+      data-reveal
+      style="--reveal-delay: 0.18s;"
+    >
+      <ProjectCard {...projects[1]} aspect="aspect-[3/5]" />
+    </div>
+
+    <div
+      class="md:col-span-4 md:translate-y-8"
+      data-reveal
+      style="--reveal-delay: 0.32s;"
+    >
+      <ProjectCard {...projects[2]} aspect="aspect-[4/5]" />
+    </div>
+  </div>
+
+  <div class="md:h-32" aria-hidden="true"></div>
+</section>

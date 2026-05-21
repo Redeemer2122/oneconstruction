@@ -1,0 +1,22 @@
+---
+/**
+ * Badge — моноширинный технический тег, e.g. "ФАЗА 01".
+ */
+interface Props {
+  label: string;
+  tone?: "neutral" | "cobalt";
+}
+
+const { label, tone = "neutral" } = Astro.props;
+
+const tones = {
+  neutral: "border-white/15 text-ink-300",
+  cobalt: "border-cobalt-500/40 text-cobalt-400",
+};
+---
+
+<span
+  class={`inline-flex items-center px-2 py-1 border-[0.5px] font-mono text-[10px] uppercase tracking-[0.18em] ${tones[tone]}`}
+>
+  {label}
+</span>
