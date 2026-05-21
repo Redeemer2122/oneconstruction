@@ -13,13 +13,13 @@
  *      становятся тёмными на белом небе и белыми на тенях. Никаких glow и
  *      text-shadow. Это инженерное решение, не декорация.
  *
- * Видео-источник: stub-URL Pexels (общий CDN). В Фазе 3 заменится на
- * собственное видео из public/video/hero-day.mp4 (съёмка Бишкека).
+ * Видео-источник: Pixabay architecture footage (общий CDN). В Фазе 3
+ * заменится на собственное видео из public/video/hero-day.mp4.
  */
 const heroVideo =
-  "https://videos.pexels.com/video-files/3214448/3214448-uhd_3840_2160_25fps.mp4";
+  "https://cdn.pixabay.com/video/2024/07/11/220695_large.mp4";
 const heroPoster =
-  "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=2400&q=85&auto=format&fit=crop";
+  "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=2400&q=85&auto=format&fit=crop";
 ---
 
 <section
@@ -52,13 +52,13 @@ const heroPoster =
   >
   </div>
 
-  <div class="relative min-h-[100dvh] grid grid-cols-12 gap-0 px-6 md:px-10 pt-28 md:pt-40 pb-16">
-    <div class="col-span-12 md:col-span-9 flex flex-col justify-end">
+  <div class="relative min-h-[100dvh] grid grid-cols-12 gap-0 px-6 md:px-10 lg:px-12 pt-28 md:pt-40 pb-20 md:pb-24">
+    <div class="col-span-12 md:col-span-10 xl:col-span-9 flex flex-col justify-end min-w-0 pr-1 md:pr-4">
       <p class="mono-detail mb-8 md:mb-10 text-ink-100/75">
         ID: 000 / DIGITAL SHOWROOM / BISHKEK · 2026
       </p>
       <h1
-        class="display text-[17vw] md:text-[11vw] leading-[0.86] tracking-[-0.045em] text-white"
+        class="display text-[15.8vw] md:text-[9.35vw] xl:text-[9.1vw] leading-[0.94] tracking-[-0.035em] text-white max-w-[calc(100vw-3rem)] md:max-w-[calc(100vw-22rem)] xl:max-w-[calc(100vw-26rem)]"
         style="mix-blend-mode: difference;"
       >
         <span class="headline-mask"><span>АРХИТЕКТУРА</span></span>
@@ -86,4 +86,3 @@ const heroPoster =
     <span class="mono-detail hidden md:inline">SCROLL ↓</span>
   </div>
 </section>
-

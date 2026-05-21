@@ -12,7 +12,7 @@ import { useState } from "react";
 type Status = "idle" | "submitting" | "success" | "error";
 
 const inputClass =
-  "bg-transparent border-0 border-b-[0.5px] border-white/15 px-0 py-3 text-base text-ink-100 placeholder:text-ink-500 outline-none transition-[border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] focus:border-cobalt-500";
+  "bg-transparent border-0 border-b-[0.5px] border-white/15 px-0 py-3 text-base text-ink-100 placeholder:text-ink-500 outline-none transition-[border-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-cobalt-400/70 focus:border-cobalt-500";
 
 const labelClass = "flex flex-col gap-2";
 const labelTextClass =

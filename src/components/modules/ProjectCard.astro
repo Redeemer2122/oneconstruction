@@ -5,7 +5,7 @@
  * Композиция:
  *  - hairline-рамка (border-[0.5px] border-white/10), rounded-none.
  *  - изображение в овер-обёртке overflow-hidden + scale-105 на hover
- *    (медленный, 1.2s, ease-out-expo). НЕ дёрганый, НЕ bouncy.
+ *    (медленный, 1.5s, ease-out-expo). НЕ дёрганый, НЕ bouncy.
  *  - технические моно-детали выложены под фото в виде матрицы (ID,
  *    координаты, статус). Никаких generic «Узнать больше →».
  *
@@ -50,7 +50,7 @@ const {
         alt={`ЖК ${name} — дневной рендер`}
         loading="lazy"
         decoding="async"
-        class="absolute inset-0 h-full w-full object-cover will-change-transform transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+        class="absolute inset-0 h-full w-full object-cover will-change-transform transition-transform duration-[1500ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
       />
       <div
         aria-hidden="true"
@@ -103,4 +103,3 @@ const {
     </div>
   </a>
 </article>
-

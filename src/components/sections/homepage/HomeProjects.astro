@@ -4,8 +4,7 @@
  *
  * Композиция: 3-column grid на desktop, single-column на mobile.
  * НЕ identical 3-card pattern: каждой карточке свой ритм через
- * разный index + status, плюс одна карточка чуть смещена по
- * вертикали (zig-zag) для устранения слаженного 3-grid AI-look'а.
+ * разный index + status, плюс статичный zig-zag на внешних wrapper'ах.
  *
  * Изображения — Unsplash, дневные модернистские рендеры. Phase 3:
  * заменяются на собственные рендеры заказчика через Keystatic.
@@ -18,7 +17,7 @@ const projects = [
     name: "ЖК LOTOS",
     index: "ID: 001",
     cover:
-      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1600&q=85&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1758193431393-0aead94a6a1b?ixlib=rb-4.1.0&q=88&fm=jpg&crop=entropy&cs=srgb&w=1600",
     location: "БИШКЕК, БОТАН. САД",
     coordinates: "42.8412° N · 74.5891° E",
     status: "СДАН · 2024",
@@ -29,7 +28,7 @@ const projects = [
     name: "YACHT VILLAGE",
     index: "ID: 002",
     cover:
-      "https://images.unsplash.com/photo-1542640244-7e672d6cef4e?w=1600&q=85&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1760067537204-fe9b55b2f1b0?ixlib=rb-4.1.0&q=88&fm=jpg&crop=entropy&cs=srgb&w=1600",
     location: "ИССЫК-КУЛЬ · ЧОЛПОН-АТА",
     coordinates: "42.6481° N · 77.0810° E",
     status: "СТРОИТСЯ · СДАЧА 2026",
@@ -40,7 +39,7 @@ const projects = [
     name: "ЖК MEDINA",
     index: "ID: 003",
     cover:
-      "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=85&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1748440290920-9033ca4e1468?ixlib=rb-4.1.0&q=88&fm=jpg&crop=entropy&cs=srgb&w=1600",
     location: "БИШКЕК, ЦЕНТР",
     coordinates: "42.8746° N · 74.5698° E",
     status: "СДАЁТСЯ · Q3 2025",
@@ -51,7 +50,7 @@ const projects = [
 
 <section
   id="projects"
-  class="relative bg-ink-950 px-6 md:px-10 py-32 md:py-44"
+  class="relative bg-ink-950 px-6 md:px-10 pt-32 md:pt-44 pb-24 md:pb-32 border-b-[0.5px] border-white/10 scroll-mt-28"
 >
   <span data-reveal-line class="block h-px w-full bg-white/10 absolute top-0 left-0" aria-hidden="true"></span>
 
@@ -77,31 +76,23 @@ const projects = [
     <span data-reveal-line class="block h-px w-full bg-white/10 absolute -bottom-4 left-0" aria-hidden="true"></span>
   </header>
 
-  <div class="grid grid-cols-1 md:grid-cols-12 gap-y-16 md:gap-y-0 md:gap-x-8">
-    <div
-      class="md:col-span-4 md:translate-y-0"
-      data-reveal
-      style="--reveal-delay: 0.05s;"
-    >
-      <ProjectCard {...projects[0]} aspect="aspect-[4/5]" />
+  <div class="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-y-16 md:gap-y-0 md:gap-x-8">
+    <div class="md:col-span-4 md:translate-y-0">
+      <div data-reveal style="--reveal-delay: 0.05s;">
+        <ProjectCard {...projects[0]} aspect="aspect-[4/5]" />
+      </div>
     </div>
 
-    <div
-      class="md:col-span-4 md:translate-y-24 lg:translate-y-32"
-      data-reveal
-      style="--reveal-delay: 0.18s;"
-    >
-      <ProjectCard {...projects[1]} aspect="aspect-[3/5]" />
+    <div class="md:col-span-4 md:translate-y-24 lg:translate-y-32">
+      <div data-reveal style="--reveal-delay: 0.18s;">
+        <ProjectCard {...projects[1]} aspect="aspect-[3/5]" />
+      </div>
     </div>
 
-    <div
-      class="md:col-span-4 md:translate-y-8"
-      data-reveal
-      style="--reveal-delay: 0.32s;"
-    >
-      <ProjectCard {...projects[2]} aspect="aspect-[4/5]" />
+    <div class="md:col-span-4 md:translate-y-8">
+      <div data-reveal style="--reveal-delay: 0.32s;">
+        <ProjectCard {...projects[2]} aspect="aspect-[4/5]" />
+      </div>
     </div>
   </div>
-
-  <div class="md:h-32" aria-hidden="true"></div>
 </section>

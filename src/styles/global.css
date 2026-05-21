@@ -64,7 +64,31 @@ html {
 
 body {
   min-height: 100dvh;
-  background: var(--color-ink-950);
+  background-color: var(--color-ink-950);
+  background-image:
+    linear-gradient(to right, oklch(0.96 0.003 258 / 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.96 0.003 258 / 0.03) 1px, transparent 1px),
+    radial-gradient(circle at 18% 12%, oklch(0.52 0.16 258 / 0.08), transparent 32rem);
+  background-size: 96px 96px, 96px 96px, 100% 100%;
+  background-attachment: fixed;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, oklch(0.96 0.003 258 / 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.96 0.003 258 / 0.035) 1px, transparent 1px);
+  background-size: 96px 96px;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 16%, black 88%, transparent 100%);
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* Scale Shock — display headline default */
@@ -122,7 +146,10 @@ html.lenis body {
 /* Hero headline mask. Each line wrapped in .headline-mask, inner span slides up. */
 .headline-mask {
   display: block;
-  overflow: hidden;
+  overflow: clip;
+  padding-block: 0.04em 0.09em;
+  padding-inline-end: 0.08em;
+  margin-block: -0.04em -0.09em;
   line-height: inherit;
 }
 .headline-mask > span {
