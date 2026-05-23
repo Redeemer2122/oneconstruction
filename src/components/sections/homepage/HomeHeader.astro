@@ -1,13 +1,11 @@
 ---
 /**
- * HomeHeader — премиальный прозрачный header поверх Hero.
+ * HomeHeader — премиальный header поверх Hero. Светлая тема.
  *
- * Защита от любого фона:
- *  - `top scrim`: linear gradient от ink-950/65 → transparent. Гарантирует
- *    читаемость моно-меню даже на ярком дневном небе видео.
- *  - Z-index = 50 (выше Hero и noise overlay 60? — noise ниже, у нас 60 на
- *    глобальной странице. Header перекрывает Hero, носис идёт поверх).
- *  - Подложка не блокирует pointer, скрим — pointer-events-none.
+ *  - Базовый цвет ссылок: холодный стальной (text-slate-400).
+ *  - Ховер: королевский фиолетовый (text-violet-600) + микро-маркер слева.
+ *  - Мобильное меню-шторка: прямоугольный full-screen overlay,
+ *    без скруглений, моноширинная навигация.
  */
 const nav = [
   { label: "ОБЪЕКТЫ", href: "#projects" },
@@ -20,7 +18,7 @@ const nav = [
 <header class="header-enter fixed top-0 inset-x-0 z-50">
   <div
     aria-hidden="true"
-    class="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-ink-950/65 via-ink-950/25 to-transparent"
+    class="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-alabaster/90 via-alabaster/55 to-transparent"
   >
   </div>
 
@@ -34,7 +32,7 @@ const nav = [
         class="h-8 w-8 object-contain select-none"
         draggable="false"
       />
-      <span class="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-100 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-cobalt-400">
+      <span class="font-mono text-[11px] uppercase tracking-[0.22em] text-slate-900 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-violet-600">
         ONE CONSTRUCTION
       </span>
     </a>
@@ -44,23 +42,92 @@ const nav = [
         nav.map((item) => (
           <a
             href={item.href}
-            class="group relative font-mono text-[11px] uppercase tracking-[0.22em] text-ink-100/85 hover:text-ink-100 transition-colors duration-300"
+            class="group relative inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-slate-400 hover:text-violet-600 transition-colors duration-300"
           >
+            <span
+              aria-hidden="true"
+              class="block h-1 w-1 bg-violet-600 opacity-0 -translate-x-1 transition-[opacity,transform] duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:opacity-100 group-hover:translate-x-0"
+            />
             {item.label}
             <span
               aria-hidden="true"
-              class="absolute -bottom-1.5 left-0 h-px w-0 bg-cobalt-400 transition-[width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:w-full"
+              class="absolute -bottom-1.5 left-0 h-px w-0 bg-violet-600 transition-[width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:w-full"
             />
           </a>
         ))
       }
     </nav>
 
-    <a
-      href="#contact"
-      class="md:hidden font-mono text-[11px] uppercase tracking-[0.22em] text-ink-100"
+    <button
+      type="button"
+      id="mobile-menu-trigger"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
+      class="md:hidden font-mono text-[11px] uppercase tracking-[0.22em] text-slate-900"
     >
       МЕНЮ
-    </a>
+    </button>
+  </div>
+
+  <!-- Мобильная меню-шторка: строгий прямоугольный full-screen overlay. -->
+  <div
+    id="mobile-menu"
+    aria-hidden="true"
+    class="md:hidden fixed inset-0 z-40 bg-alabaster opacity-0 pointer-events-none transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] data-[open=true]:opacity-100 data-[open=true]:pointer-events-auto"
+    data-open="false"
+  >
+    <div class="flex items-center justify-between px-6 py-5 border-b-[0.5px] border-slate-200">
+      <span class="font-mono text-[11px] uppercase tracking-[0.22em] text-slate-900">
+        ONE CONSTRUCTION
+      </span>
+      <button
+        type="button"
+        id="mobile-menu-close"
+        aria-label="Закрыть меню"
+        class="font-mono text-[11px] uppercase tracking-[0.22em] text-slate-900"
+      >
+        ЗАКРЫТЬ ×
+      </button>
+    </div>
+    <nav aria-label="Мобильное меню" class="flex flex-col">
+      {
+        nav.map((item, idx) => (
+          <a
+            href={item.href}
+            data-mobile-nav-link
+            class="flex items-center justify-between px-6 py-6 border-b-[0.5px] border-slate-200 font-mono text-base uppercase tracking-[0.18em] text-slate-900 transition-colors duration-300 hover:text-violet-600"
+          >
+            <span>{item.label}</span>
+            <span class="font-mono text-[10px] tracking-[0.22em] text-slate-400">
+              {String(idx + 1).padStart(2, "0")}
+            </span>
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="absolute bottom-6 inset-x-6 flex items-center justify-between">
+      <span class="mono-detail">BISHKEK · KG</span>
+      <span class="mono-detail">42.87° N · 74.57° E</span>
+    </div>
   </div>
 </header>
+
+<script>
+  const trigger = document.getElementById("mobile-menu-trigger");
+  const close = document.getElementById("mobile-menu-close");
+  const menu = document.getElementById("mobile-menu");
+  const links = document.querySelectorAll<HTMLAnchorElement>("[data-mobile-nav-link]");
+
+  const setOpen = (open: boolean) => {
+    if (!menu || !trigger) return;
+    menu.dataset.open = String(open);
+    menu.setAttribute("aria-hidden", String(!open));
+    trigger.setAttribute("aria-expanded", String(open));
+    document.documentElement.style.overflow = open ? "hidden" : "";
+  };
+
+  trigger?.addEventListener("click", () => setOpen(true));
+  close?.addEventListener("click", () => setOpen(false));
+  links.forEach((l) => l.addEventListener("click", () => setOpen(false)));
+</script>

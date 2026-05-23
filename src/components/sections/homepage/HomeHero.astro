@@ -2,19 +2,14 @@
 /**
  * HomeHero — фулл-вьюпорт герой со светлым дневным видео-фоном.
  *
- * Стратегия читаемости (для любого контента, в т.ч. яркого дневного):
- *   1. <video> autoplay/loop/muted/playsinline + poster fallback (если
- *      видео не загрузится — Unsplash poster держит композицию).
- *   2. Vignette overlay: radial gradient от прозрачного центра к ink-950
- *      по краям. Углы и низ всегда тёмные, мягко.
- *   3. Bottom scrim: linear gradient bottom→top, обеспечивает кобальтовое
- *      пятно под мономикродеталями и подножием Hero.
- *   4. Главная типографика `mix-blend-mode: difference` — буквы автоматом
- *      становятся тёмными на белом небе и белыми на тенях. Никаких glow и
- *      text-shadow. Это инженерное решение, не декорация.
- *
- * Видео-источник: Pixabay architecture footage (общий CDN). В Фазе 3
- * заменится на собственное видео из public/video/hero-day.mp4.
+ * Светлая стратегия читаемости:
+ *  1. <video> autoplay/loop/muted/playsinline + poster fallback.
+ *  2. Soft scrim: лёгкий алебастровый градиент по краям и снизу — никаких
+ *     тёмных вьеток, только воздушная тонировка для контраста типографики.
+ *  3. Главная типографика — глубокий графит. Mix-blend-mode исключён,
+ *     потому что светлая тема требует предсказуемого тонального контраста.
+ *  4. Мобильный H1: text-[14vw] чтобы заголовок гарантированно влезал и
+ *     не вызывал горизонтального скролла.
  */
 const heroVideo =
   "https://cdn.pixabay.com/video/2024/07/11/220695_large.mp4";
@@ -24,10 +19,10 @@ const heroPoster =
 
 <section
   id="hero"
-  class="relative isolate min-h-[100dvh] w-full overflow-hidden bg-ink-950"
+  class="relative isolate min-h-[100dvh] w-full overflow-hidden bg-alabaster"
 >
   <video
-    class="absolute inset-0 -z-10 h-full w-full object-cover"
+    class="absolute inset-0 -z-10 h-full w-full object-cover opacity-90"
     autoplay
     muted
     loop
@@ -42,24 +37,23 @@ const heroPoster =
   <div
     aria-hidden="true"
     class="pointer-events-none absolute inset-0 -z-10"
-    style="background: radial-gradient(ellipse at 50% 40%, transparent 0%, transparent 35%, oklch(0.16 0.018 258 / 0.55) 75%, oklch(0.16 0.018 258 / 0.85) 100%);"
+    style="background: radial-gradient(ellipse at 50% 40%, oklch(0.98 0.003 60 / 0.15) 0%, oklch(0.98 0.003 60 / 0.35) 55%, oklch(0.98 0.003 60 / 0.75) 100%);"
   >
   </div>
 
   <div
     aria-hidden="true"
-    class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-1/3 bg-gradient-to-t from-ink-950 via-ink-950/55 to-transparent"
+    class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-t from-alabaster via-alabaster/70 to-transparent"
   >
   </div>
 
   <div class="relative min-h-[100dvh] grid grid-cols-12 gap-0 px-6 md:px-10 lg:px-12 pt-28 md:pt-40 pb-20 md:pb-24">
     <div class="col-span-12 md:col-span-10 xl:col-span-9 flex flex-col justify-end min-w-0 pr-1 md:pr-4">
-      <p class="mono-detail mb-8 md:mb-10 text-ink-100/75">
+      <p class="mono-detail mb-8 md:mb-10 text-slate-600">
         ID: 000 / DIGITAL SHOWROOM / BISHKEK · 2026
       </p>
       <h1
-        class="display text-[15.8vw] md:text-[9.35vw] xl:text-[9.1vw] leading-[0.94] tracking-[-0.035em] text-white max-w-[calc(100vw-3rem)] md:max-w-[calc(100vw-22rem)] xl:max-w-[calc(100vw-26rem)]"
-        style="mix-blend-mode: difference;"
+        class="display text-[14vw] md:text-[9vw] xl:text-[8.6vw] leading-[0.94] tracking-[-0.035em] text-slate-900 max-w-full"
       >
         <span class="headline-mask"><span>АРХИТЕКТУРА</span></span>
         <span class="headline-mask"><span>БЕЗ КОМПРОМИССА</span></span>
@@ -67,21 +61,21 @@ const heroPoster =
     </div>
 
     <aside class="col-span-12 md:col-span-3 md:pl-10 flex flex-col justify-end gap-5 mt-10 md:mt-0">
-      <span class="h-px w-12 bg-white/30" aria-hidden="true"></span>
-      <p class="text-sm text-ink-100/85 max-w-[36ch] leading-relaxed">
+      <span class="h-px w-12 bg-slate-400" aria-hidden="true"></span>
+      <p class="text-sm text-slate-700 max-w-[36ch] leading-relaxed">
         One Construction. Премиальные жилые комплексы в Бишкеке.
-        Стекло, сталь, кобальтовый ритм фасадов.
+        Стекло, сталь, выверенный архитектурный ритм.
       </p>
       <a
         href="#projects"
-        class="self-start mt-2 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-100 border-b-[0.5px] border-white/40 pb-1.5 transition-colors duration-300 hover:text-cobalt-400 hover:border-cobalt-400"
+        class="self-start mt-2 font-mono text-[11px] uppercase tracking-[0.22em] text-slate-900 border-b-[0.5px] border-slate-400 pb-1.5 transition-colors duration-300 hover:text-violet-600 hover:border-violet-600"
       >
         Смотреть объекты ↘
       </a>
     </aside>
   </div>
 
-  <div class="absolute bottom-6 left-6 right-6 md:left-10 md:right-10 flex items-end justify-between text-ink-100/70 pointer-events-none">
+  <div class="absolute bottom-6 left-6 right-6 md:left-10 md:right-10 flex items-end justify-between text-slate-600 pointer-events-none">
     <span class="mono-detail">42.8746° N · 74.5698° E</span>
     <span class="mono-detail hidden md:inline">SCROLL ↓</span>
   </div>

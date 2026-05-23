@@ -12,11 +12,11 @@ import { useState } from "react";
 type Status = "idle" | "submitting" | "success" | "error";
 
 const inputClass =
-  "bg-transparent border-0 border-b-[0.5px] border-white/15 px-0 py-3 text-base text-ink-100 placeholder:text-ink-500 outline-none transition-[border-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-cobalt-400/70 focus:border-cobalt-500";
+  "bg-transparent border-0 border-b-[0.5px] border-slate-300 px-0 py-3 text-base text-slate-900 placeholder:text-slate-400 outline-none transition-[border-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-violet-500 focus:border-violet-600";
 
 const labelClass = "flex flex-col gap-2";
 const labelTextClass =
-  "font-mono text-[10px] uppercase tracking-[0.22em] text-ink-300";
+  "font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -72,7 +72,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={isBusy || isDone}
-          className="group self-start inline-flex items-center gap-3 px-6 py-3.5 border-[0.5px] border-ink-100 bg-ink-100 text-ink-950 font-mono text-[11px] uppercase tracking-[0.22em] transition-[transform,background-color,color,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.98] disabled:opacity-60 hover:bg-cobalt-500 hover:text-ink-100 hover:border-cobalt-500"
+          className="group self-start inline-flex items-center gap-3 px-6 py-3.5 border-[0.5px] border-slate-900 bg-slate-900 text-alabaster font-mono text-[11px] uppercase tracking-[0.22em] transition-[transform,background-color,color,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.98] disabled:opacity-60 hover:bg-violet-600 hover:text-white hover:border-violet-600"
         >
           {isBusy ? "ОТПРАВЛЯЕМ" : isDone ? "ПРИНЯТО" : "ОТПРАВИТЬ ЗАЯВКУ"}
           <span
@@ -81,7 +81,7 @@ export default function ContactForm() {
           />
         </button>
 
-        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-ink-400 max-w-[42ch] leading-relaxed">
+        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500 max-w-[42ch] leading-relaxed">
           Перезвоним в течение 4 часов в рабочее время. По телефону уточним
           интерес, пришлём паспорта планировок.
         </p>

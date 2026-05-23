@@ -78,6 +78,12 @@
       "sourceType": "github",
       "skillPath": "skills/stitch-skill/SKILL.md",
       "computedHash": "acf2921a7e50c06e637f072ba52e36a994cbb44ecbe6e31435bc113b894f5499"
+    },
+    "watch": {
+      "source": "bradautomates/claude-video",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "4dbd97f160e196ca367f330ad81285f57f8d16481e625d9ff4d37fc4df48069e"
     }
   }
 }

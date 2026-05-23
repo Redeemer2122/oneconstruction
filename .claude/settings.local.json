@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx skills *)",
+      "Bash(npx playwright *)",
+      "Bash(npm install *)",
+      "Bash(claude plugin *)",
+      "Bash(claude marketplace *)",
+      "Bash(claude doctor *)",
+      "Bash(npm run *)"
+    ]
+  }
+}
