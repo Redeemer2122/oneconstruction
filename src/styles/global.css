@@ -125,6 +125,53 @@ body > * {
 }
 
 /* ========================================================================
+   SECTION STITCHES — soft tonal cross-section seams.
+   Each helper paints an 80px gradient inside the section that fades the
+   PREVIOUS section's surface tone into the CURRENT one. Pointer-events
+   none, sits above section bg but below content (body > * is z-index 1
+   and stitches use z-index 0 within the section).
+   Palette order on home:
+     Hero  alabaster  →  About limestone  →  Projects limestone
+       →  Contact alabaster.
+   ======================================================================== */
+.section-stitch-top,
+.section-stitch-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 96px;
+  pointer-events: none;
+  z-index: 0;
+}
+.section-stitch-top  { top: 0;    }
+.section-stitch-bottom { bottom: 0; }
+
+/* alabaster → bone (Hero ↓ About) */
+.stitch-alabaster-to-bone {
+  background: linear-gradient(
+    to bottom,
+    var(--color-alabaster) 0%,
+    var(--color-bone) 100%
+  );
+}
+/* bone → limestone (About ↓ Projects) */
+.stitch-bone-to-limestone {
+  background: linear-gradient(
+    to bottom,
+    var(--color-bone) 0%,
+    var(--color-limestone) 100%
+  );
+}
+/* limestone → alabaster (Projects ↓ Contact) */
+.stitch-limestone-to-alabaster {
+  background: linear-gradient(
+    to bottom,
+    var(--color-limestone) 0%,
+    var(--color-alabaster) 100%
+  );
+}
+
+/* ========================================================================
    LENIS SMOOTH SCROLL — required class hooks
    Lenis 1.x вешает на <html> классы `lenis` и `lenis-smooth`.
    ======================================================================== */

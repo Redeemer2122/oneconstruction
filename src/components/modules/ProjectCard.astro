@@ -24,6 +24,8 @@ interface Props {
   units?: string;
   /** Tailwind aspect class, e.g. `aspect-[4/5]` (default) or `aspect-[3/5]`. */
   aspect?: string;
+  /** When true, card stretches to fill its parent height (used in horizontal scroll-pin slides). */
+  fill?: boolean;
 }
 
 const {
@@ -36,15 +38,16 @@ const {
   status,
   units,
   aspect = "aspect-[4/5]",
+  fill = false,
 } = Astro.props;
 ---
 
-<article class="group flex flex-col">
+<article class={`group flex flex-col ${fill ? "h-full" : ""}`}>
   <a
     href={`/projects/${slug}`}
-    class="block border-[0.5px] border-slate-200 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-slate-400 focus-visible:border-violet-600 focus-visible:outline-none"
+    class={`block border-[0.5px] border-slate-200 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-slate-400 focus-visible:border-violet-600 focus-visible:outline-none ${fill ? "flex flex-col h-full" : ""}`}
   >
-    <div class={`relative ${aspect} overflow-hidden bg-bone`}>
+    <div class={`relative ${fill ? "flex-1 min-h-0" : aspect} overflow-hidden bg-bone`}>
       <img
         src={cover}
         alt={`ЖК ${name} — дневной рендер`}

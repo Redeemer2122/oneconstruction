@@ -29,6 +29,14 @@
   - [x] **Мобильный аудит:** Hero H1 переведён в `text-[14vw] md:text-[9vw]` с гарантией влезания, добавлен `overflow-x-hidden` на `<body>`, мобильная шапка получила прямоугольное full-screen меню-шторку с моноширинной навигацией и хук-скриптом на открытие/закрытие.
 - [x] **Проверка сборки:** `npm run astro check` — 0 errors, 0 warnings, 0 hints.
 
+## 🚀 Фаза 2.4: Горизонтальный Scroll-Pin + Tonal Transitions + HomeContact Balance — [ВЫПОЛНЕНО]
+
+- [x] **Горизонтальный Scroll-Pin (`HomeProjects.astro` / `projects-scroll.ts`):** Полноэкранный GSAP ScrollTrigger pin на десктопе (min-width: 768px), карточки монументально уплывают влево при скролле. На мобильных — чистая вертикальная лента. Anti-Hardcode Guard: `.map()` по массиву `projects`. Высота карточек h-[70vh].
+- [x] **Tonal oklch transitions:** Hero alabaster → About bone → Projects limestone → Contact alabaster, с мягкими 96px cross-section gradient stitches (`.section-stitch-top` + три градиентных класса в `global.css`).
+- [x] **HomeContact blueprint placeholder:** Строгий прямоугольный блок-чертёж с SVG hairline-сеткой, пересечением улицы, компасом, координатами и масштабной линейкой. Рамка `border-ink-200/50`, заливка `bg-ink-100/40`.
+- [x] **ContactForm violet glow:** Мягкая фиолетовая подсветка нижней линии при ховере/фокусе (`hover:shadow-[0_1px_0_0_oklch(0.58_0.18_285_/_0.6)]`, `focus:shadow-[0_1px_0_0_oklch(0.48_0.20_285)]`), переход `transition-[border-color,box-shadow]`.
+- [x] **[ФИКС 2026-05-23] Монумент целиком в кадре (laptop UX rescue):** Горизонтальный трек ужат до `h-[70vh]` (был 80vh), слайды до `h-[60vh]` (был 70vh), карточки центрируются по вертикали (`items-center` на треке) — на 13" ноутбуке ЖК виден от верхушки cover до нижних координат и статуса без обрезки метаданных. Анимация `data-reveal` на контейнере `ProjectCard` не используется: карточки статично готовы к горизонтальному скроллу.
+
 ## 📊 Фаза 3: Страницы объектов и Каталог планировок — [ЗАПЛАНИРОВАНО]
 
 - [ ] Создание динамического шаблона для страниц конкретного ЖК (`src/pages/projects/[slug].astro`).
