@@ -7,28 +7,28 @@
  */
 
 @theme {
-  /* ── Lagom-inspired surfaces ─────────────────────────────────────────── */
-  --color-alabaster:   oklch(0.975 0.004 60);   /* #f2efe9 — Lagom secondary */
-  --color-bone:        oklch(0.965 0.005 55);   /* #ede9e1 — тёплый известняк */
-  --color-limestone:   oklch(0.950 0.006 50);   /* #e8e3d8 — светлый камень  */
-  --color-card:        oklch(0.985 0.002 60);   /* #fbfbf9 — Lagom card bg   */
+  /* ── Surfaces ────────────────────────────────────────────────────────── */
+  --color-alabaster:   #FBFBFA;                  /* матовая слоновая кость    */
+  --color-bone:        #F8F7F4;                  /* промежуточный тон         */
+  --color-limestone:   #F5F4F0;                  /* светлый известняк-плашки  */
+  --color-card:        #FBFBFA;                  /* card bg = alabaster       */
 
-  /* ── Lagom neutrals — угольный warm-brown ───────────────────────────── */
-  --color-charcoal-950: oklch(0.195 0.018 42);  /* #38332f — Lagom base-2    */
-  --color-charcoal-900: oklch(0.240 0.016 42);
-  --color-charcoal-800: oklch(0.300 0.014 42);
-  --color-charcoal-700: oklch(0.380 0.012 42);
-  --color-charcoal-600: oklch(0.460 0.010 42);  /* #7e7975 — Lagom base-8    */
-  --color-charcoal-500: oklch(0.560 0.009 42);
-  --color-charcoal-400: oklch(0.650 0.008 42);  /* #a39c8c — Lagom base-12   */
-  --color-charcoal-300: oklch(0.750 0.006 42);
-  --color-charcoal-200: oklch(0.840 0.005 42);  /* #d7d1c6 — Lagom base-14   */
-  --color-charcoal-100: oklch(0.920 0.004 42);
+  /* ── Neutrals — slate-based for чертёжная строгость ───────────────── */
+  --color-charcoal-950: #1e293b;  /* slate-800 — основной текст          */
+  --color-charcoal-900: #0f172a;  /* slate-900 — максимальный контраст   */
+  --color-charcoal-800: #1e293b;  /* slate-800                           */
+  --color-charcoal-700: #334155;  /* slate-700                           */
+  --color-charcoal-600: #475569;  /* slate-600                           */
+  --color-charcoal-500: #64748b;  /* slate-500                           */
+  --color-charcoal-400: #94a3b8;  /* slate-400                           */
+  --color-charcoal-300: #cbd5e1;  /* slate-300                           */
+  --color-charcoal-200: #e2e8f0;  /* slate-200 — hairlines               */
+  --color-charcoal-100: #f1f5f9;  /* slate-100                           */
 
-  /* ── Lagom hairline border ───────────────────────────────────────────── */
-  --color-border:       oklch(0.195 0.018 42 / 0.10);  /* charcoal/10 */
-  --color-border-mid:   oklch(0.195 0.018 42 / 0.16);
-  --color-border-strong:oklch(0.195 0.018 42 / 0.28);
+  /* ── Hairline borders — slate-based ───────────────────────────────────── */
+  --color-border:       #e2e8f0;  /* slate-200 — основная hairline        */
+  --color-border-mid:   #cbd5e1;  /* slate-300                            */
+  --color-border-strong:#1e293b;  /* slate-800 — контурные кнопки         */
 
   /* ── Accent — Royal Violet (наш фирменный, не Lagom) ────────────────── */
   --color-violet-700: oklch(0.38 0.18 285);
@@ -62,19 +62,18 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  background: var(--color-alabaster);
-  color: var(--color-charcoal-950);
+  background: #FBFBFA;
+  color: #1e293b;
   font-family: var(--font-sans);
   font-feature-settings: "ss01", "ss02", "cv11";
 }
 
 body {
   min-height: 100dvh;
-  background-color: var(--color-alabaster);
-  /* Деликатная сетка — opacity 0.04, едва угадывается */
+  background-color: #FBFBFA;
   background-image:
-    linear-gradient(to right,  oklch(0.195 0.018 42 / 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.195 0.018 42 / 0.04) 1px, transparent 1px);
+    linear-gradient(to right,  #e2e8f0 0.5px, transparent 0.5px),
+    linear-gradient(to bottom, #e2e8f0 0.5px, transparent 0.5px);
   background-size: 80px 80px;
   background-attachment: fixed;
 }
@@ -86,9 +85,9 @@ body::after {
   inset: 0;
   z-index: 60;
   pointer-events: none;
-  opacity: 0.025;
+  opacity: 0.02;
   mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.22 0 0 0 0 0.20 0 0 0 0 0.18 0 0 0 0.4 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.12 0 0 0 0 0.14 0 0 0 0 0.18 0 0 0 0.4 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
 body > * {
@@ -111,7 +110,7 @@ body > * {
   line-height: 1.4;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: oklch(0.460 0.010 42 / 0.65);
+  color: #64748b;
 }
 
 /* ── Hairline border helper ──────────────────────────────────────────────── */
@@ -134,39 +133,24 @@ body > * {
 .section-stitch-top    { top: 0;    }
 .section-stitch-bottom { bottom: 0; }
 
-.stitch-alabaster-to-bone {
-  background: linear-gradient(to bottom, var(--color-alabaster) 0%, var(--color-bone) 100%);
-}
-.stitch-bone-to-limestone {
-  background: linear-gradient(to bottom, var(--color-bone) 0%, var(--color-limestone) 100%);
-}
-.stitch-bone-to-blueprint {
-  background: linear-gradient(to bottom, var(--color-bone) 0%, var(--color-alabaster) 100%);
-}
-.stitch-blueprint-to-alabaster {
-  background: linear-gradient(to bottom, var(--color-alabaster) 0%, var(--color-alabaster) 100%);
+.stitch-alabaster-to-limestone {
+  background: linear-gradient(to bottom, #FBFBFA 0%, #F5F4F0 100%);
 }
 .stitch-limestone-to-alabaster {
-  background: linear-gradient(to bottom, var(--color-limestone) 0%, var(--color-alabaster) 100%);
+  background: linear-gradient(to bottom, #F5F4F0 0%, #FBFBFA 100%);
 }
 
 /* ========================================================================
-   BLUEPRINT — деликатная калька, opacity 0.04
+   BLUEPRINT — деликатная калька на slate-200
    ======================================================================== */
 .bg-blueprint {
-  background-color: var(--color-alabaster);
+  background-color: #FBFBFA;
   background-image:
-    /* Микросетка 4px */
-    linear-gradient(to right,  oklch(0.195 0.018 42 / 0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.195 0.018 42 / 0.025) 1px, transparent 1px),
-    /* Основная сетка 20px */
-    linear-gradient(to right,  oklch(0.195 0.018 42 / 0.04)  1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.195 0.018 42 / 0.04)  1px, transparent 1px),
-    /* Акцентная сетка 100px */
-    linear-gradient(to right,  oklch(0.195 0.018 42 / 0.07)  1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.195 0.018 42 / 0.07)  1px, transparent 1px);
+    linear-gradient(to right,  #e2e8f0 0.5px, transparent 0.5px),
+    linear-gradient(to bottom, #e2e8f0 0.5px, transparent 0.5px),
+    linear-gradient(to right,  #cbd5e1 0.5px, transparent 0.5px),
+    linear-gradient(to bottom, #cbd5e1 0.5px, transparent 0.5px);
   background-size:
-    4px 4px, 4px 4px,
     20px 20px, 20px 20px,
     100px 100px, 100px 100px;
 }
