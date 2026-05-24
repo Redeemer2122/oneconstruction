@@ -1,0 +1,193 @@
+---
+const materials = [
+  {
+    id: "concrete",
+    title: "БЕТОН",
+    subtitle: "Основа основ",
+    specs: [
+      { label: "МАРКА", value: "B35 · W8 · F200" },
+      { label: "ГОСТ", value: "ГОСТ 26633-2015" },
+      { label: "ПРОЧНОСТЬ", value: "35 МПА" },
+      { label: "МОРОЗОСТОЙКОСТЬ", value: "F200 ЦИКЛ." },
+    ],
+    size: "large",   // занимает 2 столбца
+    aspect: "aspect-[16/9] md:aspect-auto md:row-span-2",
+  },
+  {
+    id: "glass",
+    title: "СТЕКЛО",
+    subtitle: "Ограждающие конструкции",
+    specs: [
+      { label: "СИСТЕМА", value: "DOUBLE LOW-E" },
+      { label: "ТЕПЛОПЕР.", value: "Uw ≤ 1.1 Вт/м²К" },
+      { label: "ТОЛЩИНА", value: "4–16–4 ММ" },
+      { label: "СТАНДАРТ", value: "EN 673" },
+    ],
+    size: "small",
+    aspect: "aspect-square",
+  },
+  {
+    id: "steel",
+    title: "СТАЛЬ",
+    subtitle: "Несущие элементы",
+    specs: [
+      { label: "КЛАСС", value: "A500C · S355" },
+      { label: "ГОСТ", value: "ГОСТ 34028-2016" },
+      { label: "ПРЕДЕЛ ТЕКУ.", value: "500 МПА" },
+      { label: "ПОКРЫТИЕ", value: "HOT-DIP GALV." },
+    ],
+    size: "small",
+    aspect: "aspect-square",
+  },
+  {
+    id: "granite",
+    title: "ГРАНИТ",
+    subtitle: "Отделочные поверхности",
+    specs: [
+      { label: "ПОРОДА", value: "ГАББРО · ДИОРИТ" },
+      { label: "ПРОЧНОСТЬ", value: "1200 КГС/СМ²" },
+      { label: "ВОДОПОГЛ.", value: "≤ 0.5%" },
+      { label: "ОТДЕЛКА", value: "ТЕРМООБР. / ПОЛИР." },
+    ],
+    size: "large",
+    aspect: "aspect-[16/9] md:aspect-auto",
+  },
+];
+---
+
+<section
+  id="materials"
+  class="relative bg-[#F5F4F0] border-t border-slate-200 overflow-hidden"
+  aria-label="Материалы"
+>
+  <div class="px-6 md:px-10 lg:px-12 py-24 md:py-40">
+
+    <!-- Section header -->
+    <header class="flex items-baseline justify-between pb-6 mb-16 md:mb-24 border-b border-slate-200">
+      <span class="mono-detail" data-reveal>МАТЕРИАЛЫ</span>
+      <span class="mono-detail" data-reveal style="--reveal-delay:0.1s;">SEC: 005 / SPECS</span>
+    </header>
+
+    <!-- Title -->
+    <div class="mb-16 md:mb-28 max-w-[52ch]" data-reveal style="--reveal-delay:0.14s;">
+      <h2 class="font-mono text-2xl md:text-4xl xl:text-5xl uppercase tracking-tight text-slate-900 leading-[1.1]">
+        Только то,<br/>что останется.
+      </h2>
+    </div>
+
+    <!-- Asymmetric bento grid -->
+    <div class="grid grid-cols-1 md:grid-cols-12 auto-rows-auto gap-[1px] bg-slate-200">
+
+      <!-- БЕТОН — wide top-left (7 cols) -->
+      <div
+        class="mat-cell group relative md:col-span-7 bg-[#F5F4F0] overflow-hidden cursor-default"
+        data-material="concrete"
+        data-reveal
+        style="--reveal-delay:0.1s;"
+      >
+        <div class="mat-front absolute inset-0 flex flex-col justify-between p-7 md:p-10 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+          <!-- Ghost index -->
+          <span class="font-mono text-[100px] md:text-[140px] leading-none tracking-tighter text-slate-900/[0.05] select-none" aria-hidden="true">01</span>
+          <div>
+            <h3 class="font-mono text-xl md:text-2xl uppercase tracking-[0.08em] text-slate-900 mb-1">{materials[0].title}</h3>
+            <p class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">{materials[0].subtitle}</p>
+          </div>
+        </div>
+        <div class="mat-back absolute inset-0 flex flex-col justify-end p-7 md:p-10 bg-[#F5F4F0] opacity-0 translate-y-4 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100 group-hover:translate-y-0">
+          <dl class="grid grid-cols-2 gap-x-6 gap-y-4">
+            {materials[0].specs.map((s) => (
+              <div>
+                <dt class="font-mono text-[9px] uppercase tracking-[0.22em] text-slate-400 mb-1">{s.label}</dt>
+                <dd class="font-mono text-[11px] uppercase tracking-[0.12em] text-[#7c3aed]">{s.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <!-- min height guard -->
+        <div class="invisible p-7 md:p-10 pointer-events-none" aria-hidden="true" style="min-height:220px;"></div>
+      </div>
+
+      <!-- СТЕКЛО — narrow top-right (5 cols) -->
+      <div
+        class="mat-cell group relative md:col-span-5 bg-[#FBFBFA] overflow-hidden cursor-default"
+        data-material="glass"
+        data-reveal
+        style="--reveal-delay:0.18s;"
+      >
+        <div class="mat-front absolute inset-0 flex flex-col justify-between p-7 md:p-10 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+          <span class="font-mono text-[100px] md:text-[140px] leading-none tracking-tighter text-slate-900/[0.05] select-none" aria-hidden="true">02</span>
+          <div>
+            <h3 class="font-mono text-xl md:text-2xl uppercase tracking-[0.08em] text-slate-900 mb-1">{materials[1].title}</h3>
+            <p class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">{materials[1].subtitle}</p>
+          </div>
+        </div>
+        <div class="mat-back absolute inset-0 flex flex-col justify-end p-7 md:p-10 bg-[#FBFBFA] opacity-0 translate-y-4 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100 group-hover:translate-y-0">
+          <dl class="grid grid-cols-2 gap-x-6 gap-y-4">
+            {materials[1].specs.map((s) => (
+              <div>
+                <dt class="font-mono text-[9px] uppercase tracking-[0.22em] text-slate-400 mb-1">{s.label}</dt>
+                <dd class="font-mono text-[11px] uppercase tracking-[0.12em] text-[#7c3aed]">{s.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div class="invisible p-7 md:p-10 pointer-events-none" aria-hidden="true" style="min-height:220px;"></div>
+      </div>
+
+      <!-- СТАЛЬ — narrow bottom-left (5 cols) -->
+      <div
+        class="mat-cell group relative md:col-span-5 bg-[#FBFBFA] overflow-hidden cursor-default"
+        data-material="steel"
+        data-reveal
+        style="--reveal-delay:0.22s;"
+      >
+        <div class="mat-front absolute inset-0 flex flex-col justify-between p-7 md:p-10 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+          <span class="font-mono text-[100px] md:text-[140px] leading-none tracking-tighter text-slate-900/[0.05] select-none" aria-hidden="true">03</span>
+          <div>
+            <h3 class="font-mono text-xl md:text-2xl uppercase tracking-[0.08em] text-slate-900 mb-1">{materials[2].title}</h3>
+            <p class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">{materials[2].subtitle}</p>
+          </div>
+        </div>
+        <div class="mat-back absolute inset-0 flex flex-col justify-end p-7 md:p-10 bg-[#FBFBFA] opacity-0 translate-y-4 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100 group-hover:translate-y-0">
+          <dl class="grid grid-cols-2 gap-x-6 gap-y-4">
+            {materials[2].specs.map((s) => (
+              <div>
+                <dt class="font-mono text-[9px] uppercase tracking-[0.22em] text-slate-400 mb-1">{s.label}</dt>
+                <dd class="font-mono text-[11px] uppercase tracking-[0.12em] text-[#7c3aed]">{s.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div class="invisible p-7 md:p-10 pointer-events-none" aria-hidden="true" style="min-height:220px;"></div>
+      </div>
+
+      <!-- ГРАНИТ — wide bottom-right (7 cols) -->
+      <div
+        class="mat-cell group relative md:col-span-7 bg-[#F5F4F0] overflow-hidden cursor-default"
+        data-material="granite"
+        data-reveal
+        style="--reveal-delay:0.28s;"
+      >
+        <div class="mat-front absolute inset-0 flex flex-col justify-between p-7 md:p-10 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+          <span class="font-mono text-[100px] md:text-[140px] leading-none tracking-tighter text-slate-900/[0.05] select-none" aria-hidden="true">04</span>
+          <div>
+            <h3 class="font-mono text-xl md:text-2xl uppercase tracking-[0.08em] text-slate-900 mb-1">{materials[3].title}</h3>
+            <p class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">{materials[3].subtitle}</p>
+          </div>
+        </div>
+        <div class="mat-back absolute inset-0 flex flex-col justify-end p-7 md:p-10 bg-[#F5F4F0] opacity-0 translate-y-4 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100 group-hover:translate-y-0">
+          <dl class="grid grid-cols-2 gap-x-6 gap-y-4">
+            {materials[3].specs.map((s) => (
+              <div>
+                <dt class="font-mono text-[9px] uppercase tracking-[0.22em] text-slate-400 mb-1">{s.label}</dt>
+                <dd class="font-mono text-[11px] uppercase tracking-[0.12em] text-[#7c3aed]">{s.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div class="invisible p-7 md:p-10 pointer-events-none" aria-hidden="true" style="min-height:220px;"></div>
+      </div>
+
+    </div>
+  </div>
+</section>

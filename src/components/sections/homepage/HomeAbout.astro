@@ -142,70 +142,79 @@ const manifesto = [
 </section>
 
 <script>
-  const board = document.querySelector('.kulman-board');
-  if (board) {
-    const plates = board.querySelectorAll<HTMLElement>('.kulman-plate');
-    const lines = board.querySelectorAll<SVGElement>('.kulman-line');
-    const nodes = board.querySelectorAll<SVGElement>('.kulman-node');
-    const arrows = board.querySelectorAll<SVGElement>('.kulman-arrow');
+  import gsap from "gsap";
 
-    const allSvgElements = [...lines, ...nodes, ...arrows];
-    allSvgElements.forEach((el) => {
-      (el as HTMLElement).style.transition = 'all 0.3s ease';
-    });
+  const VIOLET = "#7c3aed";   // Royal Violet — наш акцент
+  const SLATE  = "#64748b";   // базовый slate-500
+
+  const board = document.querySelector(".kulman-board");
+  if (board) {
+    const plates = board.querySelectorAll<HTMLElement>(".kulman-plate");
+    const lines  = board.querySelectorAll<SVGElement>(".kulman-line");
+    const nodes  = board.querySelectorAll<SVGElement>(".kulman-node");
+    const arrows = board.querySelectorAll<SVGElement>(".kulman-arrow");
 
     plates.forEach((plate) => {
-      const id = plate.dataset.plate;
+      const id = plate.dataset.plate!;
 
-      plate.addEventListener('mouseenter', () => {
+      plate.addEventListener("mouseenter", () => {
         lines.forEach((line) => {
-          const connects = line.dataset.connects || '';
-          if (connects.includes(id!)) {
-            line.style.stroke = '#0f172a';
-            line.style.strokeWidth = '2.5';
-            line.style.opacity = '1';
-          } else {
-            line.style.opacity = '0.15';
-            line.style.strokeWidth = '1';
-          }
+          const hit = (line.dataset.connects || "").includes(id);
+          gsap.to(line, {
+            attr: { stroke: hit ? VIOLET : SLATE, "stroke-width": hit ? 2.5 : 1 },
+            opacity: hit ? 1 : 0.15,
+            duration: 0.35,
+            ease: "power2.out",
+          });
         });
         nodes.forEach((node) => {
-          const nodeId = node.dataset.node || '';
-          if (nodeId === id) {
-            node.style.stroke = '#0f172a';
-            node.style.strokeWidth = '2.5';
-            node.style.fill = '#0f172a';
-          } else {
-            node.style.opacity = '0.2';
-          }
+          const hit = node.dataset.node === id;
+          gsap.to(node, {
+            attr: { stroke: hit ? VIOLET : SLATE, "stroke-width": hit ? 2.5 : 1.5, fill: hit ? VIOLET : "none" },
+            opacity: hit ? 1 : 0.2,
+            duration: 0.35,
+            ease: "power2.out",
+          });
         });
         arrows.forEach((arrow) => {
-          const connects = arrow.dataset.connects || '';
-          if (connects.includes(id!)) {
-            arrow.style.fill = '#0f172a';
-            arrow.style.opacity = '1';
-          } else {
-            arrow.style.opacity = '0.15';
-          }
+          const hit = (arrow.dataset.connects || "").includes(id);
+          gsap.to(arrow, {
+            attr: { fill: hit ? VIOLET : SLATE },
+            opacity: hit ? 1 : 0.15,
+            duration: 0.35,
+            ease: "power2.out",
+          });
         });
+        // плита сама — violet border
+        gsap.to(plate, { borderColor: VIOLET, duration: 0.3, ease: "power2.out" });
       });
 
-      plate.addEventListener('mouseleave', () => {
+      plate.addEventListener("mouseleave", () => {
         lines.forEach((line) => {
-          line.style.stroke = '#64748b';
-          line.style.strokeWidth = '1.5';
-          line.style.opacity = '1';
+          gsap.to(line, {
+            attr: { stroke: SLATE, "stroke-width": 1.5 },
+            opacity: 1,
+            duration: 0.4,
+            ease: "power2.out",
+          });
         });
         nodes.forEach((node) => {
-          node.style.stroke = '#64748b';
-          node.style.strokeWidth = '1.5';
-          node.style.fill = 'none';
-          node.style.opacity = '1';
+          gsap.to(node, {
+            attr: { stroke: SLATE, "stroke-width": 1.5, fill: "none" },
+            opacity: 1,
+            duration: 0.4,
+            ease: "power2.out",
+          });
         });
         arrows.forEach((arrow) => {
-          arrow.style.fill = '#64748b';
-          arrow.style.opacity = '1';
+          gsap.to(arrow, {
+            attr: { fill: SLATE },
+            opacity: 1,
+            duration: 0.4,
+            ease: "power2.out",
+          });
         });
+        gsap.to(plate, { borderColor: "#e2e8f0", duration: 0.4, ease: "power2.out" });
       });
     });
   }

@@ -231,7 +231,9 @@ const rotations = ["rotate-[1.5deg]", "rotate-[-1deg]", "rotate-[0.5deg]"];
       }
     };
 
-    const baseRotations = [2, -1.5, 1];
+    // visible initial rotations — deck of blueprints feel
+    const baseRotations = [0, -2.5, 2];
+    const baseOffsets   = [0,  10,  18];
 
     const mm = gsap.matchMedia();
 
@@ -245,15 +247,18 @@ const rotations = ["rotate-[1.5deg]", "rotate-[-1deg]", "rotate-[0.5deg]"];
         const totalCards = cards.length;
         const scrollPerCard = window.innerHeight * 0.9;
 
+        // set initial deck state — clearly staggered & rotated
         cards.forEach((card, i) => {
           gsap.set(card, {
-            x: i * 8,
-            y: i * 8,
+            x: baseOffsets[i] || 0,
+            y: baseOffsets[i] || 0,
             rotateZ: baseRotations[i] || 0,
             zIndex: totalCards - i,
             opacity: 1,
           });
         });
+
+        let lastActive = -1;
 
         ScrollTrigger.create({
           trigger: section,
@@ -269,35 +274,53 @@ const rotations = ["rotate-[1.5deg]", "rotate-[-1deg]", "rotate-[0.5deg]"];
               const cardProgress = progress - i;
 
               if (cardProgress >= 1) {
+                // card already gone
                 gsap.set(card, {
                   x: "-130%",
                   y: "-10%",
-                  rotateZ: -12,
+                  rotateZ: -14,
                   opacity: 0,
                   zIndex: 0,
                 });
               } else if (cardProgress > 0 && cardProgress < 1) {
+                // card flying off — scrub in sync
                 gsap.set(card, {
                   x: `${-cardProgress * 130}%`,
                   y: `${-cardProgress * 10}%`,
-                  rotateZ: cardProgress * -12,
+                  rotateZ: cardProgress * -14,
                   opacity: 1 - cardProgress,
                   zIndex: totalCards - i,
                 });
               } else {
+                // card waiting in deck
                 const depth = i - activeIndex;
-                gsap.set(card, {
-                  x: depth * 8,
-                  y: depth * 8,
-                  rotateZ: depth === 0 ? 0 : baseRotations[i] || 0,
-                  opacity: 1,
-                  zIndex: totalCards - i,
-                });
+                const targetRot = depth === 0 ? 0 : baseRotations[i] || 0;
+                const targetX   = depth * 10;
+                const targetY   = depth * 10;
+
+                if (i === activeIndex && lastActive !== activeIndex) {
+                  // smoothly straighten the new top card
+                  gsap.to(card, {
+                    x: 0, y: 0, rotateZ: 0,
+                    duration: 0.55,
+                    ease: "power3.out",
+                    overwrite: "auto",
+                  });
+                } else if (i !== activeIndex) {
+                  gsap.set(card, {
+                    x: targetX,
+                    y: targetY,
+                    rotateZ: targetRot,
+                    opacity: 1,
+                    zIndex: totalCards - i,
+                  });
+                }
               }
             });
 
-            if (cards[activeIndex]) {
-              updateMeta(cards[activeIndex]);
+            if (activeIndex !== lastActive) {
+              lastActive = activeIndex;
+              if (cards[activeIndex]) updateMeta(cards[activeIndex]);
             }
           },
         });
