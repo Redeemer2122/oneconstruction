@@ -2,10 +2,10 @@
 import Layout from "@layouts/Layout.astro";
 import HomeHeader from "@sections/homepage/HomeHeader.astro";
 import HomeHero from "@sections/homepage/HomeHero.astro";
-import HomeAbout from "@sections/homepage/HomeAbout.astro";
 import HomeProjects from "@sections/homepage/HomeProjects.astro";
+import HomeAbout from "@sections/homepage/HomeAbout.astro";
 import HomeTimeline from "@sections/homepage/HomeTimeline.astro";
-import HomeMaterials from "@sections/homepage/HomeMaterials.astro";
+import HomePurchase from "@sections/homepage/HomePurchase.astro";
 import HomeContact from "@sections/homepage/HomeContact.astro";
 ---
 
@@ -13,32 +13,70 @@ import HomeContact from "@sections/homepage/HomeContact.astro";
   <HomeHeader />
   <main>
     <HomeHero />
-    <HomeAbout />
     <HomeProjects />
+    <HomeAbout />
     <HomeTimeline />
-    <HomeMaterials />
+    <HomePurchase />
     <HomeContact />
   </main>
 
-  <footer class="bg-alabaster border-t-[0.5px] border-slate-200 px-6 md:px-10 py-10 md:py-14">
-    <div class="grid grid-cols-12 gap-6 items-end">
-      <div class="col-span-12 md:col-span-6 flex items-center gap-3">
-        <img
-          src="/img/logo-silver.jpeg"
-          alt=""
-          width="28"
-          height="28"
-          class="h-7 w-7 object-contain select-none"
-          draggable="false"
-        />
-        <span class="font-mono text-[11px] uppercase tracking-[0.22em] text-slate-600">
+  <footer class="relative bg-[#0f172a] text-alabaster border-t-[0.5px] border-slate-900">
+    <!-- Top: massive monogram + nav -->
+    <div class="px-6 md:px-10 lg:px-12 pt-16 md:pt-24 pb-12 grid grid-cols-1 lg:grid-cols-12 gap-12 border-b border-slate-800">
+      <!-- Monogram -->
+      <div class="lg:col-span-6 flex flex-col gap-6">
+        <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500">
+          ONE CONSTRUCTION · BISHKEK · KG
+        </span>
+        <h2 class="font-mono text-[16vw] md:text-[9vw] lg:text-[7.4vw] leading-[0.86] tracking-[-0.04em] uppercase text-alabaster">
+          ONE<br />CONSTRUCTION
+        </h2>
+        <p class="text-sm text-slate-400 max-w-[42ch] leading-relaxed mt-4">
+          Девелопер премиальных жилых комплексов в Кыргызстане. Архитектура без компромиссов с 2014 года.
+        </p>
+      </div>
+
+      <!-- Nav columns -->
+      <div class="lg:col-span-6 grid grid-cols-2 md:grid-cols-3 gap-8">
+        <div class="flex flex-col gap-3">
+          <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500 pb-3 border-b border-slate-800">Сайт</span>
+          <a href="#projects" class="font-mono text-sm uppercase tracking-[0.12em] text-slate-300 hover:text-violet-400 transition-colors">Объекты</a>
+          <a href="#about" class="font-mono text-sm uppercase tracking-[0.12em] text-slate-300 hover:text-violet-400 transition-colors">О компании</a>
+          <a href="#privileges" class="font-mono text-sm uppercase tracking-[0.12em] text-slate-300 hover:text-violet-400 transition-colors">Стандарт</a>
+          <a href="#purchase" class="font-mono text-sm uppercase tracking-[0.12em] text-slate-300 hover:text-violet-400 transition-colors">Покупка</a>
+          <a href="#contact" class="font-mono text-sm uppercase tracking-[0.12em] text-slate-300 hover:text-violet-400 transition-colors">Контакты</a>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500 pb-3 border-b border-slate-800">Связь</span>
+          <a href="tel:+996555100100" class="font-mono text-sm text-slate-300 hover:text-violet-400 transition-colors">+996 555 100 100</a>
+          <a href="tel:+996700100100" class="font-mono text-sm text-slate-300 hover:text-violet-400 transition-colors">+996 700 100 100</a>
+          <a href="mailto:info@oneconstruction.kg" class="font-mono text-sm text-slate-300 hover:text-violet-400 transition-colors break-all">info@oneconstruction.kg</a>
+        </div>
+
+        <div class="flex flex-col gap-3 col-span-2 md:col-span-1">
+          <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500 pb-3 border-b border-slate-800">Офис</span>
+          <span class="font-mono text-sm text-slate-300 leading-relaxed">
+            г. Бишкек,<br/>ул. Раззакова 32
+          </span>
+          <span class="font-mono text-[11px] uppercase tracking-[0.16em] text-slate-500">
+            ПН — СБ · 10:00 — 19:00
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom strip -->
+    <div class="px-6 md:px-10 lg:px-12 py-8 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+      <div class="md:col-span-6 flex items-center gap-3">
+        <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500">
           © 2026 ONE CONSTRUCTION KG · ВСЕ ПРАВА ЗАЩИЩЕНЫ
         </span>
       </div>
-      <div class="col-span-12 md:col-span-6 flex md:justify-end gap-6 mt-4 md:mt-0">
-        <span class="mono-detail">BUILD 0.1.0</span>
-        <span class="mono-detail">ASTRO 6.3</span>
-        <span class="mono-detail">BISHKEK · KG</span>
+      <div class="md:col-span-6 flex flex-wrap md:justify-end gap-6">
+        <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500">BUILD 0.2.0</span>
+        <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500">ASTRO 6.3</span>
+        <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500">42.8746° N · 74.5698° E</span>
       </div>
     </div>
   </footer>

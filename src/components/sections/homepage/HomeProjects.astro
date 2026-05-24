@@ -2,50 +2,66 @@
 const projects = [
   {
     slug: "lotos",
-    name: "ЖК LOTOS",
+    name: "ЖК «Лотос»",
     index: "01",
     cover:
-      "https://images.unsplash.com/photo-1758193431393-0aead94a6a1b?ixlib=rb-4.1.0&q=88&fm=jpg&crop=entropy&cs=srgb&w=1600",
-    location: "БИШКЕК, БОТАН. САД",
-    coordinates: "42.8412° N · 74.5891° E",
-    status: "СДАН · 2024",
-    units: "1 / 2 / 3-КОМН · 78 КВАРТИР",
+      "https://images.unsplash.com/photo-1758193431393-0aead94a6a1b?ixlib=rb-4.1.0&q=88&fm=jpg&crop=entropy&cs=srgb&w=1800",
+    location: "ул. Молдокулова 100, Бишкек",
+    status: "Строится",
+    delivery: "СДАЧА · IV КВ. 2027",
+    storeys: "14 — 16 ЭТАЖЕЙ",
+    units: "112 КВАРТИР",
+    priceFrom: "от 4,2 млн сом",
+    plans: [
+      { rooms: "1-комнатные", area: "от 42.73 м²", price: "от 4,2 млн сом" },
+      { rooms: "2-комнатные", area: "от 64.96 м²", price: "от 6,8 млн сом" },
+      { rooms: "3-комнатные", area: "от 101.98 м²", price: "от 10,7 млн сом" },
+    ],
   },
   {
     slug: "yacht-village",
-    name: "YACHT VILLAGE",
+    name: "«Yacht Village»",
     index: "02",
     cover:
-      "https://images.unsplash.com/photo-1760067537204-fe9b55b2f1b0?ixlib=rb-4.1.0&q=88&fm=jpg&crop=entropy&cs=srgb&w=1600",
-    location: "ИССЫК-КУЛЬ · ЧОЛПОН-АТА",
-    coordinates: "42.6481° N · 77.0810° E",
-    status: "СТРОИТСЯ · СДАЧА 2026",
-    units: "ВИЛЛЫ + АПАРТАМЕНТЫ · 142 ЕДИНИЦЫ",
+      "https://images.unsplash.com/photo-1760067537204-fe9b55b2f1b0?ixlib=rb-4.1.0&q=88&fm=jpg&crop=entropy&cs=srgb&w=1800",
+    location: "ул. Юнусалиева 86/1, Бишкек",
+    status: "Готово к сдаче",
+    delivery: "СДАЧА · ГОТОВ",
+    storeys: "2 — 3 ЭТАЖА",
+    units: "40 КВАРТИР",
+    priceFrom: "от 4,2 млн сом",
+    plans: [
+      { rooms: "1-комнатные", area: "от 24 м²", price: "от 4,2 млн сом" },
+      { rooms: "2-комнатные", area: "от 62.47 м²", price: "от 6,8 млн сом" },
+    ],
   },
   {
     slug: "medina",
-    name: "ЖК MEDINA",
+    name: "ЖК «Медина+»",
     index: "03",
     cover:
-      "https://images.unsplash.com/photo-1748440290920-9033ca4e1468?ixlib=rb-4.1.0&q=88&fm=jpg&crop=entropy&cs=srgb&w=1600",
-    location: "БИШКЕК, ЦЕНТР",
-    coordinates: "42.8746° N · 74.5698° E",
-    status: "СДАЁТСЯ · Q3 2025",
-    units: "1 / 2 / 3 / 4-КОМН · 264 КВАРТИРЫ",
+      "https://images.unsplash.com/photo-1748440290920-9033ca4e1468?ixlib=rb-4.1.0&q=88&fm=jpg&crop=entropy&cs=srgb&w=1800",
+    location: "ул. Мичурина, 163, Бишкек",
+    status: "Строится",
+    delivery: "СДАЧА · IV КВ. 2028",
+    storeys: "16 ЭТАЖЕЙ",
+    units: "270 КВАРТИР",
+    priceFrom: "от 5 млн сом",
+    plans: [
+      { rooms: "1-комнатные", area: "от 48.8 м²", price: "от 5 млн сом" },
+      { rooms: "2-комнатные", area: "от 73.2 м²", price: "от 8 млн сом" },
+      { rooms: "3-комнатные", area: "от 115.8 м²", price: "от 12 млн сом" },
+    ],
   },
 ];
-
-const rotations = ["rotate-[1.5deg]", "rotate-[-1deg]", "rotate-[0.5deg]"];
 ---
 
 <section
   id="projects"
   class="relative bg-[#FBFBFA] border-t border-slate-200 scroll-mt-28 overflow-hidden"
-  aria-label="Проекты One Construction"
+  aria-label="Объекты One Construction"
 >
-  <div class="section-stitch-top stitch-limestone-to-alabaster" aria-hidden="true"></div>
-
-  <div class="px-6 md:px-10 lg:px-12 py-24 md:py-40">
+  <div class="px-6 md:px-10 lg:px-12 pt-24 md:pt-40 pb-0">
 
     <!-- Section header -->
     <header class="flex items-baseline justify-between pb-6 mb-16 md:mb-24 border-b border-slate-200">
@@ -53,294 +69,160 @@ const rotations = ["rotate-[1.5deg]", "rotate-[-1deg]", "rotate-[0.5deg]"];
         ОБЪЕКТЫ · {String(projects.length).padStart(2, "0")}
       </span>
       <span class="mono-detail" data-reveal style="--reveal-delay: 0.1s;">
-        SEC: 003 / PROJECTS
+        SEC: 002 / PROJECTS
       </span>
     </header>
 
-    <!-- Stack layout container -->
-    <div class="projects-stack-wrapper grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
-
-      <!-- Left: static metadata frame (drafting sidebar) -->
-      <aside class="md:col-span-4 xl:col-span-3 md:sticky md:top-32 md:self-start">
-        <div class="border border-slate-200 bg-[#F5F4F0] p-6 md:p-8">
-          <!-- Active project indicator -->
-          <div class="mb-6 pb-4 border-b border-slate-200">
-            <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-400 block mb-2">АКТИВНЫЙ ОБЪЕКТ</span>
-            <span class="stack-meta-name font-mono text-lg md:text-xl uppercase tracking-[0.08em] text-slate-900 block transition-opacity duration-300">
-              {projects[0].name}
-            </span>
-          </div>
-
-          <!-- Metadata fields -->
-          <div class="flex flex-col gap-4">
-            <div>
-              <span class="font-mono text-[9px] uppercase tracking-[0.22em] text-slate-400 block mb-1">КООРДИНАТЫ</span>
-              <span class="stack-meta-coords font-mono text-[11px] uppercase tracking-[0.14em] text-slate-800 block transition-opacity duration-300">
-                {projects[0].coordinates}
-              </span>
-            </div>
-            <div>
-              <span class="font-mono text-[9px] uppercase tracking-[0.22em] text-slate-400 block mb-1">ЛОКАЦИЯ</span>
-              <span class="stack-meta-location font-mono text-[11px] uppercase tracking-[0.14em] text-slate-800 block transition-opacity duration-300">
-                {projects[0].location}
-              </span>
-            </div>
-            <div>
-              <span class="font-mono text-[9px] uppercase tracking-[0.22em] text-slate-400 block mb-1">СТАТУС</span>
-              <span class="stack-meta-status font-mono text-[11px] uppercase tracking-[0.14em] text-slate-800 block transition-opacity duration-300">
-                {projects[0].status}
-              </span>
-            </div>
-            <div>
-              <span class="font-mono text-[9px] uppercase tracking-[0.22em] text-slate-400 block mb-1">ПЛАНИРОВКИ</span>
-              <span class="stack-meta-units font-mono text-[11px] uppercase tracking-[0.14em] text-slate-800 block transition-opacity duration-300">
-                {projects[0].units}
-              </span>
-            </div>
-          </div>
-
-          <!-- Progress dots -->
-          <div class="mt-8 pt-4 border-t border-slate-200 flex items-center gap-3">
-            {projects.map((_, i) => (
-              <span
-                class={`stack-dot w-2 h-2 border border-slate-400 transition-all duration-300 ${i === 0 ? "bg-slate-900 border-slate-900" : ""}`}
-                data-dot-index={i}
-              ></span>
-            ))}
-            <span class="ml-auto font-mono text-[10px] text-slate-400 stack-counter">01 / {String(projects.length).padStart(2, "0")}</span>
-          </div>
-        </div>
-      </aside>
-
-      <!-- Right: card stack -->
-      <div class="md:col-span-8 xl:col-span-9">
-        <div class="projects-stack relative" style="height: 70vh; min-height: 480px;">
-          {projects.map((project, idx) => (
-            <a
-              href={`/projects/${project.slug}`}
-              class={`stack-card absolute inset-0 block border border-slate-200 bg-[#FBFBFA] overflow-hidden transition-shadow duration-500 hover:shadow-[0_12px_48px_-16px_rgba(30,41,59,0.12)] ${rotations[idx]}`}
-              style={`z-index: ${projects.length - idx};`}
-              data-stack-index={idx}
-              data-project-name={project.name}
-              data-project-coords={project.coordinates}
-              data-project-location={project.location}
-              data-project-status={project.status}
-              data-project-units={project.units}
-            >
-              <!-- Image -->
-              <div class="absolute inset-0">
-                <img
-                  src={project.cover}
-                  alt={project.name}
-                  class="w-full h-full object-cover"
-                  loading={idx === 0 ? "eager" : "lazy"}
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
-              </div>
-
-              <!-- Card overlay content -->
-              <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-white/60 block mb-2">
-                  ID: {project.index}
-                </span>
-                <h3 class="font-mono text-2xl md:text-3xl xl:text-4xl uppercase tracking-tight text-white">
-                  {project.name}
-                </h3>
-              </div>
-
-              <!-- Top-right index -->
-              <span
-                class="absolute top-4 right-4 md:top-6 md:right-6 font-mono text-[64px] md:text-[80px] leading-none tracking-tighter text-white/[0.08] select-none pointer-events-none"
-                aria-hidden="true"
-              >
-                {project.index}
-              </span>
-            </a>
-          ))}
-        </div>
-      </div>
-
+    <!-- Section intro -->
+    <div class="mb-20 md:mb-32 max-w-[58ch]" data-reveal style="--reveal-delay: 0.12s;">
+      <h2 class="font-mono text-2xl md:text-4xl xl:text-5xl uppercase tracking-tight text-slate-900 leading-[1.1]">
+        Наши объекты.
+      </h2>
+      <p class="mt-6 md:mt-8 text-sm md:text-base text-slate-600 max-w-[52ch] leading-relaxed">
+        Три действующих жилых комплекса в Бишкеке. Каждый — отдельный архитектурный акт с прозрачной экономикой, фиксированной этажностью и понятным графиком сдачи.
+      </p>
     </div>
   </div>
-</section>
 
-<script>
-  import gsap from "gsap";
-  import ScrollTrigger from "gsap/ScrollTrigger";
+  <!-- Vertical project blocks -->
+  {projects.map((project, idx) => {
+    const reverse = idx % 2 === 1;
+    return (
+      <article
+        class={`project-block relative border-t border-slate-200 ${idx === projects.length - 1 ? "border-b" : ""}`}
+        data-project-index={project.index}
+      >
+        <!-- Top metadata bar -->
+        <div class="px-6 md:px-10 lg:px-12 py-5 flex items-baseline justify-between border-b border-slate-200/70">
+          <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500">
+            ID: {project.index} · {project.delivery}
+          </span>
+          <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500">
+            {project.units} · {project.storeys}
+          </span>
+        </div>
 
-  gsap.registerPlugin(ScrollTrigger);
+        <!-- Two-column block: image + content -->
+        <div class={`grid grid-cols-1 md:grid-cols-12 gap-0 ${reverse ? "md:[&>.pb-image]:order-2" : ""}`}>
+          <!-- Image -->
+          <a
+            href={`/projects/${project.slug}`}
+            class="pb-image group relative md:col-span-7 block overflow-hidden bg-[#F5F4F0] aspect-[4/3] md:aspect-auto md:min-h-[78vh]"
+            data-reveal
+            style="--reveal-delay: 0.05s;"
+          >
+            <img
+              src={project.cover}
+              alt={`${project.name} — архитектурный рендер`}
+              loading={idx === 0 ? "eager" : "lazy"}
+              decoding="async"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.625,0.05,0,1)] group-hover:scale-[1.03]"
+            />
+            <div
+              aria-hidden="true"
+              class="absolute inset-0 bg-gradient-to-t from-slate-900/35 via-slate-900/0 to-transparent pointer-events-none"
+            ></div>
 
-  const init = () => {
-    const section = document.getElementById("projects");
-    if (!section) return;
+            <!-- Blueprint hairline frame -->
+            <div
+              aria-hidden="true"
+              class="pointer-events-none absolute inset-4 md:inset-6 border border-white/20 transition-colors duration-700 group-hover:border-violet-400/70"
+            ></div>
 
-    const stack = section.querySelector<HTMLElement>(".projects-stack");
-    const cards = section.querySelectorAll<HTMLElement>(".stack-card");
-    if (!stack || cards.length === 0) return;
+            <!-- Index badge -->
+            <span
+              class="absolute top-4 left-4 md:top-6 md:left-6 font-mono text-[10px] uppercase tracking-[0.22em] text-white/80"
+            >
+              {project.index} · {project.name}
+            </span>
 
-    const metaName = section.querySelector<HTMLElement>(".stack-meta-name");
-    const metaCoords = section.querySelector<HTMLElement>(".stack-meta-coords");
-    const metaLocation = section.querySelector<HTMLElement>(".stack-meta-location");
-    const metaStatus = section.querySelector<HTMLElement>(".stack-meta-status");
-    const metaUnits = section.querySelector<HTMLElement>(".stack-meta-units");
-    const counter = section.querySelector<HTMLElement>(".stack-counter");
-    const dots = section.querySelectorAll<HTMLElement>(".stack-dot");
-    const metaFields = [metaName, metaCoords, metaLocation, metaStatus, metaUnits].filter(Boolean) as HTMLElement[];
+            <!-- Status badge -->
+            <span
+              class={`absolute top-4 right-4 md:top-6 md:right-6 font-mono text-[10px] uppercase tracking-[0.22em] px-3 py-1.5 border ${project.status === "Готово к сдаче" ? "text-violet-100 bg-violet-700/70 border-violet-400/40" : "text-white/90 bg-slate-900/40 border-white/30"}`}
+            >
+              {project.status}
+            </span>
 
-    let currentActiveIndex = 0;
+            <!-- Bottom CTA hint -->
+            <span class="absolute bottom-5 left-5 md:bottom-7 md:left-7 font-mono text-[11px] uppercase tracking-[0.2em] text-white opacity-90 transition-transform duration-500 group-hover:translate-x-1.5">
+              Перейти к объекту →
+            </span>
+          </a>
 
-    const updateMeta = (card: HTMLElement, animate = true) => {
-      const idx = parseInt(card.dataset.stackIndex || "0");
-      if (idx === currentActiveIndex && metaName?.textContent === card.dataset.projectName) return;
-      currentActiveIndex = idx;
+          <!-- Content -->
+          <div
+            class={`md:col-span-5 flex flex-col gap-8 px-6 md:px-10 lg:px-12 py-12 md:py-16 ${reverse ? "md:border-r border-slate-200" : "md:border-l border-slate-200"}`}
+            data-reveal
+            style="--reveal-delay: 0.15s;"
+          >
+            <!-- Big monumental title -->
+            <h3 class="display text-[12vw] md:text-[5.4vw] xl:text-[4.6vw] leading-[0.92] tracking-tighter text-slate-900">
+              {project.name}
+            </h3>
 
-      const applyValues = () => {
-        if (metaName) metaName.textContent = card.dataset.projectName || "";
-        if (metaCoords) metaCoords.textContent = card.dataset.projectCoords || "";
-        if (metaLocation) metaLocation.textContent = card.dataset.projectLocation || "";
-        if (metaStatus) metaStatus.textContent = card.dataset.projectStatus || "";
-        if (metaUnits) metaUnits.textContent = card.dataset.projectUnits || "";
-        if (counter) counter.textContent = `${String(idx + 1).padStart(2, "0")} / ${String(cards.length).padStart(2, "0")}`;
-        dots.forEach((dot, i) => {
-          if (i === idx) {
-            dot.classList.add("bg-slate-900", "border-slate-900");
-          } else {
-            dot.classList.remove("bg-slate-900", "border-slate-900");
-          }
-        });
-      };
+            <!-- Location + price -->
+            <div class="flex flex-col gap-3 pb-6 border-b border-slate-200">
+              <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-400">
+                ЛОКАЦИЯ
+              </span>
+              <span class="font-mono text-sm md:text-base text-slate-900 tracking-tight">
+                {project.location}
+              </span>
+            </div>
 
-      if (animate) {
-        gsap.to(metaFields, {
-          opacity: 0,
-          y: -6,
-          duration: 0.15,
-          ease: "power2.in",
-          onComplete: () => {
-            applyValues();
-            gsap.to(metaFields, {
-              opacity: 1,
-              y: 0,
-              duration: 0.25,
-              ease: "power2.out",
-            });
-          },
-        });
-      } else {
-        applyValues();
-      }
-    };
+            <!-- Stats grid -->
+            <dl class="grid grid-cols-2 gap-x-6 gap-y-5">
+              <div class="flex flex-col gap-1.5">
+                <dt class="font-mono text-[9px] uppercase tracking-[0.22em] text-slate-400">СТАТУС</dt>
+                <dd class="font-mono text-[12px] uppercase tracking-[0.14em] text-slate-900">{project.delivery}</dd>
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <dt class="font-mono text-[9px] uppercase tracking-[0.22em] text-slate-400">ЭТАЖНОСТЬ</dt>
+                <dd class="font-mono text-[12px] uppercase tracking-[0.14em] text-slate-900">{project.storeys}</dd>
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <dt class="font-mono text-[9px] uppercase tracking-[0.22em] text-slate-400">КВАРТИРЫ</dt>
+                <dd class="font-mono text-[12px] uppercase tracking-[0.14em] text-slate-900">{project.units}</dd>
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <dt class="font-mono text-[9px] uppercase tracking-[0.22em] text-slate-400">СТАРТ ЦЕНЫ</dt>
+                <dd class="font-mono text-[12px] uppercase tracking-[0.14em] text-violet-700">{project.priceFrom}</dd>
+              </div>
+            </dl>
 
-    // visible initial rotations — deck of blueprints feel
-    const baseRotations = [0, -2.5, 2];
-    const baseOffsets   = [0,  10,  18];
+            <!-- Apartment table -->
+            <div class="border-t border-slate-200 pt-6">
+              <span class="font-mono text-[9px] uppercase tracking-[0.22em] text-slate-400 block mb-4">
+                ПЛАНИРОВКИ
+              </span>
+              <div class="flex flex-col">
+                {project.plans.map((p, i) => (
+                  <div class={`grid grid-cols-12 gap-2 py-3 ${i < project.plans.length - 1 ? "border-b border-slate-200/70" : ""}`}>
+                    <span class="col-span-5 font-mono text-[12px] uppercase tracking-[0.1em] text-slate-900">
+                      {p.rooms}
+                    </span>
+                    <span class="col-span-3 font-mono text-[11px] tracking-tight text-slate-500">
+                      {p.area}
+                    </span>
+                    <span class="col-span-4 text-right font-mono text-[12px] tracking-tight text-slate-900">
+                      {p.price}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-    const mm = gsap.matchMedia();
-
-    mm.add(
-      {
-        isDesktop: "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
-      },
-      (ctx) => {
-        if (!ctx.conditions?.isDesktop) return;
-
-        const totalCards = cards.length;
-        const scrollPerCard = window.innerHeight * 0.9;
-
-        // set initial deck state — clearly staggered & rotated
-        cards.forEach((card, i) => {
-          gsap.set(card, {
-            x: baseOffsets[i] || 0,
-            y: baseOffsets[i] || 0,
-            rotateZ: baseRotations[i] || 0,
-            zIndex: totalCards - i,
-            opacity: 1,
-          });
-        });
-
-        let lastActive = -1;
-
-        ScrollTrigger.create({
-          trigger: section,
-          start: "top top",
-          end: () => `+=${scrollPerCard * totalCards}`,
-          pin: true,
-          anticipatePin: 1,
-          onUpdate: (self) => {
-            const progress = self.progress * totalCards;
-            const activeIndex = Math.min(Math.floor(progress), totalCards - 1);
-
-            cards.forEach((card, i) => {
-              const cardProgress = progress - i;
-
-              if (cardProgress >= 1) {
-                // card already gone
-                gsap.set(card, {
-                  x: "-130%",
-                  y: "-10%",
-                  rotateZ: -14,
-                  opacity: 0,
-                  zIndex: 0,
-                });
-              } else if (cardProgress > 0 && cardProgress < 1) {
-                // card flying off — scrub in sync
-                gsap.set(card, {
-                  x: `${-cardProgress * 130}%`,
-                  y: `${-cardProgress * 10}%`,
-                  rotateZ: cardProgress * -14,
-                  opacity: 1 - cardProgress,
-                  zIndex: totalCards - i,
-                });
-              } else {
-                // card waiting in deck
-                const depth = i - activeIndex;
-                const targetRot = depth === 0 ? 0 : baseRotations[i] || 0;
-                const targetX   = depth * 10;
-                const targetY   = depth * 10;
-
-                if (i === activeIndex && lastActive !== activeIndex) {
-                  // smoothly straighten the new top card
-                  gsap.to(card, {
-                    x: 0, y: 0, rotateZ: 0,
-                    duration: 0.55,
-                    ease: "power3.out",
-                    overwrite: "auto",
-                  });
-                } else if (i !== activeIndex) {
-                  gsap.set(card, {
-                    x: targetX,
-                    y: targetY,
-                    rotateZ: targetRot,
-                    opacity: 1,
-                    zIndex: totalCards - i,
-                  });
-                }
-              }
-            });
-
-            if (activeIndex !== lastActive) {
-              lastActive = activeIndex;
-              if (cards[activeIndex]) updateMeta(cards[activeIndex]);
-            }
-          },
-        });
-
-        return () => {
-          ScrollTrigger.getAll().forEach((st) => {
-            if (st.trigger === section) st.kill();
-          });
-          cards.forEach((card, i) => {
-            gsap.set(card, { clearProps: "all" });
-            (card as HTMLElement).style.zIndex = String(totalCards - i);
-          });
-        };
-      }
+            <!-- CTA -->
+            <a
+              href={`/projects/${project.slug}`}
+              class="self-start mt-2 inline-flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-slate-900 border border-slate-800 px-6 py-3 transition-colors duration-300 hover:bg-violet-700 hover:text-white hover:border-violet-700"
+            >
+              Перейти к объекту
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </article>
     );
-  };
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init, { once: true });
-  } else {
-    init();
-  }
-</script>
+  })}
+</section>

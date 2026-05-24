@@ -1,111 +1,123 @@
 ---
-const phases = [
+/**
+ * HomeTimeline — переверстана под блок "Стандарт привилегий One Construction".
+ * 7 пунктов, тонкие hairlines, проявление по ScrollTrigger.
+ */
+const privileges = [
   {
     index: "01",
-    title: "ПРОЕКТИРОВАНИЕ",
-    duration: "3–6 МЕС.",
-    detail: "Архитектурная концепция, генплан, согласование с городскими службами. Полная BIM-модель объекта.",
-    tags: ["АРХИТЕКТУРА", "BIM", "ГП"],
+    title: "Энергоэффективные дома",
+    body: "Тёплый контур фасада, многокамерные стеклопакеты, рекуперация. Счёт за отопление перестаёт быть статьёй бюджета.",
+    tag: "КЛАСС A",
   },
   {
     index: "02",
-    title: "МОНОЛИТНЫЕ РАБОТЫ",
-    duration: "8–14 МЕС.",
-    detail: "Свайное поле, монолитный каркас, плиты перекрытий. Марка бетона: B25–B35. Контроль качества на каждой захватке.",
-    tags: ["БЕТОН B35", "АРМАТУРА A500", "ЖБК"],
+    title: "Тишина и уединение",
+    body: "Звукоизоляция перекрытий и межквартирных стен по нормам отелей высокой категории. Шум лифтов и соседей — снаружи квартиры.",
+    tag: "Rw ≥ 54 дБ",
   },
   {
     index: "03",
-    title: "ФАСАДЫ И ИНЖЕНЕРИЯ",
-    duration: "4–8 МЕС.",
-    detail: "Навесные вентилируемые фасады, теплоизоляция, остекление. Параллельный монтаж инженерных систем.",
-    tags: ["НВФ", "СТЕКЛО", "HVAC"],
+    title: "Продуманные планировки",
+    body: "Сценарные планировки: тихая спальная зона, дневной контур, мастер-санузел, гардеробные. Без коридоров-тоннелей и слепых углов.",
+    tag: "BIM · CAD",
   },
   {
     index: "04",
-    title: "СДАЧА И ВВОД",
-    duration: "2–3 МЕС.",
-    detail: "Финишная отделка МОП, комиссия, получение разрешения на ввод, передача ключей собственникам.",
-    tags: ["ПРИЁМКА", "ВВОД В ЭКСПЛУАТАЦИЮ", "КЛЮЧИ"],
+    title: "Чистая вода",
+    body: "Централизованная система многоступенчатой фильтрации на вводе в дом. Минералы остаются, тяжёлые металлы — нет.",
+    tag: "5 СТУПЕНЕЙ",
+  },
+  {
+    index: "05",
+    title: "Комфортный микроклимат",
+    body: "Приточная вентиляция с подогревом и охлаждением, индивидуальные сплит-системы, термостаты по комнатам.",
+    tag: "HVAC",
+  },
+  {
+    index: "06",
+    title: "Безопасное пространство",
+    body: "Закрытый двор без машин, видеонаблюдение по периметру, СКУД, концепция «двор-без-чужих». Лобби с консьерж-зоной.",
+    tag: "24 / 7",
+  },
+  {
+    index: "07",
+    title: "Современная инфраструктура",
+    body: "Шаговая доступность школ, садов, ритейла. Внутри — детские площадки, спорт-зоны, ландшафтный дизайн от профильного бюро.",
+    tag: "WALK · 7 МИН",
   },
 ];
 ---
 
 <section
-  id="timeline"
+  id="privileges"
   class="relative bg-[#FBFBFA] border-t border-slate-200 overflow-hidden"
-  aria-label="Этапы строительства"
+  aria-label="Стандарт привилегий One Construction"
 >
   <div class="px-6 md:px-10 lg:px-12 py-24 md:py-40">
 
     <!-- Section header -->
     <header class="flex items-baseline justify-between pb-6 mb-16 md:mb-24 border-b border-slate-200">
-      <span class="mono-detail" data-reveal>ПРОЦЕСС</span>
-      <span class="mono-detail" data-reveal style="--reveal-delay:0.1s;">SEC: 004 / BUILD PHASES</span>
+      <span class="mono-detail" data-reveal>СТАНДАРТ · 03</span>
+      <span class="mono-detail" data-reveal style="--reveal-delay:0.1s;">SEC: 003 / PRIVILEGES</span>
     </header>
 
     <!-- Title -->
-    <div class="mb-20 md:mb-32 max-w-[52ch]" data-reveal style="--reveal-delay:0.14s;">
-      <h2 class="font-mono text-2xl md:text-4xl xl:text-5xl uppercase tracking-tight text-slate-900 leading-[1.1]">
-        От идеи<br/>до ключей.
-      </h2>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-20 md:mb-32">
+      <div class="lg:col-span-7" data-reveal style="--reveal-delay:0.14s;">
+        <h2 class="font-mono text-[8vw] md:text-[5.4vw] xl:text-[4.6vw] uppercase tracking-[-0.04em] text-slate-900 leading-[0.94] max-w-[14ch]">
+          Стандарт<br />привилегий<br />
+          <span class="text-violet-700">One Construction.</span>
+        </h2>
+      </div>
+      <div class="lg:col-span-5 flex flex-col gap-6 lg:pt-4" data-reveal style="--reveal-delay:0.22s;">
+        <p class="text-base md:text-lg text-slate-700 leading-relaxed max-w-[48ch]">
+          Семь обязательных слоёв, которые мы закладываем в каждый дом — независимо от класса, площади и квартиры.
+        </p>
+        <p class="text-sm md:text-base text-slate-600 leading-relaxed max-w-[48ch]">
+          Это не маркетинговый список, а технический регламент: его выполняет инженерная служба и фиксирует приёмка.
+        </p>
+      </div>
     </div>
 
-    <!-- Timeline layout -->
-    <div class="tl-root relative grid grid-cols-1 md:grid-cols-12 gap-0">
+    <!-- Privileges list — hairline rows -->
+    <ul class="priv-list border-t border-slate-200">
+      {privileges.map((p, idx) => (
+        <li
+          class="priv-row group relative grid grid-cols-12 gap-4 md:gap-8 items-start py-8 md:py-12 border-b border-slate-200 transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-bone"
+          data-priv-index={idx}
+        >
+          <!-- Index -->
+          <div class="col-span-2 md:col-span-1 flex flex-col gap-2 pt-1">
+            <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-400 group-hover:text-violet-600 transition-colors duration-500">
+              {p.index}
+            </span>
+            <span class="hidden md:block w-2 h-2 border border-slate-300 group-hover:border-violet-600 group-hover:bg-violet-600 transition-all duration-500"></span>
+          </div>
 
-      <!-- Centre spine — the line that fills with violet -->
-      <div class="hidden md:block md:col-span-1 relative">
-        <div class="tl-track absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-slate-200"></div>
-        <div
-          class="tl-fill absolute left-1/2 -translate-x-1/2 top-0 w-px bg-[#7c3aed]"
-          style="height: 0%;"
-        ></div>
-      </div>
+          <!-- Title -->
+          <div class="col-span-10 md:col-span-5">
+            <h3 class="font-mono text-lg md:text-2xl xl:text-3xl tracking-tight text-slate-900 leading-[1.1] group-hover:text-violet-700 transition-colors duration-500">
+              {p.title}
+            </h3>
+          </div>
 
-      <!-- Phase cards column -->
-      <div class="md:col-span-11 md:pl-10 flex flex-col gap-0">
-        {phases.map((phase, idx) => (
-          <article
-            class="tl-card group relative grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 py-10 md:py-14 border-b border-slate-200"
-            data-tl-index={idx}
-          >
-            <!-- Giant ghost index -->
-            <span
-              class="absolute top-6 right-0 md:-left-10 font-mono text-[80px] md:text-[110px] leading-none tracking-tighter text-slate-900/[0.04] select-none pointer-events-none"
-              aria-hidden="true"
-            >{phase.index}</span>
+          <!-- Body -->
+          <div class="col-span-12 md:col-span-5">
+            <p class="text-sm md:text-base text-slate-600 leading-relaxed max-w-[52ch]">
+              {p.body}
+            </p>
+          </div>
 
-            <!-- Left: index + duration -->
-            <div class="md:col-span-3 flex flex-col gap-3 justify-start pt-1">
-              <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-400">{phase.index}</span>
-              <span class="font-mono text-[11px] uppercase tracking-[0.16em] text-slate-500">{phase.duration}</span>
-
-              <!-- Violet dot on spine (desktop) -->
-              <div class="hidden md:block absolute -left-10 top-[3.5rem] w-3 h-3 border border-slate-300 bg-[#FBFBFA] group-[.tl-active]:border-[#7c3aed] group-[.tl-active]:bg-[#7c3aed] transition-all duration-500 -translate-x-[5px]"></div>
-            </div>
-
-            <!-- Right: content -->
-            <div class="md:col-span-9 flex flex-col gap-4">
-              <h3 class="font-mono text-sm md:text-base uppercase tracking-[0.14em] text-slate-900 transition-colors duration-300 group-hover:text-[#7c3aed]">
-                {phase.title}
-              </h3>
-              <p class="text-sm text-slate-600 leading-relaxed max-w-[52ch]">
-                {phase.detail}
-              </p>
-              <div class="flex flex-wrap gap-2 mt-2">
-                {phase.tags.map((tag) => (
-                  <span class="font-mono text-[9px] uppercase tracking-[0.18em] text-slate-500 border border-slate-200 px-2 py-1">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-
-    </div>
+          <!-- Tag -->
+          <div class="col-span-12 md:col-span-1 md:flex md:justify-end pt-1">
+            <span class="inline-block font-mono text-[9px] uppercase tracking-[0.2em] text-slate-500 border border-slate-200 px-2 py-1 group-hover:border-violet-600 group-hover:text-violet-700 transition-colors duration-500">
+              {p.tag}
+            </span>
+          </div>
+        </li>
+      ))}
+    </ul>
   </div>
 </section>
 
@@ -115,42 +127,25 @@ const phases = [
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const initTimeline = () => {
-    const section = document.getElementById("timeline");
+  const initPrivileges = () => {
+    const section = document.getElementById("privileges");
     if (!section) return;
+    const rows = section.querySelectorAll<HTMLElement>(".priv-row");
+    if (!rows.length) return;
 
-    const fill   = section.querySelector<HTMLElement>(".tl-fill");
-    const cards  = section.querySelectorAll<HTMLElement>(".tl-card");
-    if (!fill || cards.length === 0) return;
-
-    // Spine fill on scroll
-    ScrollTrigger.create({
-      trigger: section.querySelector(".tl-root"),
-      start: "top 70%",
-      end: "bottom 30%",
-      scrub: 1.2,
-      onUpdate: (self) => {
-        fill.style.height = `${self.progress * 100}%`;
-      },
-    });
-
-    // Cards: fly in from sides
-    cards.forEach((card, i) => {
-      const fromLeft = i % 2 === 0;
-      gsap.set(card, { opacity: 0, x: fromLeft ? -40 : 40 });
-
+    rows.forEach((row, i) => {
+      gsap.set(row, { opacity: 0, y: 32 });
       ScrollTrigger.create({
-        trigger: card,
-        start: "top 82%",
+        trigger: row,
+        start: "top 88%",
         onEnter: () => {
-          gsap.to(card, {
+          gsap.to(row, {
             opacity: 1,
-            x: 0,
-            duration: 0.75,
+            y: 0,
+            duration: 0.7,
             ease: "power3.out",
-            delay: 0.05 * i,
+            delay: 0.04 * i,
           });
-          card.classList.add("tl-active");
         },
         once: true,
       });
@@ -158,8 +153,8 @@ const phases = [
   };
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initTimeline, { once: true });
+    document.addEventListener("DOMContentLoaded", initPrivileges, { once: true });
   } else {
-    initTimeline();
+    initPrivileges();
   }
 </script>

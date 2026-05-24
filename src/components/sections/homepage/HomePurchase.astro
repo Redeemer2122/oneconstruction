@@ -1,0 +1,135 @@
+---
+/**
+ * HomePurchase — "Выберите удобный вариант покупки".
+ * 4 варианта: Полная оплата, Рассрочка 0%, Trade-in, Бонусная программа.
+ */
+const options = [
+  {
+    index: "01",
+    title: "Полная оплата",
+    metric: "до 12%",
+    metricLabel: "СКИДКА",
+    body: "Максимально выгодные условия при единовременной оплате. Фиксация цены и подбор лучшей планировки из доступных.",
+    bullets: ["Скидка до 12% от прайса", "Закрепление цены на 14 дней", "Подбор приоритетной квартиры"],
+    cta: "Оставить заявку",
+  },
+  {
+    index: "02",
+    title: "Рассрочка 0%",
+    metric: "40 мес.",
+    metricLabel: "БЕЗ %",
+    body: "Беспроцентная внутренняя рассрочка от застройщика. Первый взнос — от 30%, остаток — равными платежами до сдачи и после.",
+    bullets: ["Без переплат и банков", "Первый взнос — от 30%", "График до 40 месяцев"],
+    cta: "Рассчитать график",
+  },
+  {
+    index: "03",
+    title: "Trade-in",
+    metric: "0 ₽",
+    metricLabel: "ДОПЛАТА",
+    body: "Обменяем вашу старую квартиру или автомобиль на новый метр в нашем ЖК. Юристы и оценщики берут сделку на себя.",
+    bullets: ["Оценка за 1 рабочий день", "Юридическое сопровождение", "Старое жильё / авто в зачёт"],
+    cta: "Узнать оценку",
+  },
+  {
+    index: "04",
+    title: "Бонусная программа",
+    metric: "+ 3%",
+    metricLabel: "ЛОЯЛЬНОСТЬ",
+    body: "Бонусы за повторную покупку, рекомендации друзей и подписку на закрытые предзапуски. Накопленные баллы конвертируются в скидку.",
+    bullets: ["Бонусы за рекомендации", "Доступ к pre-launch", "Конвертация баллов в м²"],
+    cta: "Подключиться",
+  },
+];
+---
+
+<section
+  id="purchase"
+  class="relative bg-[#F5F4F0] border-t border-slate-200 overflow-hidden"
+  aria-label="Выберите удобный вариант покупки"
+>
+  <div class="px-6 md:px-10 lg:px-12 py-24 md:py-40">
+
+    <!-- Section header -->
+    <header class="flex items-baseline justify-between pb-6 mb-16 md:mb-24 border-b border-slate-200">
+      <span class="mono-detail" data-reveal>ПОКУПКА · 05</span>
+      <span class="mono-detail" data-reveal style="--reveal-delay:0.1s;">SEC: 005 / PURCHASE_FLOWS</span>
+    </header>
+
+    <!-- Title -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-20 md:mb-32">
+      <div class="lg:col-span-8" data-reveal style="--reveal-delay:0.14s;">
+        <h2 class="font-mono text-[8vw] md:text-[5.4vw] xl:text-[4.6vw] uppercase tracking-[-0.04em] text-slate-900 leading-[0.94] max-w-[16ch]">
+          Выберите удобный<br/>вариант покупки.
+        </h2>
+      </div>
+      <div class="lg:col-span-4 flex flex-col gap-6 lg:pt-4" data-reveal style="--reveal-delay:0.22s;">
+        <p class="text-base md:text-lg text-slate-700 leading-relaxed max-w-[48ch]">
+          Четыре сценария сделки. Подберём схему под ваш бюджет и горизонт планирования — без обязательной ипотеки и скрытых комиссий.
+        </p>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 border-t border-l border-slate-200">
+      {options.map((opt, i) => (
+        <article
+          class="group relative bg-alabaster border-r border-b border-slate-200 p-8 md:p-12 flex flex-col gap-8 min-h-[420px] md:min-h-[480px] transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          data-reveal
+          style={`--reveal-delay: ${0.06 * i + 0.28}s;`}
+        >
+          <!-- Ghost numeric -->
+          <span
+            class="absolute -top-3 -right-3 font-mono text-[110px] md:text-[150px] leading-none tracking-tighter text-slate-900/[0.04] select-none pointer-events-none"
+            aria-hidden="true"
+          >{opt.index}</span>
+
+          <header class="flex items-baseline justify-between gap-4">
+            <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-400">
+              {opt.index} / 04
+            </span>
+            <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-violet-600">
+              {opt.metricLabel}
+            </span>
+          </header>
+
+          <div class="relative z-10 flex flex-col gap-6">
+            <div class="flex items-baseline gap-4 border-b border-slate-200 pb-6">
+              <span class="font-mono text-5xl md:text-6xl tracking-tight text-violet-700 leading-none">
+                {opt.metric}
+              </span>
+              <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500">
+                {opt.metricLabel}
+              </span>
+            </div>
+
+            <h3 class="font-mono text-2xl md:text-3xl tracking-tight text-slate-900 leading-[1.05]">
+              {opt.title}
+            </h3>
+
+            <p class="text-sm md:text-base text-slate-600 leading-relaxed max-w-[44ch]">
+              {opt.body}
+            </p>
+
+            <ul class="flex flex-col gap-2 mt-2">
+              {opt.bullets.map((b) => (
+                <li class="flex items-start gap-3 text-sm text-slate-700">
+                  <span aria-hidden="true" class="mt-2 w-3 h-px bg-violet-600 shrink-0"></span>
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <a
+            href="#contact"
+            class="mt-auto self-start inline-flex items-center gap-3 px-6 py-3.5 border border-slate-900 bg-transparent text-slate-900 font-mono text-[11px] uppercase tracking-[0.22em] transition-[background-color,color,border-color] duration-300 hover:bg-violet-700 hover:text-white hover:border-violet-700"
+          >
+            <span>{opt.cta}</span>
+            <span aria-hidden="true" class="block h-px w-4 bg-current transition-[width] duration-500 group-hover:w-8"></span>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
