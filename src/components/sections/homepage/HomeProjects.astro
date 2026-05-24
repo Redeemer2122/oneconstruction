@@ -1,12 +1,4 @@
 ---
-/**
- * HomeProjects — полноэкранный горизонтальный скролл-пин (desktop)
- * и чистая вертикальная лента (mobile).
- *
- * ANTI-HARDCODE GUARD: все карточки рендерятся через .map() из массива.
- * Эффект scroll-pin реализован в `src/scripts/projects-scroll.ts`
- * через GSAP ScrollTrigger + matchMedia('(min-width: 768px)').
- */
 import ProjectCard from "@modules/ProjectCard.astro";
 
 const projects = [
@@ -48,26 +40,39 @@ const projects = [
 
 <section
   id="projects"
-  class="relative bg-limestone border-b-[0.5px] border-slate-200 scroll-mt-28"
+  class="relative bg-blueprint border-b border-[oklch(0.195_0.018_42_/_0.10)] scroll-mt-28"
+  aria-label="Проекты One Construction"
 >
-  <div class="section-stitch-top stitch-bone-to-limestone" aria-hidden="true"></div>
+  <div class="section-stitch-top stitch-bone-to-blueprint" aria-hidden="true"></div>
+
   <header
-    class="flex items-end justify-between px-6 md:px-10 pt-20 md:pt-28 pb-8 border-b-[0.5px] border-slate-200"
+    class="relative flex items-end justify-between px-6 md:px-10 pt-20 md:pt-28 pb-8
+           border-b border-[oklch(0.195_0.018_42_/_0.10)]"
   >
+    <!-- Угловой штамп — едва заметный -->
+    <span
+      class="absolute top-4 right-4 md:top-6 md:right-6 font-mono text-[9px] uppercase
+             tracking-[0.20em] text-[#38332f]/20 select-none"
+      aria-hidden="true"
+    >
+      ЛИСТ 01 · М 1:500
+    </span>
+
     <div class="flex flex-col gap-4">
       <span class="mono-detail" data-reveal>
         ОБЪЕКТЫ · {String(projects.length).padStart(2, "0")}
       </span>
       <h2
-        class="display text-4xl md:text-6xl xl:text-7xl leading-[0.92] tracking-tighter text-slate-900"
+        class="display text-4xl md:text-6xl xl:text-7xl leading-[0.92] tracking-tighter text-[#38332f]"
         data-reveal
         style="--reveal-delay: 0.08s;"
       >
         Три проекта,<br />три температуры.
       </h2>
     </div>
+
     <span
-      class="hidden md:inline-block font-mono text-[10px] uppercase tracking-[0.22em] text-slate-400"
+      class="hidden md:inline-block font-mono text-[10px] uppercase tracking-[0.22em] text-[#7e7975]/60"
       data-reveal
       style="--reveal-delay: 0.16s;"
     >
@@ -75,21 +80,23 @@ const projects = [
     </span>
   </header>
 
-  <!-- MOBILE: чистая вертикальная лента -->
-  <div class="md:hidden flex flex-col gap-12 px-6 py-16">
-    {projects.map((project) => <ProjectCard {...project} aspect="aspect-[4/5]" />)}
+  <!-- MOBILE: вертикальная лента -->
+  <div class="md:hidden flex flex-col gap-0 px-6 py-16 border-x border-[oklch(0.195_0.018_42_/_0.10)]">
+    {projects.map((project, i) => (
+      <div class={i < projects.length - 1 ? "mb-12" : ""}>
+        <ProjectCard {...project} aspect="aspect-[4/5]" />
+      </div>
+    ))}
   </div>
 
   <!-- DESKTOP: горизонтальный scroll-pin -->
   <div class="hidden md:block hs-viewport overflow-hidden">
-    <div class="hs-track flex items-center gap-8 px-10 py-20 h-[70vh] will-change-transform">
-      {
-        projects.map((project) => (
-          <div class="hs-slide w-[58vw] lg:w-[48vw] h-[60vh] flex-shrink-0">
-            <ProjectCard {...project} fill />
-          </div>
-        ))
-      }
+    <div class="hs-track flex items-center gap-6 px-10 py-20 h-[70vh] will-change-transform">
+      {projects.map((project) => (
+        <div class="hs-slide w-[58vw] lg:w-[48vw] h-[60vh] flex-shrink-0">
+          <ProjectCard {...project} fill />
+        </div>
+      ))}
       <div class="hs-tail flex-shrink-0 w-[10vw]" aria-hidden="true"></div>
     </div>
   </div>

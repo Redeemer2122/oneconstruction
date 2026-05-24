@@ -2,61 +2,56 @@
 
 /*
  * ONE CONSTRUCTION — Design Tokens
- * Tailwind v4 CSS-first theme. All neutrals tinted toward cobalt.
- * OKLCH only. No #000 / #fff. No bounce. No rounded corners.
+ * Палитра адаптирована из Lagom Development: тёплый алебастр, угольный графит,
+ * архитектурный warm-gray. OKLCH. Без #000/#fff. Без скруглений. Без bounce.
  */
 
 @theme {
-  /* Core surfaces — light premium palette */
-  --color-alabaster: oklch(0.98 0.003 60);    /* #FBFBFA warm alabaster */
-  --color-bone: oklch(0.96 0.004 55);         /* #F5F4F0 matte bone */
-  --color-limestone: oklch(0.94 0.005 50);    /* light limestone */
+  /* ── Lagom-inspired surfaces ─────────────────────────────────────────── */
+  --color-alabaster:   oklch(0.975 0.004 60);   /* #f2efe9 — Lagom secondary */
+  --color-bone:        oklch(0.965 0.005 55);   /* #ede9e1 — тёплый известняк */
+  --color-limestone:   oklch(0.950 0.006 50);   /* #e8e3d8 — светлый камень  */
+  --color-card:        oklch(0.985 0.002 60);   /* #fbfbf9 — Lagom card bg   */
 
-  /* Dark ink for typography */
-  --color-ink-950: oklch(0.16 0.018 258);   /* deep graphite */
-  --color-ink-900: oklch(0.20 0.020 258);
-  --color-ink-800: oklch(0.26 0.018 258);
-  --color-ink-700: oklch(0.34 0.016 258);
-  --color-ink-600: oklch(0.45 0.012 258);
-  --color-ink-500: oklch(0.58 0.010 258);
-  --color-ink-400: oklch(0.70 0.014 258);
-  --color-ink-300: oklch(0.82 0.012 258);
-  --color-ink-200: oklch(0.90 0.010 258);
-  --color-ink-100: oklch(0.96 0.003 258);
+  /* ── Lagom neutrals — угольный warm-brown ───────────────────────────── */
+  --color-charcoal-950: oklch(0.195 0.018 42);  /* #38332f — Lagom base-2    */
+  --color-charcoal-900: oklch(0.240 0.016 42);
+  --color-charcoal-800: oklch(0.300 0.014 42);
+  --color-charcoal-700: oklch(0.380 0.012 42);
+  --color-charcoal-600: oklch(0.460 0.010 42);  /* #7e7975 — Lagom base-8    */
+  --color-charcoal-500: oklch(0.560 0.009 42);
+  --color-charcoal-400: oklch(0.650 0.008 42);  /* #a39c8c — Lagom base-12   */
+  --color-charcoal-300: oklch(0.750 0.006 42);
+  --color-charcoal-200: oklch(0.840 0.005 42);  /* #d7d1c6 — Lagom base-14   */
+  --color-charcoal-100: oklch(0.920 0.004 42);
 
-  /* Steel — metallic neutral accent */
-  --color-steel-500: oklch(0.72 0.012 248);
-  --color-steel-400: oklch(0.80 0.010 248);
-  --color-steel-300: oklch(0.86 0.008 248);
+  /* ── Lagom hairline border ───────────────────────────────────────────── */
+  --color-border:       oklch(0.195 0.018 42 / 0.10);  /* charcoal/10 */
+  --color-border-mid:   oklch(0.195 0.018 42 / 0.16);
+  --color-border-strong:oklch(0.195 0.018 42 / 0.28);
 
-  /* Royal Violet & Indigo — interactive accents */
+  /* ── Accent — Royal Violet (наш фирменный, не Lagom) ────────────────── */
   --color-violet-700: oklch(0.38 0.18 285);
   --color-violet-600: oklch(0.48 0.20 285);
   --color-violet-500: oklch(0.58 0.18 285);
   --color-violet-400: oklch(0.68 0.16 285);
 
-  /* Cobalt — legacy support */
-  --color-cobalt-700: oklch(0.42 0.14 258);
-  --color-cobalt-600: oklch(0.52 0.16 258);
-  --color-cobalt-500: oklch(0.62 0.17 258);
-  --color-cobalt-400: oklch(0.72 0.14 258);
-
-  /* Typography */
+  /* ── Typography ──────────────────────────────────────────────────────── */
   --font-display: "Geist Variable", "Cabinet Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+  --font-sans:    "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    "Geist Mono Variable", "JetBrains Mono", ui-monospace, monospace;
 
-  /* Easing — exponential ease-out only. NO bounce, NO elastic. */
-  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
-  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
+  /* ── Easing — Lagom custom + наш expo ───────────────────────────────── */
+  --ease-lagom:      cubic-bezier(0.625, 0.05, 0, 1);   /* Lagom signature  */
+  --ease-out-quart:  cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* Radii — STRICT BAN on rounding. Only hairline allowed. */
+  /* ── Radii — СТРОГИЙ ЗАПРЕТ на скругления ───────────────────────────── */
   --radius-none: 0px;
   --radius-hair: 2px;
 }
 
-/* Strip default radius globally — premium architecture is sharp. */
+/* Глобальный сброс радиусов */
 *,
 *::before,
 *::after {
@@ -68,7 +63,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   background: var(--color-alabaster);
-  color: var(--color-ink-950);
+  color: var(--color-charcoal-950);
   font-family: var(--font-sans);
   font-feature-settings: "ss01", "ss02", "cv11";
 }
@@ -76,24 +71,24 @@ html {
 body {
   min-height: 100dvh;
   background-color: var(--color-alabaster);
+  /* Деликатная сетка — opacity 0.04, едва угадывается */
   background-image:
-    linear-gradient(to right, oklch(0.16 0.018 258 / 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.16 0.018 258 / 0.025) 1px, transparent 1px);
-  background-size: 96px 96px, 96px 96px;
+    linear-gradient(to right,  oklch(0.195 0.018 42 / 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.195 0.018 42 / 0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
   background-attachment: fixed;
 }
 
-body::before {
+/* Noise overlay — матовая бумага верже, очень тихий */
+body::after {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: 2;
+  z-index: 60;
   pointer-events: none;
-  background-image:
-    linear-gradient(to right, oklch(0.16 0.018 258 / 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.16 0.018 258 / 0.03) 1px, transparent 1px);
-  background-size: 96px 96px;
-  mask-image: linear-gradient(to bottom, transparent 0%, black 16%, black 88%, transparent 100%);
+  opacity: 0.025;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.22 0 0 0 0 0.20 0 0 0 0 0.18 0 0 0 0.4 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
 body > * {
@@ -101,7 +96,7 @@ body > * {
   z-index: 1;
 }
 
-/* Scale Shock — display headline default */
+/* ── Scale Shock — display headline ─────────────────────────────────────── */
 .display {
   font-family: var(--font-display);
   font-weight: 500;
@@ -109,30 +104,23 @@ body > * {
   line-height: 0.92;
 }
 
-/* Mono micro-detail — `ID: 404-MED | LOC: 42.87° N | STATUS: PHASE_02` */
+/* ── Mono micro-detail ───────────────────────────────────────────────────── */
 .mono-detail {
   font-family: var(--font-mono);
   font-size: 10px;
   line-height: 1.4;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: oklch(0.58 0.010 258 / 0.65);
+  color: oklch(0.460 0.010 42 / 0.65);
 }
 
-/* Hairline border helper */
+/* ── Hairline border helper ──────────────────────────────────────────────── */
 .hairline {
-  border: 0.5px solid oklch(0.16 0.018 258 / 0.08);
+  border: 0.5px solid var(--color-border);
 }
 
 /* ========================================================================
-   SECTION STITCHES — soft tonal cross-section seams.
-   Each helper paints an 80px gradient inside the section that fades the
-   PREVIOUS section's surface tone into the CURRENT one. Pointer-events
-   none, sits above section bg but below content (body > * is z-index 1
-   and stitches use z-index 0 within the section).
-   Palette order on home:
-     Hero  alabaster  →  About limestone  →  Projects limestone
-       →  Contact alabaster.
+   SECTION STITCHES
    ======================================================================== */
 .section-stitch-top,
 .section-stitch-bottom {
@@ -143,37 +131,89 @@ body > * {
   pointer-events: none;
   z-index: 0;
 }
-.section-stitch-top  { top: 0;    }
+.section-stitch-top    { top: 0;    }
 .section-stitch-bottom { bottom: 0; }
 
-/* alabaster → bone (Hero ↓ About) */
 .stitch-alabaster-to-bone {
-  background: linear-gradient(
-    to bottom,
-    var(--color-alabaster) 0%,
-    var(--color-bone) 100%
-  );
+  background: linear-gradient(to bottom, var(--color-alabaster) 0%, var(--color-bone) 100%);
 }
-/* bone → limestone (About ↓ Projects) */
 .stitch-bone-to-limestone {
-  background: linear-gradient(
-    to bottom,
-    var(--color-bone) 0%,
-    var(--color-limestone) 100%
-  );
+  background: linear-gradient(to bottom, var(--color-bone) 0%, var(--color-limestone) 100%);
 }
-/* limestone → alabaster (Projects ↓ Contact) */
+.stitch-bone-to-blueprint {
+  background: linear-gradient(to bottom, var(--color-bone) 0%, var(--color-alabaster) 100%);
+}
+.stitch-blueprint-to-alabaster {
+  background: linear-gradient(to bottom, var(--color-alabaster) 0%, var(--color-alabaster) 100%);
+}
 .stitch-limestone-to-alabaster {
-  background: linear-gradient(
-    to bottom,
-    var(--color-limestone) 0%,
-    var(--color-alabaster) 100%
-  );
+  background: linear-gradient(to bottom, var(--color-limestone) 0%, var(--color-alabaster) 100%);
 }
 
 /* ========================================================================
-   LENIS SMOOTH SCROLL — required class hooks
-   Lenis 1.x вешает на <html> классы `lenis` и `lenis-smooth`.
+   BLUEPRINT — деликатная калька, opacity 0.04
+   ======================================================================== */
+.bg-blueprint {
+  background-color: var(--color-alabaster);
+  background-image:
+    /* Микросетка 4px */
+    linear-gradient(to right,  oklch(0.195 0.018 42 / 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.195 0.018 42 / 0.025) 1px, transparent 1px),
+    /* Основная сетка 20px */
+    linear-gradient(to right,  oklch(0.195 0.018 42 / 0.04)  1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.195 0.018 42 / 0.04)  1px, transparent 1px),
+    /* Акцентная сетка 100px */
+    linear-gradient(to right,  oklch(0.195 0.018 42 / 0.07)  1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.195 0.018 42 / 0.07)  1px, transparent 1px);
+  background-size:
+    4px 4px, 4px 4px,
+    20px 20px, 20px 20px,
+    100px 100px, 100px 100px;
+}
+
+/* ========================================================================
+   PLATE GEOMETRY — чистый векторный декор для плит манифеста
+   ======================================================================== */
+.plate-geometry {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ритм-полосы: вертикальные линии шаг 10px */
+.plate-geometry-lines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to right,
+    currentColor 0px,
+    currentColor 1px,
+    transparent 1px,
+    transparent 10px
+  );
+  opacity: 0.05;
+}
+
+/* Арко-полукруги в правом нижнем углу */
+.plate-geometry-arc::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  pointer-events: none;
+  width: 140px;
+  height: 100px;
+  background-image: radial-gradient(
+    ellipse 80% 55% at 100% 100%,
+    currentColor 0%,
+    transparent 100%
+  );
+  opacity: 0.06;
+}
+
+/* ========================================================================
+   LENIS SMOOTH SCROLL
    ======================================================================== */
 html.lenis,
 html.lenis body {
@@ -194,13 +234,9 @@ html.lenis body {
 
 /* ========================================================================
    MOTION SYSTEM
-   - mask reveals on Hero headline (load)
-   - header drop-in (load)
-   - scroll reveals via [data-reveal], [data-reveal-line] + IntersectionObserver
-   - всё уважает prefers-reduced-motion
    ======================================================================== */
 
-/* Hero headline mask. Each line wrapped in .headline-mask, inner span slides up. */
+/* Hero headline mask */
 .headline-mask {
   display: block;
   overflow: clip;
@@ -222,7 +258,7 @@ html.lenis body {
   to   { transform: translateY(0); }
 }
 
-/* Header drop-in on first paint. */
+/* Header drop-in */
 .header-enter {
   opacity: 0;
   transform: translateY(-14px);
@@ -233,12 +269,12 @@ html.lenis body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Scroll reveal — text/blocks. */
+/* Scroll reveal */
 [data-reveal] {
   opacity: 0;
   transform: translateY(14px);
   transition:
-    opacity 0.95s var(--ease-out-expo),
+    opacity  0.95s var(--ease-out-expo),
     transform 0.95s var(--ease-out-expo);
   transition-delay: var(--reveal-delay, 0s);
   will-change: transform, opacity;
@@ -248,7 +284,7 @@ html.lenis body {
   transform: translateY(0);
 }
 
-/* Scroll reveal — hairline drawing from left to right. */
+/* Hairline draw */
 [data-reveal-line] {
   display: block;
   transform: scaleX(0);
@@ -261,7 +297,7 @@ html.lenis body {
   transform: scaleX(1);
 }
 
-/* Reduced motion override — instantly resolve to final state. */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .headline-mask > span,
   .header-enter {
@@ -275,30 +311,6 @@ html.lenis body {
     opacity: 1 !important;
     transform: none !important;
   }
-}
-
-/* Selection — violet tint */
-::selection {
-  background: oklch(0.58 0.18 285 / 0.25);
-  color: var(--color-ink-950);
-}
-
-/*
- * Noise overlay — applied via fixed pseudo-element (NOT on scrolling containers).
- * Pointer-events:none, GPU-cheap, keeps mobile from repainting on scroll.
- */
-.noise-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  pointer-events: none;
-  opacity: 0.035;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.15 0 0 0 0 0.18 0 0 0 0 0.22 0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-}
-
-/* Respect reduced motion. */
-@media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
@@ -306,4 +318,10 @@ html.lenis body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+/* Selection */
+::selection {
+  background: oklch(0.58 0.18 285 / 0.22);
+  color: var(--color-charcoal-950);
 }

@@ -1,18 +1,4 @@
 ---
-/**
- * ProjectCard — карточка ЖК как «дорогая картина в стальной раме».
- *
- * Композиция:
- *  - hairline-рамка (border-[0.5px] border-white/10), rounded-none.
- *  - изображение в овер-обёртке overflow-hidden + scale-105 на hover
- *    (медленный, 1.5s, ease-out-expo). НЕ дёрганый, НЕ bouncy.
- *  - технические моно-детали выложены под фото в виде матрицы (ID,
- *    координаты, статус). Никаких generic «Узнать больше →».
- *
- * Защита от любого фото: лёгкая scrim-маска снизу изображения для
- * читаемости имени проекта, если хочется поверх; здесь имя вынесено
- * под фото, scrim не нужен.
- */
 interface Props {
   slug: string;
   name: string;
@@ -22,9 +8,7 @@ interface Props {
   coordinates: string;
   status: string;
   units?: string;
-  /** Tailwind aspect class, e.g. `aspect-[4/5]` (default) or `aspect-[3/5]`. */
   aspect?: string;
-  /** When true, card stretches to fill its parent height (used in horizontal scroll-pin slides). */
   fill?: boolean;
 }
 
@@ -45,63 +29,73 @@ const {
 <article class={`group flex flex-col ${fill ? "h-full" : ""}`}>
   <a
     href={`/projects/${slug}`}
-    class={`block border-[0.5px] border-slate-200 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-slate-400 focus-visible:border-violet-600 focus-visible:outline-none ${fill ? "flex flex-col h-full" : ""}`}
+    class={`block border border-[oklch(0.195_0.018_42_/_0.14)]
+            transition-colors duration-[800ms] ease-[cubic-bezier(0.625,0.05,0,1)]
+            hover:border-[oklch(0.195_0.018_42_/_0.40)]
+            focus-visible:border-[oklch(0.48_0.20_285)] focus-visible:outline-none
+            ${fill ? "flex flex-col h-full" : ""}`}
   >
-    <div class={`relative ${fill ? "flex-1 min-h-0" : aspect} overflow-hidden bg-bone`}>
+    <!-- Изображение -->
+    <div class={`relative ${fill ? "flex-1 min-h-0" : aspect} overflow-hidden bg-[#ede9e1]`}>
       <img
         src={cover}
         alt={`ЖК ${name} — дневной рендер`}
         loading="lazy"
         decoding="async"
-        class="absolute inset-0 h-full w-full object-cover will-change-transform transition-transform duration-[1500ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+        class="absolute inset-0 h-full w-full object-cover will-change-transform
+               transition-transform duration-[1400ms] ease-[cubic-bezier(0.625,0.05,0,1)]
+               group-hover:scale-[1.04]"
       />
+      <!-- Нижний scrim -->
       <div
         aria-hidden="true"
-        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent"
-      >
-      </div>
-      <span class="absolute top-4 left-4 font-mono text-[10px] uppercase tracking-[0.22em] text-white/95">
+        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#38332f]/50 via-transparent to-transparent"
+      />
+      <span class="absolute top-4 left-4 font-mono text-[10px] uppercase tracking-[0.22em] text-[#f2efe9]/90">
         {index}
       </span>
-      <span class="absolute top-4 right-4 font-mono text-[10px] uppercase tracking-[0.22em] text-white/95">
+      <span class="absolute top-4 right-4 font-mono text-[10px] uppercase tracking-[0.22em] text-[#f2efe9]/90">
         {status}
       </span>
     </div>
 
-    <div class="px-5 md:px-6 pt-6 pb-5 flex flex-col gap-5 border-t-[0.5px] border-slate-200 bg-alabaster">
-      <h3 class="display text-3xl md:text-5xl leading-[0.92] tracking-tighter text-slate-900 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-violet-600">
+    <!-- Metadata-блок — чистый, плоский, Lagom card bg -->
+    <div class="px-5 md:px-6 pt-6 pb-5 flex flex-col gap-5
+                border-t border-[oklch(0.195_0.018_42_/_0.10)]
+                bg-[#fbfbf9]">
+      <h3 class="display text-3xl md:text-5xl leading-[0.92] tracking-tighter text-[#38332f]
+                 transition-colors duration-[600ms] ease-[cubic-bezier(0.625,0.05,0,1)]
+                 group-hover:text-[oklch(0.48_0.20_285)]">
         {name}
       </h3>
 
       <dl class="grid grid-cols-2 gap-x-6 gap-y-3 mt-1">
         <div class="flex flex-col gap-1">
-          <dt class="font-mono text-[9px] uppercase tracking-[0.22em] text-slate-400">
+          <dt class="font-mono text-[9px] uppercase tracking-[0.22em] text-[#a39c8c]">
             КООРДИНАТЫ
           </dt>
-          <dd class="font-mono text-[11px] uppercase tracking-[0.16em] text-slate-700">
+          <dd class="font-mono text-[11px] uppercase tracking-[0.14em] text-[#38332f]">
             {coordinates}
           </dd>
         </div>
         <div class="flex flex-col gap-1">
-          <dt class="font-mono text-[9px] uppercase tracking-[0.22em] text-slate-400">
+          <dt class="font-mono text-[9px] uppercase tracking-[0.22em] text-[#a39c8c]">
             ЛОКАЦИЯ
           </dt>
-          <dd class="font-mono text-[11px] uppercase tracking-[0.16em] text-slate-700">
+          <dd class="font-mono text-[11px] uppercase tracking-[0.14em] text-[#38332f]">
             {location}
           </dd>
         </div>
-        {
-          units && (
-            <div class="flex flex-col gap-1 col-span-2">
-              <dt class="font-mono text-[9px] uppercase tracking-[0.22em] text-slate-400">
-                ПЛАНИРОВКИ
-              </dt>
-              <dd class="font-mono text-[11px] uppercase tracking-[0.16em] text-slate-700">
-                {units}
-              </dd>
-            </div>
-          )
-        }
+        {units && (
+          <div class="flex flex-col gap-1 col-span-2">
+            <dt class="font-mono text-[9px] uppercase tracking-[0.22em] text-[#a39c8c]">
+              ПЛАНИРОВКИ
+            </dt>
+            <dd class="font-mono text-[11px] uppercase tracking-[0.14em] text-[#38332f]">
+              {units}
+            </dd>
+          </div>
+        )}
       </dl>
     </div>
   </a>
