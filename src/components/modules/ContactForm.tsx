@@ -28,6 +28,7 @@ export default function ContactForm() {
     <form
       onSubmit={async (e) => {
         e.preventDefault();
+        // TODO: replace mock submit with real endpoint / Telegram / CRM integration.
         setStatus("submitting");
         await new Promise((r) => setTimeout(r, 700));
         setStatus("success");

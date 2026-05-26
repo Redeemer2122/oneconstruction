@@ -18,7 +18,8 @@
       "@layouts/*": ["src/layouts/*"],
       "@content/*": ["src/content/*"],
       "@lib/*": ["src/lib/*"],
-      "@styles/*": ["src/styles/*"]
+      "@styles/*": ["src/styles/*"],
+      "@data/*": ["src/data/*"]
     }
   }
 }

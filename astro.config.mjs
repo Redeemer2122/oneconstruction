@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
+import path from 'path';
 
 // https://astro.build/config
 export default defineConfig({
@@ -8,8 +9,12 @@ export default defineConfig({
   integrations: [react()],
   vite: {
     plugins: [tailwindcss()],
+    resolve: {
+      alias: {
+        '@data': path.resolve('./src/data'),
+      },
+    },
   },
-  // Performance: ship zero JS by default. Islands opt in via client:* directives.
   prefetch: {
     prefetchAll: false,
     defaultStrategy: 'hover',
