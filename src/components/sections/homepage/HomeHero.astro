@@ -9,12 +9,13 @@ const { image: heroImage, imageAlt, eyebrow, titleLines, subtitle, metrics } = h
   class="relative isolate min-h-[100dvh] w-full overflow-hidden bg-[#FBFBFA] flex flex-col"
 >
   <!-- Background render -->
-  <div class="absolute inset-0 -z-10">
+  <div class="absolute inset-0 -z-10 oc-media-fallback">
     <img
       src={heroImage}
       alt={imageAlt}
       class="h-full w-full object-cover opacity-40"
       loading="eager"
+      onerror="this.dataset.failed='true'"
     />
     <div
       aria-hidden="true"
@@ -53,7 +54,7 @@ const { image: heroImage, imageAlt, eyebrow, titleLines, subtitle, metrics } = h
       <span class="mono-detail text-slate-400">{company.coordinates.display}</span>
       <a
         href="#projects"
-        class="inline-block font-mono text-[11px] uppercase tracking-[0.2em] text-slate-900 border border-slate-800 px-6 py-3 transition-colors duration-300 hover:bg-slate-900 hover:text-white"
+        class="inline-flex min-h-11 max-w-full items-center justify-center font-mono text-[11px] uppercase tracking-[0.16em] md:tracking-[0.2em] text-slate-900 border border-slate-800 px-6 py-3.5 transition-colors duration-300 hover:bg-slate-900 hover:text-white break-words"
       >
         Смотреть объекты ↘
       </a>
@@ -78,7 +79,7 @@ const { image: heroImage, imageAlt, eyebrow, titleLines, subtitle, metrics } = h
       <div class="hidden md:flex items-center justify-end">
         <a
           href="#contact"
-          class="font-mono text-[11px] uppercase tracking-[0.2em] text-slate-900 border border-slate-800 px-6 py-3 transition-colors duration-300 hover:bg-slate-900 hover:text-white"
+          class="inline-flex min-h-11 max-w-full items-center justify-center font-mono text-[11px] uppercase tracking-[0.18em] text-slate-900 border border-slate-800 px-6 py-3.5 transition-colors duration-300 hover:bg-slate-900 hover:text-white"
         >
           Связаться →
         </a>

@@ -16,7 +16,7 @@ const inputClass =
 
 const labelClass = "flex flex-col gap-2";
 const labelTextClass =
-  "font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500";
+  "font-mono text-[11px] md:text-[10px] uppercase tracking-[0.14em] md:tracking-[0.22em] text-slate-500";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -73,7 +73,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={isBusy || isDone}
-          className="group self-start inline-flex items-center gap-3 px-6 py-3.5 border-[0.5px] border-slate-900 bg-slate-900 text-alabaster font-mono text-[11px] uppercase tracking-[0.22em] transition-[transform,background-color,color,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.98] disabled:opacity-60 hover:bg-violet-600 hover:text-white hover:border-violet-600"
+          className="group self-start inline-flex min-h-11 max-w-full items-center gap-3 px-6 py-3.5 border-[0.5px] border-slate-900 bg-slate-900 text-alabaster font-mono text-[11px] uppercase tracking-[0.16em] md:tracking-[0.22em] transition-[transform,background-color,color,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.98] disabled:opacity-60 hover:bg-violet-600 hover:text-white hover:border-violet-600"
         >
           {isBusy ? "ОТПРАВЛЯЕМ" : isDone ? "ПРИНЯТО" : "ОТПРАВИТЬ ЗАЯВКУ"}
           <span
@@ -82,7 +82,7 @@ export default function ContactForm() {
           />
         </button>
 
-        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500 max-w-[42ch] leading-relaxed">
+        <p className="font-mono text-[11px] md:text-[10px] uppercase tracking-[0.14em] md:tracking-[0.22em] text-slate-500 max-w-[42ch] leading-relaxed">
           Перезвоним в течение 4 часов в рабочее время. По телефону уточним
           интерес, пришлём паспорта планировок.
         </p>
