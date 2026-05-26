@@ -21,7 +21,8 @@
 - [x] Old site content extraction created at `docs/old-site-content.md`.
 - [x] Critical Content Fixes 1 completed.
 - [x] Visual Upgrade 1A completed.
-- [ ] Current focus: Visual Upgrade 1B — Projects section premium upgrade.
+- [x] Visual Upgrade 1B completed.
+- [ ] Current focus: Visual Upgrade 1C — Hero section upgrade.
 
 ## Phase 1 — Infrastructure [DONE]
 
@@ -69,19 +70,19 @@
   - Footer/contact collision risks reduced.
   - Hero/project image fallback behavior added for broken or slow remote images.
   - Typecheck/build passed when completed.
-
-### Current
-
-- [ ] Visual Upgrade 1B: Projects section premium upgrade.
+- [x] Visual Upgrade 1B: Projects section premium upgrade.
   - Preserve Astro Content Layer flow.
   - Preserve `getCollection("projects")` and `sortOrder`.
   - Do not reintroduce `ProjectCard.astro`.
   - Keep current project JSON data unchanged unless the task explicitly requests content/data edits.
   - Improve premium visual hierarchy, image treatment, spacing rhythm, and mobile behavior for the Projects section.
 
-### Planned
+### Current
 
 - [ ] Visual Upgrade 1C: Hero section upgrade.
+
+### Planned
+
 - [ ] Visual Upgrade 1D: Purchase section upgrade.
 - [ ] Visual Upgrade 1E: Contact/Footer polish.
 - [ ] Visual Upgrade 1F: Mobile polish.
@@ -184,4 +185,4 @@
 
 ## Next Recommended Task
 
-- Visual Upgrade 1B — Projects section premium upgrade.
+- Visual Upgrade 1C — Hero section upgrade.
