@@ -1,62 +1,187 @@
-# One Construction — Динамический трекер задач и дорожная карта
+# One Construction — Dynamic Task Tracker and Roadmap
 
-> 🤖 **ПРОТОКОЛ АВТООБНОВЛЕНИЯ ДЛЯ ИИ (AI AUTO-UPDATE PROTOCOL):**
-> Ты обязана актуализировать этот файл самостоятельно. Как только ты успешно завершаешь подзадачу, исправляешь баг или закрываешь пункт из текущего фокуса, ты должна перезаписать данный файл, изменив пустой чек-лист `[ ]` на выполненный `[x]`. Если в процессе работы обнаруживаются скрытые технические долги или баги, ты имеешь право добавлять их в конец текущей фазы как новые подпункты `[ ]`.
+## AI Auto-Update Protocol
 
----
+- Any AI agent working on this project must update `tasks.md` after completing a task.
+- If a task changes architecture, content, visual direction, or roadmap, `tasks.md` must reflect the new state before the task is considered complete.
+- Do not mark implementation tasks complete unless `npm run typecheck` and `npm run build` pass for the project.
+- Documentation-only tasks do not require build unless they affect code, generated types, content schemas, or runtime behavior.
+- Keep this file aligned with `README.md`, `DESIGN.md`, `PRODUCT.md`, `instructions.md`, and the real source tree.
+- Do not use outdated architecture paths or legacy component assumptions. Prefer the current Astro Content Layer and homepage section structure documented below.
 
-## 🏗️ Фаза 1: Инфраструктура и стек — [ВЫПОЛНЕНО]
+## Current Stable State
 
-- [x] Инициализация проекта на Astro 6.3.6 + Tailwind v4.
-- [x] Создание базовой структуры папок (components, layouts, sections).
-- [x] Фиксация визуальной конституции в `instructions.md`, `DESIGN.md` и `PRODUCT.md`.
-- [x] Интеграция Git и успешная синхронизация с удаленным репозиторием GitHub.
+- [x] `main` is the current primary branch.
+- [x] `backup-current-redesign` branch exists.
+- [x] `backup-current-redesign-2026-05-26` tag exists.
+- [x] Homepage architecture stabilized.
+- [x] Content data centralized.
+- [x] Project data moved to Astro Content Layer.
+- [x] Content audit created at `docs/content-audit.md`.
+- [x] Old site content extraction created at `docs/old-site-content.md`.
+- [x] Critical Content Fixes 1 completed.
+- [x] Visual Upgrade 1A completed.
+- [ ] Current focus: Visual Upgrade 1B — Projects section premium upgrade.
 
-## 🎨 Фаза 2: Премиальный фронтенд Главной (Premium Light) — [В ПРОЦЕССЕ РЕДИЗАЙНА: ЛЮКСОВЫЙ ГЕОМЕТРИЧЕСКИЙ СТИЛЬ]
+## Phase 1 — Infrastructure [DONE]
 
-- [x] Интеграция плавного скролла Lenis и каскадной анимации элементов через нативный IntersectionObserver.
-- [x] Первичная замена базовых плейсхолдеров на светлые дневные архитектурные рендеры люкс-класса.
-- [x] **[ФАЗА 2.3 — ВЫПОЛНЕНО] Глобальный редизайн в светлую тему и устранение сырости:**
-  - [x] **Глобальный фон и текстура (`Layout.astro` / `global.css`):** Бэкграунд переведён в тёплый алебастр (`#FBFBFA`). Текст — глубокий графит (`text-slate-900`). Чертёжная сетка hairline-линий + полупрозрачный noise overlay для эффекта матовой бумаги.
-  - [x] **Шапка (`HomeHeader.astro`):** Базовый цвет ссылок — холодный стальной (`text-slate-400`), ховер — королевский фиолетовый (`text-violet-600`) с микро-маркером (точка) слева. Top scrim переключён на алебастровый.
-  - [x] **Манифест (`HomeAbout.astro`):** Четыре блока (Материал, Метод, Масштаб, Обещание) упакованы в строгие стальные ячейки `border-slate-200` с моноширинными индексами 01–04 на Geist Mono. Слева — крупный бруталистичный заголовок-заявление.
-  - [x] **Масштабируемые Объекты (`HomeProjects.astro` & `ProjectCard.astro`):**
-    - [x] Полное устранение хардкода: секция рендерится через `.map()` по массиву `projects`.
-    - [x] Формула циклического десктопного смещения `index % 3` (0 → 0, 1 → translate-y-32, 2 → translate-y-8) для волнообразного архитектурного ритма при любом N.
-    - [x] Максимальная высота карточек на десктопе ограничена `md:max-h-[70vh]`. На мобильных смещение отключено (вертикальная лента).
-    - [x] Низ секции закрыт сквозной чертежной линией `border-b-[0.5px] border-slate-200`.
-  - [x] **Форма связи (`HomeContact.astro`):** Бруталистичный сплит-экран. Слева (на фоне bone) — моноширинный блок контактов офиса в Бишкеке. Справа — форма с подсветкой нижней линии инпутов королевским фиолетовым на hover/focus.
-  - [x] **Мобильный аудит:** Hero H1 переведён в `text-[14vw] md:text-[9vw]` с гарантией влезания, добавлен `overflow-x-hidden` на `<body>`, мобильная шапка получила прямоугольное full-screen меню-шторку с моноширинной навигацией и хук-скриптом на открытие/закрытие.
-  - [x] **Проверка сборки:** `npm run astro check` — 0 errors, 0 warnings, 0 hints.
+- [x] Astro 6.3.6 initialized.
+- [x] React islands available for interactive components.
+- [x] Tailwind v4 configured through CSS-first styling.
+- [x] TypeScript strict setup in place.
+- [x] GitHub/Vercel workflow established.
+- [x] Core folders created: `src/components`, `src/layouts`, `src/pages`, `src/styles`, `src/data`, `src/content`.
 
-**[ФАЗА 2.5 — ВЫПОЛНЕНО] Глубинный текстурный редизайн (тактильные строительные текстуры):**
-  - [x] **HomeAbout.astro:** Фон 4-х блоков манифеста — `bg-concrete` (SVG-турбулентность, имитирующая поры и следы опалубки). Диагональный штамп «ПРОВЕРЕНО». Координаты X/Y.
-  - [x] **HomeProjects.astro:** `bg-blueprint` с бледно-голубой миллиметровкой. Штамп «ЛИСТ 01 · М 1:500».
-  - [x] **ProjectCard.astro:** Metadata-блок в ржавом металлическом уголке (CSS-тени + радиальные градиенты в углах).
-  - [x] Сборка `npm run astro check` — 0 errors.
+## Phase 2 — Homepage Architecture and Content Stabilization [DONE]
 
-**[ФАЗА 2.6 — ВЫПОЛНЕНО] Люксовый геометрический редизайн (чистая геометрия вместо грязи):**
-  - [x] **Очистка global.css:** Удалены `bg-concrete`, `stamp-overlay`, `border-metal-corner`. `bg-blueprint` переведён на тёплый алебастр `oklch(0.985 0.001 250)` с линиями opacity 0.05–0.12. Добавлены утилиты `plate-geometry`, `plate-geometry-lines`, `plate-geometry-arc`.
-  - [x] **HomeAbout.astro — чистые цветные плиты:** 4 плиты манифеста (01: slate-800, 02: slate-400, 03: orange-400, 04: violet-700) — контрастные плоские блоки без шума. Векторный декор: плита 01 — ритм-полосы, 02 — концентрические арко-полукруги (SVG), 03 — ритм-полосы, 04 — горизонтальные линии. Все линии / дуги — opacity ≤ 0.08.
-  - [x] **ProjectCard.astro:** Ржавый швеллер заменён на чистый `bg-alabaster` с `border-slate-200`.
-  - [x] **HomeProjects.astro:** Ядовитые синие линии сетки заменены на slate-250/5%. Штамп «ЛИСТ 01 · М 1:500» — `text-slate-400/25`, подсказка скролла — `text-slate-400/60`.
-  - [x] **Сборка:** `npm run astro check` — 0 errors, 0 warnings, 0 hints.
+- [x] Header/nav cleanup completed.
+- [x] `src/data` created as the current intermediate data layer.
+- [x] `src/data/company.ts` centralized company/contact/legal data.
+- [x] `src/data/homepage.ts` centralized hero and about homepage content.
+- [x] `src/data/purchase.ts` centralized purchase options.
+- [x] `src/data/privileges.ts` centralized privilege/standard items.
+- [x] Project data moved from component-local assumptions into Astro Content Layer.
+- [x] Current Content Layer config path is `src/content.config.ts`.
+- [x] Project files now live in:
+  - `src/content/projects/lotos.json`
+  - `src/content/projects/yacht-village.json`
+  - `src/content/projects/medina.json`
+- [x] `HomeProjects.astro` uses `getCollection("projects")`.
+- [x] `HomeProjects.astro` sorts projects by `sortOrder`.
+- [x] `docs/old-site-content.md` created from old homepage extraction.
+- [x] `docs/content-audit.md` created to compare old content with beta implementation.
+- [x] Critical Content Fixes 1 completed:
+  - Contact data aligned to old-site source.
+  - Current contact data: `+996 (888) 999-999`, `monolitkapitals@gmail.com`, `г. Бишкек, ул. Юнусалиева 86/1`.
+  - Legal company name, INN, and license restored from old-site source.
+  - Purchase installment copy softened around object-specific terms.
+  - Trade-in ruble metric removed.
+  - Lotos installment marked `needs_verification`.
 
-## 📊 Фаза 3: Реальный контент и финальная переверстка секций — [ВЫПОЛНЕНО]
+## Phase 3 — Homepage Visual Upgrade [IN PROGRESS]
 
-- [x] **HomeAbout.astro:** Манифест компании (One Construction — девелопер, создающий пространства, в которых хочется жить). Сетка из 5 преимуществ (10+ лет, 400 000 м², 1 200+ семей, контроль качества, архитектура со смыслом). Hover-эффект: фон → violet-700, текст → white.
-- [x] **HomeTimeline.astro:** Полная переверстка под «Стандарт привилегий One Construction». 7 пунктов (Энергоэффективные дома, Тишина, Планировки, Чистая вода, Микроклимат, Безопасность, Инфраструктура). Hairline-список + GSAP ScrollTrigger fade-in.
-- [x] **HomePurchase.astro:** Новый компонент «Выберите удобный вариант покупки». 4 варианта (Полная оплата, Рассрочка 0%, Trade-in, Бонусная программа). Geist Mono для метрик, Royal Violet для CTA.
-- [x] **HomeContact.astro:** Адрес обновлён на «Бишкек, ул. Раззакова 32». Телефоны +996 555/700 100 100, info@oneconstruction.kg. Фокус инпутов — Royal Violet.
-- [x] **index.astro:** Бруталистичный тёмный футер (slate-900) с гигантским моноширинным моноgrammoм, 3 колонками навигации и нижней технической полосой.
-- [x] **Сборка:** `npm run build` — 0 errors, 2 страницы собраны за 5.74s.
+### Completed
 
-## 📦 Фаза 4: Страницы объектов и Каталог планировок — [ЗАПЛАНИРОВАНО]
+- [x] Visual Upgrade 1A: global visual safety fixes.
+  - Mobile horizontal overflow guarded.
+  - Mobile micro-mono readability improved.
+  - CTA baseline readability improved.
+  - Footer/contact collision risks reduced.
+  - Hero/project image fallback behavior added for broken or slow remote images.
+  - Typecheck/build passed when completed.
 
-- [ ] Создание динамического шаблона для страниц конкретного ЖК (`src/pages/projects/[slug].astro`).
-- [ ] Проектирование архитектуры под будущие интерактивные SVG-планы этажей и выбор квартир (модульная интеграция React 19 компонентов на островах Astro).
+### Current
 
-## 🔌 Фаза 4: Управление контентом (Keystatic CMS) — [ЗАПЛАНИРОВАНО]
+- [ ] Visual Upgrade 1B: Projects section premium upgrade.
+  - Preserve Astro Content Layer flow.
+  - Preserve `getCollection("projects")` and `sortOrder`.
+  - Do not reintroduce `ProjectCard.astro`.
+  - Keep current project JSON data unchanged unless the task explicitly requests content/data edits.
+  - Improve premium visual hierarchy, image treatment, spacing rhythm, and mobile behavior for the Projects section.
 
-- [ ] Интеграция `@keystatic/core` и `@keystatic/astro`.
-- [ ] Настройка локального Git-хранения коллекций для проектов (`projects`) и планировок (`apartments`) без использования сторонних тяжелых баз данных.
+### Planned
+
+- [ ] Visual Upgrade 1C: Hero section upgrade.
+- [ ] Visual Upgrade 1D: Purchase section upgrade.
+- [ ] Visual Upgrade 1E: Contact/Footer polish.
+- [ ] Visual Upgrade 1F: Mobile polish.
+- [ ] Visual Upgrade 1G: full visual QA pass.
+
+## Phase 4 — Project Detail Pages [PLANNED]
+
+- [ ] Build/finish `src/pages/projects/[slug].astro`.
+- [ ] Project detail layout.
+- [ ] Project gallery.
+- [ ] Project specs.
+- [ ] Project CTA.
+- [ ] Construction timeline.
+- [ ] SEO metadata per project.
+- [ ] Confirm URL strategy against old public URLs:
+  - Old: `/lotos`, `/yachtvillage`, `/medina`
+  - Current planned beta: `/projects/lotos`, `/projects/yacht-village`, `/projects/medina`
+
+## Phase 5 — Apartments / Floor Plans [PLANNED]
+
+- [ ] Add `src/content/apartments/*.json`.
+- [ ] Finalize apartment schema in `src/content.config.ts`.
+- [ ] Define project-apartment relationship.
+- [ ] Apartment/floor-plan filtering.
+- [ ] Future interactive plans.
+- [ ] Keep React islands isolated for interactive filtering/plans.
+
+## Phase 6 — CMS / Admin [PLANNED]
+
+- [ ] Keystatic CMS integration.
+- [ ] Edit projects.
+- [ ] Edit apartments.
+- [ ] Edit homepage singleton.
+- [ ] Edit company/contact data.
+- [ ] Media workflow for real project imagery.
+- [ ] Keep CMS migration compatible with existing Content Layer structure.
+
+## Legacy / Currently Unused Components
+
+- `src/components/modules/ProjectCard.astro` — legacy/unused.
+- `src/components/modules/ConstructionTimeline.astro` — legacy/unused.
+- `src/components/sections/homepage/HomeMaterials.astro` — legacy/unused.
+- These components must not be imported into the homepage unless a future task explicitly asks for them.
+- Do not claim `ProjectCard.astro` is used on the homepage.
+- Do not claim `HomeProjects.astro` uses an inline hardcoded project array.
+
+## Current Risks / Needs Verification
+
+- [ ] Real project images still needed. Current hero/project imagery uses remote Unsplash URLs and fallback styling.
+- [ ] Hero strategy needs client approval: old site was Medina/offer-led; beta is brand-led.
+- [ ] Company metrics need verification:
+  - `250+` objects
+  - `15+` years on market
+  - `480+` apartments
+  - `10+` years
+  - `400 000 м²`
+  - `1 200+` families
+- [ ] Purchase claims need verification:
+  - `до 12%` discount
+  - installment conditions
+  - Trade-in terms
+  - `+ 3%` loyalty
+  - bonus/pre-launch claims
+- [ ] Privilege technical claims need verification:
+  - Class A
+  - `Rw ≥ 54 дБ`
+  - BIM/CAD
+  - 5-stage filtration
+  - HVAC
+  - 24/7 security
+  - 7-minute walkability
+- [ ] Legal links are placeholders:
+  - `privacyPolicyHref: "#"`
+  - `documentsHref: "#"`
+- [ ] Coordinates need verification against the approved office address.
+- [ ] `src/content/apartments` is currently empty except for `.gitkeep`; the Astro warning about no apartment files is expected.
+- [ ] Confirm whether old trust/process copy should be restored, rewritten, or intentionally omitted.
+
+## Architecture Notes for Future Agents
+
+- Current Content Layer config: `src/content.config.ts`.
+- Current projects collection: `src/content/projects/*.json`.
+- Current empty/planned apartments collection: `src/content/apartments/`.
+- Current homepage composition: `src/pages/index.astro`.
+- Current Projects data flow: `HomeProjects.astro` calls `getCollection("projects")` and sorts by `sortOrder`.
+- Current intermediate data files:
+  - `src/data/company.ts`
+  - `src/data/homepage.ts`
+  - `src/data/purchase.ts`
+  - `src/data/privileges.ts`
+- Visual upgrades must preserve:
+  - Astro-first architecture
+  - Content Layer data flow
+  - fast performance
+  - future CMS readiness
+  - premium light brutalist direction
+  - sharp geometry
+  - Geist / Geist Mono
+  - Royal Violet accent
+
+## Next Recommended Task
+
+- Visual Upgrade 1B — Projects section premium upgrade.
