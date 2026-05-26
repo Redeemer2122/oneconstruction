@@ -19,6 +19,26 @@ export const company = {
     href: "mailto:monolitkapitals@gmail.com",
     display: "monolitkapitals@gmail.com",
   },
+  socialLinks: [
+    {
+      label: "WA",
+      name: "WhatsApp",
+      href: "https://wa.me/996888999999",
+      external: true,
+    },
+    {
+      label: "IG",
+      name: "Instagram",
+      href: "https://www.instagram.com/one_construction_?igsh=NTYybnZ2YmI3OHFl",
+      external: true,
+    },
+    {
+      label: "TG",
+      name: "Telegram",
+      href: "https://t.me/vegodes",
+      external: true,
+    },
+  ],
   office: {
     addressRu: "г. Бишкек,\nул. Юнусалиева 86/1",
     addressDisplayRu: "БИШКЕК, УЛ. ЮНУСАЛИЕВА 86/1",

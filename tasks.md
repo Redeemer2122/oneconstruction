@@ -20,6 +20,9 @@
 - [x] Content audit created at `docs/content-audit.md`.
 - [x] Old site content extraction created at `docs/old-site-content.md`.
 - [x] Critical Content Fixes 1 completed.
+- [x] Header navigation/content alignment completed.
+- [x] Header socials and smooth anchor navigation completed.
+- [x] Mobile header menu fix completed.
 - [x] Visual Upgrade 1A completed.
 - [x] Visual Upgrade 1B completed.
 - [x] Visual Upgrade 1C completed.

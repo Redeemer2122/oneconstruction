@@ -1,93 +1,111 @@
 ---
-/**
- * HomeHeader — премиальный header поверх Hero. Светлая тема.
- *
- *  - Базовый цвет ссылок: холодный стальной (text-slate-400).
- *  - Ховер: королевский фиолетовый (text-violet-600) + микро-маркер слева.
- *  - Мобильное меню-шторка: прямоугольный full-screen overlay,
- *    без скруглений, моноширинная навигация.
- */
+import { company } from "@data/company";
+
 const nav = [
-  { label: "ОБЪЕКТЫ", href: "#projects" },
-  { label: "О КОМПАНИИ", href: "#about" },
-  { label: "СТАНДАРТ", href: "#privileges" },
-  { label: "ПОКУПКА", href: "#purchase" },
-  { label: "КОНТАКТЫ", href: "#contact" },
+  { label: "Главная", href: "#main" },
+  { label: "Объекты", href: "#projects" },
+  { label: "О компании", href: "#about" },
+  { label: "Варианты покупки", href: "#purchase" },
+  { label: "Преимущества", href: "#privileges" },
+  { label: "Контакты", href: "#contact" },
 ];
+
+const primaryPhone = company.phones.find((phone) => phone.primary) ?? company.phones[0];
+const socialLinks = company.socialLinks;
 ---
 
-<header class="header-enter fixed top-0 inset-x-0 z-50">
+<header class="!fixed top-0 inset-x-0 !z-[80] border-b-[0.5px] border-slate-900/10">
   <div
     aria-hidden="true"
-    class="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-alabaster/90 via-alabaster/55 to-transparent"
+    class="pointer-events-none absolute inset-0 -z-10 bg-alabaster/90 shadow-[0_1px_0_rgba(15,23,42,0.04),0_14px_42px_rgba(15,23,42,0.055)] backdrop-blur-sm"
   >
   </div>
 
-  <div class="flex items-center justify-between px-6 md:px-10 py-5">
-    <a href="/" class="group flex items-center gap-3" aria-label="One Construction — на главную">
+  <div class="header-enter grid grid-cols-[1fr_auto] items-center gap-5 px-5 py-4 md:px-8 lg:grid-cols-[minmax(180px,0.85fr)_minmax(0,1.85fr)_minmax(280px,0.9fr)] lg:px-8 xl:grid-cols-[minmax(190px,0.9fr)_minmax(0,1.9fr)_minmax(310px,0.9fr)] xl:px-10">
+    <a href="#main" class="group flex min-w-0 items-center gap-3" aria-label="One Construction — на главную">
       <img
         src="/img/logo-silver.jpeg"
         alt=""
         width="32"
         height="32"
-        class="h-8 w-8 object-contain select-none"
+        class="h-8 w-8 shrink-0 object-contain select-none"
         draggable="false"
       />
-      <span class="font-mono text-[11px] uppercase tracking-[0.22em] text-slate-900 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-violet-600">
+      <span class="truncate font-mono text-[11px] uppercase tracking-[0.18em] text-slate-900 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-violet-600 lg:tracking-[0.22em]">
         ONE CONSTRUCTION
       </span>
     </a>
 
-    <nav aria-label="Главное меню" class="hidden md:flex items-center gap-8">
+    <nav aria-label="Главное меню" class="hidden min-w-0 items-center justify-center gap-5 lg:flex xl:gap-7">
       {
         nav.map((item) => (
           <a
             href={item.href}
-            class="group relative inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-slate-400 hover:text-violet-600 transition-colors duration-300"
+            class="group relative inline-flex items-center whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.13em] text-slate-600 transition-colors duration-300 hover:text-slate-950 xl:text-[11px] xl:tracking-[0.16em]"
           >
-            <span
-              aria-hidden="true"
-              class="block h-1 w-1 bg-violet-600 opacity-0 -translate-x-1 transition-[opacity,transform] duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:opacity-100 group-hover:translate-x-0"
-            />
             {item.label}
             <span
               aria-hidden="true"
-              class="absolute -bottom-1.5 left-0 h-px w-0 bg-violet-600 transition-[width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:w-full"
+              class="absolute -bottom-2 left-0 h-px w-0 bg-slate-950 transition-[width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:w-full"
             />
           </a>
         ))
       }
     </nav>
 
+    <div class="hidden min-w-0 items-center justify-end gap-4 lg:flex xl:gap-6">
+      <a
+        href={primaryPhone.href}
+        class="whitespace-nowrap font-mono text-[12px] uppercase tracking-[0.12em] text-slate-950 transition-colors duration-300 hover:text-violet-600 lg:text-[13px]"
+      >
+        {primaryPhone.display}
+      </a>
+      <div class="flex items-center gap-1.5">
+        {
+          socialLinks.map((social) => (
+            <a
+              href={social.href}
+              target={social.external ? "_blank" : undefined}
+              rel={social.external ? "noopener noreferrer" : undefined}
+              aria-label={`${social.name} One Construction`}
+              class="inline-flex h-8 w-8 items-center justify-center border-[0.5px] border-slate-900/20 font-mono text-[10px] uppercase tracking-[0.08em] text-slate-800 transition-colors duration-300 hover:border-slate-950 hover:text-violet-600"
+            >
+              {social.label}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
     <button
       type="button"
       id="mobile-menu-trigger"
       aria-controls="mobile-menu"
       aria-expanded="false"
-      class="md:hidden font-mono text-[11px] uppercase tracking-[0.22em] text-slate-900"
+      class="justify-self-end border-[0.5px] border-slate-900/20 px-3 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-900 lg:hidden"
     >
       МЕНЮ
     </button>
   </div>
 
-  <!-- Мобильная меню-шторка: строгий прямоугольный full-screen overlay. -->
   <div
     id="mobile-menu"
     aria-hidden="true"
-    class="md:hidden fixed inset-0 z-40 bg-alabaster opacity-0 pointer-events-none transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] data-[open=true]:opacity-100 data-[open=true]:pointer-events-auto"
+    class="fixed inset-0 z-[90] flex h-dvh flex-col overflow-y-auto bg-alabaster opacity-0 pointer-events-none transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] data-[open=true]:opacity-100 data-[open=true]:pointer-events-auto lg:hidden"
     data-open="false"
+    data-lenis-prevent
   >
-    <div class="flex items-center justify-between px-6 py-5 border-b-[0.5px] border-slate-200">
-      <span class="font-mono text-[11px] uppercase tracking-[0.22em] text-slate-900">
+    <div class="flex items-center justify-between gap-4 border-b-[0.5px] border-slate-900/10 px-5 py-4">
+      <span class="min-w-0 truncate font-mono text-[11px] uppercase tracking-[0.18em] text-slate-900">
         ONE CONSTRUCTION
       </span>
       <button
         type="button"
         id="mobile-menu-close"
         aria-label="Закрыть меню"
-        class="font-mono text-[11px] uppercase tracking-[0.22em] text-slate-900"
+        class="shrink-0 border-[0.5px] border-slate-900/20 px-3 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-slate-900"
       >
-        ЗАКРЫТЬ ×
+        Закрыть
       </button>
     </div>
     <nav aria-label="Мобильное меню" class="flex flex-col">
@@ -96,10 +114,10 @@ const nav = [
           <a
             href={item.href}
             data-mobile-nav-link
-            class="flex items-center justify-between px-6 py-6 border-b-[0.5px] border-slate-200 font-mono text-base uppercase tracking-[0.18em] text-slate-900 transition-colors duration-300 hover:text-violet-600"
+            class="flex items-center justify-between gap-5 border-b-[0.5px] border-slate-900/10 px-5 py-5 font-mono text-[14px] uppercase tracking-[0.12em] text-slate-950 transition-colors duration-300 hover:text-violet-600"
           >
-            <span>{item.label}</span>
-            <span class="font-mono text-[10px] tracking-[0.22em] text-slate-400">
+            <span class="min-w-0 break-words">{item.label}</span>
+            <span class="shrink-0 font-mono text-[10px] tracking-[0.18em] text-slate-500">
               {String(idx + 1).padStart(2, "0")}
             </span>
           </a>
@@ -107,9 +125,35 @@ const nav = [
       }
     </nav>
 
-    <div class="absolute bottom-6 inset-x-6 flex items-center justify-between">
-      <span class="mono-detail">BISHKEK · KG</span>
-      <span class="mono-detail">42.87° N · 74.57° E</span>
+    <div class="mt-auto grid gap-3 border-t-[0.5px] border-slate-900/10 px-5 py-5">
+      <a
+        href={primaryPhone.href}
+        class="font-mono text-[15px] uppercase tracking-[0.1em] text-slate-950"
+      >
+        {primaryPhone.display}
+      </a>
+      <div class="grid grid-cols-3 gap-2">
+        {
+          socialLinks.map((social) => (
+            <a
+              href={social.href}
+              target={social.external ? "_blank" : undefined}
+              rel={social.external ? "noopener noreferrer" : undefined}
+              aria-label={`${social.name} One Construction`}
+              class="border-[0.5px] border-slate-900/20 px-3 py-3 text-center font-mono text-[11px] uppercase tracking-[0.12em] text-slate-900"
+            >
+              {social.label}
+            </a>
+          ))
+        }
+        <a
+          href="#contact"
+          data-mobile-nav-link
+          class="col-span-3 border-[0.5px] border-slate-950 bg-slate-950 px-4 py-3 text-center font-mono text-[11px] uppercase tracking-[0.12em] text-alabaster"
+        >
+          Оставить заявку
+        </a>
+      </div>
     </div>
   </div>
 </header>

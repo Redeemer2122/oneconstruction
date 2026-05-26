@@ -67,6 +67,7 @@ html {
   font-family: var(--font-sans);
   font-feature-settings: "ss01", "ss02", "cv11";
   overflow-x: clip;
+  scroll-padding-top: 88px;
 }
 
 body {
@@ -171,6 +172,10 @@ canvas {
 }
 
 @media (max-width: 640px) {
+  html {
+    scroll-padding-top: 78px;
+  }
+
   .mono-detail {
     font-size: 11px;
     line-height: 1.5;
