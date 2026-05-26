@@ -17,7 +17,7 @@
   "installment": {
     "label": "Рассрочка до 40 месяцев",
     "maxMonths": 40,
-    "status": "confirmed",
-    "note": "Условия действуют для ЖК «Лотос»"
+    "status": "needs_verification",
+    "note": "Срок рассрочки для ЖК «Лотос» не подтверждён на старом сайте"
   }
 }

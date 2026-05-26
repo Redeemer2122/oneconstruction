@@ -20,6 +20,14 @@ Sources:
 - `src/content/projects/yacht-village.json`
 - `src/content/projects/medina.json`
 
+## Fixed in Critical Content Fixes 1
+
+- Contacts updated from the old site source: phone, tel href, email, office address, and working hours.
+- Legal data restored from the old site source: legal company name, INN, license, and privacy/doc placeholders changed to `#`.
+- Purchase installment copy softened so global purchase cards no longer claim universal 40-month terms or a 30% first payment.
+- Trade-in `₽` metric removed and replaced with a neutral `зачёт` label.
+- ЖК «Лотос» installment status changed to `needs_verification` while keeping the visible "Рассрочка до 40 месяцев" label.
+
 | Section | Field | Old site value | Current beta value | Status | Notes |
 |---|---|---|---|---|---|
 | Hero | Main headline | Современный комплекс для тех, кто ценит комфорт без лишнего шума | АРХИТЕКТУРА / БЕЗ / КОМПРОМИССА | MISMATCH | Old hero is project-led and comfort-focused; beta is brand-led premium positioning. |

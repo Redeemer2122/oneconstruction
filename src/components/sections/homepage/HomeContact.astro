@@ -1,7 +1,7 @@
 ---
 /**
  * HomeContact — бруталистичный сплит-экран.
- * Слева: моноширинный блок контактов офиса в Бишкеке (Раззакова 32).
+ * Слева: моноширинный блок контактов офиса в Бишкеке.
  * Справа: форма с фокусом на Royal Violet.
  */
 import ContactForm from "@modules/ContactForm.tsx";
@@ -37,12 +37,6 @@ import { company } from "@data/company";
             >
               {company.phones[0].display}
             </a>
-            <a
-              href={company.phones[1].href}
-              class="font-mono text-sm md:text-base text-slate-600 transition-colors duration-300 hover:text-violet-600"
-            >
-              {company.phones[1].display}
-            </a>
           </dd>
         </div>
 
@@ -62,7 +56,8 @@ import { company } from "@data/company";
           <dt class="mono-detail">АДРЕС</dt>
           <dd class="font-mono text-sm text-slate-700 leading-relaxed">
             {company.office.addressDisplayRu}<br />
-            {company.hours.display}
+            {company.hours.display}<br />
+            {company.hours.sunday}
           </dd>
         </div>
 
