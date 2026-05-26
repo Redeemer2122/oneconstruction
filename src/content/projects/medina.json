@@ -1,0 +1,23 @@
+{
+  "name": "ЖК «Медина+»",
+  "index": "03",
+  "sortOrder": 3,
+  "cover": "https://images.unsplash.com/photo-1748440290920-9033ca4e1468?ixlib=rb-4.1.0&q=88&fm=jpg&crop=entropy&cs=srgb&w=1800",
+  "location": "ул. Мичурина, 163, Бишкек",
+  "status": "Строится",
+  "delivery": "СДАЧА · IV КВ. 2028",
+  "storeys": "16 ЭТАЖЕЙ",
+  "units": "270 КВАРТИР",
+  "priceFrom": "от 5 млн сом",
+  "plans": [
+    { "rooms": "1-комнатные", "area": "от 48.8 м²", "price": "от 5 млн сом" },
+    { "rooms": "2-комнатные", "area": "от 73.2 м²", "price": "от 8 млн сом" },
+    { "rooms": "3-комнатные", "area": "от 115.8 м²", "price": "от 12 млн сом" }
+  ],
+  "installment": {
+    "label": "Рассрочка до 70 месяцев",
+    "maxMonths": 70,
+    "status": "confirmed",
+    "note": "Условия действуют для ЖК «Медина+»"
+  }
+}

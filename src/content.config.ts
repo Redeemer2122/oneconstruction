@@ -19,8 +19,10 @@ const projects = defineCollection({
     base: "./src/content/projects",
   }),
   schema: z.object({
-    slug: z.string(),
+    slug: z.string().optional(),
     name: z.string(),
+    index: z.string(),
+    sortOrder: z.number().int(),
     location: z.string().optional(),
     phase: z.enum(["PHASE_01", "PHASE_02", "PHASE_03"]).optional(),
     coordinates: z
@@ -28,6 +30,26 @@ const projects = defineCollection({
       .optional(),
     cover: z.string().optional(),
     description: z.string().optional(),
+    status: z.string(),
+    delivery: z.string(),
+    storeys: z.string(),
+    units: z.string(),
+    priceFrom: z.string(),
+    plans: z.array(
+      z.object({
+        rooms: z.string(),
+        area: z.string(),
+        price: z.string(),
+      })
+    ),
+    installment: z
+      .object({
+        label: z.string(),
+        maxMonths: z.number().int().optional(),
+        status: z.enum(["confirmed", "needs_verification"]),
+        note: z.string().optional(),
+      })
+      .optional(),
   }),
 });
 

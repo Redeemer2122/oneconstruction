@@ -1,0 +1,23 @@
+{
+  "name": "ЖК «Лотос»",
+  "index": "01",
+  "sortOrder": 1,
+  "cover": "https://images.unsplash.com/photo-1758193431393-0aead94a6a1b?ixlib=rb-4.1.0&q=88&fm=jpg&crop=entropy&cs=srgb&w=1800",
+  "location": "ул. Молдокулова 100, Бишкек",
+  "status": "Строится",
+  "delivery": "СДАЧА · IV КВ. 2027",
+  "storeys": "14 — 16 ЭТАЖЕЙ",
+  "units": "112 КВАРТИР",
+  "priceFrom": "от 4,2 млн сом",
+  "plans": [
+    { "rooms": "1-комнатные", "area": "от 42.73 м²", "price": "от 4,2 млн сом" },
+    { "rooms": "2-комнатные", "area": "от 64.96 м²", "price": "от 6,8 млн сом" },
+    { "rooms": "3-комнатные", "area": "от 101.98 м²", "price": "от 10,7 млн сом" }
+  ],
+  "installment": {
+    "label": "Рассрочка до 40 месяцев",
+    "maxMonths": 40,
+    "status": "confirmed",
+    "note": "Условия действуют для ЖК «Лотос»"
+  }
+}

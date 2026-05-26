@@ -1,0 +1,21 @@
+{
+  "name": "«Yacht Village»",
+  "index": "02",
+  "sortOrder": 2,
+  "cover": "https://images.unsplash.com/photo-1760067537204-fe9b55b2f1b0?ixlib=rb-4.1.0&q=88&fm=jpg&crop=entropy&cs=srgb&w=1800",
+  "location": "ул. Юнусалиева 86/1, Бишкек",
+  "status": "Готово к сдаче",
+  "delivery": "СДАЧА · ГОТОВ",
+  "storeys": "2 — 3 ЭТАЖА",
+  "units": "40 КВАРТИР",
+  "priceFrom": "от 4,2 млн сом",
+  "plans": [
+    { "rooms": "1-комнатные", "area": "от 24 м²", "price": "от 4,2 млн сом" },
+    { "rooms": "2-комнатные", "area": "от 62.47 м²", "price": "от 6,8 млн сом" }
+  ],
+  "installment": {
+    "label": "Индивидуальные условия покупки",
+    "status": "needs_verification",
+    "note": "Срок рассрочки не подтверждён на старом сайте"
+  }
+}
