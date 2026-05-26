@@ -26,7 +26,8 @@
 - [x] Visual Upgrade 1A completed.
 - [x] Visual Upgrade 1B completed.
 - [x] Visual Upgrade 1C completed.
-- [ ] Current focus: Visual Upgrade 1D — Purchase section upgrade.
+- [x] Visual Upgrade 1D completed.
+- [ ] Current focus: Visual Upgrade 1E — Contact/Footer polish.
 
 ## Phase 1 — Infrastructure [DONE]
 
@@ -90,10 +91,16 @@
   - Hero 1C.4 art-direction push strengthened the architectural installation, exterior temporary imagery, commercial offer plaque, and datasheet atmosphere.
   - Preserved Astro-first architecture, sharp geometry, Geist / Geist Mono, and performance-safe motion.
   - Typecheck/build passed when completed.
+- [x] Visual Upgrade 1D: Purchase section simple 2x2 rebuild.
+  - Rebuilt `HomePurchase.astro` as a compact left-intro/right strict 2x2 purchase grid.
+  - Used component-local fixed purchase card copy.
+  - Removed bullets, oversized card spacing, card spans, and dashboard-style decoration.
+  - Preserved `src/data/purchase.ts` unchanged.
+  - Typecheck/build passed when completed.
 
 ### Current
 
-- [ ] Visual Upgrade 1D: Purchase section upgrade.
+- [ ] Visual Upgrade 1E: Contact/Footer polish.
 
 ### Planned
 
@@ -198,4 +205,4 @@
 
 ## Next Recommended Task
 
-- Visual Upgrade 1D — Purchase section upgrade.
+- Visual Upgrade 1E — Contact/Footer polish.
