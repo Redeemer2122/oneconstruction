@@ -5,11 +5,52 @@ export const hero = {
   eyebrow: "ONE CONSTRUCTION · BISHKEK · 2026",
   titleLines: ["АРХИТЕКТУРА", "БЕЗ", "КОМПРОМИССА"],
   subtitle:
-    "Премиальные жилые комплексы в Бишкеке. Стекло, сталь, выверенный архитектурный ритм.",
+    "Жилые комплексы в Бишкеке — от точного проекта до пространства, в котором хочется жить.",
+  featuredProject: {
+    eyebrow: "FEATURED PROJECT / 03",
+    name: "ЖК «Медина+»",
+    offer: "Рассрочка до 70 месяцев",
+    meta: "IV кв. 2028 · ул. Мичурина, 163",
+    href: "/projects/medina",
+  },
+  // Temporary local hero media; replace with approved project renders when available.
+  showcaseProjects: [
+    {
+      index: "03",
+      eyebrow: "FEATURED PROJECT / 03",
+      name: "ЖК «Медина+»",
+      line: "Рассрочка до 70 месяцев",
+      meta: "IV кв. 2028 · ул. Мичурина, 163",
+      href: "/projects/medina",
+      image: "/img/hero/medina-hero-temp.jpg",
+      imageAlt: "Светлая архитектурная форма с графичной фасадной сеткой",
+    },
+    {
+      index: "01",
+      eyebrow: "FEATURED PROJECT / 01",
+      name: "ЖК «Лотос»",
+      line: "Рассрочка до 40 месяцев",
+      meta: "IV кв. 2027 · ул. Молодогвардейцев 100",
+      href: "/projects/lotos",
+      image: "/img/hero/lotos-hero-temp.jpg",
+      imageAlt: "Светлый фасад жилого комплекса с балконами и перспективной геометрией",
+    },
+    {
+      index: "02",
+      eyebrow: "FEATURED PROJECT / 02",
+      name: "Yacht Village",
+      line: "Индивидуальные условия покупки",
+      meta: "резиденции клубного формата",
+      href: "/projects/yacht-village",
+      image: "/img/hero/yacht-village-hero-temp.jpg",
+      imageAlt: "Светлая клубная резиденция с открытой террасой и бассейном",
+    },
+  ],
   metrics: [
-    { value: "250+", label: "ОБЪЕКТОВ" },
-    { value: "15+", label: "ЛЕТ НА РЫНКЕ" },
-    { value: "480+", label: "КВАРТИР" },
+    { value: "3", label: "ОБЪЕКТА" },
+    { value: "ДО 70", label: "МЕС. РАССРОЧКА" },
+    { value: "422", label: "КВАРТИРЫ" },
+    { value: "БИШКЕК", label: "ГЕОГРАФИЯ" },
   ],
 } as const;
 

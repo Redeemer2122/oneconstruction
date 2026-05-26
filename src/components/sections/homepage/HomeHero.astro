@@ -1,89 +1,372 @@
 ---
 import { hero } from "@data/homepage";
 import { company } from "@data/company";
-const { image: heroImage, imageAlt, eyebrow, titleLines, subtitle, metrics } = hero;
+const {
+  eyebrow,
+  titleLines,
+  subtitle,
+  metrics,
+  showcaseProjects,
+} = hero;
+const activeProject = showcaseProjects[0];
 ---
 
 <section
   id="hero"
   class="relative isolate min-h-[100dvh] w-full overflow-hidden bg-[#FBFBFA] flex flex-col"
 >
-  <!-- Background render -->
-  <div class="absolute inset-0 -z-10 oc-media-fallback">
-    <img
-      src={heroImage}
-      alt={imageAlt}
-      class="h-full w-full object-cover opacity-40"
-      loading="eager"
-      onerror="this.dataset.failed='true'"
-    />
-    <div
-      aria-hidden="true"
-      class="absolute inset-0 bg-gradient-to-r from-[#FBFBFA] via-[#FBFBFA]/80 to-transparent"
-    ></div>
-    <div
-      aria-hidden="true"
-      class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#FBFBFA] to-transparent"
-    ></div>
-  </div>
+  <script
+    id="hero-showcase-data"
+    type="application/json"
+    is:inline
+    set:html={JSON.stringify(showcaseProjects)}
+  ></script>
 
-  <!-- Main content -->
-  <div class="relative flex-1 grid grid-cols-12 gap-0 px-6 md:px-10 lg:px-12 pt-32 md:pt-44 pb-8">
-    <!-- Left: brutalist title -->
-    <div class="col-span-12 md:col-span-8 xl:col-span-7 flex flex-col justify-center">
-      <p class="mono-detail mb-6 md:mb-8 text-slate-500">
-        {eyebrow}
-      </p>
-      <h1
-        class="font-mono text-[12vw] md:text-[7.5vw] xl:text-[6.8vw] leading-[0.92] tracking-[-0.04em] text-slate-900 uppercase max-w-full"
-      >
-        <span class="headline-mask"><span>{titleLines[0]}</span></span>
-        <span class="headline-mask"><span>{titleLines[1]}</span></span>
-        <span class="headline-mask"><span>{titleLines[2]}</span></span>
-      </h1>
+  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-blueprint opacity-[0.42]"></div>
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_78%_30%,rgba(226,232,240,0.78),transparent_34%),linear-gradient(118deg,rgba(251,251,250,0.94)_0%,rgba(248,247,244,0.72)_44%,rgba(245,244,240,0.9)_100%)]"
+  ></div>
+  <div
+    aria-hidden="true"
+    class="absolute inset-y-0 right-0 -z-10 hidden w-[60vw] border-l border-slate-900/10 bg-[#F5F4F0] shadow-[-56px_0_150px_rgba(15,23,42,0.1)] md:block"
+  ></div>
+  <div
+    aria-hidden="true"
+    class="absolute right-[-9vw] top-[10vh] -z-10 hidden h-[66vh] w-[56vw] border border-slate-900/10 opacity-70 md:block"
+  ></div>
+  <div
+    aria-hidden="true"
+    class="absolute right-[5vw] top-[17vh] -z-10 hidden h-[48vh] w-[34vw] border border-slate-900/10 bg-[#FBFBFA]/20 opacity-55 md:block"
+  ></div>
+  <div
+    aria-hidden="true"
+    class="absolute right-[18vw] top-[15vh] -z-10 hidden h-[62vh] w-px bg-violet-700/24 md:block"
+  ></div>
+  <div
+    aria-hidden="true"
+    class="absolute right-[2vw] top-[8vh] -z-10 hidden h-[78vh] w-[30vw] -skew-x-12 border-x border-slate-900/10 bg-[linear-gradient(120deg,rgba(255,255,255,0.28),rgba(148,163,184,0.1)_45%,transparent)] opacity-65 md:block"
+  ></div>
+  <div
+    aria-hidden="true"
+    class="absolute bottom-[18vh] left-[3vw] -z-10 hidden h-44 w-[34vw] border-y border-slate-900/10 bg-[repeating-linear-gradient(90deg,rgba(15,23,42,0.08)_0_1px,transparent_1px_58px)] opacity-45 md:block"
+  ></div>
+  <div
+    aria-hidden="true"
+    class="absolute inset-x-[-8vw] top-[26vh] -z-10 h-52 rotate-[-10deg] bg-gradient-to-r from-transparent via-slate-900/[0.07] to-transparent"
+  ></div>
+  <div
+    aria-hidden="true"
+    class="absolute left-0 top-0 -z-10 h-40 w-full bg-gradient-to-b from-[#FBFBFA] to-transparent"
+  ></div>
 
-      <p
-        class="mt-8 md:mt-12 text-sm md:text-base text-slate-600 max-w-[48ch] leading-relaxed"
-      >
-        {subtitle}
-      </p>
+  <div class="relative flex-1 px-5 pb-6 pt-24 sm:px-6 md:px-10 md:pt-[4.5rem] lg:px-12 xl:pt-20">
+    <div class="grid min-h-[calc(100dvh-14rem)] grid-cols-12 items-end gap-y-10 md:items-center md:gap-x-6 xl:gap-x-10">
+      <div class="col-span-12 flex flex-col justify-end md:col-span-6 xl:col-span-6">
+        <p class="mono-detail mb-6 text-slate-500 md:mb-8" data-reveal>
+          {eyebrow}
+        </p>
+        <h1
+          class="font-mono text-[13vw] leading-[0.86] tracking-[-0.04em] text-slate-900 uppercase sm:text-[14vw] md:text-[7.45vw] xl:text-[6.45vw] 2xl:text-[6.1vw]"
+        >
+          <span class="headline-mask"><span>{titleLines[0]}</span></span>
+          <span class="headline-mask"><span>{titleLines[1]}</span></span>
+          <span class="headline-mask"><span>{titleLines[2]}</span></span>
+        </h1>
+
+        <div class="mt-7 max-w-[680px] border-t border-slate-900/20 pt-6 md:mt-8 md:pt-7">
+          <p class="max-w-[58ch] text-base leading-relaxed text-slate-600 text-pretty md:text-lg" data-reveal style="--reveal-delay: 0.12s">
+            {subtitle}
+          </p>
+          <div class="mt-7 grid border border-slate-900/20 bg-[#FBFBFA]/70 sm:grid-cols-2 md:max-w-[620px]" data-reveal style="--reveal-delay: 0.2s">
+            <a
+              href="#projects"
+              class="group inline-flex min-h-14 items-center justify-between gap-5 bg-slate-900 px-6 py-4 font-mono text-[11px] uppercase tracking-[0.16em] text-[#FBFBFA] transition duration-300 ease-[var(--ease-out-expo)] hover:bg-violet-700 hover:text-[#FBFBFA] active:scale-[0.99] sm:min-h-16"
+            >
+              <span>Смотреть объекты</span>
+              <span class="transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:translate-x-1">→</span>
+            </a>
+            <a
+              href="#contact"
+              class="group inline-flex min-h-14 items-center justify-between gap-5 border-t border-slate-900/20 px-6 py-4 font-mono text-[11px] uppercase tracking-[0.16em] text-slate-900 transition duration-300 ease-[var(--ease-out-expo)] hover:bg-[#F5F4F0] hover:text-violet-700 active:scale-[0.99] sm:min-h-16 sm:border-l sm:border-t-0"
+            >
+              <span>Оставить заявку</span>
+              <span class="transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:translate-x-1">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <aside class="relative col-span-12 md:col-span-6 md:-mr-4 xl:col-span-6 xl:-mr-8" aria-label="Главный проект">
+        <div
+          aria-hidden="true"
+          class="absolute -right-4 -top-20 hidden font-mono text-[11rem] leading-none tracking-[-0.08em] text-slate-900/[0.045] md:block xl:-right-8 xl:text-[14rem]"
+        >
+          03
+        </div>
+        <div
+          aria-hidden="true"
+          class="absolute right-0 top-1/2 hidden h-[76%] w-[52vw] -translate-y-1/2 border-y border-slate-900/10 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.38)_18%,rgba(226,232,240,0.3)_100%)] shadow-[0_40px_120px_-90px_rgba(15,23,42,0.95)] md:block"
+        ></div>
+        <div
+          class="relative ml-auto grid min-h-[440px] w-full grid-rows-[auto_1fr] border border-slate-900/25 bg-[#F5F4F0] shadow-[0_54px_150px_-82px_rgba(15,23,42,0.95),-42px_34px_110px_-90px_rgba(15,23,42,0.9)] md:min-h-[585px] xl:min-h-[640px]"
+          data-hero-showcase
+          data-reveal
+          style="--reveal-delay: 0.16s"
+        >
+          <div
+            aria-hidden="true"
+            class="pointer-events-none absolute -inset-5 -z-10 hidden border border-slate-900/10 bg-[#FBFBFA]/35 md:block"
+          ></div>
+          <div
+            aria-hidden="true"
+            class="pointer-events-none absolute -right-8 top-12 -z-10 hidden h-[72%] w-[30%] border border-slate-900/10 bg-[#FBFBFA]/45 md:block"
+          ></div>
+          <div
+            aria-hidden="true"
+            class="pointer-events-none absolute -inset-x-8 bottom-[-30px] -z-10 hidden h-28 bg-gradient-to-b from-slate-900/[0.075] to-transparent md:block"
+          ></div>
+          <div class="grid grid-cols-[1fr_auto] border-b border-slate-900/15 bg-[#FBFBFA]/80">
+            <div class="px-4 py-3 sm:px-5 md:px-6 md:py-4">
+              <span class="mono-detail text-slate-500">{company.coordinates.display}</span>
+            </div>
+            <div class="border-l border-slate-900/15 px-4 py-3 sm:px-5 md:px-6 md:py-4">
+              <span class="mono-detail text-violet-700">ROTATING SHOWCASE</span>
+            </div>
+          </div>
+
+          <div class="oc-media-fallback relative min-h-[360px] overflow-hidden md:min-h-[530px] xl:min-h-[590px]">
+            {showcaseProjects.map((project, index) => (
+              <figure
+                class="hero-showcase-slide absolute inset-0"
+                data-hero-slide
+                data-active={index === 0 ? "true" : "false"}
+                aria-hidden={index === 0 ? "false" : "true"}
+              >
+                <img
+                  src={project.image}
+                  alt={project.imageAlt}
+                  class="h-full w-full object-cover object-center saturate-[0.82] contrast-[1.08]"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  onerror="this.dataset.failed='true'"
+                />
+              </figure>
+            ))}
+            <div
+              aria-hidden="true"
+              class="absolute inset-0 bg-[linear-gradient(90deg,rgba(245,244,240,0.46),rgba(251,251,250,0.03)_36%,rgba(15,23,42,0.1)),linear-gradient(0deg,rgba(245,244,240,0.8),rgba(245,244,240,0.03)_64%),linear-gradient(135deg,rgba(255,255,255,0.28),transparent_42%)]"
+            ></div>
+            <div
+              aria-hidden="true"
+              class="absolute right-0 top-0 h-full w-[24%] border-l border-slate-900/15 bg-[#FBFBFA]/72"
+            ></div>
+            <div
+              aria-hidden="true"
+              class="absolute right-[15%] top-8 h-[76%] w-px bg-violet-700/55"
+            ></div>
+            <div
+              aria-hidden="true"
+              class="absolute right-6 top-10 hidden h-40 w-40 border border-slate-900/20 bg-[#FBFBFA]/10 md:block xl:h-48 xl:w-48"
+            ></div>
+            <div
+              aria-hidden="true"
+              class="absolute bottom-0 left-0 hidden h-px w-[62%] bg-slate-900/20 md:block"
+            ></div>
+            <div
+              aria-hidden="true"
+              class="absolute left-0 top-0 hidden h-full w-12 border-r border-slate-900/10 bg-[repeating-linear-gradient(0deg,rgba(15,23,42,0.11)_0_1px,transparent_1px_42px)] opacity-70 md:block"
+            ></div>
+
+            <article class="absolute inset-x-4 bottom-4 border border-slate-900/25 bg-[#FBFBFA]/96 shadow-[0_34px_100px_-62px_rgba(15,23,42,0.95)] sm:inset-x-auto sm:right-5 sm:w-[min(500px,calc(100%-2.5rem))] md:bottom-8 md:right-8 md:w-[min(520px,calc(100%-4rem))]">
+              <div class="grid grid-cols-[1fr_auto] border-b border-slate-900/15">
+                <p class="mono-detail px-4 py-3 text-violet-700 md:px-6 md:py-4" data-hero-eyebrow>{activeProject.eyebrow}</p>
+                <span class="border-l border-slate-900/15 px-4 py-3 font-mono text-[11px] text-slate-500 md:px-6 md:py-4" data-hero-index>{activeProject.index}</span>
+              </div>
+              <div class="grid gap-5 p-4 sm:p-5 md:p-6">
+                <div>
+                  <h2 class="font-mono text-3xl uppercase leading-none tracking-[-0.04em] text-slate-900 sm:text-4xl md:text-5xl" data-hero-name>
+                    {activeProject.name}
+                  </h2>
+                  <p class="mt-5 border-y border-slate-900/15 py-3 font-mono text-lg uppercase leading-tight tracking-[-0.02em] text-slate-900 sm:text-xl md:text-2xl" data-hero-line>{activeProject.line}</p>
+                  <p class="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] text-slate-500" data-hero-meta>
+                    {activeProject.meta}
+                  </p>
+                </div>
+                <a
+                  href={activeProject.href}
+                  class="group inline-flex min-h-12 items-center justify-between gap-5 border border-slate-900/20 bg-slate-900 px-4 py-3 font-mono text-[11px] uppercase tracking-[0.14em] text-[#FBFBFA] transition duration-300 ease-[var(--ease-out-expo)] hover:border-violet-700 hover:bg-violet-700"
+                  data-hero-link
+                >
+                  <span>Перейти к проекту</span>
+                  <span class="transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:translate-x-1">→</span>
+                </a>
+              </div>
+            </article>
+
+            <div class="absolute left-4 top-4 grid grid-cols-3 border border-slate-900/15 bg-[#FBFBFA]/90 sm:left-5 sm:top-5" aria-label="Переключить объект">
+              {showcaseProjects.map((project, index) => (
+                <button
+                  type="button"
+                  class="hero-showcase-control min-h-9 border-r border-slate-900/15 px-3 font-mono text-[10px] uppercase tracking-[0.16em] text-slate-500 transition duration-300 ease-[var(--ease-out-expo)] last:border-r-0 hover:bg-[#F5F4F0] hover:text-slate-900 data-[active=true]:bg-slate-900 data-[active=true]:text-[#FBFBFA]"
+                  data-hero-control
+                  data-index={index}
+                  data-active={index === 0 ? "true" : "false"}
+                  aria-label={`Показать ${project.name}`}
+                  aria-pressed={index === 0 ? "true" : "false"}
+                >
+                  {project.index}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </aside>
     </div>
-
-    <!-- Right: coordinates + CTA -->
-    <aside class="col-span-12 md:col-span-4 xl:col-span-5 flex flex-col justify-end items-start md:items-end gap-6 mt-10 md:mt-0">
-      <span class="mono-detail text-slate-400">{company.coordinates.display}</span>
-      <a
-        href="#projects"
-        class="inline-flex min-h-11 max-w-full items-center justify-center font-mono text-[11px] uppercase tracking-[0.16em] md:tracking-[0.2em] text-slate-900 border border-slate-800 px-6 py-3.5 transition-colors duration-300 hover:bg-slate-900 hover:text-white break-words"
-      >
-        Смотреть объекты ↘
-      </a>
-    </aside>
   </div>
 
-  <!-- METRICS INFO-BAR -->
-  <div class="relative w-full bg-[#F5F4F0] border-t border-slate-200">
-    <div class="px-6 md:px-10 lg:px-12 py-8 md:py-10 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0">
+  <div class="relative w-full border-y border-slate-900/20 bg-[#F5F4F0] shadow-[0_-18px_70px_-64px_rgba(15,23,42,0.9)]">
+    <div
+      aria-hidden="true"
+      class="absolute inset-y-0 left-[25%] hidden w-px bg-slate-900/10 md:block"
+    ></div>
+    <div
+      aria-hidden="true"
+      class="absolute inset-y-0 left-[50%] hidden w-px bg-slate-900/10 md:block"
+    ></div>
+    <div
+      aria-hidden="true"
+      class="absolute inset-y-0 left-[75%] hidden w-px bg-slate-900/10 md:block"
+    ></div>
+    <div class="grid grid-cols-2 gap-0 px-5 py-4 sm:px-6 md:grid-cols-4 md:px-10 md:py-0 lg:px-12">
       {metrics.map((m, i) => (
-        <div class={`flex flex-col gap-2 ${i > 0 ? "md:border-l md:border-slate-200 md:pl-8" : ""}`}>
-          <span class="font-mono text-3xl md:text-4xl xl:text-5xl tracking-tight text-slate-900 font-medium">
+        <div class={`min-h-24 border-slate-900/10 py-4 ${i % 2 === 1 ? "border-l pl-5 md:border-l-0 md:pl-0" : "pr-5"} ${i > 1 ? "border-t md:border-t-0" : ""} md:min-h-32 md:px-6 md:py-7 xl:min-h-36`}>
+          <span class="font-mono text-3xl font-medium tracking-[-0.05em] text-slate-900 sm:text-4xl xl:text-5xl">
             {m.value}
           </span>
-          <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-slate-500">
+          <span class="mt-4 block max-w-[18ch] font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500 md:mt-5">
             {m.label}
           </span>
         </div>
       ))}
-
-      <!-- CTA in bar -->
-      <div class="hidden md:flex items-center justify-end">
-        <a
-          href="#contact"
-          class="inline-flex min-h-11 max-w-full items-center justify-center font-mono text-[11px] uppercase tracking-[0.18em] text-slate-900 border border-slate-800 px-6 py-3.5 transition-colors duration-300 hover:bg-slate-900 hover:text-white"
-        >
-          Связаться →
-        </a>
-      </div>
     </div>
   </div>
 </section>
+
+<script>
+  const root = document.querySelector("[data-hero-showcase]");
+
+  if (root) {
+    type ShowcaseProject = {
+      index: string;
+      eyebrow: string;
+      name: string;
+      line: string;
+      meta: string;
+      href: string;
+    };
+
+    const dataEl = document.getElementById("hero-showcase-data");
+    const projects = (dataEl?.textContent ? JSON.parse(dataEl.textContent) : []) as ShowcaseProject[];
+    const slides = Array.from(root.querySelectorAll<HTMLElement>("[data-hero-slide]"));
+    const controls = Array.from(root.querySelectorAll<HTMLButtonElement>("[data-hero-control]"));
+    const fields = {
+      eyebrow: root.querySelector<HTMLElement>("[data-hero-eyebrow]"),
+      index: root.querySelector<HTMLElement>("[data-hero-index]"),
+      name: root.querySelector<HTMLElement>("[data-hero-name]"),
+      line: root.querySelector<HTMLElement>("[data-hero-line]"),
+      meta: root.querySelector<HTMLElement>("[data-hero-meta]"),
+      link: root.querySelector<HTMLAnchorElement>("[data-hero-link]"),
+    };
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let activeIndex = 0;
+    let isPaused = false;
+    let timer = 0;
+
+    const setActive = (nextIndex: number) => {
+      if (projects.length === 0) return;
+      activeIndex = (nextIndex + projects.length) % projects.length;
+      const project = projects[activeIndex];
+
+      slides.forEach((slide, index) => {
+        const isActive = index === activeIndex;
+        slide.dataset.active = String(isActive);
+        slide.setAttribute("aria-hidden", String(!isActive));
+      });
+
+      controls.forEach((control, index) => {
+        const isActive = index === activeIndex;
+        control.dataset.active = String(isActive);
+        control.setAttribute("aria-pressed", String(isActive));
+      });
+
+      if (!fields.eyebrow || !fields.index || !fields.name || !fields.line || !fields.meta || !fields.link) return;
+      fields.eyebrow.textContent = project.eyebrow;
+      fields.index.textContent = project.index;
+      fields.name.textContent = project.name;
+      fields.line.textContent = project.line;
+      fields.meta.textContent = project.meta;
+      fields.link.href = project.href;
+    };
+
+    const stop = () => {
+      if (timer) window.clearInterval(timer);
+      timer = 0;
+    };
+
+    const start = () => {
+      stop();
+      if (prefersReducedMotion) return;
+      timer = window.setInterval(() => {
+        if (!isPaused) setActive(activeIndex + 1);
+      }, 6500);
+    };
+
+    controls.forEach((control) => {
+      control.addEventListener("click", () => {
+        setActive(Number(control.dataset.index));
+        start();
+      });
+    });
+
+    root.addEventListener("mouseenter", () => {
+      isPaused = true;
+    });
+    root.addEventListener("mouseleave", () => {
+      isPaused = false;
+    });
+
+    start();
+  }
+</script>
+
+<style>
+  .hero-showcase-slide {
+    opacity: 0;
+    transform: translateY(12px) scale(1.015);
+    transition:
+      opacity 900ms var(--ease-out-expo),
+      transform 1200ms var(--ease-out-expo);
+    pointer-events: none;
+  }
+
+  .hero-showcase-slide[data-active="true"] {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .hero-showcase-slide > img {
+    transition: transform 6500ms var(--ease-lagom);
+  }
+
+  .hero-showcase-slide[data-active="true"] > img {
+    transform: scale(1.035);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-showcase-slide,
+    .hero-showcase-slide > img {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>

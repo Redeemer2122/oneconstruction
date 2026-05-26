@@ -22,7 +22,8 @@
 - [x] Critical Content Fixes 1 completed.
 - [x] Visual Upgrade 1A completed.
 - [x] Visual Upgrade 1B completed.
-- [ ] Current focus: Visual Upgrade 1C — Hero section upgrade.
+- [x] Visual Upgrade 1C completed.
+- [ ] Current focus: Visual Upgrade 1D — Purchase section upgrade.
 
 ## Phase 1 — Infrastructure [DONE]
 
@@ -76,14 +77,23 @@
   - Do not reintroduce `ProjectCard.astro`.
   - Keep current project JSON data unchanged unless the task explicitly requests content/data edits.
   - Improve premium visual hierarchy, image treatment, spacing rhythm, and mobile behavior for the Projects section.
+- [x] Visual Upgrade 1C: Hero section upgrade.
+  - Added a premium light brutalist editorial Hero composition.
+  - Added a ЖК «Медина+» featured project label with the confirmed 70-month installment offer.
+  - Replaced aggressive/unverified Hero metrics with restrained current-content metrics.
+  - Hero 1C.2 correction strengthened the cinematic composition, larger architectural mass, CTA cluster, project plaque, and datasheet stat bar.
+  - Hero 1C.3 added a dynamic rotating project showcase for Medina+, Lotos, and Yacht Village with temporary local hero imagery.
+  - Hero background atmosphere pass added subtle architectural depth behind the Hero and grounded the right visual zone.
+  - Hero 1C.4 art-direction push strengthened the architectural installation, exterior temporary imagery, commercial offer plaque, and datasheet atmosphere.
+  - Preserved Astro-first architecture, sharp geometry, Geist / Geist Mono, and performance-safe motion.
+  - Typecheck/build passed when completed.
 
 ### Current
 
-- [ ] Visual Upgrade 1C: Hero section upgrade.
+- [ ] Visual Upgrade 1D: Purchase section upgrade.
 
 ### Planned
 
-- [ ] Visual Upgrade 1D: Purchase section upgrade.
 - [ ] Visual Upgrade 1E: Contact/Footer polish.
 - [ ] Visual Upgrade 1F: Mobile polish.
 - [ ] Visual Upgrade 1G: full visual QA pass.
@@ -185,4 +195,4 @@
 
 ## Next Recommended Task
 
-- Visual Upgrade 1C — Hero section upgrade.
+- Visual Upgrade 1D — Purchase section upgrade.
