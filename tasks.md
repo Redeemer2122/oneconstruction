@@ -29,7 +29,9 @@
 - [x] Visual Upgrade 1D completed.
 - [x] Purchase section polish pass completed.
 - [x] Purchase section reference implementation completed.
-- [ ] Current focus: Visual Upgrade 1E — Contact/Footer polish.
+- [x] Contact section premium upgrade completed.
+- [x] Contact content correction completed.
+- [ ] Current focus: Privileges polish or Global rhythm pass.
 
 ## Phase 1 — Infrastructure [DONE]
 
@@ -109,10 +111,22 @@
   - Kept the local purchase card text exact and preserved `src/data/purchase.ts` unchanged.
   - Verified desktop strict 2x2, all four cards equal size, exact text match, and 390px mobile stack with no horizontal overflow.
   - Typecheck/build passed when completed.
+- [x] Contact section premium upgrade.
+  - Rebuilt `HomeContact.astro` as a strong final conversion section: editorial intro with rule + supporting copy, scannable numbered hairline contact rows, social pills sourced from existing `company.socialLinks`, refined blueprint locator with violet corner marks, and a framed paper form card with elevated dark submit.
+  - Polished `ContactForm.tsx` field rhythm, focus state, and full-width premium submit; preserved the mock submit TODO and form behavior.
+  - Preserved all existing company/contact data (`src/data/company.ts` untouched).
+  - Verified 390px mobile: single column, contact rows stack to one column, form card fits, submit full-width and tappable, no horizontal overflow.
+  - Typecheck/build passed when completed.
+- [x] Contact content correction.
+  - Replaced invented Contact/form promises with old-site-aligned copy from `docs/old-site-content.md`.
+  - Restored form title `Оставьте заявку` and response subtitle `И наш менеджер свяжется с вами в течении 15 минут!`.
+  - Removed unverified passport planning, showroom invitation, 4-hour callback, and extra-call wording from the Contact section and React form helper text.
+  - Preserved `src/data/company.ts`, existing company contact data, form fields, mock submit TODO, and form behavior.
+  - Typecheck/build passed when completed.
 
 ### Current
 
-- [ ] Visual Upgrade 1E: Contact/Footer polish.
+- [ ] Visual Upgrade 1E follow-up: Privileges polish or Global rhythm pass.
 
 ### Planned
 

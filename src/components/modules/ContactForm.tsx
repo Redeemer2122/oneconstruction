@@ -12,11 +12,11 @@ import { useState } from "react";
 type Status = "idle" | "submitting" | "success" | "error";
 
 const inputClass =
-  "bg-transparent border-0 border-b-[0.5px] border-slate-300 px-0 py-3 text-base text-slate-900 placeholder:text-slate-400 outline-none transition-[border-color,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-violet-500 hover:shadow-[0_1px_0_0_oklch(0.58_0.18_285_/_0.6)] focus:border-violet-600 focus:shadow-[0_1px_0_0_oklch(0.48_0.20_285)]";
+  "bg-transparent border-0 border-b border-slate-300 px-0 py-3 text-base text-slate-900 placeholder:text-slate-400/80 outline-none transition-[border-color,box-shadow,letter-spacing] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-violet-500 focus:border-violet-600 focus:shadow-[0_1px_0_0_oklch(0.48_0.20_285)]";
 
-const labelClass = "flex flex-col gap-2";
+const labelClass = "group flex flex-col gap-2";
 const labelTextClass =
-  "font-mono text-[11px] md:text-[10px] uppercase tracking-[0.14em] md:tracking-[0.22em] text-slate-500";
+  "font-mono text-[11px] uppercase tracking-[0.22em] text-slate-500 transition-colors duration-300 group-focus-within:text-violet-600";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -33,22 +33,22 @@ export default function ContactForm() {
         await new Promise((r) => setTimeout(r, 700));
         setStatus("success");
       }}
-      className="grid gap-7 md:gap-8 max-w-[34rem]"
+      className="grid gap-6 md:gap-7"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-7">
         <label className={labelClass}>
-          <span className={labelTextClass}>ИМЯ</span>
+          <span className={labelTextClass}>ВАШЕ ИМЯ*</span>
           <input
             name="name"
             required
             autoComplete="name"
-            placeholder="Айбек"
+            placeholder="Ваше имя"
             className={inputClass}
           />
         </label>
 
         <label className={labelClass}>
-          <span className={labelTextClass}>ТЕЛЕФОН</span>
+          <span className={labelTextClass}>ТЕЛЕФОН*</span>
           <input
             name="phone"
             type="tel"
@@ -69,22 +69,25 @@ export default function ContactForm() {
         />
       </label>
 
-      <div className="flex flex-col gap-4 pt-2">
+      <div className="flex flex-col gap-4 pt-3">
         <button
           type="submit"
           disabled={isBusy || isDone}
-          className="group self-start inline-flex min-h-11 max-w-full items-center gap-3 px-6 py-3.5 border-[0.5px] border-slate-900 bg-slate-900 text-alabaster font-mono text-[11px] uppercase tracking-[0.16em] md:tracking-[0.22em] transition-[transform,background-color,color,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.98] disabled:opacity-60 hover:bg-violet-600 hover:text-white hover:border-violet-600"
+          className="group relative inline-flex w-full min-h-12 items-center justify-between gap-3 border border-slate-900 bg-slate-900 px-6 py-4 font-mono text-[12px] uppercase tracking-[0.22em] text-alabaster shadow-[0_18px_38px_rgb(15_23_42_/_0.18)] transition-[transform,background-color,color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-violet-600 hover:text-white hover:border-violet-600 hover:shadow-[0_22px_44px_rgb(109_40_217_/_0.28)] active:scale-[0.99] disabled:opacity-60"
         >
-          {isBusy ? "ОТПРАВЛЯЕМ" : isDone ? "ПРИНЯТО" : "ОТПРАВИТЬ ЗАЯВКУ"}
+          <span>
+            {isBusy ? "ОТПРАВЛЯЕМ" : isDone ? "ЗАЯВКА ПРИНЯТА" : "ОСТАВИТЬ ЗАЯВКУ"}
+          </span>
           <span
             aria-hidden="true"
-            className="block h-px w-4 bg-current transition-[width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:w-8"
-          />
+            className="inline-flex items-center text-violet-300 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1 group-hover:-translate-y-0.5 group-hover:text-white"
+          >
+            ↗
+          </span>
         </button>
 
-        <p className="font-mono text-[11px] md:text-[10px] uppercase tracking-[0.14em] md:tracking-[0.22em] text-slate-500 max-w-[42ch] leading-relaxed">
-          Перезвоним в течение 4 часов в рабочее время. По телефону уточним
-          интерес, пришлём паспорта планировок.
+        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-slate-500 max-w-[44ch] leading-relaxed">
+          И наш менеджер свяжется с вами в течении 15 минут!
         </p>
       </div>
     </form>
