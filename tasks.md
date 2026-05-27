@@ -27,6 +27,8 @@
 - [x] Visual Upgrade 1B completed.
 - [x] Visual Upgrade 1C completed.
 - [x] Visual Upgrade 1D completed.
+- [x] Purchase section polish pass completed.
+- [x] Purchase section reference implementation completed.
 - [ ] Current focus: Visual Upgrade 1E — Contact/Footer polish.
 
 ## Phase 1 — Infrastructure [DONE]
@@ -96,6 +98,16 @@
   - Used component-local fixed purchase card copy.
   - Removed bullets, oversized card spacing, card spans, and dashboard-style decoration.
   - Preserved `src/data/purchase.ts` unchanged.
+  - Typecheck/build passed when completed.
+- [x] Purchase section polish pass.
+  - Added subtle paper-like card depth, restrained Royal Violet corner marks, sharper hover motion, and a lighter architectural section atmosphere.
+  - Preserved the left intro plus right strict 2x2 grid structure, equal card treatment, and exact current card text.
+  - Verified mobile 390px layout: one-column stack, no horizontal overflow, all four cards equal height.
+  - Typecheck/build passed when completed.
+- [x] Purchase section reference implementation.
+  - Reimplemented `HomePurchase.astro` to match the supplied visual reference: left intro aside, dark intro CTA, right strict 2x2 equal-card grid, paper depth, thin dividers, corner marks, violet title accents, and arrow text links.
+  - Kept the local purchase card text exact and preserved `src/data/purchase.ts` unchanged.
+  - Verified desktop strict 2x2, all four cards equal size, exact text match, and 390px mobile stack with no horizontal overflow.
   - Typecheck/build passed when completed.
 
 ### Current
