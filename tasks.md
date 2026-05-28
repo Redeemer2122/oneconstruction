@@ -31,7 +31,7 @@
 - [x] Purchase section reference implementation completed.
 - [x] Contact section premium upgrade completed.
 - [x] Contact content correction completed.
-- [ ] Current focus: Privileges polish or Global rhythm pass.
+- [ ] Current focus: Global rhythm pass or mobile polish.
 
 ## Phase 1 — Infrastructure [DONE]
 
@@ -123,10 +123,30 @@
   - Removed unverified passport planning, showroom invitation, 4-hour callback, and extra-call wording from the Contact section and React form helper text.
   - Preserved `src/data/company.ts`, existing company contact data, form fields, mock submit TODO, and form behavior.
   - Typecheck/build passed when completed.
+- [x] Privileges simple reliable redesign.
+  - Rebuilt `HomeTimeline.astro` as a two-column light premium brutalist section with left intro, subtle blueprint SVG, and right privilege cards.
+  - Preserved all seven existing privilege records from `src/data/privileges.ts` unchanged.
+  - Added a component-local inline SVG icon map with seven consistent `viewBox="0 0 48 48"` stroke icons and restrained Royal Violet accents.
+  - Verified 390px mobile: `#privileges` section width 390px, seven cards rendered, no overflow inside the section.
+  - Typecheck/build passed when completed.
+- [x] Privileges controlled fix-pass.
+  - Tightened `HomeTimeline.astro` composition without changing structure, data, libraries, or adding heavy JS.
+  - Reduced and contained the left heading, softened the `One Construction.` accent, and narrowed the intro rail so it no longer competes with the card grid.
+  - Rebalanced the card grid with wider-feeling cards, lower card height, tighter internal rhythm, subtler background grid, and a closer full-width seventh card.
+  - Simplified the architectural visual into a clean floor-plan blueprint frame instead of a confusing building sketch.
+  - Verified 390px mobile: intro first, stacked cards, all seven items rendered, heading fits, no overflow inside `#privileges`.
+  - Typecheck/build passed when completed.
+- [x] Privileges final cleanup pass.
+  - Removed the bottom-left architectural/wireframe drawing from `HomeTimeline.astro`.
+  - Kept only a minimal technical mark so the intro stays quiet without a fake building illustration.
+  - Tightened the left heading containment and reduced the `One Construction.` accent so it stays inside the intro column and clears the card grid.
+  - Reduced background grid visibility and kept the existing six-card plus full-width seventh-card layout unchanged.
+  - Verified 390px mobile: stacked cards, heading fits, all seven items rendered, no overflow inside `#privileges`.
+  - Typecheck/build passed when completed.
 
 ### Current
 
-- [ ] Visual Upgrade 1E follow-up: Privileges polish or Global rhythm pass.
+- [ ] Visual Upgrade 1E follow-up: Global rhythm pass.
 
 ### Planned
 

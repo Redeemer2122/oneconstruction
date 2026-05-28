@@ -1,117 +1,484 @@
 ---
 /**
- * HomeTimeline — переверстана под блок "Стандарт привилегий One Construction".
- * 7 пунктов, тонкие hairlines, проявление по ScrollTrigger.
+ * HomeTimeline — block "Стандарт привилегий One Construction".
+ * Data stays in src/data/privileges.ts; this file owns only layout and icons.
  */
 import { privileges } from "@data/privileges";
+
+const privilegeIconMap = {
+  "01": `
+    <path d="M24 39c-6.5-4.2-10.4-10.1-10.4-16.4 0-7.1 5-12.4 10.4-15.6 5.4 3.2 10.4 8.5 10.4 15.6C34.4 28.9 30.5 34.8 24 39Z" />
+    <path d="M24 38V17" />
+    <path class="priv-icon-accent" d="M24 28c4.4-.3 8.2-2 10.4-5" />
+    <path class="priv-icon-accent" d="M24 31c-3.8-.5-7-2-9.4-4.5" />
+  `,
+  "02": `
+    <circle cx="24" cy="24" r="13.5" />
+    <circle cx="24" cy="24" r="6.6" />
+    <path class="priv-icon-accent" d="M9 24h-3" />
+    <path class="priv-icon-accent" d="M42 24h-3" />
+  `,
+  "03": `
+    <path d="M12 10h24v28H12z" />
+    <path d="M12 24h11" />
+    <path d="M23 10v28" />
+    <path d="M23 28h13" />
+    <path d="M31 10v8" />
+    <path class="priv-icon-accent" d="M31 22v6" />
+    <path class="priv-icon-accent" d="M27.5 25h7" />
+  `,
+  "04": `
+    <path d="M24 7c5.8 7.2 10.6 13.1 10.6 20.1 0 6.2-4.6 10.9-10.6 10.9s-10.6-4.7-10.6-10.9C13.4 20.1 18.2 14.2 24 7Z" />
+    <path class="priv-icon-accent" d="M29.5 29.5c-.9 2.2-2.6 3.6-5.1 4" />
+  `,
+  "05": `
+    <path d="M10 17c4.3-3.2 8.7-3.2 13 0s8.7 3.2 13 0" />
+    <path d="M10 24c4.3-3.2 8.7-3.2 13 0s8.7 3.2 13 0" />
+    <path d="M10 31c4.3-3.2 8.7-3.2 13 0s8.7 3.2 13 0" />
+    <path class="priv-icon-accent" d="M37 17h2" />
+    <path class="priv-icon-accent" d="M37 31h2" />
+  `,
+  "06": `
+    <path d="M24 8 36 12.2v11.2c0 7-4.5 12.7-12 16.6-7.5-3.9-12-9.6-12-16.6V12.2L24 8Z" />
+    <path class="priv-icon-accent" d="M18.5 24.5 22.2 28 30 19.5" />
+  `,
+  "07": `
+    <path d="M10 39h28" />
+    <path d="M14 39V18h9v21" />
+    <path d="M25 39V10h9v29" />
+    <path d="M17 23h3" />
+    <path d="M17 29h3" />
+    <path d="M28 16h3" />
+    <path d="M28 22h3" />
+    <path class="priv-icon-accent" d="M36 27h5v12" />
+    <path class="priv-icon-accent" d="M38.5 32h2.5" />
+  `,
+} satisfies Record<(typeof privileges)[number]["index"], string>;
 ---
 
-<section
-  id="privileges"
-  class="relative bg-[#FBFBFA] border-t border-slate-200 overflow-hidden"
-  aria-label="Стандарт привилегий One Construction"
->
-  <div class="px-6 md:px-10 lg:px-12 py-24 md:py-40">
+<section id="privileges" class="privileges-section" aria-label="Стандарт привилегий One Construction">
+  <div class="privileges-shell">
+    <aside class="privileges-intro">
+      <div class="privileges-kicker">СТАНДАРТ · 03</div>
 
-    <!-- Section header -->
-    <header class="flex items-baseline justify-between gap-6 pb-6 mb-16 md:mb-24 border-b border-slate-200">
-      <span class="mono-detail" data-reveal>СТАНДАРТ · 03</span>
-      <span class="mono-detail" data-reveal style="--reveal-delay:0.1s;">SEC: 003 / PRIVILEGES</span>
-    </header>
-
-    <!-- Title -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-20 md:mb-32">
-      <div class="lg:col-span-7" data-reveal style="--reveal-delay:0.14s;">
-        <h2 class="font-mono text-[8vw] md:text-[5.4vw] xl:text-[4.6vw] uppercase tracking-[-0.04em] text-slate-900 leading-[0.94] max-w-[14ch]">
-          Стандарт<br />привилегий<br />
-          <span class="text-violet-700">One Construction.</span>
+      <div class="privileges-copy">
+        <p class="privileges-eyebrow">Инженерный регламент</p>
+        <h2>
+          Стандарт<br />
+          привилегий<br />
+          <span>One Construction.</span>
         </h2>
-      </div>
-      <div class="lg:col-span-5 flex flex-col gap-6 lg:pt-4" data-reveal style="--reveal-delay:0.22s;">
-        <p class="text-base md:text-lg text-slate-700 leading-relaxed max-w-[48ch]">
-          Семь обязательных слоёв, которые мы закладываем в каждый дом — независимо от класса, площади и квартиры.
+        <div class="privileges-rule" aria-hidden="true">
+          <span></span>
+        </div>
+        <p class="privileges-lead">
+          Семь обязательных слоёв, которые мы закладываем в каждый дом — независимо
+          от класса, площади и квартиры.
         </p>
-        <p class="text-sm md:text-base text-slate-600 leading-relaxed max-w-[48ch]">
-          Это не маркетинговый список, а технический регламент: его выполняет инженерная служба и фиксирует приёмка.
+        <p class="privileges-note">
+          Это не маркетинговый список, а технический регламент: его выполняет
+          инженерная служба и фиксирует приёмка.
         </p>
       </div>
+
+      <div class="privileges-technical-mark" aria-hidden="true"></div>
+    </aside>
+
+    <div class="privileges-board">
+      <ul class="privileges-grid">
+        {
+          privileges.map((p, idx) => (
+            <li class:list={["privilege-card", idx === 6 && "privilege-card--wide"]}>
+              <div class="privilege-card__top">
+                <div class="privilege-card__index">
+                  <span>{p.index}</span>
+                  <small>/07</small>
+                  <i aria-hidden="true"></i>
+                </div>
+
+                <svg
+                  class="privilege-card__icon"
+                  viewBox="0 0 48 48"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <g set:html={privilegeIconMap[p.index]} />
+                </svg>
+              </div>
+
+              <div class="privilege-card__body">
+                <h3>{p.title}</h3>
+                <div class="privilege-card__divider" aria-hidden="true"></div>
+                <p>{p.body}</p>
+              </div>
+
+              <span class="privilege-card__tag">{p.tag}</span>
+            </li>
+          ))
+        }
+      </ul>
     </div>
-
-    <!-- Privileges list — hairline rows -->
-    <ul class="priv-list border-t border-slate-200">
-      {privileges.map((p, idx) => (
-        <li
-          class="priv-row group relative grid grid-cols-12 gap-4 md:gap-8 items-start py-8 md:py-12 border-b border-slate-200 transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-bone"
-          data-priv-index={idx}
-        >
-          <!-- Index -->
-          <div class="col-span-2 md:col-span-1 flex flex-col gap-2 pt-1">
-            <span class="font-mono text-[11px] md:text-[10px] uppercase tracking-[0.14em] md:tracking-[0.22em] text-slate-400 group-hover:text-violet-600 transition-colors duration-500">
-              {p.index}
-            </span>
-            <span class="hidden md:block w-2 h-2 border border-slate-300 group-hover:border-violet-600 group-hover:bg-violet-600 transition-all duration-500"></span>
-          </div>
-
-          <!-- Title -->
-          <div class="col-span-10 md:col-span-5">
-            <h3 class="font-mono text-lg md:text-2xl xl:text-3xl tracking-tight text-slate-900 leading-[1.1] group-hover:text-violet-700 transition-colors duration-500">
-              {p.title}
-            </h3>
-          </div>
-
-          <!-- Body -->
-          <div class="col-span-12 md:col-span-5">
-            <p class="text-sm md:text-base text-slate-600 leading-relaxed max-w-[52ch]">
-              {p.body}
-            </p>
-          </div>
-
-          <!-- Tag -->
-          <div class="col-span-12 md:col-span-1 md:flex md:justify-end pt-1">
-            <span class="inline-block max-w-full font-mono text-[10px] md:text-[9px] uppercase tracking-[0.14em] md:tracking-[0.2em] text-slate-500 border border-slate-200 px-2 py-1 group-hover:border-violet-600 group-hover:text-violet-700 transition-colors duration-500 break-words">
-              {p.tag}
-            </span>
-          </div>
-        </li>
-      ))}
-    </ul>
   </div>
 </section>
 
-<script>
-  import gsap from "gsap";
-  import ScrollTrigger from "gsap/ScrollTrigger";
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  const initPrivileges = () => {
-    const section = document.getElementById("privileges");
-    if (!section) return;
-    const rows = section.querySelectorAll<HTMLElement>(".priv-row");
-    if (!rows.length) return;
-
-    rows.forEach((row, i) => {
-      gsap.set(row, { opacity: 0, y: 32 });
-      ScrollTrigger.create({
-        trigger: row,
-        start: "top 88%",
-        onEnter: () => {
-          gsap.to(row, {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            ease: "power3.out",
-            delay: 0.04 * i,
-          });
-        },
-        once: true,
-      });
-    });
-  };
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initPrivileges, { once: true });
-  } else {
-    initPrivileges();
+<style>
+  .privileges-section {
+    --priv-bg: #f7f4ec;
+    --priv-paper: rgba(255, 254, 250, 0.88);
+    --priv-ink: #171d27;
+    --priv-muted: #586271;
+    --priv-soft: #8a94a3;
+    --priv-line: rgba(34, 40, 51, 0.14);
+    --priv-line-strong: rgba(34, 40, 51, 0.2);
+    --priv-violet: #5d3ac4;
+    --priv-shadow: rgba(47, 39, 28, 0.07);
+    position: relative;
+    overflow: hidden;
+    background:
+      linear-gradient(90deg, rgba(23, 29, 39, 0.018) 1px, transparent 1px) 0 0 / 8.5rem 8.5rem,
+      linear-gradient(180deg, rgba(23, 29, 39, 0.016) 1px, transparent 1px) 0 0 / 8.5rem 8.5rem,
+      var(--priv-bg);
+    color: var(--priv-ink);
+    border-top: 1px solid var(--priv-line);
   }
-</script>
+
+  .privileges-shell {
+    display: grid;
+    grid-template-columns: minmax(17rem, 0.38fr) minmax(0, 1fr);
+    gap: clamp(2rem, 3vw, 3.75rem);
+    width: min(100%, 1500px);
+    margin-inline: auto;
+    padding: clamp(3.4rem, 5.1vw, 5.25rem) clamp(1.25rem, 3.6vw, 3.5rem) clamp(3.5rem, 5.2vw, 5.25rem);
+  }
+
+  .privileges-intro {
+    display: grid;
+    align-content: start;
+    min-width: 0;
+    max-width: 26.5rem;
+  }
+
+  .privileges-kicker,
+  .privileges-eyebrow,
+  .privilege-card__index,
+  .privilege-card__tag {
+    font-family: var(--font-mono, "Geist Mono", monospace);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .privileges-kicker {
+    color: var(--priv-violet);
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: clamp(2rem, 3.2vw, 3.35rem);
+  }
+
+  .privileges-eyebrow {
+    color: var(--priv-violet);
+    font-size: 0.72rem;
+    font-weight: 700;
+    margin: 0 0 1.4rem;
+  }
+
+  .privileges-copy h2 {
+    max-width: 100%;
+    margin: 0;
+    font-family: var(--font-mono, "Geist Mono", monospace);
+    font-size: clamp(2.7rem, 3.8vw, 4.45rem);
+    font-weight: 800;
+    line-height: 0.96;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+  }
+
+  .privileges-copy h2 span {
+    display: block;
+    max-width: 100%;
+    color: var(--priv-violet);
+    opacity: 0.88;
+    font-size: 0.72em;
+    line-height: 1.02;
+    overflow-wrap: anywhere;
+  }
+
+  .privileges-rule {
+    display: flex;
+    align-items: center;
+    height: 1px;
+    max-width: 18rem;
+    margin: clamp(1.3rem, 2.1vw, 1.8rem) 0 clamp(1.55rem, 2.7vw, 2.25rem);
+    background: color-mix(in srgb, var(--priv-violet) 34%, transparent);
+  }
+
+  .privileges-rule span {
+    width: 0.45rem;
+    height: 0.45rem;
+    margin-left: auto;
+    background: var(--priv-violet);
+  }
+
+  .privileges-lead,
+  .privileges-note {
+    max-width: 24rem;
+    margin: 0;
+    color: var(--priv-muted);
+    font-size: clamp(0.98rem, 1vw, 1.08rem);
+    line-height: 1.68;
+  }
+
+  .privileges-note {
+    max-width: 23.5rem;
+    margin-top: 1.25rem;
+    color: #667181;
+    font-size: clamp(0.88rem, 0.92vw, 0.96rem);
+  }
+
+  .privileges-technical-mark {
+    width: min(100%, 18rem);
+    height: 3.5rem;
+    margin-top: clamp(1.75rem, 3vw, 2.6rem);
+    border-left: 1px solid rgba(93, 58, 196, 0.22);
+    border-bottom: 1px solid rgba(34, 40, 51, 0.1);
+  }
+
+  .privileges-board {
+    min-width: 0;
+  }
+
+  .privileges-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.95rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .privilege-card {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    min-height: clamp(13.5rem, 14.5vw, 15.5rem);
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(1.05rem, 1.35vw, 1.38rem);
+    background:
+      linear-gradient(135deg, rgba(93, 58, 196, 0.032), transparent 38%),
+      var(--priv-paper);
+    border: 1px solid var(--priv-line-strong);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.82) inset,
+      0 12px 30px var(--priv-shadow);
+    transition:
+      border-color 220ms ease,
+      box-shadow 220ms ease,
+      transform 220ms ease;
+  }
+
+  .privilege-card::before {
+    position: absolute;
+    inset: 0.55rem;
+    content: "";
+    border: 1px solid rgba(34, 40, 51, 0.06);
+    pointer-events: none;
+  }
+
+  .privilege-card:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--priv-violet) 32%, var(--priv-line-strong));
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.86) inset,
+      0 16px 36px rgba(47, 39, 28, 0.1);
+  }
+
+  .privilege-card--wide {
+    grid-column: 1 / -1;
+    min-height: 8.2rem;
+    display: grid;
+    grid-template-columns: minmax(7.5rem, 0.18fr) minmax(0, 1fr) auto;
+    gap: clamp(1rem, 1.6vw, 1.5rem);
+    align-items: start;
+  }
+
+  .privilege-card__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .privilege-card__index {
+    display: grid;
+    gap: 0.34rem;
+    color: var(--priv-violet);
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .privilege-card__index span {
+    font-size: clamp(0.98rem, 1.12vw, 1.12rem);
+  }
+
+  .privilege-card__index small {
+    color: var(--priv-soft);
+    font-size: 0.63rem;
+    letter-spacing: 0.14em;
+  }
+
+  .privilege-card__index i {
+    width: 0.3rem;
+    height: 0.3rem;
+    margin-top: 0.28rem;
+    background: var(--priv-violet);
+  }
+
+  .privilege-card__icon {
+    width: clamp(2.55rem, 3vw, 3rem);
+    height: clamp(2.55rem, 3vw, 3rem);
+    flex: 0 0 auto;
+    color: #263240;
+  }
+
+  .priv-icon-accent {
+    color: var(--priv-violet);
+  }
+
+  .privilege-card__body {
+    min-width: 0;
+    margin-top: clamp(1.15rem, 2vw, 2rem);
+  }
+
+  .privilege-card--wide .privilege-card__body {
+    margin-top: 0;
+    align-self: center;
+  }
+
+  .privilege-card__body h3 {
+    max-width: 16ch;
+    margin: 0;
+    color: var(--priv-ink);
+    font-size: clamp(1.18rem, 1.32vw, 1.46rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: 0;
+    text-wrap: balance;
+  }
+
+  .privilege-card--wide .privilege-card__body h3 {
+    max-width: none;
+  }
+
+  .privilege-card__divider {
+    height: 1px;
+    width: 100%;
+    margin: 0.72rem 0 0.68rem;
+    background: color-mix(in srgb, var(--priv-violet) 21%, var(--priv-line));
+  }
+
+  .privilege-card__body p {
+    max-width: 35rem;
+    margin: 0;
+    color: var(--priv-muted);
+    font-size: clamp(0.84rem, 0.88vw, 0.93rem);
+    line-height: 1.52;
+  }
+
+  .privilege-card__tag {
+    display: inline-flex;
+    align-self: flex-start;
+    margin-top: 1rem;
+    color: #667181;
+    font-size: 0.64rem;
+    font-weight: 700;
+  }
+
+  .privilege-card--wide .privilege-card__tag {
+    justify-self: end;
+    margin-top: 0.25rem;
+  }
+
+  @media (max-width: 1180px) {
+    .privileges-shell {
+      grid-template-columns: 1fr;
+    }
+
+    .privileges-intro {
+      max-width: 34rem;
+    }
+
+    .privileges-kicker {
+      margin-bottom: 2.5rem;
+    }
+
+    .privileges-technical-mark {
+      width: min(100%, 16rem);
+      margin-top: 2rem;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .privileges-section {
+      background:
+        linear-gradient(90deg, rgba(23, 29, 39, 0.018) 1px, transparent 1px) 0 0 / 5.5rem 5.5rem,
+        linear-gradient(180deg, rgba(23, 29, 39, 0.016) 1px, transparent 1px) 0 0 / 5.5rem 5.5rem,
+        var(--priv-bg);
+    }
+
+    .privileges-shell {
+      gap: 2.25rem;
+      padding: 3.4rem 1rem 3.75rem;
+    }
+
+    .privileges-intro {
+      max-width: 100%;
+    }
+
+    .privileges-copy h2 {
+      max-width: 100%;
+      font-size: clamp(2.25rem, 9.3vw, 2.7rem);
+      line-height: 0.98;
+    }
+
+    .privileges-technical-mark {
+      width: min(100%, 12rem);
+      height: 2.5rem;
+      margin-top: 1.45rem;
+    }
+
+    .privileges-grid {
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+    }
+
+    .privilege-card,
+    .privilege-card--wide {
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding: 1.05rem;
+    }
+
+    .privilege-card__body,
+    .privilege-card--wide .privilege-card__body {
+      margin-top: 1.25rem;
+    }
+
+    .privilege-card__body h3 {
+      max-width: 17ch;
+      font-size: 1.24rem;
+    }
+
+    .privilege-card__tag,
+    .privilege-card--wide .privilege-card__tag {
+      justify-self: start;
+      margin-top: 1.2rem;
+    }
+  }
+</style>
