@@ -31,7 +31,7 @@
 - [x] Purchase section reference implementation completed.
 - [x] Contact section premium upgrade completed.
 - [x] Contact content correction completed.
-- [ ] Current focus: Global rhythm pass or mobile polish.
+- [ ] Current focus: Global rhythm pass.
 
 ## Phase 1 — Infrastructure [DONE]
 
@@ -143,6 +143,21 @@
   - Reduced background grid visibility and kept the existing six-card plus full-width seventh-card layout unchanged.
   - Verified 390px mobile: stacked cards, heading fits, all seven items rendered, no overflow inside `#privileges`.
   - Typecheck/build passed when completed.
+- [x] About / Company visual upgrade completed.
+  - Rebuilt `HomeAbout.astro` as a Company Proof System section with a sharp editorial header, premium proof statement panel, and an asymmetric metric/proof grid.
+  - Preserved existing About text and all five existing metrics: `10+`, `400 000`, `1 200+`, `ISO`, and `AAA`.
+  - Removed local non-source metadata from the section and kept `src/data/company.ts`, `src/data/homepage.ts`, and other data files unchanged.
+  - Added restrained Royal Violet accents, thin borders, subtle paper depth, architectural linework, and transform/border/shadow hover states without React or new libraries.
+  - Verified 390px mobile: heading fits, metrics stack to one column, five proof items render, and `#about` has no horizontal overflow.
+  - Typecheck/build passed when completed.
+- [x] About / Company proof panel cleanup completed.
+  - Removed the visible English/internal label from the proof panel.
+  - Tightened the large left proof panel into a compact statement card with existing About text and existing advantage titles only.
+  - Rebalanced the section so the metrics grid remains the dominant proof surface while the statement card reads as supporting editorial structure.
+  - Preserved all five existing metrics: `10+`, `400 000`, `1 200+`, `ISO`, and `AAA`.
+  - Kept `src/data/company.ts`, Content Layer, package files, and other homepage sections unchanged.
+  - Verified 390px mobile: heading readable, proof panel compact at 350px wide, metrics stack cleanly, and `#about` has no horizontal overflow.
+  - Typecheck/build passed when completed.
 
 ### Current
 
@@ -251,4 +266,4 @@
 
 ## Next Recommended Task
 
-- Visual Upgrade 1E — Contact/Footer polish.
+- Visual Upgrade 1E follow-up — Global rhythm pass.

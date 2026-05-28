@@ -1,82 +1,234 @@
 ---
 import { about } from "@data/homepage";
-const { advantages } = about;
+
+const { advantages, paragraphs } = about;
+const [primaryParagraph, secondaryParagraph] = paragraphs;
 ---
 
-<section
-  id="about"
-  class="relative bg-[#F5F4F0] border-t border-slate-200 overflow-hidden"
->
+<section id="about" class="about-proof relative overflow-hidden border-t border-slate-900/10 bg-[#F5F4F0]">
   <div class="section-stitch-top stitch-alabaster-to-limestone" aria-hidden="true"></div>
 
-  <div class="px-6 md:px-10 lg:px-12 py-24 md:py-40">
+  <div class="about-proof__linework" aria-hidden="true"></div>
 
-    <!-- Section header -->
-    <header class="flex items-baseline justify-between pb-6 mb-20 md:mb-32 border-b border-slate-200">
-      <span class="mono-detail" data-reveal>О КОМПАНИИ</span>
-      <span class="mono-detail" data-reveal style="--reveal-delay: 0.1s;">SEC: 002 / MANIFESTO</span>
-    </header>
+  <div class="about-proof__inner px-5 py-20 sm:px-6 md:px-10 md:py-32 lg:px-12">
+    <header class="about-proof__header border-b border-slate-900/15 pb-8 md:pb-10">
+      <p class="mono-detail text-slate-500" data-reveal>О КОМПАНИИ</p>
 
-    <!-- Manifesto -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-24 md:mb-40">
-      <div class="lg:col-span-7" data-reveal style="--reveal-delay: 0.12s;">
-        <h2 class="font-mono text-[8vw] md:text-[5.4vw] xl:text-[4.6vw] uppercase tracking-[-0.04em] text-slate-900 leading-[0.94] max-w-[14ch]">
-          Пространство,<br />
-          в котором<br />
-          хочется жить.
+      <div class="about-proof__title-row mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(300px,420px)] lg:items-end lg:gap-16">
+        <h2
+          class="about-proof__title font-mono uppercase leading-[0.9] tracking-[-0.04em] text-slate-950"
+          data-reveal
+          style="--reveal-delay: 0.08s;"
+        >
+          ПРОСТРАНСТВО,<br />
+          В КОТОРОМ<br />
+          ХОЧЕТСЯ ЖИТЬ.
         </h2>
-      </div>
-      <div class="lg:col-span-5 flex flex-col gap-6 lg:pt-4" data-reveal style="--reveal-delay: 0.2s;">
-        <p class="text-base md:text-lg text-slate-700 leading-relaxed max-w-[48ch]">
-          <strong class="font-medium text-slate-900">One Construction</strong> — девелопер, который создаёт пространства, в которых хочется жить. Мы строим не квадратные метры, а долгий маршрут от первого эскиза до утреннего кофе у окна.
-        </p>
-        <p class="text-sm md:text-base text-slate-600 leading-relaxed max-w-[48ch]">
-          Каждый проект — выверенная архитектурная гипотеза: свет, материал, тишина и пропорции. Без компромиссов на скрытых от глаз инженерных слоях.
-        </p>
-        <div class="mt-2 flex items-center gap-3 border-t border-slate-200 pt-5">
-          <span class="mono-detail">BISHKEK · KG</span>
-          <span class="w-1 h-1 bg-slate-300"></span>
-          <span class="mono-detail">EST. 2014</span>
+
+        <div class="about-proof__copy max-w-[54ch]" data-reveal style="--reveal-delay: 0.16s;">
+          <p
+            class="text-base leading-relaxed text-slate-700 md:text-lg"
+            set:html={primaryParagraph.html}
+          />
         </div>
       </div>
-    </div>
+    </header>
 
-    <!-- Advantages grid (5 blocks, violet hover) -->
-    <div class="adv-grid border-t border-l border-slate-200 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-      {advantages.map((a, i) => (
-        <article
-          class={`adv-cell group relative border-r border-b border-slate-200 bg-alabaster p-8 md:p-10 min-h-[280px] md:min-h-[320px] flex flex-col justify-between transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-violet-700 ${i === 4 ? "lg:col-span-1 sm:col-span-2 lg:col-start-2" : ""}`}
-          data-reveal
-          style={`--reveal-delay: ${0.05 * i + 0.25}s;`}
-        >
-          <!-- Ghost numeric -->
-          <span
-            class="absolute -top-2 -right-2 md:-top-3 md:-right-3 font-mono text-[80px] md:text-[110px] leading-none tracking-tighter text-slate-900/[0.05] group-hover:text-white/[0.08] transition-colors duration-500 select-none pointer-events-none"
-            aria-hidden="true"
-          >{a.index}</span>
+    <div class="about-proof__statement-grid mt-10 grid gap-5 lg:mt-14 lg:grid-cols-[minmax(250px,360px)_minmax(0,1fr)] lg:items-start lg:gap-6">
+      <article class="about-proof__statement group relative border border-slate-900/15 bg-[#FBFBFA]/88 p-5 shadow-[0_24px_62px_rgb(15_23_42_/_0.06)] transition-[transform,border-color,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:border-violet-700/45 hover:shadow-[0_30px_76px_rgb(55_48_86_/_0.11)] md:p-7 lg:p-8" data-reveal style="--reveal-delay: 0.2s;">
+        <div class="about-proof__corner about-proof__corner--tl" aria-hidden="true"></div>
+        <div class="about-proof__corner about-proof__corner--br" aria-hidden="true"></div>
 
-          <header class="flex items-baseline justify-between gap-4">
-            <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-400 group-hover:text-violet-200 transition-colors duration-500">
-              {a.index} / 05
-            </span>
-            <span class="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-400 group-hover:text-violet-200 transition-colors duration-500">
-              {a.unit}
-            </span>
-          </header>
+        <div class="flex items-start justify-between gap-6 border-b border-slate-900/10 pb-5">
+          <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-violet-700">
+            О КОМПАНИИ
+          </p>
+          <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400">
+            {advantages.length} ПУНКТОВ
+          </span>
+        </div>
 
-          <div class="relative z-10 mt-8">
-            <div class="font-mono text-5xl md:text-6xl tracking-tight text-slate-900 group-hover:text-white transition-colors duration-500 leading-none">
-              {a.metric}
-            </div>
-            <h3 class="mt-6 font-mono text-sm md:text-base uppercase tracking-[0.16em] text-slate-900 group-hover:text-white transition-colors duration-500">
-              {a.title}
-            </h3>
-            <p class="mt-3 text-sm text-slate-600 group-hover:text-violet-100 transition-colors duration-500 leading-relaxed max-w-[34ch]">
-              {a.body}
-            </p>
+        <div class="mt-8">
+          <p
+            class="max-w-[44ch] text-lg leading-snug text-slate-900 md:text-xl"
+            set:html={secondaryParagraph.html}
+          />
+
+          <div class="about-proof__statement-list mt-8 border-t border-slate-900/10">
+            {advantages.map((a) => (
+              <div class="grid grid-cols-[2.8rem_1fr] gap-4 border-b border-slate-900/10 py-3">
+                <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">{a.index}</span>
+                <span class="font-mono text-[11px] uppercase leading-snug tracking-[0.16em] text-slate-700">{a.title}</span>
+              </div>
+            ))}
           </div>
-        </article>
-      ))}
+        </div>
+      </article>
+
+      <div class="about-proof__index border border-slate-900/15 bg-[#F0EEE8]/70" data-reveal style="--reveal-delay: 0.28s;">
+        {advantages.map((a, i) => (
+          <article
+            class={`about-proof__metric group relative grid min-h-[190px] overflow-hidden border-slate-900/15 bg-[#FBFBFA]/72 p-5 transition-[transform,border-color,box-shadow,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:border-violet-700/50 hover:shadow-[0_24px_54px_rgb(55_48_86_/_0.1)] md:p-6 ${i === 0 ? "about-proof__metric--lead" : ""}`}
+            data-reveal
+            style={`--reveal-delay: ${0.08 * i + 0.3}s;`}
+          >
+            <span class="about-proof__metric-line" aria-hidden="true"></span>
+
+            <header class="relative z-[1] flex items-start justify-between gap-4">
+              <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400 transition-colors duration-500 group-hover:text-violet-700">
+                {a.index} / 05
+              </span>
+              <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400 transition-colors duration-500 group-hover:text-violet-700">
+                {a.unit}
+              </span>
+            </header>
+
+            <div class="relative z-[1] mt-10 self-end">
+              <p class="font-mono text-[clamp(2.55rem,9vw,5.9rem)] leading-none tracking-[-0.07em] text-slate-950 transition-colors duration-500 group-hover:text-violet-700 md:text-[clamp(3rem,5.8vw,6.3rem)]">
+                {a.metric}
+              </p>
+              <h3 class="mt-4 font-mono text-[12px] uppercase leading-snug tracking-[0.18em] text-slate-950 md:text-[13px]">
+                {a.title}
+              </h3>
+              <p class="mt-3 max-w-[44ch] text-sm leading-relaxed text-slate-600">
+                {a.body}
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  .about-proof {
+    --about-violet: #5d3ac4;
+    color: #101827;
+  }
+
+  .about-proof__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-proof__linework {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.55;
+    background-image:
+      linear-gradient(to right, rgba(15, 23, 42, 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(15, 23, 42, 0.045) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to bottom, transparent, black 16%, black 70%, transparent);
+  }
+
+  .about-proof__header {
+    position: relative;
+  }
+
+  .about-proof__header::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    width: min(34vw, 420px);
+    height: 1px;
+    background: var(--about-violet);
+  }
+
+  .about-proof__title {
+    max-width: 12.6ch;
+    font-size: clamp(2.45rem, 9.8vw, 7.15rem);
+  }
+
+  .about-proof__corner {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    border-color: var(--about-violet);
+    opacity: 0.55;
+    transition: opacity 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .about-proof__statement:hover .about-proof__corner {
+    opacity: 0.9;
+  }
+
+  .about-proof__corner--tl {
+    top: 12px;
+    left: 12px;
+    border-top-width: 1px;
+    border-left-width: 1px;
+  }
+
+  .about-proof__corner--br {
+    right: 12px;
+    bottom: 12px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+  }
+
+  .about-proof__index {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1px;
+    background: rgba(15, 23, 42, 0.12);
+    padding: 1px;
+  }
+
+  .about-proof__metric {
+    grid-column: span 3;
+    border-width: 0;
+  }
+
+  .about-proof__metric--lead {
+    grid-column: span 6;
+    min-height: 235px;
+  }
+
+  .about-proof__metric-line {
+    position: absolute;
+    top: 0;
+    right: 18px;
+    bottom: 0;
+    width: 1px;
+    background: rgba(93, 58, 196, 0.16);
+    transform: scaleY(0.54);
+    transform-origin: top;
+    transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1), background-color 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .about-proof__metric:hover .about-proof__metric-line {
+    background: rgba(93, 58, 196, 0.54);
+    transform: scaleY(1);
+  }
+
+  @media (max-width: 767px) {
+    .about-proof__linework {
+      background-size: 48px 48px;
+      opacity: 0.34;
+    }
+
+    .about-proof__header::after {
+      width: 44vw;
+    }
+
+    .about-proof__title {
+      max-width: 100%;
+      font-size: clamp(2.38rem, 10.2vw, 3.8rem);
+      letter-spacing: -0.055em;
+    }
+
+    .about-proof__index {
+      grid-template-columns: 1fr;
+    }
+
+    .about-proof__metric,
+    .about-proof__metric--lead {
+      grid-column: 1;
+      min-height: 0;
+    }
+  }
+</style>
