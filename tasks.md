@@ -31,7 +31,8 @@
 - [x] Purchase section reference implementation completed.
 - [x] Contact section premium upgrade completed.
 - [x] Contact content correction completed.
-- [ ] Current focus: Global rhythm pass.
+- [x] Pass 1 Global Rhythm / Background System completed.
+- [ ] Current focus: Pass 2 Section Differentiation.
 
 ## Phase 1 — Infrastructure [DONE]
 
@@ -158,10 +159,19 @@
   - Kept `src/data/company.ts`, Content Layer, package files, and other homepage sections unchanged.
   - Verified 390px mobile: heading readable, proof panel compact at 350px wide, metrics stack cleanly, and `#about` has no horizontal overflow.
   - Typecheck/build passed when completed.
+- [x] Pass 1 Global Rhythm / Background System.
+  - Added shared homepage chapter surface classes and section stitch transitions in `src/styles/global.css`.
+  - Replaced the accidental page-wide fixed blueprint grid with a calmer paper base while preserving Hero/Projects section-owned backgrounds.
+  - Tuned About, Privileges, Purchase, and Contact backgrounds into a clearer warm-bone, restrained technical, commercial paper, and contact-prep rhythm.
+  - Normalized section padding and reduced obvious Contact/Purchase dead space without rebuilding section structure.
+  - Reduced repeated numbered micro-labels and softened repeated Royal Violet usage across labels, card metadata, rules, corners, and hover states.
+  - Preserved `src/data/company.ts`, `src/data/privileges.ts`, `src/data/purchase.ts`, project content, package files, Hero logic, and Projects data/rendering logic unchanged.
+  - Verified 390px mobile: document `scrollWidth` remained 390px, target sections measured 390px wide, and no page-level horizontal overflow was present.
+  - Typecheck/build passed when completed.
 
 ### Current
 
-- [ ] Visual Upgrade 1E follow-up: Global rhythm pass.
+- [ ] Pass 2 Section Differentiation.
 
 ### Planned
 
@@ -266,4 +276,4 @@
 
 ## Next Recommended Task
 
-- Visual Upgrade 1E follow-up — Global rhythm pass.
+- Pass 2 Section Differentiation.

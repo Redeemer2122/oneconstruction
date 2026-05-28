@@ -77,10 +77,8 @@ body {
   overflow-x: hidden;
   background-color: #FBFBFA;
   background-image:
-    linear-gradient(to right,  #e2e8f0 0.5px, transparent 0.5px),
-    linear-gradient(to bottom, #e2e8f0 0.5px, transparent 0.5px);
-  background-size: 80px 80px;
-  background-attachment: fixed;
+    radial-gradient(circle at 82% 6%, rgba(203, 213, 225, 0.28), transparent 28rem),
+    linear-gradient(180deg, #FBFBFA 0%, #F5F4F0 100%);
 }
 
 /* Noise overlay — матовая бумага верже, очень тихий */
@@ -104,6 +102,40 @@ main,
 section,
 footer {
   max-width: 100%;
+}
+
+.homepage-flow {
+  background: #FBFBFA;
+}
+
+.oc-chapter {
+  position: relative;
+  isolation: isolate;
+  scroll-margin-top: 7rem;
+}
+
+.oc-chapter--about {
+  background-color: #F3F0E8;
+}
+
+.oc-chapter--technical {
+  background-color: #F4F5F1;
+}
+
+.oc-chapter--commercial {
+  background-color: #F8F6F0;
+}
+
+.oc-chapter--contact {
+  background-color: #F5F3ED;
+}
+
+.oc-section-label {
+  color: rgba(51, 65, 85, 0.68);
+}
+
+.oc-section-label--quiet {
+  color: rgba(71, 85, 105, 0.58);
 }
 
 img,
@@ -203,6 +235,18 @@ canvas {
 }
 .stitch-limestone-to-alabaster {
   background: linear-gradient(to bottom, #F5F4F0 0%, #FBFBFA 100%);
+}
+.stitch-gallery-to-bone {
+  background: linear-gradient(to bottom, #FBFBFA 0%, #F3F0E8 100%);
+}
+.stitch-bone-to-technical {
+  background: linear-gradient(to bottom, #F3F0E8 0%, #F4F5F1 100%);
+}
+.stitch-technical-to-commercial {
+  background: linear-gradient(to bottom, #F4F5F1 0%, #F8F6F0 100%);
+}
+.stitch-commercial-to-contact {
+  background: linear-gradient(to bottom, #F8F6F0 0%, #F5F3ED 100%);
 }
 
 /* ========================================================================

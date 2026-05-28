@@ -56,10 +56,11 @@ const privilegeIconMap = {
 } satisfies Record<(typeof privileges)[number]["index"], string>;
 ---
 
-<section id="privileges" class="privileges-section" aria-label="Стандарт привилегий One Construction">
+<section id="privileges" class="privileges-section oc-chapter oc-chapter--technical" aria-label="Стандарт привилегий One Construction">
+  <div class="section-stitch-top stitch-bone-to-technical" aria-hidden="true"></div>
   <div class="privileges-shell">
     <aside class="privileges-intro">
-      <div class="privileges-kicker">СТАНДАРТ · 03</div>
+      <div class="privileges-kicker">СТАНДАРТ</div>
 
       <div class="privileges-copy">
         <p class="privileges-eyebrow">Инженерный регламент</p>
@@ -127,20 +128,20 @@ const privilegeIconMap = {
 
 <style>
   .privileges-section {
-    --priv-bg: #f7f4ec;
-    --priv-paper: rgba(255, 254, 250, 0.88);
+    --priv-bg: #f4f5f1;
+    --priv-paper: rgba(251, 251, 248, 0.88);
     --priv-ink: #171d27;
     --priv-muted: #586271;
     --priv-soft: #8a94a3;
     --priv-line: rgba(34, 40, 51, 0.14);
     --priv-line-strong: rgba(34, 40, 51, 0.2);
     --priv-violet: #5d3ac4;
-    --priv-shadow: rgba(47, 39, 28, 0.07);
+    --priv-shadow: rgba(31, 41, 55, 0.055);
     position: relative;
     overflow: hidden;
     background:
-      linear-gradient(90deg, rgba(23, 29, 39, 0.018) 1px, transparent 1px) 0 0 / 8.5rem 8.5rem,
-      linear-gradient(180deg, rgba(23, 29, 39, 0.016) 1px, transparent 1px) 0 0 / 8.5rem 8.5rem,
+      linear-gradient(90deg, rgba(23, 29, 39, 0.012) 1px, transparent 1px) 0 0 / 9.5rem 9.5rem,
+      linear-gradient(180deg, rgba(23, 29, 39, 0.011) 1px, transparent 1px) 0 0 / 9.5rem 9.5rem,
       var(--priv-bg);
     color: var(--priv-ink);
     border-top: 1px solid var(--priv-line);
@@ -152,7 +153,7 @@ const privilegeIconMap = {
     gap: clamp(2rem, 3vw, 3.75rem);
     width: min(100%, 1500px);
     margin-inline: auto;
-    padding: clamp(3.4rem, 5.1vw, 5.25rem) clamp(1.25rem, 3.6vw, 3.5rem) clamp(3.5rem, 5.2vw, 5.25rem);
+    padding: clamp(4.25rem, 6vw, 6.5rem) clamp(1.25rem, 3.6vw, 3.5rem) clamp(4.35rem, 6.2vw, 6.4rem);
   }
 
   .privileges-intro {
@@ -172,14 +173,14 @@ const privilegeIconMap = {
   }
 
   .privileges-kicker {
-    color: var(--priv-violet);
+    color: rgba(71, 85, 105, 0.72);
     font-size: 0.75rem;
     font-weight: 700;
     margin-bottom: clamp(2rem, 3.2vw, 3.35rem);
   }
 
   .privileges-eyebrow {
-    color: var(--priv-violet);
+    color: rgba(51, 65, 85, 0.78);
     font-size: 0.72rem;
     font-weight: 700;
     margin: 0 0 1.4rem;
@@ -200,8 +201,8 @@ const privilegeIconMap = {
   .privileges-copy h2 span {
     display: block;
     max-width: 100%;
-    color: var(--priv-violet);
-    opacity: 0.88;
+    color: #273240;
+    opacity: 0.82;
     font-size: 0.72em;
     line-height: 1.02;
     overflow-wrap: anywhere;
@@ -213,14 +214,14 @@ const privilegeIconMap = {
     height: 1px;
     max-width: 18rem;
     margin: clamp(1.3rem, 2.1vw, 1.8rem) 0 clamp(1.55rem, 2.7vw, 2.25rem);
-    background: color-mix(in srgb, var(--priv-violet) 34%, transparent);
+    background: color-mix(in srgb, var(--priv-violet) 24%, rgba(23, 29, 39, 0.18));
   }
 
   .privileges-rule span {
     width: 0.45rem;
     height: 0.45rem;
     margin-left: auto;
-    background: var(--priv-violet);
+    background: rgba(93, 58, 196, 0.58);
   }
 
   .privileges-lead,
@@ -243,7 +244,7 @@ const privilegeIconMap = {
     width: min(100%, 18rem);
     height: 3.5rem;
     margin-top: clamp(1.75rem, 3vw, 2.6rem);
-    border-left: 1px solid rgba(93, 58, 196, 0.22);
+    border-left: 1px solid rgba(34, 40, 51, 0.14);
     border-bottom: 1px solid rgba(34, 40, 51, 0.1);
   }
 
@@ -269,7 +270,7 @@ const privilegeIconMap = {
     justify-content: space-between;
     padding: clamp(1.05rem, 1.35vw, 1.38rem);
     background:
-      linear-gradient(135deg, rgba(93, 58, 196, 0.032), transparent 38%),
+      linear-gradient(135deg, rgba(31, 41, 55, 0.024), transparent 40%),
       var(--priv-paper);
     border: 1px solid var(--priv-line-strong);
     box-shadow:
@@ -316,7 +317,7 @@ const privilegeIconMap = {
   .privilege-card__index {
     display: grid;
     gap: 0.34rem;
-    color: var(--priv-violet);
+    color: #273240;
     font-weight: 800;
     line-height: 1;
   }
@@ -335,7 +336,7 @@ const privilegeIconMap = {
     width: 0.3rem;
     height: 0.3rem;
     margin-top: 0.28rem;
-    background: var(--priv-violet);
+    background: rgba(93, 58, 196, 0.48);
   }
 
   .privilege-card__icon {
@@ -346,7 +347,7 @@ const privilegeIconMap = {
   }
 
   .priv-icon-accent {
-    color: var(--priv-violet);
+    color: rgba(93, 58, 196, 0.72);
   }
 
   .privilege-card__body {
@@ -378,7 +379,7 @@ const privilegeIconMap = {
     height: 1px;
     width: 100%;
     margin: 0.72rem 0 0.68rem;
-    background: color-mix(in srgb, var(--priv-violet) 21%, var(--priv-line));
+    background: color-mix(in srgb, var(--priv-violet) 12%, var(--priv-line));
   }
 
   .privilege-card__body p {
@@ -425,14 +426,14 @@ const privilegeIconMap = {
   @media (max-width: 760px) {
     .privileges-section {
       background:
-        linear-gradient(90deg, rgba(23, 29, 39, 0.018) 1px, transparent 1px) 0 0 / 5.5rem 5.5rem,
-        linear-gradient(180deg, rgba(23, 29, 39, 0.016) 1px, transparent 1px) 0 0 / 5.5rem 5.5rem,
+        linear-gradient(90deg, rgba(23, 29, 39, 0.012) 1px, transparent 1px) 0 0 / 6.25rem 6.25rem,
+        linear-gradient(180deg, rgba(23, 29, 39, 0.011) 1px, transparent 1px) 0 0 / 6.25rem 6.25rem,
         var(--priv-bg);
     }
 
     .privileges-shell {
       gap: 2.25rem;
-      padding: 3.4rem 1rem 3.75rem;
+      padding: 3.75rem 1rem 4rem;
     }
 
     .privileges-intro {
