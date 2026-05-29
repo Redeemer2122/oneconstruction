@@ -205,6 +205,13 @@
   - Kept `src/data/company.ts`, Content Layer, package files, global styles, and all other homepage sections unchanged.
   - Verified 390px mobile and 1440px desktop: document width matches viewport, all metric value `scrollWidth <= clientWidth`, five metrics render, and no horizontal overflow is present.
   - Typecheck/build passed when completed.
+- [x] About metrics copy and clipping fix completed.
+  - Replaced the About metrics display copy in `HomeAbout.astro` with the exact approved five title/value and description pairs supplied for this pass.
+  - Removed metric text line clamping, hidden overflow, and nowrap treatment so the full metric copy is visible on desktop and wraps naturally on mobile.
+  - Preserved the current About layout and image while adjusting metric typography/spacing only enough to prevent clipping.
+  - Kept `src/data/company.ts`, Content Layer, package files, global styles, and all other homepage sections unchanged.
+  - Verified 1440px desktop and 390px mobile: exact metric copy matches, metric text fits horizontally, metric cells are not vertically clipped, and no horizontal overflow is present.
+  - Typecheck/build passed when completed.
 - [x] Pass 1 Global Rhythm / Background System.
   - Added shared homepage chapter surface classes and section stitch transitions in `src/styles/global.css`.
   - Replaced the accidental page-wide fixed blueprint grid with a calmer paper base while preserving Hero/Projects section-owned backgrounds.

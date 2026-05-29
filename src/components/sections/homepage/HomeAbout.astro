@@ -1,9 +1,37 @@
 ---
 import { about } from "@data/homepage";
 
-const { advantages, manifestoTitle, paragraphs } = about;
+const { manifestoTitle, paragraphs } = about;
 const [primaryParagraph, secondaryParagraph] = paragraphs;
 const titleLines = manifestoTitle.split("\n");
+
+const metricItems = [
+  {
+    value: "Более 10 лет опыта",
+    description:
+      "Мы выросли из небольшой строительной компании в девелопера, реализующего масштабные проекты бизнес-класса.",
+  },
+  {
+    value: "400 000 м²",
+    description:
+      "Общая площадь реализованных и строящихся объектов — от уютных кварталов до современных жилых комплексов",
+  },
+  {
+    value: "1200+ семей",
+    description:
+      "Выбрали квартиры One Construction и уже живут в наших домах с комфортом и уверенностью в будущем.",
+  },
+  {
+    value: "Контроль качества",
+    description:
+      "Каждый этап строительства проходит проверку по внутренним стандартам и международным требованиям безопасности.",
+  },
+  {
+    value: "Архитектура со смыслом",
+    description:
+      "В наших проектах каждая деталь продумана: планировки, ландшафт, фасады, благоустройство и инфраструктура.",
+  },
+] as const;
 ---
 
 <section id="about" class="about-chapter oc-chapter oc-chapter--about relative overflow-hidden border-t border-slate-900/10">
@@ -42,18 +70,15 @@ const titleLines = manifestoTitle.split("\n");
       </div>
 
       <div class="about-chapter__metrics" data-reveal style="--reveal-delay: 0.22s;">
-        {advantages.map((item) => (
+        {metricItems.map((item) => (
           <article class="about-chapter__metric">
             <span class="about-chapter__metric-mark" aria-hidden="true"></span>
             <div class="about-chapter__metric-value font-mono text-slate-950">
-              {item.metric}
+              {item.value}
             </div>
             <div class="about-chapter__metric-meta">
-              <h3 class="font-mono text-[10px] uppercase leading-snug tracking-[0.1em] text-slate-800">
-                {item.title}
-              </h3>
-              <p class="mt-2 text-[12px] leading-relaxed text-slate-600">
-                {item.body}
+              <p class="text-[12px] leading-relaxed text-slate-600">
+                {item.description}
               </p>
             </div>
           </article>
@@ -170,8 +195,7 @@ const titleLines = manifestoTitle.split("\n");
   .about-chapter__metric {
     position: relative;
     min-width: 0;
-    overflow: hidden;
-    padding: clamp(1.28rem, 1.85vw, 1.95rem) clamp(0.72rem, 1.08vw, 1.14rem) clamp(1.32rem, 1.95vw, 2rem);
+    padding: clamp(1.28rem, 1.85vw, 1.95rem) clamp(0.76rem, 1.15vw, 1.2rem) clamp(1.32rem, 1.95vw, 2rem);
   }
 
   .about-chapter__metric + .about-chapter__metric {
@@ -186,25 +210,15 @@ const titleLines = manifestoTitle.split("\n");
 
   .about-chapter__metric-value {
     max-width: 100%;
-    font-size: clamp(1.16rem, 1.84vw, 2.24rem);
-    line-height: 0.95;
+    font-size: clamp(0.9rem, 1.18vw, 1.36rem);
+    line-height: 1.08;
     letter-spacing: 0;
-    white-space: nowrap;
-    overflow-wrap: normal;
-    text-wrap: nowrap;
+    overflow-wrap: break-word;
   }
 
   .about-chapter__metric-meta {
     min-width: 0;
     margin-top: 0.95rem;
-  }
-
-  .about-chapter__metric-meta p {
-    display: -webkit-box;
-    max-width: 100%;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
   }
 
   .about-chapter__media-wrap {
@@ -268,11 +282,11 @@ const titleLines = manifestoTitle.split("\n");
 
   @media (max-width: 1180px) {
     .about-chapter__metric-value {
-      font-size: clamp(1.04rem, 1.6vw, 1.88rem);
+      font-size: clamp(0.86rem, 1.1vw, 1.16rem);
     }
 
     .about-chapter__metric {
-      padding-inline: 0.62rem;
+      padding-inline: 0.66rem;
     }
   }
 
@@ -317,7 +331,7 @@ const titleLines = manifestoTitle.split("\n");
     }
 
     .about-chapter__metric-value {
-      font-size: clamp(1.8rem, 6vw, 3rem);
+      font-size: clamp(1.35rem, 4.8vw, 2.35rem);
     }
 
     .about-chapter__metric + .about-chapter__metric {
@@ -406,7 +420,7 @@ const titleLines = manifestoTitle.split("\n");
 
     .about-chapter__metric-value {
       padding-top: 1.2rem;
-      font-size: clamp(2rem, 12vw, 3.15rem);
+      font-size: clamp(1.55rem, 8.5vw, 2.55rem);
     }
 
     .about-chapter__metric-meta {
