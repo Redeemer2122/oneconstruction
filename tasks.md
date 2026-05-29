@@ -159,6 +159,45 @@
   - Kept `src/data/company.ts`, Content Layer, package files, and other homepage sections unchanged.
   - Verified 390px mobile: heading readable, proof panel compact at 350px wide, metrics stack cleanly, and `#about` has no horizontal overflow.
   - Typecheck/build passed when completed.
+- [x] About image-led trust chapter completed.
+  - Rebuilt `HomeAbout.astro` into a reference-aligned editorial trust chapter: large left headline and existing copy, dominant right architectural image plate, and bottom horizontal proof strip.
+  - Added local image asset at `public/img/about/about-main.jpg` from Pexels, using a modern residential facade with glass, warm panels, and no people.
+  - Preserved existing About paragraphs and all five existing metrics exactly: `10+`, `400 000`, `1 200+`, `ISO`, and `AAA`.
+  - Kept `src/data/company.ts`, `src/data/homepage.ts`, other content files, and other homepage sections unchanged.
+  - Verified 390px mobile: document width 390px, `#about` width 390px, local image loads, five metrics render, and no horizontal overflow is present.
+  - Typecheck/build passed when completed.
+- [x] About reference layout refinement completed.
+  - Tightened `HomeAbout.astro` to match the supplied reference proportions: a single editorial block with a 56% left content/metrics zone and a 44% right image plate on 1440px desktop.
+  - Moved the metrics strip into the left zone beneath the text, with five equal cells, stronger values, readable labels, and thin dividers.
+  - Kept the current local `public/img/about/about-main.jpg`, enlarged it into a full-height right-side plate, adjusted the crop and light filter, and removed the inserted-thumbnail feeling.
+  - Removed the extra caption/plus and diagonal draft decoration that could read as clipped right-edge artifacts; the section now contains paint and keeps decoration inside bounds.
+  - Preserved existing About copy and all five metrics exactly: `10+`, `400 000`, `1 200+`, `ISO`, and `AAA`.
+  - Kept `src/data/company.ts`, Content Layer, package files, and all other homepage sections unchanged.
+  - Verified 390px mobile: document width 390px, `#about` width 390px, local image loads, five metrics render, and no horizontal overflow is present.
+  - Typecheck/build passed when completed.
+- [x] About reference image replacement completed.
+  - Replaced `public/img/about/about-main.jpg` with a lighter Pexels temporary image: modern beige residential balcony/facade detail by Lexi Lauwers.
+  - Kept `HomeAbout.astro` on the reference-spec structure: 56% left content/metrics zone and 44% full-height right image plate at 1440px desktop.
+  - Removed the noisy grid texture from the About block and tuned the image crop/filter so the plate feels integrated rather than pasted in.
+  - Preserved existing About copy and all five metrics exactly: `10+`, `400 000`, `1 200+`, `ISO`, and `AAA`.
+  - Kept `src/data/company.ts`, Content Layer, package files, global styles, and all other homepage sections unchanged.
+  - Verified 390px mobile: document width 390px, `#about` width 390px, image plate width 350px inside the section, local image loads, five metrics render, and no horizontal overflow is present.
+  - Typecheck/build passed when completed.
+- [x] About final polish completed.
+  - Made the existing right image plate slightly more dominant by adjusting the desktop grid to a 54.5% left zone and 45.5% right image zone, with a taller image plate.
+  - Strengthened the metrics strip with slightly larger values, more confident cell spacing, cleaner thin dividers, and no card/shadow treatment.
+  - Kept the current `public/img/about/about-main.jpg`, existing About copy, and all five metrics exactly: `10+`, `400 000`, `1 200+`, `ISO`, and `AAA`.
+  - Kept `src/data/company.ts`, Content Layer, package files, global styles, and all other homepage sections unchanged.
+  - Verified 390px mobile: document width 390px, `#about` width 390px, image plate width 350px inside the section, local image loads, five metrics render, and no horizontal overflow is present.
+  - Typecheck/build passed when completed.
+- [x] About emergency metrics/text fix completed.
+  - Reduced and contained the About headline so it stays inside the left content zone and clears the image column.
+  - Fixed the metrics strip so all five values stay inside equal cells without overlap or clipping at desktop and 390px mobile.
+  - Removed strange unit labels such as `QC` and `ARCH`, using existing metric titles and existing body text from `src/data/homepage.ts` instead.
+  - Preserved the five metric values exactly: `10+`, `400 000`, `1 200+`, `ISO`, and `AAA`.
+  - Kept the current `public/img/about/about-main.jpg`, `src/data/company.ts`, package files, and all other homepage sections unchanged.
+  - Verified 390px mobile: document width 390px, `#about` width 390px, all metric value `scrollWidth <= clientWidth`, five metrics render, and no horizontal overflow is present.
+  - Typecheck/build passed when completed.
 - [x] Pass 1 Global Rhythm / Background System.
   - Added shared homepage chapter surface classes and section stitch transitions in `src/styles/global.css`.
   - Replaced the accidental page-wide fixed blueprint grid with a calmer paper base while preserving Hero/Projects section-owned backgrounds.
