@@ -1,13 +1,31 @@
 ---
-import { about } from "@data/homepage";
-
-const { manifestoTitle, paragraphs } = about;
-const [primaryParagraph, secondaryParagraph] = paragraphs;
-const titleLines = manifestoTitle.split("\n");
+const statementRows = [
+  {
+    index: "01",
+    text: "Наша цель — сделать процесс строительства прозрачным,\nкомфортным и предсказуемым.",
+  },
+  {
+    index: "02",
+    text: "Мы работаем только с проверенными подрядчиками и командами,\nкоторые разделяют наши стандарты качества.",
+  },
+  {
+    index: "03",
+    text: "Каждый объект проходит строгий контроль и строится\nпо единым регламентам.",
+  },
+  {
+    index: "04",
+    text: "Мы ценим доверие, открытость и результат, которым можно гордиться.",
+  },
+  {
+    index: "05",
+    text: "Для нас важно не количество проектов, а ощущение, что каждый дом\nот One Construction становится частью города — надолго!",
+  },
+] as const;
 
 const metricItems = [
   {
     value: "Более 10 лет опыта",
+    displayValue: ["Более 10 лет", "опыта"],
     description:
       "Мы выросли из небольшой строительной компании в девелопера, реализующего масштабные проекты бизнес-класса.",
   },
@@ -38,34 +56,41 @@ const metricItems = [
   <div class="section-stitch-top stitch-gallery-to-bone" aria-hidden="true"></div>
 
   <div class="about-chapter__inner px-5 py-16 sm:px-6 md:px-10 md:py-24 lg:px-12 lg:py-28">
-    <div class="about-chapter__topbar" data-reveal>
-      <span class="mono-detail oc-section-label">01</span>
-      <span class="about-chapter__rule" aria-hidden="true"></span>
-      <span class="mono-detail oc-section-label">О КОМПАНИИ</span>
-    </div>
-
-    <div class="about-chapter__block mt-10 md:mt-14">
+    <div class="about-chapter__block">
       <div class="about-chapter__copy">
+        <div class="about-chapter__label" data-reveal>
+          <span class="about-chapter__label-rule" aria-hidden="true"></span>
+          <span class="mono-detail oc-section-label">О КОМПАНИИ</span>
+        </div>
+
         <h2 class="about-chapter__title font-mono uppercase text-slate-950" data-reveal style="--reveal-delay: 0.06s;">
-          {titleLines.map((line) => (
-            <>
-              {line}
-              <br />
-            </>
-          ))}
+          Мы создаём пространство,<br />
+          в котором хочется жить
         </h2>
 
-        <span class="about-chapter__short-rule mt-9 block" aria-hidden="true" data-reveal-line style="--reveal-delay: 0.14s;"></span>
+        <div class="about-chapter__text mt-8 grid max-w-[62ch] gap-7" data-reveal style="--reveal-delay: 0.14s;">
+          <p class="about-chapter__lead text-base font-medium leading-relaxed text-slate-800 md:text-lg">
+            One Construction — девелопер, который создаёт не просто здания,<br class="hidden sm:block" />
+            а пространства, где хочется жить.
+          </p>
 
-        <div class="about-chapter__text mt-8 grid max-w-[59ch] gap-5" data-reveal style="--reveal-delay: 0.18s;">
-          <p
-            class="text-base leading-relaxed text-slate-700 md:text-lg"
-            set:html={primaryParagraph.html}
-          />
-          <p
-            class="max-w-[52ch] text-sm leading-relaxed text-slate-600 md:text-base"
-            set:html={secondaryParagraph.html}
-          />
+          <div class="about-chapter__statements">
+            {statementRows.map((row) => (
+              <div class="about-chapter__statement">
+                <span class="about-chapter__statement-index font-mono text-[10px] uppercase leading-none tracking-[0.16em] text-violet-700">
+                  {row.index}
+                </span>
+                <p class="about-chapter__statement-text text-sm leading-relaxed text-slate-650 md:text-[15px]">
+                  {row.text.split("\n").map((line) => (
+                    <>
+                      {line}
+                      <br />
+                    </>
+                  ))}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -73,11 +98,19 @@ const metricItems = [
         {metricItems.map((item) => (
           <article class="about-chapter__metric">
             <span class="about-chapter__metric-mark" aria-hidden="true"></span>
-            <div class="about-chapter__metric-value font-mono text-slate-950">
-              {item.value}
+            <div class="about-chapter__metric-value font-mono text-slate-950" aria-label={item.value}>
+              {"displayValue" in item ? (
+                item.displayValue.map((line) => (
+                  <span class="about-chapter__metric-value-line">
+                    {line}
+                  </span>
+                ))
+              ) : (
+                item.value
+              )}
             </div>
             <div class="about-chapter__metric-meta">
-              <p class="text-[12px] leading-relaxed text-slate-600">
+              <p class="about-chapter__metric-description text-[12px] text-slate-600">
                 {item.description}
               </p>
             </div>
@@ -114,28 +147,23 @@ const metricItems = [
     z-index: 1;
   }
 
-  .about-chapter__topbar {
-    display: grid;
-    grid-template-columns: auto minmax(44px, 88px) auto;
-    align-items: center;
-    justify-content: start;
-    gap: 1.15rem;
-  }
-
-  .about-chapter__rule,
-  .about-chapter__short-rule,
+  .about-chapter__label-rule,
   .about-chapter__metric-mark {
     height: 1px;
     background: rgba(93, 58, 196, 0.74);
   }
 
-  .about-chapter__rule {
-    width: 100%;
-    min-width: 44px;
+  .about-chapter__label {
+    display: grid;
+    grid-template-columns: 52px auto;
+    align-items: center;
+    justify-content: start;
+    gap: 1rem;
+    margin-bottom: clamp(1.65rem, 2.4vw, 2.35rem);
   }
 
-  .about-chapter__short-rule {
-    width: 58px;
+  .about-chapter__label-rule {
+    width: 52px;
   }
 
   .about-chapter__block {
@@ -168,19 +196,33 @@ const metricItems = [
     min-width: 0;
     flex-direction: column;
     justify-content: center;
-    padding: clamp(3rem, 5.2vw, 6rem) clamp(2.4rem, 5vw, 6rem) clamp(2.5rem, 4.4vw, 4.8rem) 0;
+    padding: clamp(3.2rem, 5.4vw, 6.25rem) clamp(2.8rem, 5.4vw, 6.4rem) clamp(2.7rem, 4.5vw, 4.9rem) clamp(1rem, 1.6vw, 1.5rem);
   }
 
   .about-chapter__title {
-    max-width: 11.8ch;
-    font-size: clamp(3.45rem, 6.75vw, 7.95rem);
-    line-height: 0.96;
+    max-width: 12.2ch;
+    font-size: clamp(3.1rem, 6.15vw, 7.25rem);
+    line-height: 1;
     letter-spacing: 0;
   }
 
-  .about-chapter__text :global(strong) {
-    color: #0f172a;
-    font-weight: 520;
+  .about-chapter__statements {
+    display: grid;
+    border-top: 1px solid rgba(15, 23, 42, 0.14);
+  }
+
+  .about-chapter__statement {
+    display: grid;
+    grid-template-columns: 2.6rem minmax(0, 1fr);
+    gap: 1.15rem;
+    align-items: start;
+    padding: 0.92rem 0;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.11);
+  }
+
+  .about-chapter__statement-text {
+    max-width: 56ch;
+    line-height: 1.68;
   }
 
   .about-chapter__metrics {
@@ -195,7 +237,7 @@ const metricItems = [
   .about-chapter__metric {
     position: relative;
     min-width: 0;
-    padding: clamp(1.28rem, 1.85vw, 1.95rem) clamp(0.76rem, 1.15vw, 1.2rem) clamp(1.32rem, 1.95vw, 2rem);
+    padding: clamp(1.54rem, 2.12vw, 2.22rem) clamp(0.92rem, 1.34vw, 1.38rem) clamp(1.56rem, 2.18vw, 2.26rem);
   }
 
   .about-chapter__metric + .about-chapter__metric {
@@ -205,20 +247,28 @@ const metricItems = [
   .about-chapter__metric-mark {
     display: block;
     width: 20px;
-    margin-bottom: 1.05rem;
+    margin-bottom: 1.14rem;
   }
 
   .about-chapter__metric-value {
     max-width: 100%;
     font-size: clamp(0.9rem, 1.18vw, 1.36rem);
-    line-height: 1.08;
+    line-height: 1.14;
     letter-spacing: 0;
     overflow-wrap: break-word;
   }
 
+  .about-chapter__metric-value-line {
+    display: block;
+  }
+
   .about-chapter__metric-meta {
     min-width: 0;
-    margin-top: 0.95rem;
+    margin-top: 1.08rem;
+  }
+
+  .about-chapter__metric-description {
+    line-height: 1.62;
   }
 
   .about-chapter__media-wrap {
@@ -286,7 +336,7 @@ const metricItems = [
     }
 
     .about-chapter__metric {
-      padding-inline: 0.66rem;
+      padding-inline: 0.78rem;
     }
   }
 
@@ -305,12 +355,12 @@ const metricItems = [
     }
 
     .about-chapter__copy {
-      padding: 3rem 0 2.75rem;
+      padding: 3rem 1.2rem 2.75rem;
     }
 
     .about-chapter__title {
       max-width: 13ch;
-      font-size: clamp(3rem, 11.2vw, 5.9rem);
+      font-size: clamp(2.85rem, 10.6vw, 5.5rem);
     }
 
     .about-chapter__media-wrap {
@@ -353,22 +403,28 @@ const metricItems = [
       padding-bottom: 4.25rem;
     }
 
-    .about-chapter__topbar {
-      gap: 0.9rem;
-    }
-
     .about-chapter__block {
-      margin-top: 2rem;
+      margin-top: 0;
     }
 
     .about-chapter__copy {
-      padding: 2.3rem 0 2rem;
+      padding: 2.45rem 1rem 2.15rem;
+    }
+
+    .about-chapter__label {
+      grid-template-columns: 42px auto;
+      gap: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-chapter__label-rule {
+      width: 42px;
     }
 
     .about-chapter__title {
       max-width: 100%;
-      font-size: clamp(2.42rem, 10.4vw, 3.75rem);
-      line-height: 1;
+      font-size: clamp(2.22rem, 9.7vw, 3.46rem);
+      line-height: 1.04;
     }
 
     .about-chapter__text {
@@ -408,7 +464,7 @@ const metricItems = [
       grid-template-columns: minmax(8.5rem, auto) 1fr;
       align-items: end;
       gap: 1.25rem;
-      padding: 1.15rem 0.9rem;
+      padding: 1.32rem 1rem;
     }
 
     .about-chapter__metric-mark {

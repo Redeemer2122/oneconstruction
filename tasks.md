@@ -212,6 +212,29 @@
   - Kept `src/data/company.ts`, Content Layer, package files, global styles, and all other homepage sections unchanged.
   - Verified 1440px desktop and 390px mobile: exact metric copy matches, metric text fits horizontally, metric cells are not vertically clipped, and no horizontal overflow is present.
   - Typecheck/build passed when completed.
+- [x] About editorial statement copy integration completed.
+  - Integrated the exact approved About headline, lead paragraph, and five numbered statement rows directly in `HomeAbout.astro`.
+  - Rendered the body copy as compact editorial statement rows with mono numbers and thin dividers, avoiding a long paragraph wall and avoiding hover-only hidden content.
+  - Preserved the current image-led layout, current `public/img/about/about-main.jpg`, and current metrics strip/copy.
+  - Kept `src/data/company.ts`, Content Layer, image file, package files, global styles, and all other homepage sections unchanged.
+  - Verified 390px mobile and 1440px desktop: headline, lead, and all five statement rows match exactly, statement rows do not overflow or clip, image loads, five metrics render, and no horizontal overflow is present.
+  - Typecheck/build passed when completed.
+- [x] About layout micro-polish completed.
+  - Removed the detached top `01 / О компании` row and replaced it with an integrated `О КОМПАНИИ` label inside the left content column above the headline.
+  - Reduced the About headline scale slightly, improved line-height, and added internal left-column padding so headline, lead, statement rows, and metrics align more comfortably.
+  - Improved statement row readability with slightly fuller spacing and line-height while preserving the exact copy and avoiding hover-only hidden content.
+  - Added more breathing room to metric cells while preserving the exact metric copy, five equal cells, current image, and current section structure.
+  - Kept `src/data/company.ts`, Content Layer, image file, package files, global styles, and all other homepage sections unchanged.
+  - Verified 390px mobile: no detached topbar, integrated label present, headline fits, statement rows and metrics fit without clipping, image source unchanged, and no horizontal overflow is present.
+  - Typecheck/build passed when completed.
+- [x] About metrics micro-polish completed.
+  - Polished only the bottom About metric strip in `HomeAbout.astro`.
+  - Added a controlled two-line display for `Более 10 лет опыта` as `Более 10 лет` / `опыта` while preserving the full metric text.
+  - Increased metric cell padding slightly, improved the value-to-description gap, and raised description line-height so the fourth and fifth cells breathe better.
+  - Preserved the current About layout, current image, exact metric copy, five equal cells, thin dividers, and restrained violet micro-rules.
+  - Kept `src/data/company.ts`, Content Layer, image file, package files, global styles, and all other homepage sections unchanged.
+  - Verified 390px mobile: five metrics render, first metric displays in the intended two-line structure, metric cells have no horizontal overflow or clipping, image source unchanged, and no horizontal overflow is present.
+  - Typecheck/build passed when completed.
 - [x] Pass 1 Global Rhythm / Background System.
   - Added shared homepage chapter surface classes and section stitch transitions in `src/styles/global.css`.
   - Replaced the accidental page-wide fixed blueprint grid with a calmer paper base while preserving Hero/Projects section-owned backgrounds.
