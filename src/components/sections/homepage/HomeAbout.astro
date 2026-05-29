@@ -114,6 +114,7 @@ const titleLines = manifestoTitle.split("\n");
   }
 
   .about-chapter__block {
+    position: relative;
     display: grid;
     grid-template-areas:
       "copy media"
@@ -123,6 +124,17 @@ const titleLines = manifestoTitle.split("\n");
     overflow: hidden;
     border-block: 1px solid rgba(15, 23, 42, 0.16);
     background: rgba(251, 251, 250, 0.44);
+  }
+
+  .about-chapter__block::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 54.5%;
+    height: 1px;
+    pointer-events: none;
+    background: rgba(15, 23, 42, 0.18);
   }
 
   .about-chapter__copy {
@@ -152,14 +164,14 @@ const titleLines = manifestoTitle.split("\n");
     grid-template-columns: repeat(5, minmax(0, 1fr));
     min-width: 0;
     border-top: 1px solid rgba(15, 23, 42, 0.17);
-    background: rgba(251, 251, 250, 0.7);
+    background: rgba(251, 251, 250, 0.76);
   }
 
   .about-chapter__metric {
     position: relative;
     min-width: 0;
     overflow: hidden;
-    padding: clamp(1.15rem, 1.65vw, 1.75rem) clamp(0.7rem, 1.05vw, 1.1rem) clamp(1.2rem, 1.8vw, 1.85rem);
+    padding: clamp(1.28rem, 1.85vw, 1.95rem) clamp(0.72rem, 1.08vw, 1.14rem) clamp(1.32rem, 1.95vw, 2rem);
   }
 
   .about-chapter__metric + .about-chapter__metric {
@@ -168,13 +180,13 @@ const titleLines = manifestoTitle.split("\n");
 
   .about-chapter__metric-mark {
     display: block;
-    width: 18px;
-    margin-bottom: 0.95rem;
+    width: 20px;
+    margin-bottom: 1.05rem;
   }
 
   .about-chapter__metric-value {
     max-width: 100%;
-    font-size: clamp(1.16rem, 1.86vw, 2.28rem);
+    font-size: clamp(1.16rem, 1.84vw, 2.24rem);
     line-height: 0.95;
     letter-spacing: 0;
     white-space: nowrap;
@@ -184,7 +196,7 @@ const titleLines = manifestoTitle.split("\n");
 
   .about-chapter__metric-meta {
     min-width: 0;
-    margin-top: 0.85rem;
+    margin-top: 0.95rem;
   }
 
   .about-chapter__metric-meta p {
@@ -197,8 +209,21 @@ const titleLines = manifestoTitle.split("\n");
 
   .about-chapter__media-wrap {
     grid-area: media;
+    position: relative;
     min-width: 0;
     border-left: 1px solid rgba(15, 23, 42, 0.17);
+  }
+
+  .about-chapter__media-wrap::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 3;
+    height: 1px;
+    pointer-events: none;
+    background: rgba(251, 251, 250, 0.62);
   }
 
   .about-chapter__media {
@@ -243,7 +268,7 @@ const titleLines = manifestoTitle.split("\n");
 
   @media (max-width: 1180px) {
     .about-chapter__metric-value {
-      font-size: clamp(1.04rem, 1.62vw, 1.9rem);
+      font-size: clamp(1.04rem, 1.6vw, 1.88rem);
     }
 
     .about-chapter__metric {
@@ -261,6 +286,10 @@ const titleLines = manifestoTitle.split("\n");
       grid-template-rows: auto auto auto;
     }
 
+    .about-chapter__block::after {
+      content: none;
+    }
+
     .about-chapter__copy {
       padding: 3rem 0 2.75rem;
     }
@@ -273,6 +302,10 @@ const titleLines = manifestoTitle.split("\n");
     .about-chapter__media-wrap {
       border-top: 1px solid rgba(15, 23, 42, 0.15);
       border-left: 0;
+    }
+
+    .about-chapter__media-wrap::before {
+      content: none;
     }
 
     .about-chapter__media {
