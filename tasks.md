@@ -293,6 +293,13 @@
   - Verified desktop: 7 items, 7 images, no clipped content, no horizontal overflow.
   - Verified 390px mobile: all 7 items visible, title fits, no clipped content, no horizontal overflow.
   - Typecheck/build passed when completed.
+- [x] Privileges final small polish completed.
+  - Polished only `HomeTimeline.astro` and `tasks.md`; preserved the current left editorial column plus 2+1+2+2 bento standards wall.
+  - Kept official privilege copy, item order, seven-item count, and current image assets unchanged.
+  - Calmed the left column spacing, reduced background and accent noise, and kept the system marker integrated with the editorial rhythm.
+  - Unified bento typography, content padding, light text veils, image overlays, object-fit behavior, and calmer media filters without making the cells identical.
+  - Verified 390px mobile: 7 items, 7 images, readable text, no clipped text, no horizontal overflow.
+  - Typecheck/build passed when completed.
 
 ### Current
 
