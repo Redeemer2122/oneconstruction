@@ -32,7 +32,9 @@
 - [x] Contact section premium upgrade completed.
 - [x] Contact content correction completed.
 - [x] Pass 1 Global Rhythm / Background System completed.
-- [ ] Current focus: Pass 2 Section Differentiation.
+- [x] Privileges reference-based rebuild completed.
+- [x] Privileges reference refinement pass completed.
+- [ ] Current focus: Visual Upgrade 1E: Contact/Footer polish.
 
 ## Phase 1 — Infrastructure [DONE]
 
@@ -244,14 +246,60 @@
   - Preserved `src/data/company.ts`, `src/data/privileges.ts`, `src/data/purchase.ts`, project content, package files, Hero logic, and Projects data/rendering logic unchanged.
   - Verified 390px mobile: document `scrollWidth` remained 390px, target sections measured 390px wide, and no page-level horizontal overflow was present.
   - Typecheck/build passed when completed.
+- [x] Privileges reference-based rebuild.
+  - Rebuilt `HomeTimeline.astro` close to the supplied reference: left editorial intro, right bento standards wall, sharp hairline geometry, restrained Royal Violet details, and integrated image fragments instead of a generic card grid.
+  - Updated `src/data/privileges.ts` with the exact official copy for all seven privilege items and removed previous unverified technical tags/claims from the rendered section.
+  - Added temporary local privilege images:
+    - `public/img/privileges/facade.jpg`
+    - `public/img/privileges/plan.jpg`
+    - `public/img/privileges/water.jpg`
+    - `public/img/privileges/green-facade.jpg`
+    - `public/img/privileges/entrance.jpg`
+  - Verified desktop: left intro column plus right non-equal bento wall, 7 items rendered, 5 image fragments rendered, no clipped privilege text, and no horizontal overflow at 1440px.
+  - Verified 390px mobile: intro stacks before all seven standards, all items and image fragments fit, headline fits, and document `scrollWidth` remained 390px.
+  - Typecheck/build passed when completed.
+- [x] Privileges reference refinement pass.
+  - Refined `HomeTimeline.astro` without changing other homepage sections: enlarged the full premium panel, removed the weak blueprint drawing, and tuned the desktop proportions to about 34% intro / 66% bento wall.
+  - Increased bento row height, title scale, text spacing, and media coverage so the right side reads as a dominant standards wall instead of a compressed table.
+  - Added stronger temporary media coverage for all seven privilege blocks, including:
+    - `public/img/privileges/quiet-lobby.jpg`
+    - `public/img/privileges/courtyard-water.jpg`
+  - Preserved the exact official seven privilege items in `src/data/privileges.ts`; no copy changes were needed.
+  - Verified desktop: 7 items, 7 image fragments, no clipped text, no horizontal overflow, and right wall width ratio around 66%.
+  - Verified 390px mobile: clean stack, all 7 items visible, images contained as side fragments, headline fits, and document `scrollWidth` remained 390px.
+  - Typecheck/build passed when completed.
+- [x] Privileges layout correction pass.
+  - Corrected only `HomeTimeline.astro` and `tasks.md`; did not touch `.codex`, other homepage sections, data files, package files, or global CSS.
+  - Reworked the right side from the compressed six-column/table-like layout into a larger 2+1+2+2 bento mosaic: two large top blocks, one full-width standards block, and two rows of medium blocks.
+  - Increased the overall panel scale: desktop section frame is now about 1099px tall, with the intro and bento wall both about 916px tall at 1440px.
+  - Preserved the reference proportions: left intro around 34%, right bento wall around 66%.
+  - Preserved exact official privilege copy, order, and seven-item count.
+  - Verified desktop: 7 items, 7 images, no clipped content, no horizontal overflow.
+  - Verified 390px mobile: clean stacked layout, all 7 items visible, image fragments contained, no clipped content, no horizontal overflow.
+  - Typecheck/build passed when completed.
+- [x] Privileges left column and scale polish.
+  - Polished only `HomeTimeline.astro` and `tasks.md`; preserved the current 2+1+2+2 bento wall direction, official copy, item order, and image set.
+  - Increased the section frame breathing room and slightly widened the panel so it reads as a full homepage section rather than a small inserted module.
+  - Strengthened the left editorial column with larger internal padding, a more intentional headline scale, calmer label-to-headline spacing, improved intro spacing, and an integrated bottom alignment rule for the `01 / 07 / СИСТЕМА ПРИВИЛЕГИЙ` marker.
+  - Applied a subtle shared image treatment adjustment for the bottom bento fragments so media stays visible and consistent without replacing assets.
+  - Verified desktop: intro/wall ratio around 35%/65%, both columns about 936px tall, 7 items and 7 images render, no clipped content, no horizontal overflow.
+  - Verified 390px mobile: intro is not cramped, title fits, all 7 items and images render, no clipped content, no horizontal overflow.
+  - Typecheck/build passed when completed.
+- [x] Privileges visible scale correction.
+  - Made a visible scale change in `HomeTimeline.astro` rather than another micro-polish pass; preserved the official copy and the 2+1+2+2 bento structure.
+  - Increased desktop section scale: frame height is now about 1318px at 1440px viewport, with intro and bento wall both about 1102px tall.
+  - Increased left headline scale and editorial spacing while preventing desktop clipping.
+  - Increased bento row heights, text scale, image area widths, and media visibility so the right wall reads as the main visual standards system.
+  - Verified desktop: 7 items, 7 images, no clipped content, no horizontal overflow.
+  - Verified 390px mobile: all 7 items visible, title fits, no clipped content, no horizontal overflow.
+  - Typecheck/build passed when completed.
 
 ### Current
 
-- [ ] Pass 2 Section Differentiation.
+- [ ] Visual Upgrade 1E: Contact/Footer polish.
 
 ### Planned
 
-- [ ] Visual Upgrade 1E: Contact/Footer polish.
 - [ ] Visual Upgrade 1F: Mobile polish.
 - [ ] Visual Upgrade 1G: full visual QA pass.
 
@@ -313,14 +361,14 @@
   - Trade-in terms
   - `+ 3%` loyalty
   - bonus/pre-launch claims
-- [ ] Privilege technical claims need verification:
-  - Class A
-  - `Rw ≥ 54 дБ`
-  - BIM/CAD
-  - 5-stage filtration
-  - HVAC
-  - 24/7 security
-  - 7-minute walkability
+- [ ] Temporary Privileges image fragments need final approved production replacements:
+  - `public/img/privileges/facade.jpg`
+  - `public/img/privileges/quiet-lobby.jpg`
+  - `public/img/privileges/plan.jpg`
+  - `public/img/privileges/water.jpg`
+  - `public/img/privileges/green-facade.jpg`
+  - `public/img/privileges/entrance.jpg`
+  - `public/img/privileges/courtyard-water.jpg`
 - [ ] Legal links are placeholders:
   - `privacyPolicyHref: "#"`
   - `documentsHref: "#"`
@@ -352,4 +400,4 @@
 
 ## Next Recommended Task
 
-- Pass 2 Section Differentiation.
+- Visual Upgrade 1E: Contact/Footer polish.
