@@ -127,7 +127,8 @@ const privilegeMedia = {
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: minmax(23rem, 0.35fr) minmax(0, 0.65fr);
+    grid-template-columns: minmax(24.5rem, 0.37fr) minmax(0, 0.63fr);
+    column-gap: clamp(1rem, 1.8vw, 2rem);
     width: min(100%, 1760px);
     margin-inline: auto;
     padding: clamp(6.25rem, 7.55vw, 8.9rem) clamp(0.75rem, 1.65vw, 1.65rem) clamp(6.65rem, 7.95vw, 9.45rem);
@@ -152,7 +153,7 @@ const privilegeMedia = {
     min-height: clamp(58rem, 70vw, 68.5rem);
     align-content: start;
     padding: clamp(2.9rem, 4.15vw, 4.65rem) clamp(2rem, 2.78vw, 3.1rem);
-    border-right: 0;
+    border-right: 1px solid var(--priv-line-soft);
     overflow: hidden;
   }
 
@@ -196,12 +197,12 @@ const privilegeMedia = {
   }
 
   .privileges-intro h2 {
-    max-width: 12.7ch;
+    max-width: min(100%, 11ch);
     margin: 0;
-    font-family: var(--font-mono, "Geist Mono", monospace);
-    font-size: clamp(3.28rem, 4.52vw, 5.9rem);
+    font-family: var(--font-display, var(--font-sans, sans-serif));
+    font-size: clamp(3.05rem, 4.05vw, 5.25rem);
     font-weight: 800;
-    line-height: 0.98;
+    line-height: 1;
     letter-spacing: 0;
     text-transform: uppercase;
     text-wrap: balance;

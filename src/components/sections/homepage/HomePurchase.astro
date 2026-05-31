@@ -1,7 +1,12 @@
 ---
 import { purchaseOptions, purchaseSection } from "@data/purchase";
 
-const titleLines = purchaseSection.title.toLocaleUpperCase("ru-RU").split(" ");
+const titleWords = purchaseSection.title.toLocaleUpperCase("ru-RU").split(" ");
+const titleLines = [
+  titleWords.slice(0, 2).join(" "),
+  titleWords.slice(2, 4).join(" "),
+  titleWords.slice(4).join(" "),
+].filter(Boolean);
 ---
 
 <section id="purchase" class="purchase-section oc-chapter oc-chapter--commercial" aria-label={purchaseSection.title}>
@@ -11,8 +16,10 @@ const titleLines = purchaseSection.title.toLocaleUpperCase("ru-RU").split(" ");
     <aside class="purchase-intro" data-reveal>
       <p class="purchase-label">{purchaseSection.label}</p>
 
-      <h2>
-        {titleLines.map((line) => <span>{line}</span>)}
+      <h2 aria-label={purchaseSection.title}>
+        {titleLines.map((line, index) => (
+          <span>{line}{index < titleLines.length - 1 ? " " : ""}</span>
+        ))}
         <span aria-hidden="true" class="purchase-title-dot">.</span>
       </h2>
 

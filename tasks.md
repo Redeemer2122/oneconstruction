@@ -433,6 +433,21 @@
 
 ## Current Risks / Needs Verification
 
+- [x] Final homepage rhythm polish + typography rebalance.
+  - Rebalanced large emotional/brand headings from technical mono to the existing Geist display/sans stack in Hero, About, Privileges, Contact, and Footer.
+  - Preserved mono for labels, coordinates, numbers, project specs, controls, and small metadata.
+  - Fixed the Purchase headline so the visual stacked lines keep real word spacing and the accessible label remains `Выберите удобный вариант покупки`.
+  - Replaced English/debug-facing labels (`ROTATING SHOWCASE`, `SEC: 002 / PROJECTS`, `BUILD 0.2.0`, `ASTRO 6.3`, `Image plate`) with Russian brand-facing metadata.
+  - Slightly tightened Projects intro/block rhythm and softened the Contact to Footer transition without changing data, images, packages, or global font-family tokens.
+  - Verified 390px mobile: document width stayed 390px, no page-level horizontal overflow, Hero headline no longer clips, Purchase headline is spaced, and visible CTAs remain readable/tappable.
+  - Typecheck/build passed. The expected empty `src/content/apartments` warning remains.
+- [x] Privileges headline collision fix.
+  - Adjusted only `HomeTimeline.astro` to give the Privileges intro column a safer desktop width, a real gutter before the bento wall, and a slightly calmer local display-heading clamp.
+  - Preserved the display/sans typography direction from the final polish; did not touch global font tokens.
+  - Preserved official Privileges copy, all seven privilege items, current images, and the existing bento wall structure.
+  - Verified desktop 1440px: headline ends 67px before the bento board, with a 26px panel gutter, and no Privileges text overflow.
+  - Verified 390px mobile: document width stayed 390px, headline fits, all seven bento items render, and no Privileges text is clipped.
+  - Typecheck/build passed. The expected empty `src/content/apartments` warning remains.
 - [ ] Real project images still needed. Current hero/project imagery uses remote Unsplash URLs and fallback styling.
 - [ ] Hero strategy needs client approval: old site was Medina/offer-led; beta is brand-led.
 - [ ] Company metrics need verification:
