@@ -448,6 +448,14 @@
   - Verified desktop 1440px: headline ends 67px before the bento board, with a 26px panel gutter, and no Privileges text overflow.
   - Verified 390px mobile: document width stayed 390px, headline fits, all seven bento items render, and no Privileges text is clipped.
   - Typecheck/build passed. The expected empty `src/content/apartments` warning remains.
+- [x] About mobile layout fix.
+  - Adjusted only `HomeAbout.astro` mobile rules so the approved desktop image-led About layout remains unchanged.
+  - Converted the mobile metrics/proof strip into full-width stacked proof rows with contained text, natural wrapping, and no right drift.
+  - Kept the mobile order as label/headline, lead/statements, image, metrics.
+  - Preserved About copy, metric content, current image, data files, package files, and global CSS unchanged.
+  - Verified desktop 1440px: About grid remains `copy media` / `metrics media`, with the same five-cell desktop metrics strip.
+  - Verified 390px mobile: document width stayed 390px, About block width 350px, image width 350px, five metric rows render at 350px, and no About text overflow/clipping is present.
+  - Typecheck/build passed. The expected empty `src/content/apartments` warning remains.
 - [ ] Real project images still needed. Current hero/project imagery uses remote Unsplash URLs and fallback styling.
 - [ ] Hero strategy needs client approval: old site was Medina/offer-led; beta is brand-led.
 - [ ] Company metrics need verification:
