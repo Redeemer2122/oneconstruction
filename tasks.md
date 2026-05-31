@@ -34,7 +34,9 @@
 - [x] Pass 1 Global Rhythm / Background System completed.
 - [x] Privileges reference-based rebuild completed.
 - [x] Privileges reference refinement pass completed.
-- [ ] Current focus: Visual Upgrade 1E: Contact/Footer polish.
+- [x] Purchase commercial decision block rebuild completed.
+- [x] Purchase reference-based refinement completed.
+- [ ] Current focus: Contact conversion upgrade.
 
 ## Phase 1 — Infrastructure [DONE]
 
@@ -300,10 +302,27 @@
   - Unified bento typography, content padding, light text veils, image overlays, object-fit behavior, and calmer media filters without making the cells identical.
   - Verified 390px mobile: 7 items, 7 images, readable text, no clipped text, no horizontal overflow.
   - Typecheck/build passed when completed.
+- [x] Purchase commercial decision block rebuild completed.
+  - Rebuilt `HomePurchase.astro` as a premium commercial decision system: left editorial purchase intro, dark primary contact CTA, and a framed right-side 2x2 purchase option matrix.
+  - Preserved the existing component-local purchase option copy, option order, and four equal purchase scenarios: `Полная оплата`, `Рассрочка 0%`, `Trade-in`, and `Бонусная программа`.
+  - Kept `src/data/purchase.ts`, package files, global styles, Content Layer, and all other homepage sections unchanged.
+  - Added restrained Royal Violet accents, thin rules, graphite typography, sharp geometry, subtle paper depth, equal desktop matrix cells, and CSS-only hover/focus motion.
+  - Verified desktop: 4 options render in an equal 2x2 matrix, CTAs stay aligned/contained, and no horizontal overflow appears inside `#purchase`.
+  - Verified 390px mobile: intro renders first, main CTA remains full-width and tappable, all 4 options stack cleanly, no CTA clipping, and document `scrollWidth` remains 390px.
+  - Typecheck/build passed when completed.
+- [x] Purchase reference-based refinement completed.
+  - Refined `HomePurchase.astro` closer to the attached reference: clean left intro column, large stacked purchase headline, dark primary CTA, and a simple right-side 2x2 equal purchase matrix.
+  - Aligned `src/data/purchase.ts` with the official purchase copy and removed the previous extra bullets, metric labels, and unrequested purchase conditions.
+  - Used the screenshot value for installment copy: `до 70 мес.` / `до 70 месяцев`.
+  - Preserved exactly four purchase options: `Полная оплата`, `Рассрочка 0%`, `Trade-in`, and `Бонусная программа`, with no option made meaningfully dominant.
+  - Kept package files, global styles, Content Layer, company data, privileges data, and all other homepage sections unchanged.
+  - Verified desktop: intro/matrix ratio is about 38%/62%, cards render as an equal 2x2 matrix, CTAs stay aligned, and no overflow appears inside `#purchase`.
+  - Verified 390px mobile: intro renders first, main CTA remains full-width and tappable, all four options stack cleanly, no CTA clipping, and document `scrollWidth` remains 390px.
+  - Typecheck/build passed when completed.
 
 ### Current
 
-- [ ] Visual Upgrade 1E: Contact/Footer polish.
+- [ ] Contact conversion upgrade.
 
 ### Planned
 
@@ -407,4 +426,4 @@
 
 ## Next Recommended Task
 
-- Visual Upgrade 1E: Contact/Footer polish.
+- Contact conversion upgrade.
