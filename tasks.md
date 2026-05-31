@@ -39,6 +39,8 @@
 - [x] Purchase premium polish pass completed.
 - [x] Contact conversion polish completed.
 - [x] Contact layout bugfix / micro-polish completed.
+- [x] Hero stats + Projects intro and image CTA cleanup completed.
+- [x] Project image duplicated CTA overlay removal completed.
 - [ ] Current focus: final full-page rhythm polish.
 
 ## Phase 1 — Infrastructure [DONE]
@@ -102,6 +104,21 @@
   - Hero background atmosphere pass added subtle architectural depth behind the Hero and grounded the right visual zone.
   - Hero 1C.4 art-direction push strengthened the architectural installation, exterior temporary imagery, commercial offer plaque, and datasheet atmosphere.
   - Preserved Astro-first architecture, sharp geometry, Geist / Geist Mono, and performance-safe motion.
+  - Typecheck/build passed when completed.
+- [x] Hero stats + Projects intro and image CTA cleanup completed.
+  - Removed the decorative oversized Hero `03` background mark that could read as a top-right debug artifact.
+  - Updated the Hero stats to show `3 объекта`, `до 70 мес. рассрочка`, `422 квартиры`, and `Бишкек / Иссык-Куль география`.
+  - Refined the Hero stats cell padding, value/label hierarchy, and 390px stacking behavior without changing the horizontal stats bar structure.
+  - Reworked the Projects intro into a cleaner two-column editorial block aligned to the project grid and reduced excess vertical spacing.
+  - Replaced the project image full-width bottom strip with a compact dark CTA label while preserving the full image link hit area.
+  - Kept About, Privileges, Purchase, Contact, company data, purchase data, privilege data, package files, global CSS, and Content Layer project data unchanged.
+  - Verified 390px mobile: document `scrollWidth` remained 390px, Hero stats did not overflow, Projects intro stayed readable, and all three image CTA labels were compact, tappable through the image link, and unclipped.
+  - Typecheck/build passed when completed.
+- [x] Project image duplicated CTA overlay removal completed.
+  - Removed the visible bottom `Перейти к объекту` CTA label from project images in `HomeProjects.astro`.
+  - Preserved the full image link, existing image hover treatment, top project image metadata/status badges, and the main project detail CTA button.
+  - Kept project Content Layer data, package files, global CSS, Hero, About, Privileges, Purchase, and Contact unchanged.
+  - Verified 390px mobile: three project images render cleanly with no image CTA text, all three main detail CTAs remain accessible, and document `scrollWidth` remained 390px.
   - Typecheck/build passed when completed.
 - [x] Visual Upgrade 1D: Purchase section simple 2x2 rebuild.
   - Rebuilt `HomePurchase.astro` as a compact left-intro/right strict 2x2 purchase grid.

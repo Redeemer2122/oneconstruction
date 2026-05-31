@@ -48,9 +48,9 @@ export const hero = {
   ],
   metrics: [
     { value: "3", label: "ОБЪЕКТА" },
-    { value: "ДО 70", label: "МЕС. РАССРОЧКА" },
+    { value: "ДО 70 МЕС.", label: "РАССРОЧКА" },
     { value: "422", label: "КВАРТИРЫ" },
-    { value: "БИШКЕК", label: "ГЕОГРАФИЯ" },
+    { value: "БИШКЕК / ИССЫК-КУЛЬ", label: "ГЕОГРАФИЯ" },
   ],
 } as const;
 

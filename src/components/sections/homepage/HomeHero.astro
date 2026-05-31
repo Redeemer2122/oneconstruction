@@ -100,12 +100,6 @@ const activeProject = showcaseProjects[0];
       <aside class="relative col-span-12 md:col-span-6 md:-mr-4 xl:col-span-6 xl:-mr-8" aria-label="Главный проект">
         <div
           aria-hidden="true"
-          class="absolute -right-4 -top-20 hidden font-mono text-[11rem] leading-none tracking-[-0.08em] text-slate-900/[0.045] md:block xl:-right-8 xl:text-[14rem]"
-        >
-          03
-        </div>
-        <div
-          aria-hidden="true"
           class="absolute right-0 top-1/2 hidden h-[76%] w-[52vw] -translate-y-1/2 border-y border-slate-900/10 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.38)_18%,rgba(226,232,240,0.3)_100%)] shadow-[0_40px_120px_-90px_rgba(15,23,42,0.95)] md:block"
         ></div>
         <div
@@ -239,11 +233,11 @@ const activeProject = showcaseProjects[0];
     ></div>
     <div class="grid grid-cols-2 gap-0 px-5 py-4 sm:px-6 md:grid-cols-4 md:px-10 md:py-0 lg:px-12">
       {metrics.map((m, i) => (
-        <div class={`min-h-24 border-slate-900/10 py-4 ${i % 2 === 1 ? "border-l pl-5 md:border-l-0 md:pl-0" : "pr-5"} ${i > 1 ? "border-t md:border-t-0" : ""} md:min-h-32 md:px-6 md:py-7 xl:min-h-36`}>
-          <span class="font-mono text-3xl font-medium tracking-[-0.05em] text-slate-900 sm:text-4xl xl:text-5xl">
+        <div class={`flex min-h-24 flex-col justify-center border-slate-900/10 px-4 py-4 sm:px-5 ${i % 2 === 1 ? "border-l" : ""} ${i > 1 ? "border-t md:border-t-0" : ""} md:min-h-28 md:border-l-0 md:px-7 md:py-7 xl:min-h-32`}>
+          <span class={`block font-mono font-medium uppercase text-slate-900 ${i === 3 ? "text-xl leading-tight tracking-[-0.035em] sm:text-2xl md:text-2xl xl:text-3xl" : "text-3xl leading-none tracking-[-0.05em] sm:text-4xl xl:text-5xl"}`}>
             {m.value}
           </span>
-          <span class="mt-4 block max-w-[18ch] font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500 md:mt-5">
+          <span class="mt-3 block max-w-[20ch] font-mono text-[10px] uppercase leading-relaxed tracking-[0.16em] text-slate-500 md:mt-4 md:tracking-[0.18em]">
             {m.label}
           </span>
         </div>
