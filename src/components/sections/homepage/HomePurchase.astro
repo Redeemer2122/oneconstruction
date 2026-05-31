@@ -56,21 +56,35 @@ const titleLines = purchaseSection.title.toLocaleUpperCase("ru-RU").split(" ");
   .purchase-section {
     position: relative;
     overflow: hidden;
-    border-top: 1px solid rgb(15 23 42 / 0.08);
-    border-bottom: 1px solid rgb(15 23 42 / 0.08);
+    isolation: isolate;
+    border-top: 1px solid rgb(15 23 42 / 0.1);
+    border-bottom: 1px solid rgb(15 23 42 / 0.1);
     background:
-      radial-gradient(circle at 8% 22%, rgb(255 255 252 / 0.68), transparent 28%),
-      linear-gradient(180deg, #f8f6f0 0%, #f3f0e7 100%);
+      radial-gradient(circle at 10% 19%, rgb(255 255 252 / 0.74), transparent 26%),
+      radial-gradient(circle at 77% 32%, rgb(79 54 189 / 0.07), transparent 28%),
+      linear-gradient(180deg, #f9f7f1 0%, #f2efe6 100%);
   }
 
   .purchase-section::before {
     position: absolute;
     inset: 0;
+    z-index: -2;
     pointer-events: none;
     content: "";
     background:
-      linear-gradient(90deg, rgb(15 23 42 / 0.018) 1px, transparent 1px) 50% 0 / min(24vw, 380px) 100%,
-      linear-gradient(180deg, rgb(255 255 252 / 0.34), transparent 42%, rgb(15 23 42 / 0.018));
+      linear-gradient(90deg, rgb(15 23 42 / 0.024) 1px, transparent 1px) 50% 0 / min(24vw, 380px) 100%,
+      linear-gradient(180deg, rgb(255 255 252 / 0.38), transparent 43%, rgb(15 23 42 / 0.02));
+  }
+
+  .purchase-section::after {
+    position: absolute;
+    inset: clamp(36px, 4vw, 64px) clamp(18px, 3vw, 48px);
+    z-index: -1;
+    pointer-events: none;
+    content: "";
+    border-top: 1px solid rgb(15 23 42 / 0.055);
+    border-bottom: 1px solid rgb(15 23 42 / 0.045);
+    opacity: 0.78;
   }
 
   .purchase-shell {
@@ -80,17 +94,21 @@ const titleLines = purchaseSection.title.toLocaleUpperCase("ru-RU").split(" ");
     gap: clamp(48px, 5vw, 82px);
     max-width: 1510px;
     margin: 0 auto;
-    padding: clamp(76px, 7.2vw, 112px) clamp(22px, 5.4vw, 88px) clamp(78px, 7vw, 108px);
+    padding: clamp(84px, 7.6vw, 122px) clamp(22px, 5.4vw, 88px) clamp(86px, 7.3vw, 116px);
   }
 
   .purchase-intro {
+    position: relative;
     min-width: 0;
-    padding-top: clamp(10px, 1.4vw, 22px);
+    padding-top: clamp(12px, 1.5vw, 24px);
   }
 
   .purchase-label {
-    margin: 0 0 clamp(42px, 5.6vw, 72px);
-    color: #4f36bd;
+    position: relative;
+    display: inline-block;
+    margin: 0 0 clamp(42px, 5.6vw, 74px);
+    padding-right: clamp(62px, 7vw, 112px);
+    color: #5137bd;
     font-family: var(--font-mono, monospace);
     font-size: clamp(12px, 0.9vw, 15px);
     font-weight: 700;
@@ -99,29 +117,41 @@ const titleLines = purchaseSection.title.toLocaleUpperCase("ru-RU").split(" ");
     text-transform: uppercase;
   }
 
+  .purchase-label::after {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: clamp(44px, 5.6vw, 86px);
+    height: 1px;
+    content: "";
+    background: linear-gradient(90deg, rgb(81 55 189 / 0.48), transparent);
+    transform: translateY(-50%);
+  }
+
   .purchase-intro h2 {
     display: grid;
     gap: 0.015em;
     max-width: 8.9em;
     margin: 0;
-    color: #121824;
-    font-size: clamp(52px, 5.05vw, 86px);
+    color: #101722;
+    font-size: clamp(54px, 5.16vw, 88px);
     font-weight: 700;
-    line-height: 0.98;
+    line-height: 0.965;
     letter-spacing: 0;
+    text-shadow: 0 1px 0 rgb(255 255 252 / 0.72);
   }
 
   .purchase-title-dot {
     display: inline;
-    color: #4f36bd;
+    color: #5137bd;
   }
 
   .purchase-intro__rule {
     position: relative;
     width: min(100%, 380px);
     height: 1px;
-    margin: clamp(28px, 3vw, 38px) 0 clamp(28px, 3vw, 36px);
-    background: rgb(79 54 189 / 0.36);
+    margin: clamp(30px, 3.1vw, 40px) 0 clamp(28px, 3vw, 38px);
+    background: linear-gradient(90deg, rgb(81 55 189 / 0.48), rgb(15 23 42 / 0.13) 74%, transparent);
   }
 
   .purchase-intro__rule::after {
@@ -139,28 +169,48 @@ const titleLines = purchaseSection.title.toLocaleUpperCase("ru-RU").split(" ");
   .purchase-description {
     max-width: 34ch;
     margin: 0;
-    color: rgb(51 65 85 / 0.84);
+    color: rgb(42 52 67 / 0.86);
     font-size: clamp(17px, 1.28vw, 21px);
-    line-height: 1.48;
+    line-height: 1.5;
   }
 
   .purchase-intro__cta {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 70px;
     width: min(100%, 340px);
-    margin-top: clamp(34px, 4vw, 48px);
-    border: 1px solid rgb(15 23 42 / 0.88);
-    background: #101624;
+    position: relative;
+    overflow: hidden;
+    margin-top: clamp(36px, 4.1vw, 52px);
+    border: 1px solid rgb(15 23 42 / 0.94);
+    background:
+      linear-gradient(135deg, rgb(255 255 255 / 0.08), transparent 34%),
+      #0d1422;
     color: #f8f7f2;
     font-size: clamp(16px, 1.2vw, 19px);
     font-weight: 700;
     line-height: 1;
     text-decoration: none;
-    box-shadow: 0 18px 42px rgb(15 23 42 / 0.12);
+    box-shadow:
+      0 22px 48px rgb(15 23 42 / 0.16),
+      0 1px 0 rgb(255 255 252 / 0.14) inset,
+      0 -1px 0 rgb(0 0 0 / 0.24) inset;
     transition:
       transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
       background 280ms cubic-bezier(0.16, 1, 0.3, 1),
       box-shadow 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .purchase-intro__cta::before {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    content: "";
+    background: linear-gradient(90deg, transparent, rgb(116 85 231 / 0.16), transparent);
+    opacity: 0;
+    transform: translateX(-42%);
+    transition:
+      opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .purchase-intro__cta span:first-child {
@@ -170,18 +220,31 @@ const titleLines = purchaseSection.title.toLocaleUpperCase("ru-RU").split(" ");
 
   .purchase-intro__cta span:last-child {
     display: grid;
+    position: relative;
     place-items: center;
-    border-left: 1px solid rgb(248 247 242 / 0.22);
-    color: #7455e7;
+    border-left: 1px solid rgb(248 247 242 / 0.2);
+    background: rgb(255 255 252 / 0.035);
+    color: #8568ef;
     font-size: 25px;
     transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .purchase-intro__cta:hover,
   .purchase-intro__cta:focus-visible {
-    background: #0d1320;
-    box-shadow: 0 22px 50px rgb(15 23 42 / 0.16);
+    background:
+      linear-gradient(135deg, rgb(255 255 255 / 0.1), transparent 35%),
+      #0a111e;
+    box-shadow:
+      0 27px 58px rgb(15 23 42 / 0.2),
+      0 1px 0 rgb(255 255 252 / 0.16) inset,
+      0 -1px 0 rgb(0 0 0 / 0.26) inset;
     transform: translateY(-2px);
+  }
+
+  .purchase-intro__cta:hover::before,
+  .purchase-intro__cta:focus-visible::before {
+    opacity: 1;
+    transform: translateX(42%);
   }
 
   .purchase-intro__cta:hover span:last-child,
@@ -194,26 +257,34 @@ const titleLines = purchaseSection.title.toLocaleUpperCase("ru-RU").split(" ");
   }
 
   .purchase-grid {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-auto-rows: 1fr;
     gap: clamp(18px, 1.7vw, 24px);
     min-width: 0;
+    padding: clamp(2px, 0.35vw, 5px);
+    background:
+      linear-gradient(90deg, transparent, rgb(81 55 189 / 0.1), transparent) 50% 0 / 1px 100% no-repeat,
+      linear-gradient(180deg, transparent, rgb(15 23 42 / 0.08), transparent) 0 50% / 100% 1px no-repeat;
   }
 
   .purchase-card {
     position: relative;
     display: flex;
     min-width: 0;
-    min-height: clamp(300px, 24vw, 372px);
+    min-height: clamp(308px, 24.4vw, 382px);
     flex-direction: column;
-    border: 1px solid rgb(15 23 42 / 0.15);
+    overflow: hidden;
+    border: 1px solid rgb(15 23 42 / 0.16);
     background:
-      linear-gradient(180deg, rgb(255 255 252 / 0.78), rgb(245 244 240 / 0.86)),
+      linear-gradient(135deg, rgb(255 255 252 / 0.9), rgb(255 255 252 / 0) 38%),
+      linear-gradient(180deg, rgb(255 255 252 / 0.82), rgb(244 242 236 / 0.9)),
       #f8f7f2;
     box-shadow:
-      0 16px 42px rgb(15 23 42 / 0.04),
-      0 1px 0 rgb(255 255 252 / 0.82) inset;
+      0 16px 42px rgb(15 23 42 / 0.052),
+      0 1px 0 rgb(255 255 252 / 0.9) inset,
+      0 -1px 0 rgb(15 23 42 / 0.04) inset;
     transition:
       transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
       border-color 280ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -221,25 +292,68 @@ const titleLines = purchaseSection.title.toLocaleUpperCase("ru-RU").split(" ");
       box-shadow 280ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
+  .purchase-card::before,
+  .purchase-card::after {
+    position: absolute;
+    pointer-events: none;
+    content: "";
+    opacity: 0.72;
+    transition:
+      opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .purchase-card::before {
+    top: -1px;
+    right: -1px;
+    width: 42px;
+    height: 42px;
+    border-top: 1px solid rgb(81 55 189 / 0.28);
+    border-right: 1px solid rgb(81 55 189 / 0.28);
+  }
+
+  .purchase-card::after {
+    inset: 0;
+    background:
+      radial-gradient(circle at 82% 18%, rgb(81 55 189 / 0.09), transparent 30%),
+      linear-gradient(180deg, transparent 66%, rgb(15 23 42 / 0.018));
+    opacity: 0;
+  }
+
   .purchase-card:hover,
   .purchase-card:focus-within {
-    border-color: rgb(79 54 189 / 0.34);
+    border-color: rgb(81 55 189 / 0.38);
     background:
-      linear-gradient(180deg, rgb(255 255 252 / 0.92), rgb(246 244 239 / 0.94)),
+      linear-gradient(135deg, rgb(255 255 252 / 0.96), rgb(255 255 252 / 0.14) 42%),
+      linear-gradient(180deg, rgb(255 255 252 / 0.94), rgb(246 244 239 / 0.96)),
       #fbfaf6;
     box-shadow:
-      0 22px 52px rgb(15 23 42 / 0.07),
-      0 1px 0 rgb(255 255 252 / 0.9) inset;
+      0 26px 58px rgb(15 23 42 / 0.082),
+      0 1px 0 rgb(255 255 252 / 0.96) inset,
+      0 -1px 0 rgb(15 23 42 / 0.05) inset;
     transform: translateY(-4px);
+  }
+
+  .purchase-card:hover::before,
+  .purchase-card:focus-within::before {
+    opacity: 1;
+    transform: translate(-4px, 4px);
+  }
+
+  .purchase-card:hover::after,
+  .purchase-card:focus-within::after {
+    opacity: 1;
   }
 
   .purchase-card__top {
     display: flex;
+    position: relative;
+    z-index: 1;
     align-items: flex-start;
     justify-content: space-between;
     gap: 18px;
-    padding: clamp(26px, 2.4vw, 36px) clamp(26px, 2.8vw, 40px) 0;
-    color: #4f36bd;
+    padding: clamp(27px, 2.5vw, 38px) clamp(27px, 2.9vw, 42px) 0;
+    color: #5137bd;
     font-family: var(--font-mono, monospace);
     font-size: clamp(18px, 1.45vw, 25px);
     font-weight: 700;
@@ -254,21 +368,25 @@ const titleLines = purchaseSection.title.toLocaleUpperCase("ru-RU").split(" ");
   }
 
   .purchase-card__rule {
+    position: relative;
+    z-index: 1;
     height: 1px;
-    margin: clamp(18px, 1.8vw, 26px) clamp(26px, 2.8vw, 40px) 0;
-    background: rgb(15 23 42 / 0.14);
+    margin: clamp(18px, 1.8vw, 26px) clamp(27px, 2.9vw, 42px) 0;
+    background: linear-gradient(90deg, rgb(15 23 42 / 0.17), rgb(15 23 42 / 0.09), transparent);
   }
 
   .purchase-card__content {
     display: grid;
+    position: relative;
+    z-index: 1;
     gap: clamp(18px, 1.8vw, 24px);
-    padding: clamp(34px, 4.2vw, 58px) clamp(26px, 2.8vw, 40px) clamp(28px, 3vw, 38px);
+    padding: clamp(36px, 4.25vw, 60px) clamp(27px, 2.9vw, 42px) clamp(30px, 3vw, 40px);
   }
 
   .purchase-card h3 {
     max-width: 13ch;
     margin: 0;
-    color: #121824;
+    color: #101722;
     font-size: clamp(32px, 2.9vw, 50px);
     font-weight: 700;
     line-height: 1.02;
@@ -277,27 +395,31 @@ const titleLines = purchaseSection.title.toLocaleUpperCase("ru-RU").split(" ");
   }
 
   .purchase-card__accent {
-    width: 70px;
+    width: 76px;
     height: 3px;
-    background: #4f36bd;
+    background: linear-gradient(90deg, #5137bd, #7455e7);
+    box-shadow: 0 1px 0 rgb(255 255 252 / 0.74);
   }
 
   .purchase-card p {
     max-width: 33ch;
     margin: 0;
-    color: rgb(51 65 85 / 0.82);
+    color: rgb(42 52 67 / 0.83);
     font-size: clamp(16px, 1.18vw, 20px);
-    line-height: 1.34;
+    line-height: 1.38;
   }
 
   .purchase-card__cta {
     display: grid;
+    position: relative;
+    z-index: 1;
     grid-template-columns: minmax(0, 1fr) 56px;
     align-items: center;
-    min-height: 68px;
+    min-height: 70px;
     margin-top: auto;
-    border-top: 1px solid rgb(15 23 42 / 0.13);
-    color: #121824;
+    border-top: 1px solid rgb(15 23 42 / 0.14);
+    background: rgb(255 255 252 / 0.24);
+    color: #101722;
     font-size: clamp(16px, 1.12vw, 19px);
     font-weight: 700;
     line-height: 1.1;
@@ -306,13 +428,15 @@ const titleLines = purchaseSection.title.toLocaleUpperCase("ru-RU").split(" ");
 
   .purchase-card__cta span:first-child {
     min-width: 0;
-    padding: 19px clamp(26px, 2.8vw, 40px);
+    padding: 20px clamp(27px, 2.9vw, 42px);
   }
 
   .purchase-card__cta span:last-child {
     display: grid;
     place-items: center;
-    color: #4f36bd;
+    height: 100%;
+    border-left: 1px solid rgb(15 23 42 / 0.1);
+    color: #5137bd;
     font-size: 28px;
     line-height: 1;
     transition:
@@ -345,7 +469,7 @@ const titleLines = purchaseSection.title.toLocaleUpperCase("ru-RU").split(" ");
   @media (max-width: 767px) {
     .purchase-shell {
       gap: 34px;
-      padding: 58px 20px 66px;
+      padding: 62px 20px 70px;
     }
 
     .purchase-label {
@@ -385,6 +509,8 @@ const titleLines = purchaseSection.title.toLocaleUpperCase("ru-RU").split(" ");
       grid-template-columns: 1fr;
       grid-auto-rows: auto;
       gap: 18px;
+      padding: 0;
+      background: none;
     }
 
     .purchase-card {

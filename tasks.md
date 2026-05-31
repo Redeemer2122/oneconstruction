@@ -36,7 +36,10 @@
 - [x] Privileges reference refinement pass completed.
 - [x] Purchase commercial decision block rebuild completed.
 - [x] Purchase reference-based refinement completed.
-- [ ] Current focus: Contact conversion upgrade.
+- [x] Purchase premium polish pass completed.
+- [x] Contact conversion polish completed.
+- [x] Contact layout bugfix / micro-polish completed.
+- [ ] Current focus: final full-page rhythm polish.
 
 ## Phase 1 — Infrastructure [DONE]
 
@@ -127,6 +130,39 @@
   - Restored form title `Оставьте заявку` and response subtitle `И наш менеджер свяжется с вами в течении 15 минут!`.
   - Removed unverified passport planning, showroom invitation, 4-hour callback, and extra-call wording from the Contact section and React form helper text.
   - Preserved `src/data/company.ts`, existing company contact data, form fields, mock submit TODO, and form behavior.
+  - Typecheck/build passed when completed.
+- [x] Contact conversion polish completed.
+  - Polished `HomeContact.astro` without redesigning the section: preserved the two-column desktop structure, official Contact/form copy, current company/contact data, existing map placeholder, and current form fields/behavior.
+  - Tightened the left contact hierarchy with cleaner row density, stronger phone emphasis, thinner rule rhythm, and a more intentional social/map stack.
+  - Anchored the right form card as the main conversion object with a subtle vertical rail, stronger paper frame, restrained top rule, improved internal spacing, cleaner input/focus treatment from the wrapper, and a darker premium submit surface.
+  - Verified 390px mobile: contact information renders first, map remains controlled at 184px tall, form card is 350px wide, inputs and submit button remain full-width/tappable, and document `scrollWidth` remains 390px.
+  - Typecheck/build passed when completed.
+- [x] Contact layout bugfix / micro-polish completed.
+  - Fixed visible Contact layout issues in `HomeContact.astro` without redesigning the section or changing copy, data, fields, or form behavior.
+  - Removed the disconnected top `Контакты` / `Заявка` header labels and kept labels integrated within the left info and form card content.
+  - Removed the broken-looking black/violet form-card top accent pseudo-element and kept a clean full-width frame instead.
+  - Added safer left-column inset/rail alignment so contact rows, socials, and map align cleanly without feeling clipped.
+  - Verified 390px mobile: left content not clipped, map controlled at 184px tall, form card 350px wide, submit button full-width/tappable, no horizontal overflow, and no broken accent line.
+  - Typecheck/build passed when completed.
+- [x] Contact final micro-fix completed.
+  - Polished only `HomeContact.astro` without redesigning the Contact section.
+  - Reduced the form-card grid noise, strengthened the form title/submit weight slightly, and improved WA / IG / TG button hit area and visibility.
+  - Removed the repeated manager-response helper line under the submit button via the Contact wrapper while preserving the official subtitle above.
+  - Preserved contact data, official copy, form fields, and form behavior unchanged.
+  - Verified 390px mobile: social buttons remain tappable, the form card stays contained, and no duplicated response line appears below the submit button.
+  - Typecheck/build passed when completed.
+- [x] Contact left contact-list alignment fix completed.
+  - Polished only the internal Contact information rows in `HomeContact.astro`.
+  - Added a safer left gutter inside the contact list, gave the row number slot a fixed internal column, and clarified the label/value alignment without changing copy, data, map, form card, fields, or behavior.
+  - Softened the nearby left rail so the list no longer reads as clipped against the section edge.
+  - Verified 390px mobile: contact rows stay readable, row numbers start inside the table gutter, values wrap within the viewport, and no horizontal overflow is present.
+  - Typecheck/build passed when completed.
+- [x] Contact left info rows and form rhythm fix completed.
+  - Polished only `HomeContact.astro` without redesigning the Contact section or changing copy, data, fields, map, form card direction, or form behavior.
+  - Kept the desktop phone value on one line, removed the contact-row gradient/fill, and simplified the row rhythm so the number/label area reads as calm metadata instead of a heavy table.
+  - Reduced the form card bottom emptiness by lowering the card min-height and replacing the auto footer spacer with a measured privacy-line gap.
+  - Verified desktop: phone renders as one line, contact rows have transparent background, and the privacy line sits close below the submit button.
+  - Verified 390px mobile: rows remain readable, phone does not overflow, submit remains full-width/tappable, and no horizontal overflow is present.
   - Typecheck/build passed when completed.
 - [x] Privileges simple reliable redesign.
   - Rebuilt `HomeTimeline.astro` as a two-column light premium brutalist section with left intro, subtle blueprint SVG, and right privilege cards.
@@ -319,10 +355,18 @@
   - Verified desktop: intro/matrix ratio is about 38%/62%, cards render as an equal 2x2 matrix, CTAs stay aligned, and no overflow appears inside `#purchase`.
   - Verified 390px mobile: intro renders first, main CTA remains full-width and tappable, all four options stack cleanly, no CTA clipping, and document `scrollWidth` remains 390px.
   - Typecheck/build passed when completed.
+- [x] Purchase premium polish pass completed.
+  - Polished `HomePurchase.astro` without changing structure or official purchase copy: preserved left intro plus right strict 2x2 matrix, four equal options, no images, no React, and no new libraries.
+  - Strengthened the commercial paper surface with subtler layered depth, restrained Royal Violet atmosphere, sharper intro hierarchy, and a more premium dark split CTA.
+  - Upgraded the option cards into refined decision tiles with cleaner bevels, contained corner marks, richer surface depth, clearer internal rules, stronger CTA rows, and CSS-only hover lift/arrow motion.
+  - Preserved `src/data/purchase.ts`, package files, global styles, Content Layer, company data, privileges data, and all other homepage sections unchanged.
+  - Verified desktop: four equal 2x2 cards, contained CTAs, no overflow inside `#purchase`.
+  - Verified 390px mobile: intro first, full-width main CTA, four stacked cards, readable text, no clipped CTAs, and document `scrollWidth` remains 390px.
+  - Typecheck/build passed when completed.
 
 ### Current
 
-- [ ] Contact conversion upgrade.
+- [ ] Final full-page rhythm polish.
 
 ### Planned
 
@@ -426,4 +470,4 @@
 
 ## Next Recommended Task
 
-- Contact conversion upgrade.
+- Final full-page rhythm polish.

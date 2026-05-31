@@ -11,11 +11,6 @@ import { company } from "@data/company";
 <section id="contact" class="contact-section oc-chapter oc-chapter--contact" aria-label="Свяжитесь с One Construction">
   <div class="contact-stitch stitch-commercial-to-contact" aria-hidden="true"></div>
 
-  <header class="contact-header">
-    <span class="contact-eyebrow">КОНТАКТЫ</span>
-    <span class="contact-eyebrow contact-eyebrow--muted">ЗАЯВКА</span>
-  </header>
-
   <div class="contact-shell">
     <aside class="contact-info" data-reveal>
       <p class="contact-kicker">ОФИС · БИШКЕК</p>
@@ -174,37 +169,29 @@ import { company } from "@data/company";
     background: linear-gradient(180deg, #F8F6F0 0%, #F5F3ED 100%);
   }
 
-  .contact-header {
-    position: relative; z-index: 1;
-    display: flex; align-items: flex-end; justify-content: space-between;
-    gap: 24px;
-    max-width: 1500px; margin: 0 auto;
-    padding: clamp(56px, 6.4vw, 92px) clamp(22px, 5vw, 88px) 18px;
-    border-bottom: 1px solid rgb(15 23 42 / 0.1);
-  }
-
-  .contact-eyebrow {
-    color: rgb(71 85 105 / 0.72);
-    font-family: var(--font-mono, monospace);
-    font-size: 13px; font-weight: 700; line-height: 1.15;
-    letter-spacing: 0.18em; text-transform: uppercase;
-  }
-  .contact-eyebrow--muted { color: rgb(51 65 85 / 0.62); }
-
   .contact-shell {
     position: relative; z-index: 1;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-    gap: clamp(40px, 5.4vw, 88px);
+    grid-template-columns: minmax(0, 0.94fr) minmax(480px, 1.06fr);
+    align-items: start;
+    gap: clamp(34px, 4.4vw, 70px);
     max-width: 1500px; margin: 0 auto;
-    padding: clamp(52px, 6vw, 88px) clamp(22px, 5vw, 88px) clamp(66px, 7vw, 108px);
+    padding: clamp(78px, 8vw, 118px) clamp(22px, 5vw, 88px) clamp(58px, 6.2vw, 92px);
   }
 
   /* ── INFO ──────────────────────────────────────────────── */
-  .contact-info { position: relative; min-width: 0; display: flex; flex-direction: column; }
+  .contact-info {
+    position: relative; min-width: 0; display: flex; flex-direction: column;
+    padding-left: clamp(18px, 2.1vw, 34px);
+  }
+
+  .contact-info::before {
+    position: absolute; left: 0; top: 2px; bottom: 0; width: 1px; content: "";
+    background: linear-gradient(180deg, rgb(15 23 42 / 0.14), rgb(15 23 42 / 0.055) 42%, transparent);
+  }
 
   .contact-kicker {
-    margin: 0 0 clamp(24px, 2.6vw, 34px); color: rgb(71 85 105 / 0.74);
+    margin: 0 0 clamp(18px, 2vw, 26px); color: rgb(71 85 105 / 0.74);
     font-family: var(--font-mono, monospace);
     font-size: 13px; font-weight: 700; line-height: 1.15;
     letter-spacing: 0.18em; text-transform: uppercase;
@@ -220,7 +207,7 @@ import { company } from "@data/company";
 
   .contact-rule {
     position: relative; width: min(100%, 320px); height: 1px;
-    margin: 28px 0 24px;
+    margin: clamp(20px, 2.1vw, 28px) 0 clamp(18px, 1.8vw, 22px);
     background: rgb(15 23 42 / 0.22);
   }
   .contact-rule::after {
@@ -230,43 +217,53 @@ import { company } from "@data/company";
   }
 
   .contact-lede {
-    max-width: 38ch; margin: 0 0 clamp(32px, 3.4vw, 46px);
+    max-width: 38ch; margin: 0 0 clamp(24px, 2.8vw, 36px);
     color: rgb(51 65 85 / 0.86);
     font-size: clamp(16px, 1.18vw, 19px);
     line-height: 1.55;
   }
 
   .contact-rows {
-    display: grid; gap: 0; margin: 0 0 clamp(28px, 3vw, 36px);
+    display: grid; gap: 0; margin: 0 0 clamp(22px, 2.5vw, 30px);
+    padding-left: clamp(14px, 1.4vw, 22px);
     border-top: 1px solid rgb(15 23 42 / 0.13);
+    background: transparent;
   }
 
   .contact-row {
     display: grid;
-    grid-template-columns: minmax(140px, 0.42fr) minmax(0, 1fr);
-    gap: clamp(16px, 2vw, 32px);
-    padding: clamp(18px, 1.8vw, 24px) 0;
+    grid-template-columns: minmax(122px, 0.28fr) minmax(260px, 1fr);
+    column-gap: clamp(14px, 1.6vw, 24px);
+    row-gap: 7px;
+    padding: clamp(16px, 1.5vw, 20px) clamp(10px, 1.2vw, 16px) clamp(16px, 1.5vw, 20px) 0;
     border-bottom: 1px solid rgb(15 23 42 / 0.13);
   }
 
   .contact-row dt {
-    display: flex; align-items: baseline; gap: 12px;
+    display: grid; align-items: baseline;
+    grid-template-columns: 32px minmax(0, 1fr);
+    column-gap: 10px;
     color: #273240;
     font-family: var(--font-mono, monospace);
-    font-size: 12px; font-weight: 700; line-height: 1;
-    letter-spacing: 0.18em; text-transform: uppercase;
+    font-size: 11px; font-weight: 700; line-height: 1.05;
+    letter-spacing: 0.16em; text-transform: uppercase;
   }
-  .contact-row__num { color: rgb(91 59 196 / 0.66); font-weight: 700; }
+  .contact-row__num {
+    color: rgb(91 59 196 / 0.66);
+    font-weight: 700;
+  }
+  .contact-row__label { min-width: 0; }
   .contact-row dd { margin: 0; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
 
   .contact-row__primary {
     display: inline-block; max-width: 100%;
     color: #151a24;
     font-family: var(--font-mono, monospace);
-    font-size: clamp(22px, 2.1vw, 30px); font-weight: 700;
+    font-size: clamp(22px, 1.78vw, 28px); font-weight: 700;
     letter-spacing: -0.01em; text-decoration: none;
     transition: color 260ms cubic-bezier(0.16, 1, 0.3, 1);
     overflow-wrap: anywhere;
+    white-space: nowrap;
   }
   .contact-row__primary:hover { color: #6d28d9; }
 
@@ -290,37 +287,50 @@ import { company } from "@data/company";
   /* ── SOCIALS ──────────────────────────────────────────── */
   .contact-socials {
     display: flex; flex-wrap: wrap; gap: 10px;
-    margin: 0 0 clamp(36px, 4vw, 52px);
+    margin: 0 0 clamp(22px, 2.5vw, 32px);
   }
   .contact-social {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 10px 14px;
-    border: 1px solid rgb(15 23 42 / 0.16);
-    background: rgb(255 255 252 / 0.7);
+    display: inline-flex; align-items: center; justify-content: space-between; gap: 12px;
+    min-height: 44px;
+    min-width: 78px;
+    padding: 12px 16px;
+    border: 1px solid rgb(15 23 42 / 0.22);
+    background: rgb(255 255 252 / 0.86);
     color: #151a24;
     font-family: var(--font-mono, monospace);
     font-size: 12px; font-weight: 700;
     letter-spacing: 0.18em; text-transform: uppercase;
     text-decoration: none;
+    box-shadow: 0 1px 0 rgb(255 255 252 / 0.82) inset;
     transition: border-color 260ms cubic-bezier(0.16, 1, 0.3, 1), color 260ms cubic-bezier(0.16, 1, 0.3, 1), transform 260ms cubic-bezier(0.16, 1, 0.3, 1), background-color 260ms cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .contact-social span:last-child { color: rgb(91 59 196 / 0.74); font-size: 14px; line-height: 0.8; }
+  .contact-social span:last-child { color: rgb(91 59 196 / 0.9); font-size: 14px; line-height: 0.8; }
   .contact-social:hover {
     border-color: rgb(109 40 217 / 0.55);
     background: #FBFBFA;
     transform: translateY(-2px);
   }
+  .contact-social:focus-visible {
+    outline: 2px solid rgb(109 40 217 / 0.5);
+    outline-offset: 3px;
+  }
 
   /* ── MAP ──────────────────────────────────────────────── */
   .contact-map {
-    position: relative; margin: clamp(26px, 3vw, 40px) 0 0; aspect-ratio: 16 / 7;
+    position: relative; margin: 0; aspect-ratio: 16 / 6.2;
     border: 1px solid rgb(15 23 42 / 0.16);
     background:
+      linear-gradient(90deg, rgb(109 40 217 / 0.07) 0 1px, transparent 1px 100%),
       linear-gradient(180deg, rgb(255 255 252 / 0.85), rgb(245 244 240 / 0.9)),
       #FBFBFA;
     overflow: hidden;
+    box-shadow: 0 1px 0 rgb(255 255 252 / 0.72) inset;
   }
-  .contact-map__grid { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.16; }
+  .contact-map::after {
+    position: absolute; inset: 12px; content: ""; pointer-events: none;
+    border: 1px solid rgb(15 23 42 / 0.07);
+  }
+  .contact-map__grid { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.12; }
 
   .contact-map__corner {
     position: absolute; width: 12px; height: 12px; pointer-events: none;
@@ -357,16 +367,28 @@ import { company } from "@data/company";
   }
 
   /* ── FORM CARD ────────────────────────────────────────── */
-  .contact-form-wrap { position: relative; min-width: 0; }
+  .contact-form-wrap {
+    position: relative; min-width: 0;
+    padding: clamp(10px, 1.2vw, 16px) 0 clamp(10px, 1.2vw, 16px) clamp(14px, 1.5vw, 22px);
+  }
+
+  .contact-form-wrap::before {
+    position: absolute; left: 0; top: 0; bottom: 0; width: 1px; content: "";
+    background: linear-gradient(180deg, rgb(15 23 42 / 0.18), rgb(109 40 217 / 0.2) 36%, rgb(15 23 42 / 0.06) 72%, transparent);
+  }
 
   .contact-form-card {
-    position: relative; padding: clamp(28px, 3vw, 44px);
-    border: 1px solid rgb(15 23 42 / 0.14);
+    position: relative; display: flex; flex-direction: column;
+    min-height: clamp(620px, 48vw, 700px);
+    padding: clamp(28px, 3vw, 44px);
+    border: 1px solid rgb(15 23 42 / 0.17);
+    border-top-color: rgb(15 23 42 / 0.24);
     background:
-      linear-gradient(180deg, rgb(255 255 252 / 0.78), rgb(245 244 240 / 0.86)),
+      linear-gradient(90deg, rgb(15 23 42 / 0.022) 1px, transparent 1px) 0 0 / 72px 100%,
+      linear-gradient(180deg, rgb(255 255 252 / 0.9), rgb(245 244 240 / 0.9)),
       #FBFBFA;
     box-shadow:
-      0 32px 60px rgb(15 23 42 / 0.07),
+      0 22px 54px rgb(15 23 42 / 0.08),
       0 1px 0 rgb(255 255 252 / 0.86) inset,
       0 -1px 0 rgb(15 23 42 / 0.05) inset;
   }
@@ -374,8 +396,8 @@ import { company } from "@data/company";
   .contact-form-card__corner {
     position: absolute; width: 14px; height: 14px; pointer-events: none;
   }
-  .contact-form-card__corner--tl { top: -1px; left: -1px; border-top: 1px solid rgb(91 59 196 / 0.62); border-left: 1px solid rgb(91 59 196 / 0.62); }
-  .contact-form-card__corner--tr { top: -1px; right: -1px; border-top: 1px solid rgb(15 23 42 / 0.22); border-right: 1px solid rgb(15 23 42 / 0.22); }
+  .contact-form-card__corner--tl { top: 9px; left: 9px; border-top: 1px solid rgb(15 23 42 / 0.22); border-left: 1px solid rgb(15 23 42 / 0.22); }
+  .contact-form-card__corner--tr { top: 9px; right: 9px; border-top: 1px solid rgb(15 23 42 / 0.18); border-right: 1px solid rgb(15 23 42 / 0.18); }
   .contact-form-card__corner--bl { bottom: -1px; left: -1px; border-bottom: 1px solid rgb(15 23 42 / 0.22); border-left: 1px solid rgb(15 23 42 / 0.22); }
   .contact-form-card__corner--br { bottom: -1px; right: -1px; border-bottom: 1px solid rgb(91 59 196 / 0.62); border-right: 1px solid rgb(91 59 196 / 0.62); }
 
@@ -392,8 +414,8 @@ import { company } from "@data/company";
   .contact-form-card__title {
     max-width: 22ch; margin: clamp(20px, 2vw, 28px) 0 0; color: #151a24;
     font-family: var(--font-mono, monospace);
-    font-size: clamp(22px, 1.95vw, 30px); font-weight: 700;
-    line-height: 1.12; letter-spacing: -0.01em;
+    font-size: clamp(26px, 2.28vw, 37px); font-weight: 800;
+    line-height: 1.08; letter-spacing: 0;
   }
 
   .contact-form-card__subtitle {
@@ -405,8 +427,35 @@ import { company } from "@data/company";
 
   .contact-form-card__rule {
     height: 1px;
-    margin: clamp(24px, 2.6vw, 36px) 0 clamp(24px, 2.6vw, 32px);
-    background: rgb(15 23 42 / 0.12);
+    margin: clamp(22px, 2.2vw, 30px) 0 clamp(22px, 2.4vw, 30px);
+    background: linear-gradient(90deg, rgb(15 23 42 / 0.2), rgb(15 23 42 / 0.07));
+  }
+
+  .contact-form-card :global(form) { gap: clamp(20px, 2vw, 26px); }
+  .contact-form-card :global(form > div:first-child) { gap: clamp(18px, 2vw, 26px); }
+  .contact-form-card :global(label) { gap: 10px; }
+  .contact-form-card :global(input) {
+    min-height: 52px;
+    border-bottom-color: rgb(15 23 42 / 0.22);
+  }
+  .contact-form-card :global(input:focus) {
+    border-bottom-color: #5b21b6;
+    box-shadow: 0 1px 0 0 rgb(91 33 182 / 0.72);
+  }
+  .contact-form-card :global(button[type="submit"]) {
+    min-height: 60px;
+    padding-inline: clamp(20px, 2vw, 28px);
+    border-color: #151a24;
+    background: #151a24;
+    box-shadow: 0 18px 38px rgb(15 23 42 / 0.2);
+  }
+  .contact-form-card :global(button[type="submit"]:hover) {
+    border-color: #111827;
+    background: #111827;
+    box-shadow: 0 20px 42px rgb(15 23 42 / 0.2);
+  }
+  .contact-form-card :global(form > div:last-child > p) {
+    display: none;
   }
 
   .contact-form-card__foot {
@@ -427,11 +476,14 @@ import { company } from "@data/company";
       grid-template-columns: 1fr;
       gap: 48px;
     }
+    .contact-form-wrap { padding: 0; }
+    .contact-form-wrap::before { display: none; }
   }
 
   @media (max-width: 640px) {
-    .contact-header { padding: 48px 20px 16px; }
-    .contact-shell { padding: 44px 20px 60px; gap: 38px; }
+    .contact-shell { padding: 58px 20px 60px; gap: 38px; }
+    .contact-info { padding-left: 0; }
+    .contact-info::before { display: none; }
 
     .contact-title { max-width: none; font-size: clamp(38px, 11vw, 48px); }
     .contact-rule { margin: 22px 0 20px; }
@@ -442,16 +494,20 @@ import { company } from "@data/company";
       gap: 8px;
       padding: 16px 0;
     }
-    .contact-row__primary { font-size: 22px; }
+    .contact-rows { padding-left: 14px; }
+    .contact-row dt { grid-template-columns: 34px minmax(0, 1fr); column-gap: 10px; }
+    .contact-row__primary { font-size: 22px; white-space: normal; }
     .contact-row__secondary { font-size: 15px; }
 
     .contact-socials { gap: 8px; }
-    .contact-social { padding: 9px 12px; font-size: 11px; }
+    .contact-social { flex: 1 1 0; min-width: 0; padding: 11px 12px; font-size: 11px; }
 
-    .contact-map { aspect-ratio: 16 / 9; }
+    .contact-map { aspect-ratio: 16 / 8.4; }
     .contact-map__pin-label { font-size: 10px; }
 
-    .contact-form-card { padding: 22px; }
+    .contact-form-card { min-height: 0; padding: 22px; }
     .contact-form-card__title { font-size: 20px; }
+    .contact-form-card :global(form > div:first-child) { grid-template-columns: 1fr; }
+    .contact-form-card :global(button[type="submit"]) { min-height: 56px; padding-inline: 18px; }
   }
 </style>
