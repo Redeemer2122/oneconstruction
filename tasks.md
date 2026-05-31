@@ -40,6 +40,9 @@
 - [x] Contact conversion polish completed.
 - [x] Contact layout bugfix / micro-polish completed.
 - [x] Hero stats + Projects intro and image CTA cleanup completed.
+- [x] Hero copy and stats strip update completed.
+- [x] Hero headline scale micro-fix completed.
+- [x] Hero headline line-break fix completed.
 - [x] Project image duplicated CTA overlay removal completed.
 - [ ] Current focus: final full-page rhythm polish.
 
@@ -113,6 +116,22 @@
   - Replaced the project image full-width bottom strip with a compact dark CTA label while preserving the full image link hit area.
   - Kept About, Privileges, Purchase, Contact, company data, purchase data, privilege data, package files, global CSS, and Content Layer project data unchanged.
   - Verified 390px mobile: document `scrollWidth` remained 390px, Hero stats did not overflow, Projects intro stayed readable, and all three image CTA labels were compact, tappable through the image link, and unclipped.
+  - Typecheck/build passed when completed.
+- [x] Hero copy and stats strip update completed.
+  - Updated only the Hero headline to `ОДНА МЕЧТА. / ОДНА ЦЕЛЬ. / ОДИН РЕЗУЛЬТАТ.`.
+  - Updated only the first Hero stat to `10 / ЛЕТ ОПЫТА`; the remaining Hero stats stayed unchanged.
+  - Slightly improved Hero stats label readability while preserving the restrained mono metadata style and existing stats bar structure.
+  - Verified 390px mobile: headline fits without clipping, stats labels remain readable, and document `scrollWidth` remained 390px.
+  - Typecheck/build passed when completed.
+- [x] Hero headline scale micro-fix completed.
+  - Reduced only the desktop Hero headline scale by about 8% and eased desktop line-height slightly.
+  - Preserved the approved headline text, Hero layout, right showcase card, CTA buttons, and stats bar unchanged.
+  - Verified 390px mobile: headline lines stayed intentional and readable, no clipping, no meaningful overflow, and document `scrollWidth` remained 390px.
+  - Typecheck/build passed when completed.
+- [x] Hero headline line-break fix completed.
+  - Preserved the approved Hero headline copy while rendering the final phrase as controlled visual lines: `ОДИН / РЕЗУЛЬТАТ.`.
+  - Desktop headline line breaks are controlled as `ОДНА МЕЧТА. / ОДНА ЦЕЛЬ. / ОДИН / РЕЗУЛЬТАТ.` without changing the Hero layout, right showcase card, CTA buttons, or stats bar.
+  - Verified 390px mobile: the same four intentional lines render, no clipping, no meaningful overflow, and document `scrollWidth` remained 390px.
   - Typecheck/build passed when completed.
 - [x] Project image duplicated CTA overlay removal completed.
   - Removed the visible bottom `Перейти к объекту` CTA label from project images in `HomeProjects.astro`.

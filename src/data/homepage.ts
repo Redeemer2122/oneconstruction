@@ -3,7 +3,7 @@ export const hero = {
     "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=2400&q=85&auto=format&fit=crop",
   imageAlt: "Премиальный архитектурный рендер",
   eyebrow: "ONE CONSTRUCTION · BISHKEK · 2026",
-  titleLines: ["АРХИТЕКТУРА", "БЕЗ", "КОМПРОМИССА"],
+  titleLines: ["ОДНА МЕЧТА.", "ОДНА ЦЕЛЬ.", "ОДИН РЕЗУЛЬТАТ."],
   subtitle:
     "Жилые комплексы в Бишкеке — от точного проекта до пространства, в котором хочется жить.",
   featuredProject: {
@@ -47,7 +47,7 @@ export const hero = {
     },
   ],
   metrics: [
-    { value: "3", label: "ОБЪЕКТА" },
+    { value: "10", label: "ЛЕТ ОПЫТА" },
     { value: "ДО 70 МЕС.", label: "РАССРОЧКА" },
     { value: "422", label: "КВАРТИРЫ" },
     { value: "БИШКЕК / ИССЫК-КУЛЬ", label: "ГЕОГРАФИЯ" },
