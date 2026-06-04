@@ -7,7 +7,7 @@ import HomeAbout from "@sections/homepage/HomeAbout.astro";
 import HomeTimeline from "@sections/homepage/HomeTimeline.astro";
 import HomePurchase from "@sections/homepage/HomePurchase.astro";
 import HomeContact from "@sections/homepage/HomeContact.astro";
-import { company } from "@data/company";
+import SiteFooter from "@components/layout/SiteFooter.astro";
 ---
 
 <Layout>
@@ -21,70 +21,6 @@ import { company } from "@data/company";
     <HomeContact />
   </main>
 
-  <footer class="relative bg-[#0f172a] text-alabaster border-t-[0.5px] border-slate-900 shadow-[0_-56px_120px_-96px_rgba(15,23,42,0.95)]">
-    <!-- Top: massive monogram + nav -->
-    <div class="px-6 md:px-10 lg:px-12 pt-16 md:pt-24 pb-12 grid grid-cols-1 lg:grid-cols-12 gap-12 border-b border-slate-800 overflow-hidden">
-      <!-- Monogram -->
-      <div class="min-w-0 lg:col-span-6 flex flex-col gap-6">
-        <span class="font-mono text-[11px] md:text-[10px] uppercase tracking-[0.14em] md:tracking-[0.22em] text-slate-500 break-words">
-          {company.name} · {company.city.toUpperCase()} · {company.country}
-        </span>
-        <h2 class="display max-w-full text-[15vw] md:text-[8.4vw] lg:text-[6.2vw] xl:text-[5.7vw] leading-[0.88] uppercase text-alabaster break-words">
-          ONE<br />CONSTRUCTION
-        </h2>
-        <p class="text-sm text-slate-400 max-w-[42ch] leading-relaxed mt-4">
-          {company.description}
-        </p>
-      </div>
-
-      <!-- Nav columns -->
-      <div class="min-w-0 lg:col-span-6 grid grid-cols-2 md:grid-cols-3 gap-8">
-        <div class="min-w-0 flex flex-col gap-3">
-          <span class="font-mono text-[11px] md:text-[10px] uppercase tracking-[0.14em] md:tracking-[0.22em] text-slate-500 pb-3 border-b border-slate-800">Сайт</span>
-          <a href="#projects" class="font-mono text-sm uppercase tracking-[0.12em] text-slate-300 hover:text-violet-400 transition-colors">Объекты</a>
-          <a href="#about" class="font-mono text-sm uppercase tracking-[0.12em] text-slate-300 hover:text-violet-400 transition-colors">О компании</a>
-          <a href="#privileges" class="font-mono text-sm uppercase tracking-[0.12em] text-slate-300 hover:text-violet-400 transition-colors">Стандарт</a>
-          <a href="#purchase" class="font-mono text-sm uppercase tracking-[0.12em] text-slate-300 hover:text-violet-400 transition-colors">Покупка</a>
-          <a href="#contact" class="font-mono text-sm uppercase tracking-[0.12em] text-slate-300 hover:text-violet-400 transition-colors">Контакты</a>
-        </div>
-
-        <div class="min-w-0 flex flex-col gap-3">
-          <span class="font-mono text-[11px] md:text-[10px] uppercase tracking-[0.14em] md:tracking-[0.22em] text-slate-500 pb-3 border-b border-slate-800">Связь</span>
-          <a href={company.phones[0].href} class="font-mono text-sm text-slate-300 hover:text-violet-400 transition-colors break-words">{company.phones[0].display}</a>
-          <a href={company.email.href} class="font-mono text-sm text-slate-300 hover:text-violet-400 transition-colors break-all">{company.email.display}</a>
-        </div>
-
-        <div class="min-w-0 flex flex-col gap-3 col-span-2 md:col-span-1">
-          <span class="font-mono text-[11px] md:text-[10px] uppercase tracking-[0.14em] md:tracking-[0.22em] text-slate-500 pb-3 border-b border-slate-800">Офис</span>
-          <span class="font-mono text-sm text-slate-300 leading-relaxed break-words">
-            г. Бишкек,<br/>{company.office.streetRu}
-          </span>
-          <span class="font-mono text-[11px] uppercase tracking-[0.14em] md:tracking-[0.16em] text-slate-500 break-words">
-            {company.hours.display}
-          </span>
-          <span class="font-mono text-[11px] uppercase tracking-[0.14em] md:tracking-[0.16em] text-slate-500 break-words">
-            {company.hours.sunday}
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bottom strip -->
-    <div class="px-6 md:px-10 lg:px-12 py-8 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-      <div class="min-w-0 md:col-span-6 flex flex-col gap-2">
-        <span class="font-mono text-[11px] md:text-[10px] uppercase tracking-[0.14em] md:tracking-[0.22em] text-slate-500 break-words">
-          © {company.legal.companyName} · ВСЕ ПРАВА ЗАЩИЩЕНЫ
-        </span>
-        <span class="font-mono text-[10px] md:text-[9px] uppercase tracking-[0.12em] md:tracking-[0.16em] text-slate-600 leading-relaxed break-words">
-          ИНН: {company.legal.inn} · {company.legal.license}
-        </span>
-      </div>
-      <div class="min-w-0 md:col-span-6 flex flex-wrap md:justify-end gap-4 md:gap-6">
-        <span class="font-mono text-[11px] md:text-[10px] uppercase tracking-[0.14em] md:tracking-[0.22em] text-slate-500">Премиальная недвижимость</span>
-        <span class="font-mono text-[11px] md:text-[10px] uppercase tracking-[0.14em] md:tracking-[0.22em] text-slate-500">Бишкек · Кыргызстан</span>
-        <span class="font-mono text-[11px] md:text-[10px] uppercase tracking-[0.14em] md:tracking-[0.22em] text-slate-500 break-words">{company.coordinates.display}</span>
-      </div>
-    </div>
-  </footer>
+  <SiteFooter />
 </Layout>
 
