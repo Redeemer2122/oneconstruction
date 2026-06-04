@@ -1,0 +1,63 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  projects: CollectionEntry<"projects">[];
+}
+
+const { projects } = Astro.props;
+const featured = projects[0];
+const lakeProject = projects.find((project) =>
+  project.data.location?.toLowerCase().includes("иссык")
+);
+const heroProject = lakeProject ?? featured;
+const heroImage = "/img/privileges/entrance.jpg";
+---
+
+<section class="relative isolate -mt-[73px] border-b border-slate-900/10 bg-[#FBFBFA] lg:-mt-[81px]" aria-labelledby="projects-hero-title">
+  <div
+    class="oc-media-fallback relative min-h-[100dvh] overflow-hidden border-b border-slate-900/10 bg-[#111827] bg-cover bg-center"
+    style={`background-image: url('${heroImage}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}
+  >
+    <img
+      src={heroImage}
+      alt={heroProject ? `${heroProject.data.name} — курортная архитектура с водой` : "Курортная архитектура с водой"}
+      width="1800"
+      height="980"
+      loading="eager"
+      decoding="async"
+      class="absolute inset-0 h-full w-full object-cover saturate-[0.82] contrast-[1.04]"
+      onerror="this.dataset.failed='true'"
+    />
+
+    <div
+      aria-hidden="true"
+      class="absolute inset-0 bg-[linear-gradient(180deg,rgba(251,251,250,0.18)_0%,rgba(15,23,42,0.10)_35%,rgba(2,6,23,0.72)_100%)]"
+    ></div>
+    <div
+      aria-hidden="true"
+      class="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,23,0.70)_0%,rgba(2,6,23,0.34)_38%,rgba(2,6,23,0.04)_78%)]"
+    ></div>
+
+    <div class="relative z-10 flex min-h-[100dvh] items-center px-5 pb-10 pt-24 md:px-10 lg:px-12">
+      <div class="max-w-[44rem] translate-y-16 text-[#FBFBFA] md:translate-y-20 lg:translate-y-24">
+        <nav class="mb-9 font-mono text-[11px] uppercase leading-relaxed tracking-[0.14em] text-[#FBFBFA]/72" aria-label="Хлебные крошки">
+          <a href="/" class="transition-colors duration-300 hover:text-white">Главная</a>
+          <span class="mx-2 text-[#FBFBFA]/42">/</span>
+          <span class="text-[#FBFBFA]">Объекты</span>
+        </nav>
+
+        <h1
+          id="projects-hero-title"
+          class="font-medium uppercase leading-[0.92] tracking-normal text-[#FBFBFA]"
+        >
+          <span class="block text-[4rem] md:text-[6.8rem] lg:text-[8rem] xl:text-[8.8rem]">ОБЪЕКТЫ</span>
+          <span class="block whitespace-nowrap text-[2.15rem] md:text-[5.2rem] lg:text-[6.25rem] xl:text-[6.9rem]">ONE CONSTRUCTION<span class="text-violet-400">.</span></span>
+        </h1>
+        <p class="mt-7 max-w-[32rem] text-sm leading-6 text-[#FBFBFA]/82 md:text-base md:leading-7">
+          Выбирайте пространство, которое отражает ваш образ жизни и ценности. Мы создаём не просто дома, а места силы.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

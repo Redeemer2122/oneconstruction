@@ -1,0 +1,25 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import HomeHeader from "@sections/homepage/HomeHeader.astro";
+import SiteFooter from "@components/layout/SiteFooter.astro";
+import ProjectsHero from "@sections/projects/ProjectsHero.astro";
+import ProjectsShowcase from "@sections/projects/ProjectsShowcase.astro";
+import ProjectsCta from "@sections/projects/ProjectsCta.astro";
+
+const allProjects = await getCollection("projects");
+const projects = allProjects.sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+---
+
+<Layout
+  title="Все объекты · One Construction"
+  description="Полная подборка объектов One Construction: жилые комплексы, резиденции и курортные проекты."
+>
+  <HomeHeader />
+  <main id="main" class="overflow-x-hidden bg-[#FBFBFA] pt-[73px] lg:pt-[81px]">
+    <ProjectsHero projects={projects} />
+    <ProjectsShowcase projects={projects} />
+    <ProjectsCta />
+  </main>
+  <SiteFooter />
+</Layout>

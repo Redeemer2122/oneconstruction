@@ -1,0 +1,241 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  projects: CollectionEntry<"projects">[];
+}
+
+const { projects } = Astro.props;
+const [featured, ...restProjects] = projects;
+const filters = ["Все", "Жилые комплексы", "Резиденции", "Готовые", "Строятся"];
+
+const pluralizeObjects = (count: number) => {
+  const last = count % 10;
+  const lastTwo = count % 100;
+  if (last === 1 && lastTwo !== 11) return `${count} объект`;
+  if ([2, 3, 4].includes(last) && ![12, 13, 14].includes(lastTwo)) return `${count} объекта`;
+  return `${count} объектов`;
+};
+
+const getObjectType = (project: CollectionEntry<"projects">) => {
+  const name = project.data.name.toLowerCase();
+  if (name.includes("resort") || name.includes("village")) return "Резиденция";
+  return "Жилой комплекс";
+};
+
+const getLocationLine = (location?: string) => location ?? "Кыргызстан";
+const getSlug = (project: CollectionEntry<"projects">) => project.data.slug ?? project.id;
+const getFeaturedSpecs = (project: CollectionEntry<"projects">) => [
+  { label: "Территория", value: project.data.territory ?? "уточняется" },
+  { label: "Объем", value: project.data.units },
+  { label: "Этажность", value: project.data.storeys },
+  { label: "Стоимость", value: project.data.priceFrom },
+];
+const getCardSpecs = (project: CollectionEntry<"projects">) => [
+  { label: "Цена", value: project.data.priceFrom },
+  { label: "Срок", value: project.data.delivery },
+  {
+    label: project.data.installment ? "Рассрочка" : "Объем",
+    value: project.data.installment?.label ?? project.data.units,
+  },
+];
+const localFallbacks: Record<string, string> = {
+  "one-ordo-resort": "/img/privileges/courtyard-water.jpg",
+  lotos: "/img/hero/lotos-hero-temp.jpg",
+  "yacht-village": "/img/hero/yacht-village-hero-temp.jpg",
+  medina: "/img/hero/medina-hero-temp.jpg",
+};
+const getFallbackImage = (project: CollectionEntry<"projects">) =>
+  localFallbacks[project.id] ?? "/img/privileges/entrance.jpg";
+---
+
+<section
+  id="objects-showcase"
+  class="relative bg-[#FBFBFA] px-5 py-12 md:px-10 md:py-16 lg:px-12 lg:py-20"
+  aria-labelledby="projects-showcase-title"
+>
+  <header class="mb-8 grid gap-6 border-b border-slate-900/10 pb-6 md:grid-cols-[1fr_auto] md:items-end">
+    <div>
+      <p class="mb-4 font-mono text-[10px] uppercase leading-relaxed tracking-[0.18em] text-slate-500">
+        Объектный индекс
+      </p>
+      <h2 id="projects-showcase-title" class="text-3xl font-medium uppercase leading-none tracking-normal text-slate-950 md:text-5xl">
+        Подборка One Construction
+      </h2>
+    </div>
+    <p class="font-mono text-[11px] uppercase leading-relaxed tracking-[0.14em] text-slate-500 md:text-right">
+      {pluralizeObjects(projects.length)}
+    </p>
+  </header>
+
+  <div class="mb-8 flex min-w-0 items-center justify-between gap-5 overflow-x-auto border-b border-slate-900/10 pb-4" aria-label="Визуальные категории">
+    <div class="flex min-w-max items-center gap-7 md:gap-10">
+      {filters.map((filter, index) => (
+        <button
+          type="button"
+          class={`relative pb-3 font-mono text-[10px] uppercase leading-none tracking-[0.16em] transition-colors duration-300 ${index === 0 ? "text-slate-950" : "text-slate-400 hover:text-slate-700"}`}
+          aria-pressed={index === 0 ? "true" : "false"}
+        >
+          {filter}
+          {index === 0 && <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-px bg-slate-950"></span>}
+        </button>
+      ))}
+    </div>
+    <span class="hidden shrink-0 font-mono text-[10px] uppercase leading-none tracking-[0.16em] text-slate-400 md:inline">
+      Без фильтрации
+    </span>
+  </div>
+
+  {featured && (
+    <article class="mb-6 grid border border-slate-900/10 bg-[#FBFBFA] lg:grid-cols-[1.18fr_0.82fr]">
+      <a
+        href={`/projects/${getSlug(featured)}`}
+        class="oc-media-fallback group relative block min-h-[26rem] overflow-hidden bg-[#F5F4F0] bg-cover bg-center md:min-h-[36rem] lg:min-h-[44rem]"
+        style={`background-image: linear-gradient(135deg, rgba(251,251,250,0.1), rgba(15,23,42,0.12)), url('${getFallbackImage(featured)}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}
+        aria-label={`Открыть объект ${featured.data.name}`}
+      >
+        <img
+          src={featured.data.cover}
+          alt={`${featured.data.name} — архитектурный рендер`}
+          width="1800"
+          height="1200"
+          loading="eager"
+          decoding="async"
+          class="absolute inset-0 z-[1] h-full w-full object-cover saturate-[0.9] contrast-[1.03] transition-transform duration-[1400ms] ease-[cubic-bezier(0.625,0.05,0,1)] group-hover:scale-[1.025]"
+          onerror="this.dataset.failed='true'"
+        />
+        <span class="absolute left-4 top-4 z-[3] border border-[#FBFBFA]/55 bg-[#FBFBFA]/88 px-3 py-2 font-mono text-[10px] uppercase leading-none tracking-[0.16em] text-violet-700 md:left-6 md:top-6">
+          {featured.data.index}
+        </span>
+      </a>
+
+      <div class="grid content-between gap-10 border-t border-slate-900/10 p-5 md:p-8 lg:border-l lg:border-t-0 lg:p-10 xl:p-12">
+        <div>
+          <div class="mb-9 flex items-start justify-between gap-5">
+            <span class="font-mono text-[10px] uppercase leading-relaxed tracking-[0.18em] text-violet-700">
+              {getObjectType(featured)}
+            </span>
+            <span class="border border-violet-700/35 px-3 py-2 font-mono text-[10px] uppercase leading-none tracking-[0.14em] text-violet-700">
+              {featured.data.status}
+            </span>
+          </div>
+
+          <h3 class="text-4xl font-medium uppercase leading-[0.96] tracking-normal text-slate-950 md:text-6xl">
+            {featured.data.name}
+          </h3>
+          <p class="mt-5 font-mono text-[11px] uppercase leading-relaxed tracking-[0.12em] text-slate-500">
+            {getLocationLine(featured.data.location)}
+          </p>
+          {featured.data.description && (
+            <p class="mt-7 max-w-[35rem] text-sm leading-7 text-slate-600 md:text-base">
+              {featured.data.description}
+            </p>
+          )}
+        </div>
+
+        <div>
+          <dl class="mb-8 grid border-t border-slate-900/10 sm:grid-cols-2">
+            {getFeaturedSpecs(featured).map((item, index) => (
+              <div class={`border-b border-slate-900/10 py-5 ${index % 2 === 0 ? "sm:border-r sm:pr-5" : "sm:pl-5"}`}>
+                <dt class="font-mono text-[10px] uppercase leading-relaxed tracking-[0.16em] text-slate-400">
+                  {item.label}
+                </dt>
+                <dd class="mt-2 font-mono text-sm uppercase leading-snug tracking-[0.06em] text-slate-900">
+                  {item.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+
+          <a
+            href={`/projects/${getSlug(featured)}`}
+            class="group inline-grid max-w-full grid-cols-[1fr_auto] items-center bg-slate-950 font-mono text-[11px] uppercase leading-none tracking-[0.14em] text-[#FBFBFA] transition-colors duration-300 hover:bg-violet-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700"
+          >
+            <span class="px-5 py-4">Открыть объект</span>
+            <span aria-hidden="true" class="grid h-full min-w-12 place-items-center border-l border-[#FBFBFA]/20 transition-transform duration-300 group-hover:translate-x-0.5">
+              →
+            </span>
+          </a>
+        </div>
+      </div>
+    </article>
+  )}
+
+  <div class="grid items-stretch gap-5 md:auto-rows-fr md:grid-cols-3">
+    {restProjects.map((project) => (
+      <article class="h-full border border-slate-900/10 bg-[#FBFBFA]">
+        <a
+          href={`/projects/${getSlug(project)}`}
+          class="oc-media-fallback group/image relative block aspect-[11/10] overflow-hidden bg-[#F5F4F0] bg-cover bg-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700 md:aspect-auto md:h-[22rem] xl:h-[24rem]"
+          style={`background-image: linear-gradient(135deg, rgba(251,251,250,0.08), rgba(15,23,42,0.12)), url('${getFallbackImage(project)}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}
+          aria-label={`Открыть объект ${project.data.name}`}
+        >
+          <img
+            src={project.data.cover}
+            alt={`${project.data.name} — архитектурный рендер`}
+            width="1200"
+            height="900"
+            loading="lazy"
+            decoding="async"
+            class="absolute inset-0 z-[1] h-full w-full object-cover saturate-[0.92] contrast-[1.03] transition-transform duration-[1200ms] ease-[cubic-bezier(0.625,0.05,0,1)] group-hover/image:scale-[1.035]"
+            onerror="this.dataset.failed='true'"
+          />
+          <span class="absolute right-4 top-4 z-[3] border border-[#FBFBFA]/55 bg-[#FBFBFA]/88 px-3 py-2 font-mono text-[10px] uppercase leading-none tracking-[0.14em] text-slate-600">
+            {project.data.status}
+          </span>
+        </a>
+
+        <div class="flex min-h-[25rem] flex-col justify-between gap-8 p-5 md:p-6 xl:p-7">
+          <div>
+            <span class="mb-4 block font-mono text-[10px] uppercase leading-relaxed tracking-[0.18em] text-violet-700">
+              {getObjectType(project)}
+            </span>
+            <h3 class="text-3xl font-medium uppercase leading-[0.96] tracking-normal text-slate-950 xl:text-4xl">
+              {project.data.name}
+            </h3>
+            <p class="mt-4 font-mono text-[10px] uppercase leading-relaxed tracking-[0.12em] text-slate-500">
+              {getLocationLine(project.data.location)}
+            </p>
+            {project.data.description && (
+              <p class="mt-5 text-sm leading-6 text-slate-600">
+                {project.data.description}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <dl class="grid border-t border-slate-900/10">
+              {getCardSpecs(project).map((item) => (
+                <div class="grid grid-cols-[minmax(6rem,0.55fr)_1fr] gap-4 border-b border-slate-900/10 py-3">
+                  <dt class="font-mono text-[9px] uppercase leading-relaxed tracking-[0.16em] text-slate-400">
+                    {item.label}
+                  </dt>
+                  <dd class="font-mono text-[11px] uppercase leading-relaxed tracking-[0.08em] text-slate-900">
+                    {item.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+
+            <a
+              href={`/projects/${getSlug(project)}`}
+              class="project-card-cta mt-6 inline-flex max-w-full items-center justify-start gap-3 border border-slate-950 bg-slate-950 px-3.5 py-3 font-mono text-[10px] uppercase leading-none tracking-[0.14em] text-[#FBFBFA] transition-colors duration-300 hover:border-violet-700 hover:bg-violet-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700"
+            >
+                <span>Открыть объект</span>
+                <span aria-hidden="true" class="project-card-cta-arrow font-mono text-base leading-none transition-transform duration-300">
+                  →
+                </span>
+            </a>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .project-card-cta:hover .project-card-cta-arrow,
+  .project-card-cta:focus-visible .project-card-cta-arrow {
+    transform: translateX(0.25rem);
+  }
+</style>

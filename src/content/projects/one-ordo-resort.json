@@ -1,0 +1,21 @@
+{
+  "name": "One Ordo Resort",
+  "index": "04",
+  "sortOrder": 0,
+  "showOnHomepage": false,
+  "cover": "/img/privileges/entrance.jpg",
+  "location": "с. Кара-Ой, Иссык-Куль",
+  "status": "Строится",
+  "delivery": "СДАЧА · УТОЧНЯЕТСЯ",
+  "storeys": "5 — 7 ЭТАЖЕЙ",
+  "units": "1486 АПАРТАМЕНТОВ",
+  "priceFrom": "по запросу",
+  "description": "Премиальный курортный комплекс на побережье Иссык-Куля с апартаментами, дуплексами и коттеджами.",
+  "territory": "11,7 ГА",
+  "plans": [],
+  "installment": {
+    "label": "Условия уточняются",
+    "status": "needs_verification",
+    "note": "Статус рассрочки для One Ordo Resort требует проверки"
+  }
+}

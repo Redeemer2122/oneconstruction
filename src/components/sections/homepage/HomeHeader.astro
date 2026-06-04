@@ -2,12 +2,12 @@
 import { company } from "@data/company";
 
 const nav = [
-  { label: "Главная", href: "#main" },
-  { label: "Объекты", href: "#projects" },
-  { label: "О компании", href: "#about" },
-  { label: "Варианты покупки", href: "#purchase" },
-  { label: "Преимущества", href: "#privileges" },
-  { label: "Контакты", href: "#contact" },
+  { label: "Главная", href: "/#main" },
+  { label: "Объекты", href: "/projects" },
+  { label: "О компании", href: "/#about" },
+  { label: "Варианты покупки", href: "/#purchase" },
+  { label: "Преимущества", href: "/#privileges" },
+  { label: "Контакты", href: "/#contact" },
 ];
 
 const primaryPhone = company.phones.find((phone) => phone.primary) ?? company.phones[0];
@@ -22,7 +22,7 @@ const socialLinks = company.socialLinks;
   </div>
 
   <div class="header-enter grid grid-cols-[1fr_auto] items-center gap-5 px-5 py-4 md:px-8 lg:grid-cols-[minmax(180px,0.85fr)_minmax(0,1.85fr)_minmax(280px,0.9fr)] lg:px-8 xl:grid-cols-[minmax(190px,0.9fr)_minmax(0,1.9fr)_minmax(310px,0.9fr)] xl:px-10">
-    <a href="#main" class="group flex min-w-0 items-center gap-3" aria-label="One Construction — на главную">
+    <a href="/#main" class="group flex min-w-0 items-center gap-3" aria-label="One Construction — на главную">
       <img
         src="/img/logo-silver.jpeg"
         alt=""
@@ -147,7 +147,7 @@ const socialLinks = company.socialLinks;
           ))
         }
         <a
-          href="#contact"
+          href="/#contact"
           data-mobile-nav-link
           class="col-span-3 border-[0.5px] border-slate-950 bg-slate-950 px-4 py-3 text-center font-mono text-[11px] uppercase tracking-[0.12em] text-alabaster"
         >

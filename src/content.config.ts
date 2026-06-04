@@ -23,6 +23,7 @@ const projects = defineCollection({
     name: z.string(),
     index: z.string(),
     sortOrder: z.number().int(),
+    showOnHomepage: z.boolean().optional(),
     location: z.string().optional(),
     phase: z.enum(["PHASE_01", "PHASE_02", "PHASE_03"]).optional(),
     coordinates: z
@@ -35,6 +36,7 @@ const projects = defineCollection({
     storeys: z.string(),
     units: z.string(),
     priceFrom: z.string(),
+    territory: z.string().optional(),
     plans: z.array(
       z.object({
         rooms: z.string(),
