@@ -163,7 +163,7 @@ const getFallbackImage = (project: CollectionEntry<"projects">) =>
 
   <div class="grid items-stretch gap-5 md:auto-rows-fr md:grid-cols-3">
     {restProjects.map((project) => (
-      <article class="h-full border border-slate-900/10 bg-[#FBFBFA]">
+      <article class="flex h-full flex-col border border-slate-900/10 bg-[#FBFBFA]">
         <a
           href={`/projects/${getSlug(project)}`}
           class="oc-media-fallback group/image relative block aspect-[11/10] overflow-hidden bg-[#F5F4F0] bg-cover bg-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700 md:aspect-auto md:h-[22rem] xl:h-[24rem]"
@@ -185,32 +185,32 @@ const getFallbackImage = (project: CollectionEntry<"projects">) =>
           </span>
         </a>
 
-        <div class="flex min-h-[25rem] flex-col justify-between gap-8 p-5 md:p-6 xl:p-7">
+        <div class="flex min-h-[34.25rem] flex-1 flex-col justify-between gap-10 p-6 md:p-7 xl:p-8">
           <div>
-            <span class="mb-4 block font-mono text-[10px] uppercase leading-relaxed tracking-[0.18em] text-violet-700">
+            <span class="mb-5 block font-mono text-[10px] uppercase leading-relaxed tracking-[0.18em] text-violet-700">
               {getObjectType(project)}
             </span>
             <h3 class="text-3xl font-medium uppercase leading-[0.96] tracking-normal text-slate-950 xl:text-4xl">
               {project.data.name}
             </h3>
-            <p class="mt-4 font-mono text-[10px] uppercase leading-relaxed tracking-[0.12em] text-slate-500">
+            <p class="mt-5 font-mono text-[10px] uppercase leading-relaxed tracking-[0.12em] text-slate-500">
               {getLocationLine(project.data.location)}
             </p>
             {project.data.description && (
-              <p class="mt-5 text-sm leading-6 text-slate-600">
+              <p class="mt-6 max-w-[31rem] text-[15px] leading-7 text-slate-700 md:text-sm md:leading-7">
                 {project.data.description}
               </p>
             )}
           </div>
 
           <div>
-            <dl class="grid border-t border-slate-900/10">
+            <dl class="grid gap-4 border-t border-slate-900/10 pt-5">
               {getCardSpecs(project).map((item) => (
-                <div class="grid grid-cols-[minmax(6rem,0.55fr)_1fr] gap-4 border-b border-slate-900/10 py-3">
-                  <dt class="font-mono text-[9px] uppercase leading-relaxed tracking-[0.16em] text-slate-400">
+                <div class="grid gap-1.5">
+                  <dt class="font-mono text-[9px] uppercase leading-none tracking-[0.16em] text-slate-400">
                     {item.label}
                   </dt>
-                  <dd class="font-mono text-[11px] uppercase leading-relaxed tracking-[0.08em] text-slate-900">
+                  <dd class="font-mono text-[11px] uppercase leading-relaxed tracking-[0.08em] text-slate-800">
                     {item.value}
                   </dd>
                 </div>
@@ -219,7 +219,7 @@ const getFallbackImage = (project: CollectionEntry<"projects">) =>
 
             <a
               href={`/projects/${getSlug(project)}`}
-              class="project-card-cta mt-6 inline-flex max-w-full items-center justify-start gap-3 border border-slate-950 bg-slate-950 px-3.5 py-3 font-mono text-[10px] uppercase leading-none tracking-[0.14em] text-[#FBFBFA] transition-colors duration-300 hover:border-violet-700 hover:bg-violet-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700"
+              class="project-card-cta mt-7 inline-flex max-w-full items-center justify-start gap-3 border border-slate-950 bg-slate-950 px-3.5 py-3 font-mono text-[10px] uppercase leading-none tracking-[0.14em] text-[#FBFBFA] transition-colors duration-300 hover:border-violet-700 hover:bg-violet-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700"
             >
                 <span>Открыть объект</span>
                 <span aria-hidden="true" class="project-card-cta-arrow font-mono text-base leading-none transition-transform duration-300">

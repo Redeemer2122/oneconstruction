@@ -1,25 +1,51 @@
 ---
 import { company } from "@data/company";
+
+interface Props {
+  variant?: "large" | "compact";
+}
+
+const { variant = "large" } = Astro.props;
+const isCompact = variant === "compact";
+
+const topClasses = isCompact
+  ? "px-6 md:px-10 lg:px-12 pt-10 md:pt-12 pb-8 grid grid-cols-1 lg:grid-cols-12 gap-8 border-b border-slate-800 overflow-hidden"
+  : "px-6 md:px-10 lg:px-12 pt-16 md:pt-24 pb-12 grid grid-cols-1 lg:grid-cols-12 gap-12 border-b border-slate-800 overflow-hidden";
+const monogramClasses = isCompact
+  ? "min-w-0 lg:col-span-5 flex flex-col gap-4"
+  : "min-w-0 lg:col-span-6 flex flex-col gap-6";
+const titleClasses = isCompact
+  ? "display max-w-full text-[10.5vw] md:text-[5.6vw] lg:text-[4.1vw] xl:text-[3.5vw] leading-[0.9] uppercase text-alabaster break-words"
+  : "display max-w-full text-[15vw] md:text-[8.4vw] lg:text-[6.2vw] xl:text-[5.7vw] leading-[0.88] uppercase text-alabaster break-words";
+const descriptionClasses = isCompact
+  ? "text-sm text-slate-400 max-w-[48ch] leading-relaxed"
+  : "text-sm text-slate-400 max-w-[42ch] leading-relaxed mt-4";
+const navClasses = isCompact
+  ? "min-w-0 lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-6 lg:gap-8"
+  : "min-w-0 lg:col-span-6 grid grid-cols-2 md:grid-cols-3 gap-8";
+const bottomClasses = isCompact
+  ? "px-6 md:px-10 lg:px-12 py-5 grid grid-cols-1 md:grid-cols-12 gap-5 items-center"
+  : "px-6 md:px-10 lg:px-12 py-8 grid grid-cols-1 md:grid-cols-12 gap-6 items-center";
 ---
 
 <footer class="relative bg-[#0f172a] text-alabaster border-t-[0.5px] border-slate-900 shadow-[0_-56px_120px_-96px_rgba(15,23,42,0.95)]">
   <!-- Top: massive monogram + nav -->
-  <div class="px-6 md:px-10 lg:px-12 pt-16 md:pt-24 pb-12 grid grid-cols-1 lg:grid-cols-12 gap-12 border-b border-slate-800 overflow-hidden">
+  <div class={topClasses}>
     <!-- Monogram -->
-    <div class="min-w-0 lg:col-span-6 flex flex-col gap-6">
+    <div class={monogramClasses}>
       <span class="font-mono text-[11px] md:text-[10px] uppercase tracking-[0.14em] md:tracking-[0.22em] text-slate-500 break-words">
         {company.name} · {company.city.toUpperCase()} · {company.country}
       </span>
-      <h2 class="display max-w-full text-[15vw] md:text-[8.4vw] lg:text-[6.2vw] xl:text-[5.7vw] leading-[0.88] uppercase text-alabaster break-words">
+      <h2 class={titleClasses}>
         ONE<br />CONSTRUCTION
       </h2>
-      <p class="text-sm text-slate-400 max-w-[42ch] leading-relaxed mt-4">
+      <p class={descriptionClasses}>
         {company.description}
       </p>
     </div>
 
     <!-- Nav columns -->
-    <div class="min-w-0 lg:col-span-6 grid grid-cols-2 md:grid-cols-3 gap-8">
+    <div class={navClasses}>
       <div class="min-w-0 flex flex-col gap-3">
         <span class="font-mono text-[11px] md:text-[10px] uppercase tracking-[0.14em] md:tracking-[0.22em] text-slate-500 pb-3 border-b border-slate-800">Сайт</span>
         <a href="#projects" class="font-mono text-sm uppercase tracking-[0.12em] text-slate-300 hover:text-violet-400 transition-colors">Объекты</a>
@@ -51,7 +77,7 @@ import { company } from "@data/company";
   </div>
 
   <!-- Bottom strip -->
-  <div class="px-6 md:px-10 lg:px-12 py-8 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+  <div class={bottomClasses}>
     <div class="min-w-0 md:col-span-6 flex flex-col gap-2">
       <span class="font-mono text-[11px] md:text-[10px] uppercase tracking-[0.14em] md:tracking-[0.22em] text-slate-500 break-words">
         © {company.legal.companyName} · ВСЕ ПРАВА ЗАЩИЩЕНЫ
