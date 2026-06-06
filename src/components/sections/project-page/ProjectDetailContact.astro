@@ -1,0 +1,100 @@
+---
+import { company } from "@data/company";
+
+interface Props {
+  project: any;
+}
+
+const { project } = Astro.props;
+const data = project.data;
+const contact = data.contactCta ?? {
+  title: `Получите консультацию по ${data.name}`,
+  body: "Оставьте контакты, и менеджер уточнит доступные квартиры и условия покупки.",
+};
+const serviceNotes = [
+  "Подбор формата под запрос",
+  "Актуальные условия и планировки",
+  "Помощь с оформлением заявки",
+];
+---
+
+<section id="contact" class="bg-[#F5F4F0] px-5 py-20 md:px-8 md:py-28 lg:px-10" aria-labelledby="contact-title">
+  <div class="mx-auto grid max-w-[1480px] overflow-hidden border-[0.5px] border-slate-900/15 bg-[#FBFBFA] lg:grid-cols-[0.95fr_1.05fr]">
+    <div class="relative min-h-[560px] overflow-hidden p-6 md:p-8 lg:p-10">
+      <img
+        src={data.cover ?? "/img/privileges/green-facade.jpg"}
+        alt=""
+        class="absolute inset-0 h-full w-full object-cover opacity-[0.14] mix-blend-multiply"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(251,251,250,0.96),rgba(251,251,250,0.82))]" aria-hidden="true"></div>
+      <svg viewBox="0 0 520 360" aria-hidden="true" class="absolute -bottom-2 right-0 hidden w-[72%] text-violet-700/18 md:block">
+        <path d="M34 326H486M82 326V82l112-38 164 64v218M118 326V120h70v206M226 326V98h82v228M346 326V148h74v178M118 150h70M118 190h70M118 230h70M226 132h82M226 170h82M226 208h82M346 178h74M346 220h74M346 262h74" fill="none" stroke="currentColor" stroke-width="1" />
+      </svg>
+      <div class="relative z-10 grid h-full content-between gap-12">
+        <div>
+          <p class="mono-detail text-violet-700">Заявка</p>
+          <h2 id="contact-title" class="mt-5 max-w-[12ch] text-4xl font-medium leading-[1.02] text-slate-950 md:text-6xl">
+            {contact.title}
+          </h2>
+          <p class="mt-6 max-w-[48ch] text-base leading-8 text-slate-600">{contact.body}</p>
+        </div>
+
+        <div class="grid gap-8">
+          <ul class="grid gap-4 text-sm leading-6 text-slate-700 sm:grid-cols-3">
+            {serviceNotes.map((note) => (
+              <li class="border-t-[0.5px] border-slate-900/15 pt-4">{note}</li>
+            ))}
+          </ul>
+
+          <div class="grid gap-px bg-slate-900/10 p-px text-slate-700 sm:grid-cols-3">
+            <a href={company.phones[0].href} class="bg-[#FBFBFA]/88 p-4 font-mono text-[11px] uppercase tracking-[0.12em] transition-colors duration-300 hover:text-violet-700">{company.phones[0].display}</a>
+            <a href={company.email.href} class="break-all bg-[#FBFBFA]/88 p-4 font-mono text-[11px] uppercase tracking-[0.12em] transition-colors duration-300 hover:text-violet-700">{company.email.display}</a>
+            <span class="bg-[#FBFBFA]/88 p-4 font-mono text-[11px] uppercase tracking-[0.12em]">{company.office.addressDisplayRu}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form class="grid content-center gap-5 border-t-[0.5px] border-slate-900/15 bg-[#FBFBFA] p-6 md:p-8 lg:border-l-[0.5px] lg:border-t-0 lg:p-12">
+      <label class="grid gap-2">
+        <span class="mono-detail">Имя</span>
+        <input
+          type="text"
+          name="name"
+          autocomplete="name"
+          class="min-h-14 border-[0.5px] border-slate-900/15 bg-transparent px-4 text-base text-slate-950 outline-none transition-colors duration-300 focus:border-slate-950"
+        />
+      </label>
+      <label class="grid gap-2">
+        <span class="mono-detail">Телефон</span>
+        <input
+          type="tel"
+          name="phone"
+          autocomplete="tel"
+          placeholder="+996"
+          class="min-h-14 border-[0.5px] border-slate-900/15 bg-transparent px-4 text-base text-slate-950 outline-none transition-colors duration-300 placeholder:text-slate-400 focus:border-slate-950"
+        />
+      </label>
+      <label class="grid gap-2">
+        <span class="mono-detail">Комментарий</span>
+        <textarea
+          name="message"
+          rows="4"
+          class="min-h-32 resize-y border-[0.5px] border-slate-900/15 bg-transparent px-4 py-3 text-base text-slate-950 outline-none transition-colors duration-300 focus:border-slate-950"
+        ></textarea>
+      </label>
+      <label class="flex items-start gap-3 text-xs leading-5 text-slate-500">
+        <input type="checkbox" name="privacy" class="mt-1 h-4 w-4 border-[0.5px] border-slate-900/20" />
+        <span>Я согласен с обработкой персональных данных</span>
+      </label>
+      <button
+        type="submit"
+        class="min-h-14 border-[0.5px] border-slate-950 bg-slate-950 px-5 py-4 font-mono text-[11px] uppercase tracking-[0.16em] text-alabaster transition-colors duration-300 hover:border-violet-700 hover:bg-violet-700"
+      >
+        Получить консультацию
+      </button>
+    </form>
+  </div>
+</section>

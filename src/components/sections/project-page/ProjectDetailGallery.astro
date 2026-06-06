@@ -1,0 +1,69 @@
+---
+interface Props {
+  project: any;
+}
+
+const { project } = Astro.props;
+const gallery = project.data.gallery ?? [];
+const primary = gallery[0];
+const supporting = gallery.slice(1, 4);
+---
+
+{
+  gallery.length > 0 && primary && (
+    <section class="bg-[#FBFBFA] px-5 py-20 md:px-8 md:py-28 lg:px-10" aria-labelledby="gallery-title">
+      <div class="mx-auto max-w-[1480px]">
+        <div class="mb-12 grid gap-8 lg:grid-cols-[0.6fr_0.4fr] lg:items-end">
+          <div class="border-t-[0.5px] border-slate-900/15 pt-8">
+            <p class="mono-detail text-violet-700">Галерея</p>
+            <h2 id="gallery-title" class="mt-5 text-5xl font-medium leading-[0.96] text-slate-950 md:text-6xl">
+              Архитектура и среда
+            </h2>
+          </div>
+          <p class="max-w-[44ch] text-sm leading-7 text-slate-600 lg:justify-self-end">
+            Свет, фасады, входные зоны и дворовая среда показывают характер проекта крупнее, чем сухие характеристики.
+          </p>
+        </div>
+
+        <div class="grid gap-3 lg:grid-cols-[1.55fr_0.9fr]">
+          <figure class="group relative min-h-[420px] overflow-hidden bg-blueprint md:min-h-[620px]">
+            <img
+              src={primary.image}
+              alt={primary.alt}
+              class="absolute inset-0 h-full w-full object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.625,0.05,0,1)] group-hover:scale-[1.025]"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/22 via-transparent to-transparent opacity-80" aria-hidden="true"></div>
+            {primary.caption && (
+              <figcaption class="absolute inset-x-0 bottom-0 flex items-center justify-between gap-4 bg-[#FBFBFA]/92 px-4 py-3 font-mono text-[10px] uppercase tracking-[0.14em] text-slate-700 backdrop-blur-sm">
+                <span>01 / {primary.caption}</span>
+                <span class="text-violet-700">Главный вид</span>
+              </figcaption>
+            )}
+          </figure>
+
+          <div class="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+            {supporting.map((item: any, index: number) => (
+            <figure class="group relative min-h-[240px] overflow-hidden bg-blueprint lg:min-h-0">
+              <img
+                src={item.image}
+                alt={item.alt}
+                class="absolute inset-0 h-full w-full object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.625,0.05,0,1)] group-hover:scale-[1.025]"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/18 via-transparent to-transparent opacity-80" aria-hidden="true"></div>
+              {item.caption && (
+                <figcaption class="absolute inset-x-0 bottom-0 bg-[#FBFBFA]/92 px-4 py-3 font-mono text-[10px] uppercase tracking-[0.14em] text-slate-700 backdrop-blur-sm">
+                  {String(index + 2).padStart(2, "0")} / {item.caption}
+                </figcaption>
+              )}
+            </figure>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

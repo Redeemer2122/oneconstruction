@@ -1,22 +1,43 @@
 ---
-/**
- * Динамический роут страницы ЖК.
- * Полная реализация — Фаза 2 (контент + галерея + спеки).
- */
+import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
+import HomeHeader from "@sections/homepage/HomeHeader.astro";
+import SiteFooter from "@components/layout/SiteFooter.astro";
+import ProjectDetailHero from "@sections/project-page/ProjectDetailHero.astro";
+import ProjectDetailStats from "@sections/project-page/ProjectDetailStats.astro";
+import ProjectDetailBenefits from "@sections/project-page/ProjectDetailBenefits.astro";
+import ProjectDetailPlans from "@sections/project-page/ProjectDetailPlans.astro";
+import ProjectDetailGallery from "@sections/project-page/ProjectDetailGallery.astro";
+import ProjectDetailPurchase from "@sections/project-page/ProjectDetailPurchase.astro";
+import ProjectDetailProgress from "@sections/project-page/ProjectDetailProgress.astro";
+import ProjectDetailContact from "@sections/project-page/ProjectDetailContact.astro";
 
-export function getStaticPaths() {
-  // Phase 2: подтянуть из getCollection("projects").
-  return [];
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+
+  return projects.map((project) => ({
+    params: { slug: project.data.slug ?? project.id },
+    props: { project },
+  }));
 }
 
-const { slug } = Astro.params;
+const { project } = Astro.props;
+const slug = project.data.slug ?? project.id;
+const title = `${project.data.name} · One Construction`;
+const description = project.data.seoDescription ?? project.data.description;
 ---
 
-<Layout title={`ЖК · ${slug}`}>
-  <main class="min-h-[100dvh] px-6 py-24">
-    <p class="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-300">
-      PROJECT / {slug} / TBD_PHASE_02
-    </p>
+<Layout title={title} description={description}>
+  <HomeHeader />
+  <main id="main" class="overflow-x-hidden bg-[#FBFBFA]">
+    <ProjectDetailHero project={project} slug={slug} />
+    <ProjectDetailStats project={project} />
+    <ProjectDetailBenefits project={project} />
+    <ProjectDetailPlans project={project} />
+    <ProjectDetailGallery project={project} />
+    <ProjectDetailPurchase project={project} />
+    <ProjectDetailProgress project={project} />
+    <ProjectDetailContact project={project} />
   </main>
+  <SiteFooter variant="compact" />
 </Layout>

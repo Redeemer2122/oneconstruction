@@ -1,0 +1,42 @@
+---
+interface Props {
+  project: any;
+}
+
+const { project } = Astro.props;
+const data = project.data;
+const stats =
+  data.stats?.length
+    ? data.stats
+    : [
+        { value: data.storeys, label: "этажность" },
+        { value: data.units, label: "квартиры" },
+        { value: data.delivery, label: "сдача" },
+        { value: data.priceFrom, label: "старт цены" },
+      ];
+---
+
+<section class="relative z-10 bg-[#FBFBFA] pb-16 md:pb-20" aria-labelledby="project-stats-title">
+  <h2 id="project-stats-title" class="sr-only">Ключевые характеристики проекта</h2>
+  <div class="relative w-full border-y border-slate-900/18 bg-[#F5F4F0]">
+    <dl class="project-spec-strip grid grid-cols-2 gap-0 px-5 sm:px-6 md:px-10 lg:grid-cols-5 lg:px-12">
+      {
+        stats.map((stat: any, index: number) => (
+          <div
+            class={`project-spec-cell min-w-0 px-4 py-5 sm:px-5 md:px-7 lg:min-h-28 lg:py-7 xl:min-h-32 ${index === stats.length - 1 ? "col-span-2 lg:col-span-1" : ""} ${index % 2 === 1 ? "border-l border-slate-900/10" : ""} ${index > 1 ? "border-t border-slate-900/10" : ""} lg:border-t-0 ${index > 0 ? "lg:border-l lg:border-slate-900/10" : "lg:border-l-0"}`}
+          >
+            <div class="flex h-full min-h-24 flex-col justify-center">
+              <dd class="max-w-[12ch] font-mono text-[clamp(1.8rem,2.15vw,2.85rem)] font-medium leading-none text-slate-950">
+                {stat.value}
+              </dd>
+              <dt class="mt-3 max-w-[22ch] font-mono text-[10px] uppercase leading-relaxed tracking-[0.14em] text-slate-600 md:mt-4 md:text-[11px] md:tracking-[0.16em]">
+                {stat.label}
+              </dt>
+              {stat.detail && <p class="mt-2 max-w-[24ch] text-xs leading-5 text-slate-500">{stat.detail}</p>}
+            </div>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>

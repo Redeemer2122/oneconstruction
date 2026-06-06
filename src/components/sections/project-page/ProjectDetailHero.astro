@@ -1,0 +1,124 @@
+---
+interface Props {
+  project: any;
+  slug: string;
+}
+
+const { project, slug } = Astro.props;
+const data = project.data;
+const hero = data.hero ?? {};
+const image = hero.image ?? data.cover;
+const imageAlt = hero.imageAlt ?? `${data.name} - архитектурный образ проекта`;
+const featuredPlan = data.plans?.[0];
+const featuredLabel = hero.featuredPlanLabel ?? "Доступный формат";
+const slugLabel = slug === "medina" ? "Medina" : slug;
+const heroDisplayTitleLines = slug === "medina" ? ["ЖК", "МЕДИНА+"] : [data.name.replace(/[«»]/g, "")];
+---
+
+<section class="relative isolate overflow-hidden bg-[#F5F4F0]">
+  <img
+    src={image}
+    alt={imageAlt}
+    class="absolute inset-0 -z-20 h-full w-full object-cover"
+    loading="eager"
+    decoding="async"
+  />
+  <div
+    class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(251,251,250,0.84)_0%,rgba(251,251,250,0.66)_30%,rgba(251,251,250,0.24)_56%,rgba(15,23,42,0.24)_100%)]"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_26%_45%,rgba(251,251,250,0.36),rgba(251,251,250,0.06)_34%,rgba(251,251,250,0)_48%),linear-gradient(180deg,rgba(251,251,250,0.08)_0%,rgba(251,251,250,0)_42%,rgba(15,23,42,0.2)_100%)]"
+    aria-hidden="true"
+  ></div>
+
+  <div class="mx-auto grid min-h-[700px] max-w-[1720px] gap-8 px-5 pb-12 pt-24 md:px-8 md:pb-14 lg:h-[76dvh] lg:min-h-[560px] lg:max-h-[820px] lg:grid-cols-[minmax(0,0.98fr)_360px] lg:items-center lg:px-10 lg:pt-24 xl:grid-cols-[minmax(0,1fr)_380px]">
+    <div class="relative z-10 flex max-w-[720px] flex-col justify-center py-8 lg:-translate-y-5 lg:py-5">
+      <div class="grid gap-5">
+        <div class="flex flex-wrap items-center gap-3 text-slate-600">
+          <a
+            href="/projects"
+            class="font-mono text-[11px] uppercase tracking-[0.16em] transition-colors duration-300 hover:text-slate-950"
+          >
+            Объекты
+          </a>
+          <span class="h-px w-8 bg-slate-400/70" aria-hidden="true"></span>
+          <span class="font-mono text-[11px] uppercase tracking-[0.16em]">
+            {data.index} / {slugLabel}
+          </span>
+        </div>
+
+        <div class="grid gap-4 md:gap-5">
+          <p class="w-fit border-[0.5px] border-violet-700/25 bg-[#FBFBFA]/68 px-3 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-violet-700 backdrop-blur-sm">
+            {hero.eyebrow ?? data.status}
+          </p>
+          <h1 class="display max-w-[8ch] text-[clamp(3rem,11.2vw,5.2rem)] font-medium leading-[0.92] tracking-normal text-slate-950 md:text-[clamp(4.2rem,5.7vw,6.9rem)]">
+            {heroDisplayTitleLines.map((line, index) => <span class="block">{line}{index === 0 ? " " : ""}</span>)}
+          </h1>
+          {data.location && (
+            <p class="flex max-w-[48ch] items-center gap-3 text-base font-medium leading-7 text-slate-900">
+              <span class="h-px w-8 bg-violet-700/45" aria-hidden="true"></span>
+              {data.location}
+            </p>
+          )}
+          <p class="max-w-[50ch] text-base leading-8 text-slate-700 md:text-lg md:leading-8">
+            {hero.summary ?? data.description}
+          </p>
+        </div>
+      </div>
+
+      <div class="mb-8 mt-7 flex flex-col gap-3 sm:flex-row lg:mb-11">
+        <a
+          href="#plans"
+          class="inline-flex min-h-14 items-center justify-center border-[0.5px] border-slate-950 bg-slate-950 px-6 py-4 font-mono text-[11px] uppercase tracking-[0.16em] text-alabaster transition-colors duration-300 hover:border-violet-700 hover:bg-violet-700"
+        >
+          Подобрать квартиру
+        </a>
+        <a
+          href="#contact"
+          class="inline-flex min-h-14 items-center justify-center border-[0.5px] border-slate-900/25 bg-[#FBFBFA]/58 px-6 py-4 font-mono text-[11px] uppercase tracking-[0.16em] text-slate-950 backdrop-blur-sm transition-colors duration-300 hover:border-slate-950 hover:bg-[#FBFBFA]/82"
+        >
+          Получить консультацию
+        </a>
+      </div>
+    </div>
+
+    <div class="relative z-10 pb-4 lg:pb-0">
+      <aside class="ml-auto w-full max-w-[360px] border-[0.5px] border-slate-950/14 bg-[#FBFBFA]">
+        <div class="p-5">
+          <div class="flex items-start justify-between gap-5 border-b-[0.5px] border-slate-900/12 pb-4">
+            <p class="font-mono text-[10px] uppercase tracking-[0.16em] text-violet-700">{featuredLabel}</p>
+            <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-500">{data.index}</span>
+          </div>
+          {
+            featuredPlan ? (
+              <div class="mt-5 grid gap-4">
+                <div>
+                  <h2 class="text-2xl font-medium leading-tight text-slate-950">{featuredPlan.rooms}</h2>
+                  <p class="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] text-slate-600">
+                    {featuredPlan.area}
+                  </p>
+                </div>
+                <div class="relative aspect-[16/10] overflow-hidden border-[0.5px] border-slate-900/10 bg-[#FBFBFA]">
+                  <img
+                    src={featuredPlan.image ?? "/img/privileges/plan.jpg"}
+                    alt={`Планировка ${featuredPlan.rooms} в ${data.name}`}
+                    class="h-full w-full object-cover mix-blend-multiply"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <a href="#plans" class="group inline-flex items-center justify-between gap-4 border-t-[0.5px] border-slate-900/12 pt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-slate-950 transition-colors duration-300 hover:text-violet-700">
+                  <span>Смотреть планировки</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            ) : (
+              <p class="mt-4 text-sm leading-6 text-slate-600">Планировки уточняются отделом продаж.</p>
+            )
+          }
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

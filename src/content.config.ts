@@ -37,13 +37,82 @@ const projects = defineCollection({
     units: z.string(),
     priceFrom: z.string(),
     territory: z.string().optional(),
+    seoDescription: z.string().optional(),
+    hero: z
+      .object({
+        eyebrow: z.string().optional(),
+        summary: z.string().optional(),
+        image: z.string().optional(),
+        imageAlt: z.string().optional(),
+        featuredPlanLabel: z.string().optional(),
+      })
+      .optional(),
+    stats: z
+      .array(
+        z.object({
+          value: z.string(),
+          label: z.string(),
+          detail: z.string().optional(),
+        })
+      )
+      .optional(),
+    benefits: z
+      .array(
+        z.object({
+          title: z.string(),
+          body: z.string(),
+        })
+      )
+      .optional(),
     plans: z.array(
       z.object({
         rooms: z.string(),
         area: z.string(),
         price: z.string(),
+        image: z.string().optional(),
+        note: z.string().optional(),
       })
     ),
+    gallery: z
+      .array(
+        z.object({
+          image: z.string(),
+          alt: z.string(),
+          caption: z.string().optional(),
+        })
+      )
+      .optional(),
+    purchaseOptions: z
+      .array(
+        z.object({
+          title: z.string(),
+          body: z.string(),
+          meta: z.string().optional(),
+          status: z.enum(["confirmed", "needs_verification"]).optional(),
+        })
+      )
+      .optional(),
+    constructionStatus: z
+      .object({
+        title: z.string(),
+        summary: z.string(),
+        items: z
+          .array(
+            z.object({
+              label: z.string(),
+              value: z.string(),
+              note: z.string().optional(),
+            })
+          )
+          .optional(),
+      })
+      .optional(),
+    contactCta: z
+      .object({
+        title: z.string(),
+        body: z.string(),
+      })
+      .optional(),
     installment: z
       .object({
         label: z.string(),
