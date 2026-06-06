@@ -1,37 +1,120 @@
-# One Construction Product Context (Light Edition)
+# One Construction · Product Context
 
-## Product Purpose
+## Что это
 
-One Construction is a premium digital showroom for a residential developer. The site sells material quality, architectural ambition, and controlled scale before individual floor plans. The light, gallery-like aesthetic reflects high-end real estate, transparency, and premium status.
+One Construction — премиальный digital showroom девелопера: главная, витрина объектов, будущие страницы объектов, планировки и заявки.
 
-## Brand Voice
+Сайт должен продавать не “квадратные метры”, а доверие, архитектуру, качество пространства и понятный путь к заявке.
 
-Monolithic, precise, architectural, technical but light and spacious. The tone feels like high-quality concrete, matte steel, thick textured paper, and daylight architectural rendering. No startup cliches, no cheap sales words like "elevate" or "next-gen".
+---
 
-## Anti-References
+## Текущий статус
 
-- Dark neon crypto-palettes, purple-blue neon glows, soft rounded SaaS cards.
-- Cheap pure-white bootstrap templates.
-- Decorative glassmorphism without purpose.
-- Emoji, stock text, placeholder copy.
+Готово:
 
-## Current Project Phase
+- `/` — главная страница, визуально утверждена заказчиком.
+- `/projects` — витрина всех объектов.
+- `SiteFooter.astro` — общий footer.
+- `SiteFooter variant="compact"` — footer для внутренних страниц.
+- Проекты вынесены в Astro Content Layer.
+- `showOnHomepage` управляет тем, какие объекты видны на главной.
+- `One Ordo Resort` добавлен как временный 4-й объект.
 
-- Main homepage architecture is stabilized.
-- Content data is centralized.
-- Project data moved to Astro Content Layer.
-- Critical content fixes have started.
-- Current focus: visual upgrade of homepage sections, starting with Projects and Hero.
+Планируется:
 
-## Content Architecture
+- `/projects/[slug]` — универсальный шаблон страницы объекта.
+- Пилот: `Medina+`.
+- Проверка шаблона на `Yacht Village`.
+- Затем масштабирование на `Lotos` и `One Ordo Resort`.
 
-- Project data lives in `src/content/projects/lotos.json`, `src/content/projects/yacht-village.json`, and `src/content/projects/medina.json`.
-- `HomeProjects.astro` loads project entries through `getCollection("projects")` and sorts by `sortOrder`.
-- Content Layer configuration lives at `src/content.config.ts`.
-- `src/content/apartments/` is planned for future apartment/floor-plan data and is currently empty except for `.gitkeep`.
-- Current intermediate data files are `src/data/company.ts`, `src/data/homepage.ts`, `src/data/purchase.ts`, and `src/data/privileges.ts`. Treat them as valid current sources and future CMS migration candidates.
+---
 
-## Implementation Guardrails
+## Страницы
 
-- Visual design remains first, but upgrades must preserve Astro-first architecture, Content Layer data flow, performance, and future CMS readiness.
-- Do not reintroduce legacy homepage components unless a task explicitly asks for them.
+### `/`
+
+Главная — approved visual baseline.
+
+Поведение:
+
+- Header “Объекты” → `/#projects`
+- Hero CTA “Смотреть объекты” → `/projects`
+
+### `/projects`
+
+Витрина всех объектов.
+
+Поведение:
+
+- показывает все проекты из `src/content/projects/`;
+- featured object сейчас задаётся логикой страницы;
+- позже лучше добавить поле `isFeaturedOnProjectsPage`.
+
+### `/projects/[slug]`
+
+Пока заглушка.
+
+Нужно сделать один динамический шаблон, а не отдельные страницы руками.
+
+---
+
+## Контент объектов
+
+Источник:
+
+- `src/content/projects/lotos.json`
+- `src/content/projects/medina.json`
+- `src/content/projects/yacht-village.json`
+- `src/content/projects/one-ordo-resort.json`
+
+Правила:
+
+- не хардкодить карточки объектов в компонентах;
+- использовать `getCollection("projects")`;
+- сортировать через `sortOrder`;
+- главная показывает проекты, где `showOnHomepage !== false`;
+- `/projects` показывает все проекты;
+- не выдумывать коммерческие факты.
+
+---
+
+## Следующий продуктовый этап
+
+Страницы объектов должны быть удобными, премиальными и функциональными.
+
+Базовая структура project detail page:
+
+1. Hero объекта  
+   Название, локация, статус, ключевые характеристики, CTA.
+
+2. Суть проекта / преимущества  
+   5–6 сильных причин выбрать объект.
+
+3. Планировки  
+   Использовать `plans` из project JSON. Позже — отдельная коллекция apartments.
+
+4. Галерея  
+   Временные изображения допустимы, но production должен использовать реальные ассеты.
+
+5. Варианты покупки  
+   Цена, рассрочка, условия, CTA.
+
+6. Статус / ход строительства  
+   Только подтверждённые данные. Если этапов нет — не выдумывать.
+
+7. Заявка / контакт  
+   Простая конверсионная секция.
+
+8. Compact footer
+
+---
+
+## Product guardrails
+
+- Visual-first, но без поломки архитектуры.
+- Data-first: данные в content/data, не в разметке.
+- Один шаблон должен масштабироваться на будущие объекты.
+- Важные данные должны быть читаемыми на mobile.
+- Никаких fake claims, скидок, сроков, наград или условий без источника.
+- Форма заявки должна быть подключена к реальной отправке перед production.
+- `One Ordo Resort` пока частично требует верификации.

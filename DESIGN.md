@@ -1,40 +1,186 @@
-# One Construction Design Context (Premium Light)
+# One Construction · Design Context
 
-## Visual Direction
+## Направление
 
-Premium architectural brutalism in a light spectrum: monolith, warm alabaster, chalk bone, Royal Violet, indigo ink, matte silver, and architectural blueprint lines. The interface feels clean, airy, but incredibly forceful.
+Premium light architectural brutalism.
 
-## Geometry
+Сайт должен ощущаться как современный архитектурный showroom: светлый, строгий, дорогой, визуальный, но удобный и читаемый.
 
-- Global default: `border-radius: 0` (no radius).
-- Acceptable exception: 2px maximum on glass/media elements if strictly needed.
-- Borders are sharp and restrained hairlines: `0.5px` to `1px`, using `black / 5%` or `slate-200`.
-- No decorative pill tags.
+---
 
-## Color (Tailwind v4 / OKLCH)
+## Визуальные принципы
 
-- Avoid pure `#FFF` and pure `#000`.
-- Base background: Rich warm neutrals (`#FBFBFA` / `#F5F4F0` - Alabaster / Bone).
-- Typography: Deep charcoal, anthracite, or indigo-black (`text-slate-900`).
-- Accent strategy: Royal Violet / Deep Indigo. Deliberate technical execution, never decorative.
-- Overlay: Premium fine-grain paper texture on a fixed, `pointer-events-none` layer.
+- Светлая база: alabaster / bone / limestone.
+- Текст: graphite / slate / deep navy.
+- Акцент: restrained Royal Violet.
+- Геометрия: sharp, без скруглений.
+- Линии: тонкие hairline borders.
+- Изображения — часть структуры, не декор.
+- Много воздуха, но без пустоты.
+- Editorial-композиция вместо generic card grid.
+- Важные данные всегда читаемые, особенно на mobile.
+
+---
 
 ## Typography
 
-- Primary family: Geist.
-- Technical family: Geist Mono. Inter is strictly banned.
-- Scale shock: Monumental display headings against tiny uppercase technical mono labels (`10px`, tracking generous).
-- Real business information must remain readable, especially on mobile. Micro-mono labels are allowed as atmosphere, but important data such as prices, delivery, contact details, project stats, and CTAs must not become unreadable.
+Используем:
 
-## Layout & Motion
+- Geist — основной шрифт.
+- Geist Mono — технические labels, индексы, координаты, micro-details.
 
-- Confident grids, asymmetry, purposeful negative space ("air").
-- Avoid generic 3-card rows.
-- Motion: Animate transform and opacity only. Use `ease-out-expo`. No bounce or playful overshoot. Heavy libraries (GSAP) are strictly isolated.
+Правила:
 
-## Architecture Guardrails
+- Большие display-заголовки допустимы, но не должны ломать композицию.
+- Mono не использовать для больших эмоциональных заголовков, если это делает сайт слишком техническим.
+- Цены, сроки, локации, CTA, характеристики объектов должны быть читаемыми.
+- Не менять глобальные font-family без отдельной задачи.
 
-- Visual upgrades come first, but must not break Astro-first architecture, Content Layer data flow, fast static performance, or future CMS readiness.
-- Homepage sections should stay isolated and imported by `src/pages/index.astro`.
-- Project presentation should continue to read from the Astro Content Layer rather than hardcoded arrays or legacy project cards.
-- Keep sharp geometry, Geist / Geist Mono, Royal Violet, and the premium light brutalist direction intact during visual upgrades.
+---
+
+## Geometry
+
+- `border-radius: 0` по умолчанию.
+- Не использовать `rounded-xl`, `rounded-2xl`, pill UI.
+- Допустим максимум 2px только если технически нужно для media/glass, но лучше избегать.
+- Borders: `0.5px–1px`, restrained.
+- Без heavy shadows.
+- Без glow.
+- Без SaaS-card эстетики.
+
+---
+
+## Цвет
+
+Основная палитра:
+
+- `#FBFBFA` — alabaster.
+- `#F8F7F4` — bone.
+- `#F5F4F0` — limestone.
+- slate / graphite для текста.
+- Royal Violet для CTA, focus, hover, акцентов.
+
+Избегать:
+
+- pure white как основной фон;
+- pure black как основной текст;
+- neon gradients;
+- синих/фиолетовых glow-эффектов.
+
+---
+
+## Motion
+
+Motion должен быть тихим и премиальным.
+
+Можно:
+
+- opacity;
+- transform;
+- subtle image scale;
+- reveal on scroll;
+- smooth anchor scroll.
+
+Нельзя:
+
+- bounce;
+- playful overshoot;
+- heavy animated noise;
+- motion ради motion.
+
+`prefers-reduced-motion` должен уважаться.
+
+---
+
+## Homepage
+
+Главная уже утверждена заказчиком.
+
+Не менять без явной причины:
+
+- overall visual direction;
+- Hero composition;
+- Projects section;
+- About layout;
+- Privileges bento system;
+- Purchase copy/layout;
+- Contact form behavior;
+- Footer large variant.
+
+Мелкие правки допустимы только с narrow scope.
+
+---
+
+## `/projects`
+
+Страница всех объектов должна ощущаться как premium object catalogue.
+
+Текущие правила:
+
+- full-bleed hero image cover;
+- title overlay, не split-layout как на homepage;
+- featured object + динамическая сетка остальных объектов;
+- карточки информативные, но не перегруженные;
+- essential info visible by default;
+- image and CTA may be clickable;
+- body/specs/empty areas should not navigate;
+- compact footer.
+
+---
+
+## Project detail pages
+
+Следующий дизайн-этап — страницы объектов.
+
+Они не должны копировать homepage или `/projects`.
+
+Ожидаемое ощущение:
+
+- project-specific;
+- functional;
+- visual-led;
+- premium developer presentation;
+- удобный путь к планировкам и заявке.
+
+Базовые секции:
+
+- hero объекта;
+- key stats;
+- project essence / benefits;
+- plans;
+- gallery;
+- purchase options;
+- construction status;
+- contact CTA;
+- compact footer.
+
+---
+
+## Anti-references
+
+Не делать:
+
+- generic real-estate template;
+- Tilda-like cards;
+- SaaS landing;
+- crypto/neon aesthetic;
+- overly dark pages;
+- heavy shadows;
+- rounded cards;
+- decorative icons everywhere;
+- fake blueprint clutter;
+- hover-only important content.
+
+---
+
+## Review checklist
+
+Перед тем как принимать визуальный результат:
+
+1. Выглядит ли премиально?
+2. Отличается ли страница от homepage и `/projects`, если это новый тип страницы?
+3. Читаются ли важные данные?
+4. Нет ли перегруза mono/technical style?
+5. Нет ли generic карточной сетки?
+6. Работает ли mobile 390px?
+7. Не сломана ли утверждённая главная?

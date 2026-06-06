@@ -1,112 +1,251 @@
-# 🎯 MASTER INSTRUCTIONS: ONE CONSTRUCTION DIGITAL SHOWROOM
+# One Construction · AI Instructions
 
-## 💎 ГЛАВНЫЙ ПРИНЦИП: VISUAL DESIGN FIRST (PREMIUM LIGHT EDITION)
+These rules apply to Codex, Claude Code, Cursor, ChatGPT agents, and any other AI assistant working on this project.
 
-Мы создаем премиальный светлый цифровой шоурум для девелопера One Construction.
-Визуал, эстетика и motion-дизайн определяют структуру проекта. Мы пишем код ради реализации бескомпромиссного, воздушного и монументального светлого визуала. При этом сайт должен оставаться реактивно быстрым, удобным и масштабируемым (без лагов).
+## Core rule
 
-Visual design first не означает "ломать архитектуру ради картинки". Любые визуальные улучшения должны сохранять Astro-first подход, Content Layer data flow, производительность и готовность к будущей CMS-миграции.
+Work in small, scoped changes.
 
----
-
-## 🎨 1. ART DIRECTION & DESIGN SYSTEM (Правила вкуса)
-
-### Источники вдохновения:
-
-- Эстетика `tasteskill.dev` (глубокая материальность элементов, премиальный motion, инерция).
-- Эстетика `impeccable.style` (галерейная эстетика, архитектурные журналы,чистота композиции, обилие воздуха).
-
-### Геометрия и Сетка:
-
-- **Строгий запрет на скругления:** Никаких `rounded-xl`, `rounded-2xl`. Только жёсткие углы (`rounded-none`).
-- Границы: Тончайшие, едва заметные линии чертежа (`border-[0.5px] border-black/5` или `border-slate-200`).
-
-### Шрифтовая система ("Scale Shock"):
-
-- **Максимальный контраст масштабов:** Scale Shock остается принципом: монументальные заголовки контрастируют с техническими моно-деталями.
-- Заголовки: Гигантские, монументальные акцидентные шрифты (`text-[9vw]`, `text-7xl` до `text-11xl`) глубокого графитового цвета с плотным межбуквенным расстоянием (`tracking-tighter`).
-- Микро-детали: Крошечные подписи моноширинным шрифтом (Geist Mono) в верхнем регистре с большим разбегом букв (`text-[10px] uppercase tracking-widest text-slate-500`).
-- Реальная бизнес-информация должна оставаться читаемой, особенно на мобильных. Micro-mono подписи допустимы как атмосфера, но важные данные (цены, сроки сдачи, контакты, характеристики объектов, CTA) не должны становиться нечитаемыми.
-- Шаблон для технических деталей: `ID: 404-MED | LOC: 42.8746° N, 74.5698° E | STATUS: PHASE_02`.
-
-### Цветовая глубина и Текстура (Светлая палитра):
-
-- Фон: Никакого плоского чисто-белого цвета. Используем дорогие светлые оттенки: теплый алебастр, матовая слоновая кость (`#FBFBFA`) или светлый известняк (`#F5F4F0`).
-- Текст: Глубокий благородный графит, темный антрацит или чернильно-черный (`text-slate-900`).
-- Акценты: Королевский фиолетовый (Royal Violet) и насыщенный индиго для интерактивных элементов, активных ховеров и подсветки фокуса инпутов.
-- Текстура: Наложить на бэкграунд всего сайта легкий полупрозрачный оверлей (Noise/Grain) для эффекта текстуры матовой дорогой бумаги верже или мелкозернистого песчаника.
+Do not “improve the whole project” unless explicitly asked. Preserve the approved homepage and existing visual direction.
 
 ---
 
-## 🛠 `text
+## Project root
 
-src/
-├── components/
-│ ├── ui/ # Атомарные, независимые UI-элементы без бизнес-логики
-│ │ ├── Button.astro # Премиальная кнопка с кастомным ховером
-│ │ ├── Input.astro # Инпут формы со стальной границей и фокусом
-│ │ └── Badge.astro # Технические моноширинные теги (e.g., "ФАЗА 1")
-│ │
-│ ├── modules/ # Крупные переиспользуемые блоки-модули
-│ │ ├── ProjectCard.astro # Legacy/unused: не импортировать на главную без явной задачи
-│ │ ├── ContactForm.tsx # Интерактивная форма (React для валидации на лету)
-│ │ └── ConstructionTimeline.astro # Legacy/unused: не импортировать без явной задачи
-│ │
-│ └── sections/ # Специфичные секции конкретных страниц
-│ ├── homepage/
-│ │ ├── HomeHero.astro
-│ │ ├── HomeProjects.astro # Загружает проекты через getCollection("projects")
-│ │ ├── HomeAbout.astro
-│ │ ├── HomeTimeline.astro # Текущая секция privileges / standard
-│ │ ├── HomePurchase.astro
-│ │ ├── HomeContact.astro
-│ │ └── HomeMaterials.astro # Legacy/unused: не импортировать без явной задачи
-│ └── project-page/
-│ ├── ProjectSpecs.astro
-│ └── ProjectGallery.astro
-│
-├── content.config.ts # Astro 6 Content Layer config
-│
-├── content/ # Контентная база данных, готовится к будущей CMS
-│ ├── homepage.mdoc # Контент разделов Главной страницы (синглтон)
-│ ├── projects/ # База Жилых Комплексов через Content Layer
-│ │ ├── lotos.json
-│ │ ├── yacht-village.json
-│ │ └── medina.json
-│ └── apartments/ # Запланировано; сейчас пусто кроме .gitkeep
-│
-├── data/ # Текущие промежуточные data-файлы, кандидаты для CMS-миграции
-│ ├── company.ts
-│ ├── homepage.ts
-│ ├── purchase.ts
-│ └── privileges.ts
-│
-└── pages/ # Роуты сайта (Ссылки в браузере)
-├── index.astro # Главная страница (собирает sections/homepage/\*)
-├── admin.astro # Точка входа в админку Keystatic (oneconstruction.kg/admin)
-└── projects/
-└── [slug].astro # Динамический шаблон страницы конкретного ЖК
+Always work only inside:
+
+`E:\oneconstruction`
+
+Before editing, confirm the current working directory.
+
+Never read from or edit other local projects.
 
 ---
 
-## 🔄 3. МАСШТАБИРУЕМОСТЬ И ДИНАМИКА (Anti-Hardcode Guard)
+## Current status
 
-- **Динамический маппинг объектов:** Секция проектов (`HomeProjects.astro`) НЕ должна содержать жесткий хардкод конкретных карточек. Сейчас она получает проекты через Astro Content Layer: `getCollection("projects")`, затем сортирует по `sortOrder`. Добавление нового JSON-файла в `src/content/projects/` должно генерировать новый объект без изменения верстки секции.
-- **Циклический ритм асимметрии:** Десктопное вертикальное смещение карточек должно рассчитываться динамически на основе их индекса в массиве (например, через оператор остатка от деления `index % 3`), чтобы бесконечная лента объектов сохраняла волнообразный архитектурный ритм при любом количестве ЖК.
-- **Компонентная независимость:** Главная страница (`src/pages/index.astro`) — это исключительно плоский хаб для вызова изолированных секций. Верстка должна быть спроектирована так, чтобы внедрение новой секции (например, `HomeNews.astro` в будущем) между текущими блоками происходило бесшовно и не ломало глобальные стили и отступы соседних компонентов.
+Stable pages:
+
+- `/` — approved homepage.
+- `/projects` — objects showcase page.
+
+Planned:
+
+- `/projects/[slug]` — dynamic project detail pages.
+
+The next major task is the project detail template, starting with `Medina+` and testing against `Yacht Village`.
 
 ---
 
-## ✅ CURRENT PHASE / ARCHITECTURE SNAPSHOT
+## Architecture rules
 
-- Основная архитектура главной стабилизирована.
-- Контентные данные централизованы.
-- Project data перенесены в Content Layer:
-  - `src/content/projects/lotos.json`
-  - `src/content/projects/yacht-village.json`
-  - `src/content/projects/medina.json`
-- Content Layer config находится в `src/content.config.ts`.
-- `src/content/apartments/` запланирован и сейчас пустой.
-- Critical content fixes начаты.
-- Текущий фокус: визуальный апгрейд секций главной, начиная с `Projects` и `Hero`.
-- Legacy/unused компоненты (`ProjectCard.astro`, `ConstructionTimeline.astro`, `HomeMaterials.astro`) не возвращать на главную без явного запроса.
+- Astro-first.
+- Use Content Layer for project data.
+- Do not hardcode project cards manually.
+- Keep homepage sections isolated.
+- Prefer data/content edits over hardcoded component copy.
+- Do not add new libraries without approval.
+- Do not create unnecessary backend complexity.
+
+Project data source:
+
+- `src/content/projects/*.json`
+
+Current behavior:
+
+- Homepage shows projects where `showOnHomepage !== false`.
+- `/projects` shows all projects.
+- Future: use `isFeaturedOnProjectsPage` to control featured object.
+
+---
+
+## Protected files
+
+Do not edit unless the task explicitly requires it:
+
+- `src/styles/global.css`
+- `src/scripts/motion.ts`
+- `src/layouts/Layout.astro`
+- `package.json`
+- `astro.config.mjs`
+- `tsconfig.json`
+- existing approved homepage sections
+
+Homepage is approved. Avoid touching it unless the request is specifically about homepage.
+
+---
+
+## Legacy / unused components
+
+Do not use these for new pages unless explicitly requested:
+
+- `src/components/modules/ProjectCard.astro`
+- `src/components/modules/ConstructionTimeline.astro`
+- `src/components/sections/homepage/HomeMaterials.astro`
+- `src/components/sections/project-page/ProjectGallery.astro`
+- `src/components/sections/project-page/ProjectSpecs.astro`
+- `src/components/ui/Badge.astro`
+- `src/components/ui/Button.astro`
+- `src/components/ui/Input.astro`
+
+Create new page-specific components when needed.
+
+---
+
+## Visual rules
+
+Follow `DESIGN.md`.
+
+Key rules:
+
+- premium light architectural brutalism;
+- alabaster / bone / limestone backgrounds;
+- graphite / slate / deep navy text;
+- restrained Royal Violet accents;
+- no rounded cards;
+- no SaaS aesthetic;
+- no heavy shadows or glow;
+- thin borders;
+- strong imagery;
+- important data must remain readable on mobile.
+
+Do not hide important information only on hover.
+
+---
+
+## Content rules
+
+Never invent:
+
+- prices;
+- discounts;
+- installment terms;
+- delivery dates;
+- awards;
+- certificates;
+- construction milestones;
+- legal claims;
+- CRM promises;
+- response time promises.
+
+Use known sources:
+
+- `docs/old-site-content.md` if available;
+- current `src/content/projects/*.json`;
+- `src/data/*.ts`;
+- official client-provided text.
+
+If data is missing, mark it as temporary or needs verification.
+
+---
+
+## Form / backend rules
+
+Current form may still be mock/intermediate.
+
+For future real submission:
+
+- keep secrets out of frontend;
+- use `.env` and Vercel Environment Variables;
+- validate server-side;
+- prefer simple integrations first:
+  1. Telegram/WhatsApp notification;
+  2. email;
+  3. Google Sheets;
+  4. CRM;
+  5. CMS/backend only if needed.
+
+Do not add backend services without approval.
+
+---
+
+## Required workflow
+
+Before editing:
+
+1. Confirm scope.
+2. List files you plan to edit.
+3. Confirm working directory is `E:\oneconstruction`.
+
+During editing:
+
+- edit only allowed files;
+- do not commit unless explicitly asked;
+- do not touch unrelated files;
+- keep visual changes narrow.
+
+After editing, always run:
+
+- `npm run typecheck`
+- `npm run build`
+
+Then return:
+
+- files changed;
+- what changed;
+- confirm protected files were not touched;
+- typecheck/build result;
+- desktop/mobile visual notes if UI changed.
+
+---
+
+## Git rules
+
+Do not commit automatically.
+
+When user asks for backup:
+
+1. `git status --short`
+2. stage explicit files only;
+3. `git diff --cached --stat`
+4. commit with a clear message;
+5. `git push origin main`
+6. optional tag for stable milestones.
+
+Avoid `git add .`.
+
+Do not commit:
+
+- `.codex/`
+- `.tmp/`
+- debug logs;
+- screenshots;
+- local artifacts;
+- secrets.
+
+---
+
+## Prompt discipline
+
+Good task prompts should include:
+
+- Task
+- Edit only
+- Do NOT edit
+- Goal
+- Fix list
+- Hard rules
+- Validation
+- Return
+
+Avoid vague prompts like:
+
+- “make it better”
+- “redesign everything”
+- “be creative” without scope
+
+---
+
+## Acceptance checklist
+
+Before calling work done:
+
+- build passes;
+- typecheck passes;
+- no unrelated files changed;
+- homepage still works;
+- `/projects` still works if affected;
+- mobile 390px has no horizontal overflow;
+- content is not invented;
+- important data is readable;
+- visual result fits One Construction style.
