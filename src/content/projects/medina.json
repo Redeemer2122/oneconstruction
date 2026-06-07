@@ -54,25 +54,60 @@
   ],
   "plans": [
     {
-      "rooms": "1-комнатные",
-      "area": "от 48.8 м²",
+      "rooms": "1-комнатная квартира",
+      "area": "48.8 м²",
       "price": "по запросу",
       "image": "/img/privileges/plan.jpg",
-      "note": "компактный формат"
+      "note": "Компактный формат"
     },
     {
-      "rooms": "2-комнатные",
-      "area": "от 73.2 м²",
+      "rooms": "1-комнатная квартира",
+      "area": "48.8 м²",
       "price": "по запросу",
       "image": "/img/privileges/plan.jpg",
-      "note": "для семьи"
+      "note": "Компактный формат"
     },
     {
-      "rooms": "3-комнатные",
-      "area": "от 115.8 м²",
+      "rooms": "1-комнатная квартира",
+      "area": "52.6 м²",
       "price": "по запросу",
       "image": "/img/privileges/plan.jpg",
-      "note": "просторный сценарий"
+      "note": "Компактный формат"
+    },
+    {
+      "rooms": "2-комнатная квартира",
+      "area": "75.2 м²",
+      "price": "по запросу",
+      "image": "/img/privileges/plan.jpg",
+      "note": "Для семьи"
+    },
+    {
+      "rooms": "2-комнатная квартира",
+      "area": "78.6 м²",
+      "price": "по запросу",
+      "image": "/img/privileges/plan.jpg",
+      "note": "Для семьи"
+    },
+    {
+      "rooms": "2-комнатная квартира",
+      "area": "73.2 м²",
+      "price": "по запросу",
+      "image": "/img/privileges/plan.jpg",
+      "note": "Для семьи"
+    },
+    {
+      "rooms": "2-комнатная квартира",
+      "area": "92.4 м²",
+      "price": "по запросу",
+      "image": "/img/privileges/plan.jpg",
+      "note": "Для семьи"
+    },
+    {
+      "rooms": "3-комнатная квартира",
+      "area": "115.8 м²",
+      "price": "по запросу",
+      "image": "/img/privileges/plan.jpg",
+      "note": "Просторный сценарий"
     }
   ],
   "gallery": [

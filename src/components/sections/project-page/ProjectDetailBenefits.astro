@@ -66,19 +66,13 @@ const sectionIntro = isMedina
             </div>
           </div>
 
-          <div class="benefits-line-art absolute left-0 top-[455px] w-[min(455px,88vw)] text-[#0E214C]" aria-hidden="true">
-            <svg viewBox="0 0 620 330" fill="none" role="img">
-              <path d="M42 286h530" stroke="currentColor" stroke-width="1" />
-              <path d="M82 286V92h178v194M260 286V58h154v228M414 286V118h96v168" stroke="currentColor" stroke-width="1.12" />
-              <path d="M82 92l88-46 90 46M260 58l77-38 77 38M414 118l47-25 49 25" stroke="currentColor" stroke-width="1.12" />
-              <path d="M112 126h42v48h-42zM188 126h42v48h-42zM292 92h34v48h-34zM350 92h34v48h-34zM440 150h24v42h-24zM482 150h24v42h-24z" stroke="currentColor" stroke-width="0.9" />
-              <path d="M112 202h42v48h-42zM188 202h42v48h-42zM292 164h34v48h-34zM350 164h34v48h-34zM440 214h24v42h-24zM482 214h24v42h-24z" stroke="currentColor" stroke-width="0.9" />
-              <path d="M154 286v-48c0-19 14-35 31-35s31 16 31 35v48M319 286v-54c0-21 15-39 34-39s34 18 34 39v54" stroke="currentColor" stroke-width="1.05" />
-              <path d="M94 112h154M274 77h126M428 134h70M95 190h152M275 152h126M429 204h70" stroke="currentColor" stroke-width="0.72" />
-              <path d="M61 286c4-28 8-56 10-84M42 222c22 8 32 23 29 48M88 216c-18 10-24 26-17 52M548 286c4-25 7-50 9-74M530 230c20 7 29 21 27 44M576 225c-18 9-25 24-19 49" stroke="currentColor" stroke-width="0.9" />
-              <path d="M70 296c38-12 75-11 111 2M216 298c55-11 107-10 156 1M402 297c46-10 87-9 123 1" stroke="currentColor" stroke-width="0.75" />
-              <path d="M126 70h88M295 39h83M448 106h28" stroke="currentColor" stroke-width="0.7" opacity="0.58" />
-            </svg>
+          <div class="benefits-decorative-asset" aria-hidden="true">
+            <img
+              src="/img/project-details/medina/benefits-decorative-asset.png"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
           </div>
 
           <a
@@ -172,8 +166,54 @@ const sectionIntro = isMedina
     transform: translate(-50%, -50%) rotate(45deg);
   }
 
-  .benefits-line-art {
-    opacity: 0.082;
+  .benefits-decorative-asset {
+    position: absolute;
+    left: -40%;
+    bottom: 0;
+    z-index: 0;
+    width: 195%;
+    height: 650px;
+    pointer-events: none;
+    opacity: 0.27;
+    mix-blend-mode: multiply;
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, transparent 12%, #000 32%, #000 70%, transparent 100%),
+      linear-gradient(to top, transparent 0%, #000 12%, #000 74%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, transparent 13%, #000 30%, #000 100%);
+    mask-image:
+      linear-gradient(to right, transparent 0%, transparent 12%, #000 32%, #000 70%, transparent 100%),
+      linear-gradient(to top, transparent 0%, #000 12%, #000 74%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, transparent 13%, #000 30%, #000 100%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+
+  .benefits-decorative-asset::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    background:
+      linear-gradient(90deg, rgba(251, 251, 250, 0.78) 0%, rgba(251, 251, 250, 0.22) 22%, rgba(251, 251, 250, 0) 38%),
+      linear-gradient(0deg, rgba(248, 247, 244, 0.82) 0%, rgba(248, 247, 244, 0) 24%);
+    pointer-events: none;
+  }
+
+  .benefits-decorative-asset img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: left bottom;
+    filter: contrast(1.2) saturate(0.96);
+  }
+
+  .benefits-cta {
+    background: rgba(251, 251, 250, 0.88);
+  }
+
+  .benefits-cta:hover,
+  .benefits-cta:focus-visible {
+    background: #0e214c;
   }
 
   .benefits-list {
@@ -293,9 +333,12 @@ const sectionIntro = isMedina
       min-height: 590px;
     }
 
-    .benefits-line-art {
-      top: 360px;
-      opacity: 0.065;
+    .benefits-decorative-asset {
+      left: -34%;
+      bottom: 4px;
+      width: 178%;
+      height: 500px;
+      opacity: 0.2;
     }
   }
 
@@ -321,7 +364,7 @@ const sectionIntro = isMedina
       line-height: 1;
     }
 
-    .benefits-line-art {
+    .benefits-decorative-asset {
       display: none;
     }
 
