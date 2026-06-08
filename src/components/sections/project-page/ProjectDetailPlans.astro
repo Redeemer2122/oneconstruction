@@ -12,6 +12,10 @@ const getCategory = (value: string) => {
   const count = getRoomCount(value);
   return count ? `${count}-комнатные` : value;
 };
+const getCompactCategory = (value: string) => {
+  const count = getRoomCount(value);
+  return count ? `${count}-комнатная` : value;
+};
 const getTitle = (value: string) => {
   const count = getRoomCount(value);
   if (!count || value.toLowerCase().includes("квартира")) return value;
@@ -23,7 +27,8 @@ const minArea = plans.reduce((lowest: number | null, plan: any) => {
   if (!Number.isFinite(area)) return lowest;
   return lowest === null || area < lowest ? area : lowest;
 }, null);
-const metaText = `${plans.length} планировок${minArea ? ` / от ${minArea.toLocaleString("ru-RU", { maximumFractionDigits: 1 })} м²` : ""}`;
+const minAreaText = minArea ? minArea.toFixed(1).replace(/\.0$/, "") : "";
+const metaText = `${plans.length} планировок${minAreaText ? ` / от ${minAreaText} м²` : ""}`;
 const filterOrder = ["1-комнатные", "2-комнатные", "3-комнатные"];
 const availableFilters = filterOrder.filter((filter) => plans.some((plan: any) => getCategory(String(plan.rooms)) === filter));
 const filters = ["Все", ...availableFilters];
@@ -41,30 +46,36 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
       data-all-limit="6"
     >
       <div class="mx-auto max-w-[1480px]">
-        <div class="grid gap-8 border-t-[0.5px] border-slate-900/15 pt-8 lg:grid-cols-[minmax(0,0.52fr)_minmax(420px,0.48fr)] lg:items-end">
+        <div class="grid gap-10 border-t-[0.5px] border-slate-900/18 pt-8 lg:grid-cols-[minmax(0,0.46fr)_minmax(560px,0.54fr)] lg:items-end">
           <div>
-            <p class="mono-detail text-violet-700">ПЛАНИРОВКИ</p>
+            <div class="flex items-center gap-4">
+              <p class="mono-detail text-violet-700">ПЛАНИРОВКИ</p>
+              <span class="h-px w-12 bg-slate-900/15" aria-hidden="true"></span>
+            </div>
             <h2 id="plans-title" class="mt-5 max-w-[11ch] text-5xl font-medium leading-[0.96] text-slate-950 text-balance md:text-6xl">
               Выберите свой формат
             </h2>
             <p class="mt-6 max-w-[58ch] text-sm leading-7 text-slate-600 md:text-base md:leading-8">
               От компактных 1-комнатных до просторных семейных форматов — подберите планировку под свой сценарий жизни.
             </p>
-            <p class="mt-5 font-mono text-[11px] uppercase tracking-[0.14em] text-slate-500">
-              {metaText}
-            </p>
+            <div class="mt-6 flex max-w-[26rem] items-center gap-4 border-t-[0.5px] border-slate-900/15 pt-3">
+              <span class="h-1.5 w-1.5 bg-violet-700" aria-hidden="true"></span>
+              <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-slate-500">
+                {metaText}
+              </p>
+            </div>
           </div>
 
           <div class="min-w-0 lg:justify-self-end">
             <div
-              class="flex max-w-full gap-px overflow-x-auto bg-slate-900/12 p-px [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:flex-wrap lg:justify-end"
+              class="plan-filter-shell flex max-w-full gap-1 overflow-x-auto border-[0.5px] border-slate-900/15 bg-[#FBFBFA] p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:flex-wrap lg:justify-end"
               role="group"
               aria-label="Фильтр планировок"
             >
               {filters.map((filter: string, index: number) => (
                 <button
                   type="button"
-                  class={`shrink-0 px-4 py-3 text-center font-mono text-[10px] uppercase tracking-[0.13em] transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700 md:px-5 ${index === 0 ? "bg-slate-950 text-alabaster" : "bg-[#FBFBFA] text-slate-600 hover:bg-[#F8F7F4] hover:text-slate-950"}`}
+                  class="plan-filter-button shrink-0 border-[0.5px] border-slate-900/10 px-5 py-3.5 text-center font-mono text-[11px] uppercase tracking-[0.12em] text-slate-600 transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700 md:min-w-[140px] md:px-6"
                   data-plan-filter={filter}
                   aria-pressed={index === 0 ? "true" : "false"}
                 >
@@ -75,35 +86,36 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
           </div>
         </div>
 
-        <div class={`mt-12 grid gap-4 md:gap-5 ${gridColumns}`} data-plan-grid>
+        <div class={`plans-grid mt-14 grid gap-4 md:gap-5 ${gridColumns}`} data-plan-grid>
           {plans.map((plan: any, index: number) => {
             const category = getCategory(String(plan.rooms));
+            const compactCategory = getCompactCategory(String(plan.rooms));
             const isInitiallyHidden = shouldLimitAll && index >= 6;
 
             return (
               <article
-                class={`group grid min-h-[520px] border-[0.5px] border-slate-900/10 bg-[#FBFBFA] transition duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-950/35 hover:bg-[#F8F7F4] ${isInitiallyHidden ? "hidden" : ""}`}
+                class={`plan-card group grid min-h-[540px] border-[0.5px] border-slate-900/10 bg-[#FBFBFA] transition duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-950/35 hover:bg-[#F8F7F4] ${isInitiallyHidden ? "hidden" : ""}`}
                 data-plan-card
                 data-plan-category={category}
                 data-plan-index={index}
               >
-                <div class="relative aspect-[5/3.55] overflow-hidden bg-blueprint">
+                <div class="plan-media relative aspect-[5/3.55] overflow-hidden bg-blueprint">
                   <img
                     src={plan.image ?? "/img/privileges/plan.jpg"}
                     alt={`Планировка ${getTitle(String(plan.rooms))}, ${plan.area}, ${data.name}`}
-                    class="absolute inset-0 h-full w-full object-cover mix-blend-multiply transition-transform duration-[900ms] ease-[cubic-bezier(0.625,0.05,0,1)] group-hover:scale-[1.035]"
+                    class={`plan-image plan-crop-${index % 8} absolute inset-0 h-full w-full object-cover mix-blend-multiply transition-transform duration-[900ms] ease-[cubic-bezier(0.625,0.05,0,1)]`}
                     loading="lazy"
                     decoding="async"
                   />
-                  <div class="absolute left-0 top-0 bg-[#FBFBFA]/92 px-4 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-500 backdrop-blur-sm">
+                  <div class="plan-index absolute left-0 top-0 bg-[#FBFBFA]/94 px-4 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-500 backdrop-blur-sm">
                     {String(index + 1).padStart(2, "0")}
                   </div>
                 </div>
 
-                <div class="flex min-h-0 flex-col p-6 md:p-7">
+                <div class="plan-content flex min-h-0 flex-col p-7 md:p-8">
                   <div class="flex items-start justify-between gap-5">
                     <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-violet-700">
-                      {category}
+                      {compactCategory}
                     </span>
                     {plan.note && (
                       <span class="max-w-[18ch] text-right font-mono text-[10px] uppercase tracking-[0.12em] text-slate-400">
@@ -112,24 +124,24 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
                     )}
                   </div>
 
-                  <div class="mt-12">
-                    <h3 class="text-3xl font-medium leading-tight text-slate-950">
+                  <div class="plan-body mt-12">
+                    <h3 class="plan-title text-3xl font-medium leading-tight text-slate-950">
                       {getTitle(String(plan.rooms))}
                     </h3>
-                    <p class="mt-4 font-mono text-[13px] uppercase tracking-[0.12em] text-slate-600">
+                    <p class="plan-area mt-4 font-mono text-[13px] uppercase tracking-[0.12em] text-slate-600">
                       {plan.area}
                     </p>
-                    <p class="mt-5 max-w-[36ch] text-sm leading-7 text-slate-600">
+                    <p class="plan-note mt-5 max-w-[36ch] text-sm leading-7 text-slate-600">
                       {plan.note ?? "Планировка для ежедневного городского сценария."}
                     </p>
                   </div>
 
                   <a
                     href="#contact"
-                    class="mt-auto flex items-center justify-between gap-4 border-t-[0.5px] border-slate-900/12 pt-6 font-mono text-[11px] uppercase tracking-[0.16em] text-slate-950 transition-colors duration-300 group-hover:border-slate-950/30 group-hover:text-violet-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700"
+                    class="plan-cta mt-auto flex items-center justify-between gap-4 border-t-[0.5px] border-slate-900/18 pt-6 font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-slate-950 transition-colors duration-300 group-hover:border-slate-950/35 group-hover:text-violet-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700"
                   >
                     Выбрать квартиру
-                    <span aria-hidden="true">→</span>
+                    <span class="plan-cta-arrow transition-transform duration-300 ease-out" aria-hidden="true">→</span>
                   </a>
                 </div>
               </article>
@@ -138,10 +150,10 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
         </div>
 
         {shouldLimitAll && (
-          <div class="mt-10" data-plan-show-more-wrap>
+          <div class="mt-11 border-t-[0.5px] border-slate-900/12 pt-7" data-plan-show-more-wrap>
             <button
               type="button"
-              class="inline-flex min-h-12 items-center border-[0.5px] border-slate-900/25 bg-[#FBFBFA] px-5 py-3 font-mono text-[11px] uppercase tracking-[0.14em] text-slate-950 transition-colors duration-300 hover:border-slate-950 hover:bg-slate-950 hover:text-alabaster focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700"
+              class="plan-show-more inline-flex min-h-10 items-center border-b-[0.5px] border-slate-900/25 pb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-slate-950 transition-colors duration-300 hover:border-violet-700 hover:text-violet-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700"
               data-plan-show-more
               aria-expanded="false"
             >
@@ -167,10 +179,6 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
             buttons.forEach((button) => {
               const isActive = button.getAttribute("data-plan-filter") === activeFilter;
               button.setAttribute("aria-pressed", String(isActive));
-              button.classList.toggle("bg-slate-950", isActive);
-              button.classList.toggle("text-alabaster", isActive);
-              button.classList.toggle("bg-[#FBFBFA]", !isActive);
-              button.classList.toggle("text-slate-600", !isActive);
             });
           };
 
@@ -211,6 +219,59 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
           updateCards();
         });
       </script>
+
+      <style>
+        .plan-filter-button[aria-pressed="true"] {
+          background: #020617;
+          border-color: #020617;
+          color: #fbfbfa;
+        }
+
+        .plan-filter-button[aria-pressed="false"]:hover {
+          background: #f5f4f0;
+          color: #020617;
+        }
+
+        .plan-card:hover .plan-image {
+          transform: scale(1.045);
+        }
+
+        .plan-card:hover .plan-cta-arrow {
+          transform: translateX(0.35rem);
+        }
+
+        .plan-crop-0 {
+          object-position: 48% 46%;
+        }
+
+        .plan-crop-1 {
+          object-position: 58% 48%;
+        }
+
+        .plan-crop-2 {
+          object-position: 42% 54%;
+        }
+
+        .plan-crop-3 {
+          object-position: 54% 42%;
+        }
+
+        .plan-crop-4 {
+          object-position: 46% 58%;
+        }
+
+        .plan-crop-5 {
+          object-position: 62% 52%;
+        }
+
+        .plan-crop-6 {
+          object-position: 40% 46%;
+        }
+
+        .plan-crop-7 {
+          object-position: 56% 56%;
+        }
+      </style>
     </section>
   )
 }
