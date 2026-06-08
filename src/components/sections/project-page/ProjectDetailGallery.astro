@@ -1,69 +1,1017 @@
 ---
+import "photoswipe/style.css";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Expand,
+  Leaf,
+  ShieldCheck,
+  Sparkles,
+  SunMedium,
+} from "@lucide/astro";
+
+interface GalleryItem {
+  image?: string;
+  src?: string;
+  width?: number;
+  height?: number;
+  alt?: string;
+  caption?: string;
+  label?: string;
+  category?: string;
+}
+
 interface Props {
   project: any;
 }
 
 const { project } = Astro.props;
-const gallery = project.data.gallery ?? [];
-const primary = gallery[0];
-const supporting = gallery.slice(1, 4);
+const galleryRaw = (project.data.gallery ?? []) as GalleryItem[];
+
+const gallery = galleryRaw
+  .map((item, index) => {
+    const src = item.src ?? item.image ?? "";
+    const label = item.label ?? item.category ?? item.caption ?? `Вид ${index + 1}`;
+
+    return {
+      src,
+      width: item.width ?? 1800,
+      height: item.height ?? 1200,
+      alt: item.alt ?? item.caption ?? label,
+      caption: item.caption ?? label,
+      label,
+      category: item.category ?? label,
+    };
+  })
+  .filter((item) => item.src);
+
+const total = gallery.length;
+const initialIndex = total > 3 ? 3 : 0;
+const initial = gallery[initialIndex];
+const counterTotal = String(total).padStart(2, "0");
+const counterInitial = String(initialIndex + 1).padStart(2, "0");
+const galleryJson = JSON.stringify(gallery).replace(/</g, "\\u003c");
+
+const features = [
+  { text: "Архитектура в стиле неоклассика", Icon: Sparkles },
+  { text: "Премиальные материалы и технологии", Icon: ShieldCheck },
+  { text: "Пространства для жизни и вдохновения", Icon: Leaf },
+  { text: "Уютный двор и видовые локации", Icon: SunMedium },
+];
 ---
 
 {
-  gallery.length > 0 && primary && (
-    <section class="bg-[#FBFBFA] px-5 py-20 md:px-8 md:py-28 lg:px-10" aria-labelledby="gallery-title">
-      <div class="mx-auto max-w-[1480px]">
-        <div class="mb-12 grid gap-8 lg:grid-cols-[0.6fr_0.4fr] lg:items-end">
-          <div class="border-t-[0.5px] border-slate-900/15 pt-8">
-            <p class="mono-detail text-violet-700">Галерея</p>
-            <h2 id="gallery-title" class="mt-5 text-5xl font-medium leading-[0.96] text-slate-950 md:text-6xl">
-              Архитектура и среда
+  total > 0 && initial && (
+    <section
+      class="project-gallery-section"
+      data-project-gallery
+      data-gallery-initial-index={initialIndex}
+      aria-labelledby="gallery-title"
+    >
+      <div class="project-gallery-shell">
+        <div class="project-gallery-layout">
+          <aside class="gallery-editorial" aria-label="Описание галереи">
+            <p class="gallery-label">
+              <span>ГАЛЕРЕЯ</span>
+              <span aria-hidden="true">+</span>
+            </p>
+
+            <h2 id="gallery-title">
+              ЖК Медина+ —
+              <br />
+              архитектура света
+              <br />
+              и спокойствия
             </h2>
+
+            <p class="gallery-intro">
+              Каждая деталь проекта создана с вниманием к эстетике, комфорту и гармонии. Фасады,
+              лобби, двор и виды — всё продумано для вашей вдохновляющей повседневности.
+            </p>
+
+            <ul class="gallery-features" aria-label="Особенности галереи">
+              {features.map(({ text, Icon }) => (
+                <li>
+                  <Icon aria-hidden="true" size={17} stroke-width={1.55} />
+                  <span>{text}</span>
+                </li>
+              ))}
+            </ul>
+          </aside>
+
+          <div class="gallery-showcase">
+            <div class="gallery-view">
+              <div class="gallery-main-frame">
+                <button
+                  class="gallery-main"
+                  type="button"
+                  data-gallery-open
+                  aria-label="Открыть изображение в полноэкранной галерее"
+                >
+                  <img
+                    src={initial.src}
+                    width={initial.width}
+                    height={initial.height}
+                    alt={initial.alt}
+                    loading="lazy"
+                    decoding="async"
+                    data-gallery-main-image
+                  />
+
+                  <span class="gallery-main__wash" aria-hidden="true"></span>
+                  <span class="gallery-main__pill" data-gallery-main-label>{initial.category}</span>
+                  <span class="gallery-main__affordance" aria-hidden="true">
+                    <Expand size={16} stroke-width={1.45} />
+                    <span>Открыть изображение</span>
+                  </span>
+                </button>
+
+                <button
+                  class="gallery-nav gallery-nav--prev"
+                  type="button"
+                  data-gallery-prev
+                  aria-label="Предыдущее изображение"
+                >
+                  <ChevronLeft aria-hidden="true" size={22} stroke-width={1.55} />
+                </button>
+
+                <button
+                  class="gallery-nav gallery-nav--next"
+                  type="button"
+                  data-gallery-next
+                  aria-label="Следующее изображение"
+                >
+                  <ChevronRight aria-hidden="true" size={22} stroke-width={1.55} />
+                </button>
+              </div>
+
+              <div class="gallery-side">
+                <div class="gallery-count" aria-live="polite" aria-atomic="true">
+                  <span data-gallery-current>{counterInitial}</span>
+                  <span class="gallery-count__divider" aria-hidden="true">/</span>
+                  <span class="gallery-count__total">{counterTotal}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="gallery-rail-shell" aria-label="Миниатюры галереи">
+              <button
+                class="rail-nav rail-nav--prev"
+                type="button"
+                data-gallery-rail-prev
+                aria-label="Прокрутить миниатюры назад"
+                aria-disabled="true"
+                disabled
+              >
+                <ChevronLeft aria-hidden="true" size={17} stroke-width={1.55} />
+              </button>
+
+              <div class="gallery-rail" data-gallery-rail>
+                {gallery.map((item, index) => (
+                  <button
+                    class="gallery-thumb"
+                    type="button"
+                    data-gallery-thumb={index}
+                    aria-label={`Показать изображение: ${item.label}`}
+                    aria-selected={index === initialIndex ? "true" : "false"}
+                  >
+                    <span class="gallery-thumb__image">
+                      <img
+                        src={item.src}
+                        width={item.width}
+                        height={item.height}
+                        alt={item.alt}
+                        loading={index < 6 ? "eager" : "lazy"}
+                        decoding="async"
+                      />
+                    </span>
+                    <span class="gallery-thumb__label">{item.label}</span>
+                  </button>
+                ))}
+              </div>
+
+              <button
+                class="rail-nav rail-nav--next"
+                type="button"
+                data-gallery-rail-next
+                aria-label="Прокрутить миниатюры вперед"
+              >
+                <ChevronRight aria-hidden="true" size={19} stroke-width={1.55} />
+              </button>
+            </div>
           </div>
-          <p class="max-w-[44ch] text-sm leading-7 text-slate-600 lg:justify-self-end">
-            Свет, фасады, входные зоны и дворовая среда показывают характер проекта крупнее, чем сухие характеристики.
-          </p>
         </div>
 
-        <div class="grid gap-3 lg:grid-cols-[1.55fr_0.9fr]">
-          <figure class="group relative min-h-[420px] overflow-hidden bg-blueprint md:min-h-[620px]">
-            <img
-              src={primary.image}
-              alt={primary.alt}
-              class="absolute inset-0 h-full w-full object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.625,0.05,0,1)] group-hover:scale-[1.025]"
-              loading="lazy"
-              decoding="async"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/22 via-transparent to-transparent opacity-80" aria-hidden="true"></div>
-            {primary.caption && (
-              <figcaption class="absolute inset-x-0 bottom-0 flex items-center justify-between gap-4 bg-[#FBFBFA]/92 px-4 py-3 font-mono text-[10px] uppercase tracking-[0.14em] text-slate-700 backdrop-blur-sm">
-                <span>01 / {primary.caption}</span>
-                <span class="text-violet-700">Главный вид</span>
-              </figcaption>
-            )}
-          </figure>
-
-          <div class="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-            {supporting.map((item: any, index: number) => (
-            <figure class="group relative min-h-[240px] overflow-hidden bg-blueprint lg:min-h-0">
-              <img
-                src={item.image}
-                alt={item.alt}
-                class="absolute inset-0 h-full w-full object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.625,0.05,0,1)] group-hover:scale-[1.025]"
-                loading="lazy"
-                decoding="async"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/18 via-transparent to-transparent opacity-80" aria-hidden="true"></div>
-              {item.caption && (
-                <figcaption class="absolute inset-x-0 bottom-0 bg-[#FBFBFA]/92 px-4 py-3 font-mono text-[10px] uppercase tracking-[0.14em] text-slate-700 backdrop-blur-sm">
-                  {String(index + 2).padStart(2, "0")} / {item.caption}
-                </figcaption>
-              )}
-            </figure>
-            ))}
-          </div>
-        </div>
+        <script is:inline type="application/json" data-gallery-payload set:html={galleryJson}></script>
       </div>
     </section>
   )
 }
+
+<script>
+  import PhotoSwipe from "photoswipe";
+  import PhotoSwipeLightbox from "photoswipe/lightbox";
+
+  type ProjectGalleryItem = {
+    src: string;
+    width: number;
+    height: number;
+    alt: string;
+    caption: string;
+    label: string;
+    category: string;
+  };
+
+  const formatGalleryNumber = (value: number) => String(value).padStart(2, "0");
+
+  const initProjectGalleries = () => {
+    document.querySelectorAll("[data-project-gallery]").forEach((galleryRoot) => {
+      if (!(galleryRoot instanceof HTMLElement) || galleryRoot.dataset.galleryReady === "true") {
+        return;
+      }
+
+      const payload = galleryRoot.querySelector("[data-gallery-payload]");
+      const openButtons = Array.from(galleryRoot.querySelectorAll("[data-gallery-open]"));
+      const mainImage = galleryRoot.querySelector("[data-gallery-main-image]");
+      const mainLabel = galleryRoot.querySelector("[data-gallery-main-label]");
+      const currentCounter = galleryRoot.querySelector("[data-gallery-current]");
+      const previousButton = galleryRoot.querySelector("[data-gallery-prev]");
+      const nextButton = galleryRoot.querySelector("[data-gallery-next]");
+      const rail = galleryRoot.querySelector("[data-gallery-rail]");
+      const railPrevious = galleryRoot.querySelector("[data-gallery-rail-prev]");
+      const railNext = galleryRoot.querySelector("[data-gallery-rail-next]");
+      const thumbButtons = Array.from(galleryRoot.querySelectorAll("[data-gallery-thumb]"));
+
+      if (
+        !(payload instanceof HTMLScriptElement) ||
+        !(mainImage instanceof HTMLImageElement) ||
+        !(mainLabel instanceof HTMLElement) ||
+        !(currentCounter instanceof HTMLElement)
+      ) {
+        return;
+      }
+
+      const items = JSON.parse(payload.textContent || "[]") as ProjectGalleryItem[];
+
+      if (!Array.isArray(items) || items.length === 0) {
+        return;
+      }
+
+      galleryRoot.dataset.galleryReady = "true";
+      let currentIndex = Number(galleryRoot.dataset.galleryInitialIndex || 0);
+
+      const updateRailControls = () => {
+        if (
+          !(rail instanceof HTMLElement) ||
+          !(railPrevious instanceof HTMLButtonElement) ||
+          !(railNext instanceof HTMLButtonElement)
+        ) {
+          return;
+        }
+
+        const maxScroll = rail.scrollWidth - rail.clientWidth;
+        const isAtStart = rail.scrollLeft <= 1;
+        const isAtEnd = maxScroll <= 1 || rail.scrollLeft >= maxScroll - 1;
+
+        railPrevious.disabled = isAtStart;
+        railNext.disabled = isAtEnd;
+        railPrevious.setAttribute("aria-disabled", String(isAtStart));
+        railNext.setAttribute("aria-disabled", String(isAtEnd));
+      };
+
+      const queueRailControlsUpdate = (delay = 0) => {
+        window.setTimeout(() => {
+          window.requestAnimationFrame(updateRailControls);
+        }, delay);
+      };
+
+      const syncRailPosition = (behavior: ScrollBehavior = "smooth") => {
+        const activeThumb = thumbButtons[currentIndex];
+
+        if (activeThumb instanceof HTMLElement) {
+          activeThumb.scrollIntoView({
+            behavior,
+            block: "nearest",
+            inline: "center",
+          });
+
+          queueRailControlsUpdate(behavior === "smooth" ? 360 : 0);
+        }
+      };
+
+      const renderCurrentImage = (
+        nextIndex: number,
+        behavior: ScrollBehavior = "smooth",
+        shouldSyncRail = true
+      ) => {
+        currentIndex = (nextIndex + items.length) % items.length;
+        const item = items[currentIndex];
+
+        mainImage.src = item.src;
+        mainImage.width = item.width;
+        mainImage.height = item.height;
+        mainImage.alt = item.alt;
+        mainLabel.textContent = item.category || item.label || "";
+        currentCounter.textContent = formatGalleryNumber(currentIndex + 1);
+
+        thumbButtons.forEach((button, index) => {
+          button.setAttribute("aria-selected", String(index === currentIndex));
+        });
+
+        if (shouldSyncRail) {
+          syncRailPosition(behavior);
+        }
+      };
+
+      const lightbox = new PhotoSwipeLightbox({
+        dataSource: items,
+        pswpModule: PhotoSwipe,
+        bgOpacity: 0.9,
+        showHideAnimationType: "zoom",
+        closeTitle: "Закрыть",
+        zoomTitle: "Увеличить",
+        arrowPrevTitle: "Предыдущее изображение",
+        arrowNextTitle: "Следующее изображение",
+        paddingFn: (viewportSize) =>
+          viewportSize.x < 700
+            ? { top: 32, right: 12, bottom: 72, left: 12 }
+            : { top: 52, right: 76, bottom: 84, left: 76 },
+      });
+
+      lightbox.addFilter("thumbEl", (thumbEl, _itemData, index) => {
+        if (index === currentIndex) {
+          return mainImage;
+        }
+
+        const thumbImage = thumbButtons[index]?.querySelector("img");
+        return thumbImage || thumbEl || mainImage;
+      });
+
+      lightbox.on("uiRegister", () => {
+        lightbox.pswp?.ui?.registerElement({
+          name: "custom-caption",
+          className: "pswp__custom-caption",
+          appendTo: "root",
+          order: 9,
+          html: "",
+          onInit: (captionElement, pswp) => {
+            const updateCaption = () => {
+              const caption = pswp.currSlide?.data?.caption || pswp.currSlide?.data?.alt || "";
+              captionElement.textContent = caption;
+              captionElement.toggleAttribute("hidden", !caption);
+            };
+
+            pswp.on("change", updateCaption);
+            updateCaption();
+          },
+        });
+      });
+
+      lightbox.on("change", () => {
+        if (lightbox.pswp) {
+          renderCurrentImage(lightbox.pswp.currIndex);
+        }
+      });
+
+      lightbox.init();
+      renderCurrentImage(currentIndex, "auto", false);
+
+      previousButton?.addEventListener("click", () => renderCurrentImage(currentIndex - 1));
+      nextButton?.addEventListener("click", () => renderCurrentImage(currentIndex + 1));
+
+      thumbButtons.forEach((button, index) => {
+        button.addEventListener("click", () => renderCurrentImage(index));
+      });
+
+      openButtons.forEach((button) => {
+        if (!(button instanceof HTMLButtonElement)) {
+          return;
+        }
+
+        button.addEventListener("click", (event) => {
+          const initialPoint =
+            event instanceof MouseEvent && (event.clientX || event.clientY)
+              ? { x: event.clientX, y: event.clientY }
+              : null;
+
+          lightbox.loadAndOpen(currentIndex, items, initialPoint);
+        });
+      });
+
+      const scrollRail = (direction: number) => {
+        if (rail instanceof HTMLElement) {
+          rail.scrollBy({
+            left: direction * Math.max(rail.clientWidth * 0.72, 220),
+            behavior: "smooth",
+          });
+
+          queueRailControlsUpdate(360);
+        }
+      };
+
+      railPrevious?.addEventListener("click", () => scrollRail(-1));
+      railNext?.addEventListener("click", () => scrollRail(1));
+      rail?.addEventListener("scroll", updateRailControls, { passive: true });
+      window.addEventListener("resize", updateRailControls, { passive: true });
+
+      if (rail instanceof HTMLElement && "ResizeObserver" in window) {
+        const railObserver = new ResizeObserver(updateRailControls);
+        railObserver.observe(rail);
+      }
+
+      updateRailControls();
+    });
+  };
+
+  initProjectGalleries();
+  document.addEventListener("astro:page-load", initProjectGalleries);
+</script>
+
+<style>
+  .project-gallery-section {
+    background:
+      radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.72), transparent 28rem),
+      linear-gradient(180deg, #fbf8f1 0%, #f6f0e6 100%);
+    color: #10254c;
+    overflow: hidden;
+    padding: clamp(4.5rem, 6.8vw, 7.4rem) clamp(1rem, 2.4vw, 2.25rem)
+      clamp(4.7rem, 6.4vw, 7rem);
+    scroll-margin-top: 5rem;
+  }
+
+  .project-gallery-shell {
+    margin: 0 auto;
+    max-width: 1640px;
+  }
+
+  .project-gallery-layout {
+    display: grid;
+    gap: clamp(2.6rem, 4.2vw, 5rem);
+    grid-template-columns: minmax(20rem, 0.31fr) minmax(0, 0.69fr);
+  }
+
+  .gallery-editorial {
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: clamp(1.35rem, 2vw, 2.05rem) 0 0;
+  }
+
+  .gallery-label {
+    align-items: center;
+    color: #24406c;
+    display: flex;
+    font-family: var(--font-mono, "Geist Mono", monospace);
+    font-size: 0.72rem;
+    font-weight: 650;
+    gap: 0.82rem;
+    letter-spacing: 0.28em;
+    line-height: 1;
+    margin: 0 0 clamp(1.55rem, 2.25vw, 2.25rem);
+  }
+
+  .gallery-label::after {
+    background: #9b8ad0;
+    content: "";
+    display: block;
+    height: 1px;
+    opacity: 0.8;
+    width: 3.1rem;
+  }
+
+  .gallery-label span:last-child {
+    color: #9b8ad0;
+    font-size: 0.82rem;
+    letter-spacing: 0;
+    margin-left: -0.25rem;
+  }
+
+  .gallery-editorial h2 {
+    color: #10254c;
+    font-family: var(--font-serif, Georgia, "Times New Roman", serif);
+    font-size: clamp(2.72rem, 3.42vw, 4.15rem);
+    font-weight: 420;
+    letter-spacing: 0;
+    line-height: 1.03;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .gallery-intro {
+    color: rgba(16, 37, 76, 0.66);
+    font-size: clamp(1rem, 1.08vw, 1.1rem);
+    line-height: 1.76;
+    margin: clamp(1.45rem, 2.2vw, 2rem) 0 0;
+    max-width: 34rem;
+  }
+
+  .gallery-features {
+    display: grid;
+    gap: clamp(1.12rem, 1.75vw, 1.5rem);
+    list-style: none;
+    margin: clamp(2.35rem, 4.2vw, 3.5rem) 0 0;
+    padding: 0;
+  }
+
+  .gallery-features::after {
+    background: linear-gradient(90deg, rgba(155, 138, 208, 0.58), rgba(16, 37, 76, 0.12));
+    content: "";
+    display: block;
+    height: 1px;
+    margin-top: clamp(0.55rem, 1.3vw, 1rem);
+    width: min(11rem, 42%);
+  }
+
+  .gallery-features li {
+    align-items: center;
+    color: #243a63;
+    display: grid;
+    font-size: 0.94rem;
+    font-weight: 600;
+    gap: 1rem;
+    grid-template-columns: 1.3rem minmax(0, 1fr);
+    line-height: 1.46;
+  }
+
+  .gallery-features svg {
+    color: #9b8ad0;
+  }
+
+  .gallery-showcase {
+    min-width: 0;
+  }
+
+  .gallery-view {
+    align-items: stretch;
+    display: grid;
+    gap: clamp(1rem, 1.9vw, 2rem);
+    grid-template-columns: minmax(0, 1fr) clamp(5.1rem, 6.8vw, 7rem);
+  }
+
+  .gallery-main-frame {
+    min-width: 0;
+    position: relative;
+  }
+
+  .gallery-main {
+    appearance: none;
+    aspect-ratio: 16 / 9;
+    background: #e7dece;
+    border: 1px solid rgba(16, 37, 76, 0.16);
+    border-radius: 7px;
+    color: inherit;
+    cursor: zoom-in;
+    display: block;
+    height: clamp(420px, 34vw, 580px);
+    max-height: 580px;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    width: 100%;
+  }
+
+  .gallery-main img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.001);
+    transition:
+      filter 320ms ease,
+      transform 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    width: 100%;
+  }
+
+  .gallery-main:hover img {
+    filter: saturate(1.04) contrast(1.02);
+    transform: scale(1.018);
+  }
+
+  .gallery-main__wash {
+    background:
+      linear-gradient(180deg, rgba(6, 14, 29, 0.12), rgba(6, 14, 29, 0) 34%),
+      linear-gradient(90deg, rgba(6, 14, 29, 0.18), rgba(6, 14, 29, 0) 42%);
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  .gallery-main__pill {
+    align-items: center;
+    background: rgba(15, 19, 24, 0.38);
+    border: 1px solid rgba(255, 255, 255, 0.68);
+    border-radius: 999px;
+    color: #fffaf0;
+    display: inline-flex;
+    font-size: 0.86rem;
+    font-weight: 650;
+    left: 1.25rem;
+    line-height: 1;
+    min-height: 2.5rem;
+    padding: 0.62rem 1.22rem;
+    position: absolute;
+    top: 1.25rem;
+  }
+
+  .gallery-main__affordance {
+    align-items: center;
+    background: rgba(250, 247, 239, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.48);
+    bottom: 1.15rem;
+    color: #10254c;
+    display: inline-flex;
+    font-size: 0.76rem;
+    font-weight: 650;
+    gap: 0.55rem;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    opacity: 0;
+    padding: 0.72rem 0.86rem;
+    pointer-events: none;
+    position: absolute;
+    right: 1.15rem;
+    transform: translateY(0.25rem);
+    transition:
+      opacity 220ms ease,
+      transform 220ms ease;
+  }
+
+  .gallery-main:hover .gallery-main__affordance,
+  .gallery-main:focus-visible .gallery-main__affordance {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .gallery-nav {
+    align-items: center;
+    appearance: none;
+    background: rgba(250, 247, 239, 0.92);
+    border: 1px solid rgba(16, 37, 76, 0.12);
+    border-radius: 999px;
+    color: #10254c;
+    cursor: pointer;
+    display: inline-flex;
+    height: 3.45rem;
+    justify-content: center;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition:
+      background-color 220ms ease,
+      border-color 220ms ease,
+      color 220ms ease,
+      transform 220ms ease;
+    width: 3.45rem;
+    z-index: 2;
+  }
+
+  .gallery-nav:hover,
+  .rail-nav:hover {
+    background: #10254c;
+    border-color: #10254c;
+    color: #fffaf0;
+  }
+
+  .gallery-nav:active {
+    transform: translateY(-50%) scale(0.97);
+  }
+
+  .gallery-nav--prev {
+    left: 1rem;
+  }
+
+  .gallery-nav--next {
+    right: 1rem;
+  }
+
+  .gallery-side {
+    align-content: start;
+    display: grid;
+    min-width: 0;
+    padding: clamp(1.15rem, 1.9vw, 2rem) 0;
+  }
+
+  .gallery-count {
+    align-items: baseline;
+    color: #10254c;
+    display: flex;
+    font-family: var(--font-serif, Georgia, "Times New Roman", serif);
+    font-size: clamp(1.72rem, 2.2vw, 2.35rem);
+    font-variant-numeric: tabular-nums;
+    gap: 0.48rem;
+    justify-content: flex-start;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .gallery-count__divider,
+  .gallery-count__total {
+    color: rgba(16, 37, 76, 0.58);
+    font-family: var(--font-mono, "Geist Mono", monospace);
+    font-size: 0.95rem;
+  }
+
+  .gallery-rail-shell {
+    align-items: start;
+    display: grid;
+    gap: clamp(0.62rem, 0.95vw, 0.9rem);
+    grid-template-columns: 2.65rem minmax(0, 1fr) 2.65rem;
+    margin-top: clamp(1.25rem, 2.2vw, 1.9rem);
+    max-width: calc(100% - clamp(5.1rem, 6.8vw, 7rem) - clamp(1rem, 1.9vw, 2rem));
+  }
+
+  .gallery-rail {
+    display: grid;
+    gap: clamp(0.9rem, 1.3vw, 1.18rem);
+    grid-auto-columns: clamp(6.5rem, 7.85vw, 8.45rem);
+    grid-auto-flow: column;
+    min-width: 0;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    padding: 0.12rem 0.08rem 0.75rem;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+
+  .gallery-rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-thumb {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    color: rgba(16, 37, 76, 0.58);
+    cursor: pointer;
+    display: grid;
+    gap: 0.68rem;
+    min-width: 0;
+    padding: 0;
+    text-align: left;
+  }
+
+  .gallery-thumb__image {
+    aspect-ratio: 16 / 9;
+    background: #e7dece;
+    border: 1px solid rgba(16, 37, 76, 0.14);
+    border-radius: 6px;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    transition:
+      border-color 220ms ease,
+      box-shadow 220ms ease,
+      opacity 220ms ease;
+  }
+
+  .gallery-thumb__image img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.78;
+    transition:
+      opacity 220ms ease,
+      transform 420ms ease;
+    width: 100%;
+  }
+
+  .gallery-thumb__label {
+    display: block;
+    font-size: 0.9rem;
+    line-height: 1.26;
+    overflow-wrap: anywhere;
+  }
+
+  .gallery-thumb:hover .gallery-thumb__image img {
+    opacity: 0.94;
+    transform: scale(1.035);
+  }
+
+  .gallery-thumb[aria-selected="true"] {
+    color: #10254c;
+  }
+
+  .gallery-thumb[aria-selected="true"] .gallery-thumb__image {
+    border-color: #6c5ca8;
+    box-shadow:
+      0 0 0 1px #6c5ca8,
+      0 0 0 3px rgba(108, 92, 168, 0.12);
+  }
+
+  .gallery-thumb[aria-selected="true"] img {
+    opacity: 1;
+  }
+
+  .rail-nav {
+    align-items: center;
+    appearance: none;
+    background: rgba(250, 247, 239, 0.82);
+    border: 1px solid rgba(16, 37, 76, 0.12);
+    border-radius: 999px;
+    color: #10254c;
+    cursor: pointer;
+    display: inline-flex;
+    height: 2.65rem;
+    justify-content: center;
+    margin-top: 0.32rem;
+    padding: 0;
+    transition:
+      background-color 220ms ease,
+      border-color 220ms ease,
+      color 220ms ease,
+      transform 220ms ease;
+    width: 2.65rem;
+  }
+
+  .rail-nav:disabled {
+    background: rgba(250, 247, 239, 0.48);
+    border-color: rgba(16, 37, 76, 0.08);
+    color: rgba(16, 37, 76, 0.24);
+    cursor: not-allowed;
+    opacity: 0.46;
+  }
+
+  .rail-nav:disabled:hover {
+    background: rgba(250, 247, 239, 0.48);
+    border-color: rgba(16, 37, 76, 0.08);
+    color: rgba(16, 37, 76, 0.24);
+    transform: none;
+  }
+
+  .rail-nav:disabled:active {
+    transform: none;
+  }
+
+  .rail-nav:active {
+    transform: scale(0.97);
+  }
+
+  .gallery-main:focus-visible,
+  .gallery-thumb:focus-visible,
+  .gallery-nav:focus-visible,
+  .rail-nav:focus-visible {
+    outline: 2px solid #7e70bd;
+    outline-offset: 4px;
+  }
+
+  :global(.pswp__custom-caption) {
+    background: rgba(13, 17, 22, 0.58);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 6px;
+    bottom: 1.05rem;
+    color: #fffaf0;
+    font-size: 0.9rem;
+    left: 50%;
+    line-height: 1.5;
+    max-width: min(42rem, calc(100vw - 2rem));
+    padding: 0.82rem 1rem;
+    position: absolute;
+    text-align: center;
+    transform: translateX(-50%);
+    width: max-content;
+  }
+
+  @media (max-width: 1180px) {
+    .project-gallery-layout {
+      grid-template-columns: minmax(15.5rem, 0.34fr) minmax(0, 0.66fr);
+    }
+
+    .gallery-main {
+      height: clamp(360px, 37vw, 500px);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .project-gallery-section {
+      padding-bottom: clamp(3.6rem, 10vw, 5rem);
+    }
+
+    .project-gallery-layout {
+      gap: 2rem;
+      grid-template-columns: 1fr;
+    }
+
+    .gallery-editorial {
+      padding-top: 0;
+    }
+
+    .gallery-view {
+      gap: 0.9rem;
+      grid-template-columns: 1fr;
+    }
+
+    .gallery-side {
+      align-items: center;
+      display: flex;
+      justify-content: flex-start;
+      order: -1;
+      padding: 0;
+    }
+
+    .gallery-main {
+      height: auto;
+    }
+
+    .gallery-rail-shell {
+      max-width: none;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .project-gallery-section {
+      padding-left: 1rem;
+      padding-right: 1rem;
+      padding-top: 5.2rem;
+    }
+
+    .gallery-label {
+      font-size: 0.62rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .gallery-editorial h2 {
+      font-size: clamp(2.12rem, 9.6vw, 2.72rem);
+      line-height: 1.08;
+    }
+
+    .gallery-intro {
+      font-size: 0.95rem;
+      line-height: 1.64;
+      margin-top: 1.1rem;
+    }
+
+    .gallery-features {
+      gap: 0.9rem;
+      margin-top: 1.65rem;
+    }
+
+    .gallery-features li {
+      font-size: 0.86rem;
+      gap: 0.74rem;
+    }
+
+    .gallery-count {
+      font-size: 1.56rem;
+    }
+
+    .gallery-main {
+      aspect-ratio: 16 / 10;
+      border-radius: 6px;
+    }
+
+    .gallery-main__pill {
+      font-size: 0.72rem;
+      left: 0.8rem;
+      min-height: 2rem;
+      padding: 0.48rem 0.86rem;
+      top: 0.8rem;
+    }
+
+    .gallery-main__affordance {
+      bottom: 0.78rem;
+      font-size: 0.68rem;
+      opacity: 0.62;
+      padding: 0.58rem 0.68rem;
+      right: 0.78rem;
+      transform: none;
+    }
+
+    .gallery-nav {
+      height: 2.65rem;
+      width: 2.65rem;
+    }
+
+    .gallery-nav--prev {
+      left: 0.62rem;
+    }
+
+    .gallery-nav--next {
+      right: 0.62rem;
+    }
+
+    .gallery-rail-shell {
+      grid-template-columns: minmax(0, 1fr);
+      margin-top: 0.95rem;
+    }
+
+    .gallery-rail {
+      grid-auto-columns: 6.85rem;
+      padding-bottom: 0.45rem;
+    }
+
+    .gallery-thumb__label {
+      font-size: 0.78rem;
+    }
+
+    .rail-nav {
+      display: none;
+    }
+
+    :global(.pswp__custom-caption) {
+      bottom: 0.75rem;
+      font-size: 0.75rem;
+      max-width: calc(100vw - 1.5rem);
+    }
+  }
+</style>

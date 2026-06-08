@@ -79,6 +79,10 @@ const projects = defineCollection({
           image: z.string(),
           alt: z.string(),
           caption: z.string().optional(),
+          label: z.string().optional(),
+          category: z.string().optional(),
+          width: z.number().optional(),
+          height: z.number().optional(),
         })
       )
       .optional(),
