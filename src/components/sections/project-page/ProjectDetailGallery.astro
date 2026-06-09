@@ -126,23 +126,6 @@ const features = [
                   </span>
                 </button>
 
-                <button
-                  class="gallery-nav gallery-nav--prev"
-                  type="button"
-                  data-gallery-prev
-                  aria-label="Предыдущее изображение"
-                >
-                  <ChevronLeft aria-hidden="true" size={22} stroke-width={1.55} />
-                </button>
-
-                <button
-                  class="gallery-nav gallery-nav--next"
-                  type="button"
-                  data-gallery-next
-                  aria-label="Следующее изображение"
-                >
-                  <ChevronRight aria-hidden="true" size={22} stroke-width={1.55} />
-                </button>
               </div>
 
               <div class="gallery-side">
@@ -235,8 +218,6 @@ const features = [
       const mainImage = galleryRoot.querySelector("[data-gallery-main-image]");
       const mainLabel = galleryRoot.querySelector("[data-gallery-main-label]");
       const currentCounter = galleryRoot.querySelector("[data-gallery-current]");
-      const previousButton = galleryRoot.querySelector("[data-gallery-prev]");
-      const nextButton = galleryRoot.querySelector("[data-gallery-next]");
       const rail = galleryRoot.querySelector("[data-gallery-rail]");
       const railPrevious = galleryRoot.querySelector("[data-gallery-rail-prev]");
       const railNext = galleryRoot.querySelector("[data-gallery-rail-next]");
@@ -375,9 +356,6 @@ const features = [
 
       lightbox.init();
       renderCurrentImage(currentIndex, "auto", false);
-
-      previousButton?.addEventListener("click", () => renderCurrentImage(currentIndex - 1));
-      nextButton?.addEventListener("click", () => renderCurrentImage(currentIndex + 1));
 
       thumbButtons.forEach((button, index) => {
         button.addEventListener("click", () => renderCurrentImage(index));
@@ -642,47 +620,10 @@ const features = [
     transform: translateY(0);
   }
 
-  .gallery-nav {
-    align-items: center;
-    appearance: none;
-    background: rgba(250, 247, 239, 0.92);
-    border: 1px solid rgba(16, 37, 76, 0.12);
-    border-radius: 999px;
-    color: #10254c;
-    cursor: pointer;
-    display: inline-flex;
-    height: 3.45rem;
-    justify-content: center;
-    padding: 0;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    transition:
-      background-color 220ms ease,
-      border-color 220ms ease,
-      color 220ms ease,
-      transform 220ms ease;
-    width: 3.45rem;
-    z-index: 2;
-  }
-
-  .gallery-nav:hover,
   .rail-nav:hover {
     background: #10254c;
     border-color: #10254c;
     color: #fffaf0;
-  }
-
-  .gallery-nav:active {
-    transform: translateY(-50%) scale(0.97);
-  }
-
-  .gallery-nav--prev {
-    left: 1rem;
-  }
-
-  .gallery-nav--next {
-    right: 1rem;
   }
 
   .gallery-side {
@@ -849,7 +790,6 @@ const features = [
 
   .gallery-main:focus-visible,
   .gallery-thumb:focus-visible,
-  .gallery-nav:focus-visible,
   .rail-nav:focus-visible {
     outline: 2px solid #7e70bd;
     outline-offset: 4px;
@@ -975,19 +915,6 @@ const features = [
       padding: 0.58rem 0.68rem;
       right: 0.78rem;
       transform: none;
-    }
-
-    .gallery-nav {
-      height: 2.65rem;
-      width: 2.65rem;
-    }
-
-    .gallery-nav--prev {
-      left: 0.62rem;
-    }
-
-    .gallery-nav--next {
-      right: 0.62rem;
     }
 
     .gallery-rail-shell {
