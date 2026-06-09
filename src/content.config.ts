@@ -98,13 +98,33 @@ const projects = defineCollection({
       .optional(),
     constructionStatus: z
       .object({
+        label: z.string().optional(),
         title: z.string(),
         summary: z.string(),
+        status: z.string().optional(),
+        delivery: z.string().optional(),
+        verificationNote: z.string().optional(),
+        activeStageIndex: z.number().int().min(0).optional(),
         items: z
           .array(
             z.object({
               label: z.string(),
               value: z.string(),
+              note: z.string().optional(),
+            })
+          )
+          .optional(),
+        stages: z
+          .array(
+            z.object({
+              title: z.string(),
+              status: z.string(),
+              period: z.string().optional(),
+              description: z.string().optional(),
+              verification: z.enum(["demo", "project", "pending"]).optional(),
+              state: z.enum(["completed", "active", "planned", "target"]).optional(),
+              image: z.string().optional(),
+              imageAlt: z.string().optional(),
               note: z.string().optional(),
             })
           )
