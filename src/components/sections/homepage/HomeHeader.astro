@@ -1,7 +1,17 @@
 ---
 import { company } from "@data/company";
 
-const nav = [
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  navItems?: NavItem[];
+  mobileCtaHref?: string;
+}
+
+const defaultNavItems: NavItem[] = [
   { label: "Главная", href: "/#main" },
   { label: "Объекты", href: "/#projects" },
   { label: "О компании", href: "/#about" },
@@ -10,6 +20,7 @@ const nav = [
   { label: "Контакты", href: "/#contact" },
 ];
 
+const { navItems = defaultNavItems, mobileCtaHref = "/#contact" } = Astro.props;
 const primaryPhone = company.phones.find((phone) => phone.primary) ?? company.phones[0];
 const socialLinks = company.socialLinks;
 ---
@@ -38,7 +49,7 @@ const socialLinks = company.socialLinks;
 
     <nav aria-label="Главное меню" class="hidden min-w-0 items-center justify-center gap-5 lg:flex xl:gap-7">
       {
-        nav.map((item) => (
+        navItems.map((item) => (
           <a
             href={item.href}
             class="group relative inline-flex items-center whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.13em] text-slate-600 transition-colors duration-300 hover:text-slate-950 xl:text-[11px] xl:tracking-[0.16em]"
@@ -110,7 +121,7 @@ const socialLinks = company.socialLinks;
     </div>
     <nav aria-label="Мобильное меню" class="flex flex-col">
       {
-        nav.map((item, idx) => (
+        navItems.map((item, idx) => (
           <a
             href={item.href}
             data-mobile-nav-link
@@ -147,7 +158,7 @@ const socialLinks = company.socialLinks;
           ))
         }
         <a
-          href="/#contact"
+          href={mobileCtaHref}
           data-mobile-nav-link
           class="col-span-3 border-[0.5px] border-slate-950 bg-slate-950 px-4 py-3 text-center font-mono text-[11px] uppercase tracking-[0.12em] text-alabaster"
         >

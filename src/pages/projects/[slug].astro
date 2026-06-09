@@ -25,10 +25,19 @@ const { project } = Astro.props;
 const slug = project.data.slug ?? project.id;
 const title = `${project.data.name} · One Construction`;
 const description = project.data.seoDescription ?? project.data.description;
+const projectDetailNavItems = [
+  { label: "Главная", href: "#hero" },
+  { label: "Преимущества", href: "#benefits" },
+  { label: "Планировки", href: "#plans" },
+  { label: "Галерея", href: "#gallery" },
+  { label: "Варианты покупки", href: "#purchase" },
+  { label: "Этапы строительства", href: "#progress" },
+  { label: "Контакты", href: "#contact" },
+];
 ---
 
 <Layout title={title} description={description}>
-  <HomeHeader />
+  <HomeHeader navItems={projectDetailNavItems} mobileCtaHref="#contact" />
   <main id="main" class="overflow-x-hidden bg-[#FBFBFA]">
     <ProjectDetailHero project={project} slug={slug} />
     <ProjectDetailStats project={project} />
