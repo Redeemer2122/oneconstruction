@@ -1,100 +1,420 @@
 ---
 import { company } from "@data/company";
+import {
+  ArrowRight,
+  Building2,
+  ChevronDown,
+  Clock3,
+  Mail,
+  MapPin,
+  Phone,
+  ShieldCheck,
+} from "@lucide/astro";
 
 interface Props {
   project: any;
 }
 
+type SocialLink = {
+  label: string;
+  href?: string;
+  ariaLabel?: string;
+};
+
+type ContactItem = {
+  label: string;
+  value: string;
+  href?: string;
+  Icon: typeof Phone;
+};
+
 const { project } = Astro.props;
 const data = project.data;
 const contact = data.contactCta ?? {
-  title: `Получите консультацию по ${data.name}`,
-  body: "Оставьте контакты, и менеджер уточнит доступные квартиры и условия покупки.",
+  label: "КОНСУЛЬТАЦИЯ",
+  title: `Обсудим квартиру в ${data.name}`,
+  body: "Подберём планировку, расскажем о ценах и условиях и поможем принять уверенное решение.",
 };
-const serviceNotes = [
-  "Подбор формата под запрос",
-  "Актуальные условия и планировки",
-  "Помощь с оформлением заявки",
-];
+
+const phone = contact.contactDetails?.phone ?? company.phones[0]?.display;
+const phoneHref =
+  contact.contactDetails?.phoneHref ??
+  company.phones[0]?.href ??
+  `tel:${String(phone ?? "").replace(/[^\d+]/g, "")}`;
+const email = contact.contactDetails?.email ?? company.email?.display;
+const emailHref = contact.contactDetails?.emailHref ?? company.email?.href ?? `mailto:${email}`;
+const address = contact.contactDetails?.address ?? company.office?.addressDisplayRu;
+const responseNote = contact.contactDetails?.responseNote ?? "Ответим в течение рабочего дня";
+const responseNoteLines = String(responseNote)
+  .split(/\n+/)
+  .map((line) => line.trim())
+  .filter(Boolean);
+const socialLinks: SocialLink[] = contact.contactDetails?.socialLinks ?? [];
+const form = contact.form ?? {
+  title: "Оставьте заявку",
+  intro: "Менеджер свяжется с вами в течение 15 минут",
+  securityNote: "Ваши данные под защитой и не передаются третьим лицам",
+  successMessage:
+    "Спасибо, заявка подготовлена. На следующем этапе мы подключим отправку менеджеру.",
+};
+
+const contactItems: ContactItem[] = [
+  phone && { label: "Телефон", value: phone, href: phoneHref, Icon: Phone },
+  address && { label: "Адрес", value: address, Icon: MapPin },
+  email && { label: "Email", value: email, href: emailHref, Icon: Mail },
+].filter(Boolean) as ContactItem[];
+
+const getSocialType = (label: string) => {
+  const key = label.toLowerCase();
+
+  if (key.includes("instagram")) return "instagram";
+  if (key.includes("telegram")) return "telegram";
+
+  return "whatsapp";
+};
+
+const socialItems = socialLinks.map((social) => ({
+  ...social,
+  type: getSocialType(social.label),
+}));
 ---
 
-<section id="contact" class="bg-[#F5F4F0] px-5 py-20 md:px-8 md:py-28 lg:px-10" aria-labelledby="contact-title">
-  <div class="mx-auto grid max-w-[1480px] overflow-hidden border-[0.5px] border-slate-900/15 bg-[#FBFBFA] lg:grid-cols-[0.95fr_1.05fr]">
-    <div class="relative min-h-[560px] overflow-hidden p-6 md:p-8 lg:p-10">
-      <img
-        src={data.cover ?? "/img/privileges/green-facade.jpg"}
-        alt=""
-        class="absolute inset-0 h-full w-full object-cover opacity-[0.14] mix-blend-multiply"
-        loading="lazy"
-        decoding="async"
-      />
-      <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(251,251,250,0.96),rgba(251,251,250,0.82))]" aria-hidden="true"></div>
-      <svg viewBox="0 0 520 360" aria-hidden="true" class="absolute -bottom-2 right-0 hidden w-[72%] text-violet-700/18 md:block">
-        <path d="M34 326H486M82 326V82l112-38 164 64v218M118 326V120h70v206M226 326V98h82v228M346 326V148h74v178M118 150h70M118 190h70M118 230h70M226 132h82M226 170h82M226 208h82M346 178h74M346 220h74M346 262h74" fill="none" stroke="currentColor" stroke-width="1" />
-      </svg>
-      <div class="relative z-10 grid h-full content-between gap-12">
-        <div>
-          <p class="mono-detail text-violet-700">Заявка</p>
-          <h2 id="contact-title" class="mt-5 max-w-[12ch] text-4xl font-medium leading-[1.02] text-slate-950 md:text-6xl">
-            {contact.title}
-          </h2>
-          <p class="mt-6 max-w-[48ch] text-base leading-8 text-slate-600">{contact.body}</p>
-        </div>
+<section
+  id="contact"
+  class="relative overflow-hidden bg-[#F7F3EC] px-5 pb-24 pt-16 text-[#111827] md:px-8 md:pb-32 md:pt-24 lg:px-10 lg:pb-36"
+  aria-labelledby="contact-title"
+>
+  <div class="mx-auto grid max-w-[1480px] gap-12 lg:grid-cols-[minmax(0,0.49fr)_minmax(420px,0.51fr)] lg:items-start lg:gap-14 xl:gap-20">
+    <div class="max-w-[660px]">
+      <p class="font-mono text-[12px] font-semibold uppercase tracking-[0.16em] text-[#6547B4]">
+        {contact.label ?? "КОНСУЛЬТАЦИЯ"}
+      </p>
+      <div class="mt-7 h-px w-24 bg-[#6547B4]" aria-hidden="true"></div>
 
-        <div class="grid gap-8">
-          <ul class="grid gap-4 text-sm leading-6 text-slate-700 sm:grid-cols-3">
-            {serviceNotes.map((note) => (
-              <li class="border-t-[0.5px] border-slate-900/15 pt-4">{note}</li>
-            ))}
-          </ul>
+      <h2
+        id="contact-title"
+        class="mt-9 max-w-[11.5ch] text-[3.55rem] font-normal leading-[0.98] text-[#10172A] text-balance [font-family:Georgia,'Times_New_Roman',serif] md:text-[5.2rem] lg:text-[5.45rem]"
+      >
+        {contact.title}
+      </h2>
+      <p class="mt-8 max-w-[39rem] text-[1.0625rem] leading-8 text-[#747987] md:text-[1.25rem] md:leading-9">
+        {contact.body}
+      </p>
 
-          <div class="grid gap-px bg-slate-900/10 p-px text-slate-700 sm:grid-cols-3">
-            <a href={company.phones[0].href} class="bg-[#FBFBFA]/88 p-4 font-mono text-[11px] uppercase tracking-[0.12em] transition-colors duration-300 hover:text-violet-700">{company.phones[0].display}</a>
-            <a href={company.email.href} class="break-all bg-[#FBFBFA]/88 p-4 font-mono text-[11px] uppercase tracking-[0.12em] transition-colors duration-300 hover:text-violet-700">{company.email.display}</a>
-            <span class="bg-[#FBFBFA]/88 p-4 font-mono text-[11px] uppercase tracking-[0.12em]">{company.office.addressDisplayRu}</span>
+      <div class="mt-12 h-px w-full bg-[#111827]/10" aria-hidden="true"></div>
+
+      <address class="mt-7 grid gap-5 not-italic md:gap-6">
+        {contactItems.map((item) => {
+          const Icon = item.Icon;
+          const content = (
+            <>
+              <span class="contact-soft-icon flex h-16 w-16 shrink-0 items-center justify-center bg-[#F0EEF2] text-[#6547B4] shadow-[inset_0_1px_0_rgba(255,255,255,0.75)] md:h-[4.25rem] md:w-[4.25rem]">
+                <Icon class="h-7 w-7" stroke-width="1.75" aria-hidden="true" />
+              </span>
+              <span class="min-w-0 text-[1.0625rem] font-medium leading-7 text-[#182036] md:text-[1.25rem]">
+                {item.value}
+              </span>
+            </>
+          );
+
+          return item.href ? (
+            <a
+              href={item.href}
+              class="group grid grid-cols-[4rem_1fr] items-center gap-5 transition-colors duration-300 hover:text-[#6547B4] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6547B4] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F7F3EC] md:grid-cols-[4.25rem_1fr] md:gap-7"
+              aria-label={`${item.label}: ${item.value}`}
+            >
+              {content}
+            </a>
+          ) : (
+            <div class="grid grid-cols-[4rem_1fr] items-center gap-5 md:grid-cols-[4.25rem_1fr] md:gap-7">
+              {content}
+            </div>
+          );
+        })}
+      </address>
+
+      <div class="mt-9 h-px w-full bg-[#111827]/10" aria-hidden="true"></div>
+
+      <div class="mt-7 flex flex-wrap items-center gap-5">
+        {socialItems.length > 0 && (
+          <div class="flex flex-wrap gap-4" aria-label="Социальные сети">
+            {socialItems.map((social) => {
+              return (
+                <a
+                  href={social.href ?? "#"}
+                  aria-label={social.ariaLabel ?? social.label}
+                  title={social.label}
+                  class="contact-social-button flex h-16 w-16 items-center justify-center bg-[#F0EEF2] text-[#6547B4] shadow-[inset_0_1px_0_rgba(255,255,255,0.75)] transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_16px_32px_rgba(91,63,166,0.14)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6547B4] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F7F3EC]"
+                >
+                  {social.type === "instagram" && (
+                    <svg class="h-7 w-7" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                      <rect x="5.25" y="5.25" width="17.5" height="17.5" rx="5.25" stroke="currentColor" stroke-width="1.9" />
+                      <circle cx="14" cy="14" r="4.15" stroke="currentColor" stroke-width="1.9" />
+                      <circle cx="19.1" cy="8.95" r="1.15" fill="currentColor" />
+                    </svg>
+                  )}
+                  {social.type === "telegram" && (
+                    <svg class="h-7 w-7" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                      <path
+                        d="M23.7 5.65 4.62 13.08c-1.18.46-1.15 1.17-.18 1.48l4.82 1.52 1.86 5.82c.3.9.78 1.05 1.41.44l2.72-2.64 4.76 3.54c.87.64 1.51.31 1.73-.82L25 7.05c.28-1.34-.48-1.9-1.3-1.4Z"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linejoin="round"
+                      />
+                      <path d="m9.42 15.9 10.86-6.86-8.36 9.3" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  )}
+                  {social.type === "whatsapp" && (
+                    <svg class="h-7 w-7" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                      <path
+                        d="M6.2 22.15 7.5 18.5a8.7 8.7 0 1 1 3.2 2.75l-4.5.9Z"
+                        stroke="currentColor"
+                        stroke-width="1.85"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M10.95 10.5c.32-.45.65-.52 1.08-.32l1.15 2.05c.13.25.08.55-.13.75l-.68.68c.7 1.45 1.82 2.55 3.37 3.3l.78-.78c.2-.2.52-.27.78-.13l2.02 1.05c.3.15.42.5.28.8-.38.83-1.02 1.3-1.93 1.42-1.65.18-3.68-.8-5.58-2.7-1.95-1.95-2.93-3.98-2.75-5.62.05-.5.23-.98.55-1.4Z"
+                        stroke="currentColor"
+                        stroke-width="1.55"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  )}
+                </a>
+              );
+            })}
           </div>
-        </div>
+        )}
+
+        <p class="flex min-w-[16rem] items-center gap-3 text-[0.9375rem] font-medium leading-6 text-[#626978] md:text-[1.0625rem]">
+          <span class="contact-round-icon flex h-10 w-10 shrink-0 items-center justify-center bg-[#F0EEF2] text-[#6547B4]">
+            <Clock3 class="h-5 w-5" stroke-width="1.75" aria-hidden="true" />
+          </span>
+          <span class="grid gap-1 [font-variant-numeric:tabular-nums]">
+            {responseNoteLines.map((line) => <span>{line}</span>)}
+          </span>
+        </p>
       </div>
     </div>
 
-    <form class="grid content-center gap-5 border-t-[0.5px] border-slate-900/15 bg-[#FBFBFA] p-6 md:p-8 lg:border-l-[0.5px] lg:border-t-0 lg:p-12">
-      <label class="grid gap-2">
-        <span class="mono-detail">Имя</span>
-        <input
-          type="text"
-          name="name"
-          autocomplete="name"
-          class="min-h-14 border-[0.5px] border-slate-900/15 bg-transparent px-4 text-base text-slate-950 outline-none transition-colors duration-300 focus:border-slate-950"
-        />
-      </label>
-      <label class="grid gap-2">
-        <span class="mono-detail">Телефон</span>
-        <input
-          type="tel"
-          name="phone"
-          autocomplete="tel"
-          placeholder="+996"
-          class="min-h-14 border-[0.5px] border-slate-900/15 bg-transparent px-4 text-base text-slate-950 outline-none transition-colors duration-300 placeholder:text-slate-400 focus:border-slate-950"
-        />
-      </label>
-      <label class="grid gap-2">
-        <span class="mono-detail">Комментарий</span>
-        <textarea
-          name="message"
-          rows="4"
-          class="min-h-32 resize-y border-[0.5px] border-slate-900/15 bg-transparent px-4 py-3 text-base text-slate-950 outline-none transition-colors duration-300 focus:border-slate-950"
-        ></textarea>
-      </label>
-      <label class="flex items-start gap-3 text-xs leading-5 text-slate-500">
-        <input type="checkbox" name="privacy" class="mt-1 h-4 w-4 border-[0.5px] border-slate-900/20" />
-        <span>Я согласен с обработкой персональных данных</span>
-      </label>
-      <button
-        type="submit"
-        class="min-h-14 border-[0.5px] border-slate-950 bg-slate-950 px-5 py-4 font-mono text-[11px] uppercase tracking-[0.16em] text-alabaster transition-colors duration-300 hover:border-violet-700 hover:bg-violet-700"
-      >
-        Получить консультацию
-      </button>
-    </form>
+    <div class="contact-form-card w-full max-w-[638px] justify-self-end border border-[#171D2D]/10 bg-[#FBFAF7] p-6 shadow-[0_20px_64px_rgba(17,24,39,0.085)] md:p-8 lg:mt-10 lg:p-10">
+      <div class="pointer-events-none absolute hidden" aria-hidden="true"></div>
+      <div class="contact-form-frame relative overflow-hidden">
+        <svg
+          class="pointer-events-none absolute -right-20 -top-20 h-72 w-72 text-[#6547B4]/[0.032]"
+          viewBox="0 0 260 260"
+          fill="none"
+          aria-hidden="true"
+        >
+          {Array.from({ length: 7 }).map((_, index) => (
+            <path
+              d={`M${42 + index * 10} 10C${210 - index * 8} ${18 + index * 2} ${250 - index * 7} ${78 + index * 9} ${226 - index * 5} ${226 - index * 4}`}
+              stroke="currentColor"
+              stroke-width="1"
+            />
+          ))}
+        </svg>
+
+        <div class="relative grid justify-items-center text-center">
+          <div class="contact-building-badge flex h-[5rem] w-[5rem] items-center justify-center bg-white text-[#6547B4] shadow-[0_12px_28px_rgba(17,24,39,0.085)]">
+            <Building2 class="h-9 w-9" stroke-width="1.45" aria-hidden="true" />
+          </div>
+
+          <h3 class="mt-7 text-[2.65rem] font-normal leading-none text-[#10172A] [font-family:Georgia,'Times_New_Roman',serif] md:text-[3.55rem]">
+            {form.title}
+          </h3>
+          <p class="mt-4 text-base leading-7 text-[#747987] md:text-[1.0625rem]">{form.intro}</p>
+        </div>
+
+        <form class="contact-lead-form relative mt-8 grid gap-5" novalidate data-success-message={form.successMessage}>
+          <div>
+            <label for="lead-name" class="sr-only">Ваше имя</label>
+            <input
+              id="lead-name"
+              type="text"
+              name="name"
+              autocomplete="name"
+              placeholder="Ваше имя*"
+              required
+              class="contact-input h-16 w-full border border-[#171D2D]/12 bg-white/72 px-7 text-[1.0625rem] text-[#10172A] outline-none transition duration-300 placeholder:text-[#8A909E] focus:border-[#6547B4]/55 focus:bg-white focus:ring-4 focus:ring-[#6547B4]/10 md:h-[4.85rem] md:text-[1.2rem]"
+            />
+            <p class="mt-2 hidden text-sm leading-6 text-[#9A3142]" data-error-for="name"></p>
+          </div>
+
+          <div>
+            <label for="lead-phone" class="sr-only">Телефон</label>
+            <div class="contact-input grid h-16 grid-cols-[auto_auto_1fr] items-center gap-3 border border-[#171D2D]/12 bg-white/72 px-7 transition duration-300 focus-within:border-[#6547B4]/55 focus-within:bg-white focus-within:ring-4 focus-within:ring-[#6547B4]/10 md:h-[4.85rem]">
+              <span class="text-lg leading-none" aria-hidden="true">🇰🇬</span>
+              <ChevronDown class="h-4 w-4 text-[#8A909E]" stroke-width="1.75" aria-hidden="true" />
+              <input
+                id="lead-phone"
+                type="tel"
+                name="phone"
+                autocomplete="tel"
+                inputmode="tel"
+                placeholder="+996 (000) 000-000"
+                required
+                class="min-w-0 border-0 bg-transparent p-0 text-[1.0625rem] text-[#10172A] outline-none placeholder:text-[#8A909E] md:text-[1.2rem]"
+              />
+            </div>
+            <p class="mt-2 hidden text-sm leading-6 text-[#9A3142]" data-error-for="phone"></p>
+          </div>
+
+          <div>
+            <label class="grid grid-cols-[1.65rem_1fr] items-start gap-4 text-[0.95rem] leading-6 text-[#30384A] md:text-base">
+              <input
+                type="checkbox"
+                name="privacy"
+                required
+                class="contact-checkbox mt-1 h-[1.65rem] w-[1.65rem] border border-[#6547B4] text-[#6547B4] accent-[#6547B4] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6547B4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FBFAF7]"
+              />
+              <span>
+                Я соглашаюсь с
+                <a
+                  href="#"
+                  class="text-[#6547B4] underline decoration-[#6547B4]/50 underline-offset-4 transition-colors duration-300 hover:text-[#4F3693] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6547B4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FBFAF7]"
+                >
+                  политикой обработки персональных данных
+                </a>
+              </span>
+            </label>
+            <p class="mt-2 hidden text-sm leading-6 text-[#9A3142]" data-error-for="privacy"></p>
+          </div>
+
+          <button
+            type="submit"
+            class="contact-submit-button group flex min-h-16 items-center justify-center bg-[#6547B4] px-7 py-5 text-base font-semibold text-white shadow-[0_14px_28px_rgba(101,71,180,0.20)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#593CA8] hover:shadow-[0_18px_34px_rgba(101,71,180,0.26)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6547B4] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FBFAF7] active:translate-y-0 md:min-h-[4.65rem] md:text-lg"
+          >
+            <span class="flex-1 text-center">Оставить заявку</span>
+            <ArrowRight class="h-8 w-8 transition-transform duration-300 group-hover:translate-x-1" stroke-width="1.75" aria-hidden="true" />
+          </button>
+
+          <p
+            class="contact-status hidden border border-[#6547B4]/25 bg-[#F1ECF8] px-5 py-4 text-sm leading-6 text-[#3F2E5E]"
+            role="status"
+            aria-live="polite"
+            data-form-status
+          ></p>
+        </form>
+
+        <p class="relative mt-8 flex items-center gap-3 text-sm leading-6 text-[#8A909E] md:text-base">
+          <ShieldCheck class="h-6 w-6 shrink-0" stroke-width="1.55" aria-hidden="true" />
+          <span>{form.securityNote ?? "Ваши данные под защитой и не передаются третьим лицам"}</span>
+        </p>
+      </div>
+    </div>
   </div>
 </section>
+
+<style>
+  #contact .contact-form-card {
+    border-radius: 24px;
+  }
+
+  #contact .contact-form-frame {
+    border-radius: 20px;
+  }
+
+  #contact .contact-soft-icon,
+  #contact .contact-social-button,
+  #contact .contact-input,
+  #contact .contact-submit-button,
+  #contact .contact-status {
+    border-radius: 18px;
+  }
+
+  #contact .contact-round-icon,
+  #contact .contact-building-badge {
+    border-radius: 999px;
+  }
+
+  #contact .contact-checkbox {
+    border-radius: 0;
+  }
+
+  @media (max-width: 640px) {
+    #contact .contact-form-card {
+      border-radius: 18px;
+    }
+
+    #contact .contact-soft-icon,
+    #contact .contact-social-button,
+    #contact .contact-input,
+    #contact .contact-submit-button,
+    #contact .contact-status {
+      border-radius: 14px;
+    }
+  }
+</style>
+
+<script>
+  // @ts-nocheck
+  const form = document.querySelector(".contact-lead-form");
+
+  if (form) {
+    const setError = (name, message) => {
+      const field = form.elements.namedItem(name);
+      const error = form.querySelector(`[data-error-for="${name}"]`);
+
+      if (field) {
+        field.setAttribute("aria-invalid", message ? "true" : "false");
+      }
+
+      if (error) {
+        error.textContent = message;
+        error.classList.toggle("hidden", !message);
+      }
+    };
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const name = String(formData.get("name") ?? "").trim();
+      const phone = String(formData.get("phone") ?? "").trim();
+      const privacy = formData.get("privacy") === "on";
+      const status = form.querySelector("[data-form-status]");
+      let hasError = false;
+
+      setError("name", "");
+      setError("phone", "");
+      setError("privacy", "");
+
+      if (!name) {
+        setError("name", "Укажите имя, чтобы менеджер знал, как к вам обращаться.");
+        hasError = true;
+      }
+
+      if (!phone) {
+        setError("phone", "Укажите номер телефона для связи.");
+        hasError = true;
+      }
+
+      if (!privacy) {
+        setError("privacy", "Подтвердите согласие на обработку персональных данных.");
+        hasError = true;
+      }
+
+      if (status) {
+        status.textContent = "";
+        status.classList.add("hidden");
+      }
+
+      if (hasError) {
+        const firstInvalid = form.querySelector('[aria-invalid="true"]');
+        firstInvalid?.focus();
+        return;
+      }
+
+      // TODO: replace frontend stub with POST /api/lead when Telegram/email/CRM destination is confirmed.
+      if (status) {
+        status.textContent =
+          form.dataset.successMessage ??
+          "Спасибо, заявка подготовлена. На следующем этапе мы подключим отправку менеджеру.";
+        status.classList.remove("hidden");
+      }
+    });
+  }
+</script>

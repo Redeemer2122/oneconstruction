@@ -133,8 +133,38 @@ const projects = defineCollection({
       .optional(),
     contactCta: z
       .object({
+        label: z.string().optional(),
         title: z.string(),
         body: z.string(),
+        supportPoints: z.array(z.string()).optional(),
+        contactDetails: z
+          .object({
+            phone: z.string().optional(),
+            phoneHref: z.string().optional(),
+            address: z.string().optional(),
+            email: z.string().optional(),
+            emailHref: z.string().optional(),
+            responseNote: z.string().optional(),
+            schedule: z.array(z.string()).optional(),
+            socialLinks: z
+              .array(
+                z.object({
+                  label: z.string(),
+                  href: z.string().optional(),
+                  ariaLabel: z.string().optional(),
+                })
+              )
+              .optional(),
+          })
+          .optional(),
+        form: z
+          .object({
+            title: z.string().optional(),
+            intro: z.string().optional(),
+            securityNote: z.string().optional(),
+            successMessage: z.string().optional(),
+          })
+          .optional(),
       })
       .optional(),
     installment: z
