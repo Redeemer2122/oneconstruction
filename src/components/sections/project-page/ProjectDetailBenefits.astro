@@ -33,20 +33,14 @@ const sectionIntro = isMedina
 {
   benefits.length > 0 && (
     <section id="benefits" class="benefits-section bg-[#FBFBFA] px-5 py-16 md:px-8 md:py-24 lg:px-10" aria-labelledby="benefits-title">
-      <div class="mx-auto grid max-w-[1480px] gap-12 lg:grid-cols-[minmax(320px,0.36fr)_minmax(0,0.64fr)] lg:gap-16 xl:gap-20">
-        <aside class="benefits-intro relative flex min-h-[700px] flex-col overflow-hidden lg:min-h-[820px]">
+      <div class="mx-auto grid max-w-[1480px] gap-12 lg:grid-cols-[minmax(320px,0.35fr)_minmax(0,0.65fr)] lg:gap-14 xl:gap-20">
+        <aside class="benefits-intro relative flex min-h-[620px] flex-col overflow-hidden lg:min-h-[720px]">
           <div class="relative z-10 max-w-[470px]">
-            <div class="benefits-label flex items-center gap-5 text-[#7C66A3]">
-              <svg class="h-8 w-8 shrink-0" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                <path d="M20 5c4.2 5.2 4.2 10.8 0 16-4.2-5.2-4.2-10.8 0-16Z" stroke="currentColor" stroke-width="1.05" />
-                <path d="M20 21c4.7-3.2 9.2-3.4 13.6-.5-3.1 3.9-7.3 5.2-13.6.5Z" stroke="currentColor" stroke-width="1.05" />
-                <path d="M20 21c-4.7-3.2-9.2-3.4-13.6-.5 3.1 3.9 7.3 5.2 13.6.5Z" stroke="currentColor" stroke-width="1.05" />
-                <path d="M20 18v17M13 35h14M15.5 29.5h9" stroke="currentColor" stroke-width="1.05" stroke-linecap="square" />
-              </svg>
-              <p class="font-mono text-[11px] uppercase leading-none tracking-[0.24em]">ПРЕИМУЩЕСТВА</p>
+            <div class="benefits-label text-[#7C66A3]">
+              <p class="font-mono text-[12px] uppercase leading-none tracking-[0.18em]">ПРЕИМУЩЕСТВА</p>
             </div>
 
-            <h2 id="benefits-title" class="benefits-title mt-9 text-[#0E214C]">
+            <h2 id="benefits-title" class="benefits-title mt-9 text-[#0E214C]" aria-label={sectionTitle}>
               {isMedina ? (
                 <>
                   <span>Почему именно</span>
@@ -64,6 +58,14 @@ const sectionIntro = isMedina
             <div class="mt-8 max-w-[440px] space-y-1 text-[17px] leading-8 text-[#2E3D62] md:text-[18px] md:leading-9">
               {sectionIntro.map((line) => <p>{line}</p>)}
             </div>
+
+            <a
+              href="#contact"
+              class="benefits-cta mt-10 inline-grid min-h-16 w-full max-w-[360px] grid-cols-[1fr_auto] items-center px-8 py-5 font-mono text-[11px] uppercase leading-none tracking-[0.16em] text-[#FBFBFA] transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7C66A3]"
+            >
+              <span>Оставить заявку</span>
+              <span class="text-3xl leading-none" aria-hidden="true">→</span>
+            </a>
           </div>
 
           <div class="benefits-decorative-asset" aria-hidden="true">
@@ -74,33 +76,24 @@ const sectionIntro = isMedina
               decoding="async"
             />
           </div>
-
-          <a
-            href="#contact"
-            class="benefits-cta relative z-10 mt-auto inline-grid min-h-16 w-full max-w-[390px] grid-cols-[1fr_auto] items-center border border-[#7C66A3]/70 px-9 py-5 font-mono text-[11px] uppercase leading-none tracking-[0.22em] text-[#7C66A3] transition-colors duration-300 hover:border-[#0E214C] hover:bg-[#0E214C] hover:text-[#FBFBFA] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7C66A3]"
-          >
-            <span>ОСТАВИТЬ ЗАЯВКУ</span>
-            <span class="text-3xl leading-none" aria-hidden="true">→</span>
-          </a>
         </aside>
 
-        <div class="benefits-list" role="list">
+        <div class="benefits-matrix" role="list">
           {benefits.map((benefit: any, index: number) => {
             const Icon = benefitIcons[index % benefitIcons.length];
 
             return (
-              <article class="benefits-row" role="listitem" tabindex="0">
-                <div class="benefits-row-icon" aria-hidden="true">
-                  <Icon size={25} stroke-width={1.18} />
+              <article class="benefits-item" role="listitem">
+                <div class="benefits-item-kicker">
+                  <span class="benefits-item-number" aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span class="benefits-item-icon" aria-hidden="true">
+                    <Icon size={42} stroke-width={1.08} />
+                  </span>
                 </div>
-                <div class="benefits-row-number" aria-hidden="true">
-                  {String(index + 1).padStart(2, "0")}
-                </div>
-                <span class="benefits-row-rule" aria-hidden="true"></span>
-                <div class="benefits-row-copy">
-                  <h3>{benefit.title}</h3>
-                  <p>{benefit.body}</p>
-                </div>
+                <h3>{benefit.title}</h3>
+                <p>{benefit.body}</p>
               </article>
             );
           })}
@@ -114,14 +107,23 @@ const sectionIntro = isMedina
   .benefits-section {
     color: #0e214c;
     background:
-      radial-gradient(circle at 9% 27%, rgba(124, 102, 163, 0.045), transparent 20rem),
+      linear-gradient(90deg, rgba(124, 102, 163, 0.045), transparent 34rem),
       linear-gradient(180deg, #fbfbfa 0%, #f8f7f4 100%);
+  }
+
+  .benefits-label::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 1px;
+    margin-top: 18px;
+    background: #7c66a3;
   }
 
   .benefits-title {
     font-family: var(--font-display, "Geist Variable", ui-sans-serif, system-ui, sans-serif);
     max-width: 620px;
-    font-size: clamp(46px, 3.45vw, 62px);
+    font-size: clamp(46px, 3.35vw, 64px);
     font-weight: 500;
     line-height: 0.96;
     letter-spacing: 0;
@@ -134,56 +136,35 @@ const sectionIntro = isMedina
 
   .benefits-divider {
     position: relative;
-    width: 190px;
-    height: 18px;
+    width: 154px;
+    height: 1px;
+    background: rgba(124, 102, 163, 0.22);
   }
 
   .benefits-divider::before,
   .benefits-divider::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: calc(50% - 10px);
-    height: 1px;
-    background: rgba(124, 102, 163, 0.32);
-  }
-
-  .benefits-divider::before {
-    left: 0;
-  }
-
-  .benefits-divider::after {
-    right: 0;
+    display: none;
   }
 
   .benefits-divider span {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 8px;
-    height: 8px;
-    background: #7c66a3;
-    transform: translate(-50%, -50%) rotate(45deg);
+    display: none;
   }
 
   .benefits-decorative-asset {
     position: absolute;
-    left: -40%;
-    bottom: 0;
+    left: -54%;
+    bottom: -26px;
     z-index: 0;
-    width: 195%;
-    height: 650px;
+    width: 232%;
+    height: 610px;
     pointer-events: none;
-    opacity: 0.27;
-    mix-blend-mode: multiply;
+    opacity: 0.42;
     -webkit-mask-image:
-      linear-gradient(to right, transparent 0%, transparent 12%, #000 32%, #000 70%, transparent 100%),
-      linear-gradient(to top, transparent 0%, #000 12%, #000 74%, transparent 100%),
-      linear-gradient(to bottom, transparent 0%, transparent 13%, #000 30%, #000 100%);
+      linear-gradient(to right, #000 0%, #000 58%, transparent 98%),
+      linear-gradient(to top, #000 0%, #000 68%, transparent 100%);
     mask-image:
-      linear-gradient(to right, transparent 0%, transparent 12%, #000 32%, #000 70%, transparent 100%),
-      linear-gradient(to top, transparent 0%, #000 12%, #000 74%, transparent 100%),
-      linear-gradient(to bottom, transparent 0%, transparent 13%, #000 30%, #000 100%);
+      linear-gradient(to right, #000 0%, #000 58%, transparent 98%),
+      linear-gradient(to top, #000 0%, #000 68%, transparent 100%);
     -webkit-mask-composite: source-in;
     mask-composite: intersect;
   }
@@ -193,8 +174,9 @@ const sectionIntro = isMedina
     position: absolute;
     inset: -1px;
     background:
-      linear-gradient(90deg, rgba(251, 251, 250, 0.78) 0%, rgba(251, 251, 250, 0.22) 22%, rgba(251, 251, 250, 0) 38%),
-      linear-gradient(0deg, rgba(248, 247, 244, 0.82) 0%, rgba(248, 247, 244, 0) 24%);
+      linear-gradient(180deg, rgba(251, 251, 250, 0.94) 0%, rgba(251, 251, 250, 0.58) 26%, rgba(251, 251, 250, 0) 56%),
+      linear-gradient(90deg, rgba(251, 251, 250, 0.04) 0%, rgba(251, 251, 250, 0) 46%, rgba(251, 251, 250, 0.68) 100%),
+      linear-gradient(0deg, rgba(248, 247, 244, 0.12) 0%, rgba(248, 247, 244, 0) 34%);
     pointer-events: none;
   }
 
@@ -204,141 +186,126 @@ const sectionIntro = isMedina
     height: 100%;
     object-fit: contain;
     object-position: left bottom;
-    filter: contrast(1.2) saturate(0.96);
+    filter: grayscale(1) contrast(1.22) brightness(0.96);
   }
 
   .benefits-cta {
-    background: rgba(251, 251, 250, 0.88);
+    position: relative;
+    z-index: 10;
+    background: #624294;
+    transition:
+      background-color 260ms var(--ease-out-expo),
+      box-shadow 260ms var(--ease-out-expo);
   }
 
   .benefits-cta:hover,
   .benefits-cta:focus-visible {
-    background: #0e214c;
+    background: #7651ad;
+    box-shadow: 0 16px 34px rgba(98, 66, 148, 0.18);
   }
 
-  .benefits-list {
-    display: grid;
-    gap: 6px;
+  .benefits-cta span:last-child {
+    transition: transform 260ms var(--ease-out-expo);
   }
 
-  .benefits-row {
+  .benefits-cta:hover span:last-child,
+  .benefits-cta:focus-visible span:last-child {
+    transform: translateX(6px);
+  }
+
+  .benefits-matrix {
     display: grid;
-    min-height: 138px;
-    grid-template-columns: 86px 92px 1px minmax(0, 1fr);
-    align-items: center;
-    border: 1px solid rgba(14, 33, 76, 0.15);
-    background: rgba(251, 251, 250, 0.86);
+    align-self: center;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .benefits-item {
+    min-height: 342px;
+    padding: clamp(30px, 2.9vw, 46px) clamp(26px, 2.8vw, 46px);
     color: #0e214c;
-    outline: none;
-    transition:
-      transform 220ms var(--ease-out-expo),
-      background-color 220ms var(--ease-out-expo),
-      border-color 220ms var(--ease-out-expo),
-      color 220ms var(--ease-out-expo);
   }
 
-  .benefits-row-icon {
+  .benefits-item:nth-child(3n + 2),
+  .benefits-item:nth-child(3n + 3) {
+    border-left: 1px solid rgba(14, 33, 76, 0.12);
+  }
+
+  .benefits-item:nth-child(n + 4) {
+    border-top: 1px solid rgba(14, 33, 76, 0.12);
+  }
+
+  .benefits-item-kicker {
     display: flex;
-    justify-content: center;
-    color: #7c66a3;
-    transition: color 220ms var(--ease-out-expo);
+    min-height: 72px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: clamp(34px, 3.2vw, 62px);
   }
 
-  .benefits-row-number {
+  .benefits-item-number {
     font-family: var(--font-display, "Geist Variable", ui-sans-serif, system-ui, sans-serif);
-    font-size: clamp(38px, 3vw, 50px);
-    font-weight: 500;
+    font-size: clamp(36px, 3.1vw, 50px);
+    font-weight: 400;
     line-height: 1;
-    text-align: center;
-    color: currentColor;
-    transition: color 220ms var(--ease-out-expo);
+    color: #7c66a3;
   }
 
-  .benefits-row-rule {
-    width: 1px;
-    height: 68px;
-    background: rgba(14, 33, 76, 0.17);
-    transition: background-color 220ms var(--ease-out-expo);
+  .benefits-item-icon {
+    color: #70579b;
   }
 
-  .benefits-row-copy {
-    min-width: 0;
-    padding: 24px 34px 24px 42px;
-  }
-
-  .benefits-row-copy h3 {
+  .benefits-item h3 {
     font-family: var(--font-display, "Geist Variable", ui-sans-serif, system-ui, sans-serif);
-    font-size: clamp(24px, 1.68vw, 28px);
+    margin-top: 24px;
+    max-width: 13.5ch;
+    font-size: clamp(25px, 1.62vw, 30px);
     font-weight: 500;
-    line-height: 1.16;
+    line-height: 1.14;
     letter-spacing: 0;
     color: currentColor;
   }
 
-  .benefits-row-copy p {
-    margin-top: 10px;
-    max-width: 42ch;
-    font-size: 17px;
-    line-height: 1.58;
-    color: rgba(46, 61, 98, 0.9);
-    transition: color 220ms var(--ease-out-expo);
-  }
-
-  .benefits-row:focus-visible {
-    border-color: rgba(124, 102, 163, 0.62);
-    box-shadow: 0 0 0 2px rgba(124, 102, 163, 0.14);
-  }
-
-  @media (max-width: 1279px) {
-    .benefits-row {
-      grid-template-columns: 72px 78px 1px minmax(0, 1fr);
-    }
-
-    .benefits-row-copy {
-      padding-inline: 32px 22px;
-    }
-
-    .benefits-row-copy p {
-      font-size: 16px;
-    }
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .benefits-row:hover,
-    .benefits-row:focus-visible {
-      transform: translateX(4px) translateY(-2px);
-      border-color: #0b1c4a;
-      background: #0b1c4a;
-      color: #fbfbfa;
-    }
-
-    .benefits-row:hover .benefits-row-icon,
-    .benefits-row:focus-visible .benefits-row-icon {
-      color: rgba(210, 199, 236, 0.96);
-    }
-
-    .benefits-row:hover .benefits-row-rule,
-    .benefits-row:focus-visible .benefits-row-rule {
-      background: rgba(251, 251, 250, 0.3);
-    }
-
-    .benefits-row:hover .benefits-row-copy p,
-    .benefits-row:focus-visible .benefits-row-copy p {
-      color: rgba(251, 251, 250, 0.82);
-    }
+  .benefits-item p {
+    margin-top: 20px;
+    max-width: 28ch;
+    font-size: 16px;
+    line-height: 1.68;
+    color: rgba(46, 61, 98, 0.84);
   }
 
   @media (max-width: 1023px) {
     .benefits-intro {
-      min-height: 590px;
+      min-height: 520px;
     }
 
     .benefits-decorative-asset {
-      left: -34%;
-      bottom: 4px;
-      width: 178%;
-      height: 500px;
-      opacity: 0.2;
+      left: -42%;
+      bottom: -20px;
+      width: 205%;
+      height: 485px;
+      opacity: 0.28;
+    }
+
+    .benefits-matrix {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      border-top: 1px solid rgba(14, 33, 76, 0.12);
+    }
+
+    .benefits-item {
+      min-height: 280px;
+    }
+
+    .benefits-item:nth-child(n) {
+      border-left: 0;
+      border-top: 0;
+    }
+
+    .benefits-item:nth-child(even) {
+      border-left: 1px solid rgba(14, 33, 76, 0.12);
+    }
+
+    .benefits-item:nth-child(n + 3) {
+      border-top: 1px solid rgba(14, 33, 76, 0.12);
     }
   }
 
@@ -351,10 +318,6 @@ const sectionIntro = isMedina
     .benefits-intro {
       min-height: 0;
       padding-bottom: 0;
-    }
-
-    .benefits-label {
-      gap: 14px;
     }
 
     .benefits-title {
@@ -376,53 +339,48 @@ const sectionIntro = isMedina
       letter-spacing: 0.16em;
     }
 
-    .benefits-list {
-      gap: 6px;
+    .benefits-matrix {
+      display: block;
+      border-top: 1px solid rgba(14, 33, 76, 0.12);
     }
 
-    .benefits-row {
+    .benefits-item {
       min-height: 0;
-      grid-template-columns: 44px minmax(0, 1fr);
-      grid-template-areas:
-        "icon number"
-        "copy copy";
-      align-items: start;
-      padding: 18px 18px 20px;
+      padding: 26px 0 28px;
+      border-left: 0;
+      border-top: 0;
+      border-bottom: 1px solid rgba(14, 33, 76, 0.12);
     }
 
-    .benefits-row-icon {
-      grid-area: icon;
+    .benefits-item:nth-child(n) {
+      border-left: 0;
+      border-top: 0;
+    }
+
+    .benefits-item-kicker {
+      min-height: 44px;
       justify-content: flex-start;
-      padding-top: 4px;
+      gap: 22px;
     }
 
-    .benefits-row-icon :global(svg) {
-      width: 27px;
-      height: 27px;
-    }
-
-    .benefits-row-number {
-      grid-area: number;
+    .benefits-item-number {
       font-size: 38px;
-      text-align: left;
     }
 
-    .benefits-row-rule {
-      display: none;
+    .benefits-item-icon :global(svg) {
+      width: 34px;
+      height: 34px;
     }
 
-    .benefits-row-copy {
-      grid-area: copy;
-      padding: 16px 0 0;
-    }
-
-    .benefits-row-copy h3 {
+    .benefits-item h3 {
+      margin-top: 20px;
+      max-width: 18ch;
       font-size: clamp(24px, 7.2vw, 31px);
       line-height: 1.14;
     }
 
-    .benefits-row-copy p {
-      margin-top: 10px;
+    .benefits-item p {
+      margin-top: 12px;
       max-width: 31ch;
       font-size: 15px;
       line-height: 1.6;
@@ -434,11 +392,7 @@ const sectionIntro = isMedina
       font-size: 34px;
     }
 
-    .benefits-row {
-      padding-inline: 15px;
-    }
-
-    .benefits-row-copy h3 {
+    .benefits-item h3 {
       font-size: 25px;
     }
   }
