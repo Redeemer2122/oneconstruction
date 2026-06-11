@@ -5,6 +5,53 @@ const allProjects = await getCollection("projects");
 const projects = allProjects
   .filter((project) => project.data.showOnHomepage !== false)
   .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+
+type ProjectPlan = {
+  rooms: string;
+  area: string;
+  price: string;
+};
+
+const normalizeRoomGroup = (rooms: string) => {
+  const match = rooms.match(/^(\d)/);
+  return match ? `${match[1]}-комнатные` : rooms;
+};
+
+const summarizeAreas = (areas: string[]) => {
+  const unique = Array.from(new Set(areas));
+  if (unique.length <= 1) return unique[0] ?? "";
+
+  const parsed = unique
+    .map((area) => {
+      const value = Number(area.replace(",", ".").match(/\d+(?:[.,]\d+)?/)?.[0]?.replace(",", "."));
+      return Number.isFinite(value) ? { area, value } : null;
+    })
+    .filter(Boolean) as { area: string; value: number }[];
+
+  if (parsed.length !== unique.length) return unique.join(" / ");
+
+  const sorted = parsed.sort((a, b) => a.value - b.value);
+  const unit = unique.find((area) => area.includes("м²")) ? " м²" : "";
+  return `${sorted[0].value}–${sorted[sorted.length - 1].value}${unit}`;
+};
+
+const getHomepagePlanPreview = (plans: ProjectPlan[]) => {
+  const groups = new Map<string, ProjectPlan[]>();
+
+  plans.forEach((plan) => {
+    const key = normalizeRoomGroup(plan.rooms);
+    groups.set(key, [...(groups.get(key) ?? []), plan]);
+  });
+
+  return Array.from(groups.entries()).map(([rooms, group]) => {
+    const prices = Array.from(new Set(group.map((plan) => plan.price)));
+    return {
+      rooms,
+      area: summarizeAreas(group.map((plan) => plan.area)),
+      price: prices.length === 1 ? prices[0] : prices[0],
+    };
+  });
+};
 ---
 
 <section
@@ -25,13 +72,15 @@ const projects = allProjects
     </header>
 
     <!-- Section intro -->
-    <div class="mb-10 grid grid-cols-1 gap-7 md:mb-14 md:grid-cols-12 md:gap-6" data-reveal style="--reveal-delay: 0.12s;">
-      <h2 class="display text-2xl md:col-span-5 md:text-4xl xl:text-5xl uppercase text-slate-900 leading-[1.05]">
+    <div class="mb-12 grid grid-cols-1 gap-6 md:mb-16 md:grid-cols-12 md:items-end md:gap-6" data-reveal style="--reveal-delay: 0.12s;">
+      <h2 class="display text-[2.85rem] md:col-span-6 md:text-[4.25rem] xl:text-[4.9rem] uppercase text-slate-900 leading-[0.92]">
         Наши объекты.
       </h2>
-      <p class="text-sm md:col-span-6 md:col-start-7 md:max-w-[52ch] md:text-base text-slate-600 leading-relaxed">
-        Три действующих жилых комплекса в Бишкеке. Каждый — отдельный архитектурный акт с прозрачной экономикой, фиксированной этажностью и понятным графиком сдачи.
-      </p>
+      <div class="md:col-span-5 md:col-start-8 md:max-w-[54ch] md:border-t md:border-slate-900/15 md:pt-5">
+        <p class="text-sm md:text-base text-slate-600 leading-relaxed">
+          Три действующих жилых комплекса в Бишкеке. Каждый — отдельный архитектурный акт с прозрачной экономикой, фиксированной этажностью и понятным графиком сдачи.
+        </p>
+      </div>
     </div>
   </div>
 
@@ -45,6 +94,7 @@ const projects = allProjects
       { label: "Квартиры", value: project.data.units, accent: false },
       ...(project.data.installment ? [{ label: "Рассрочка", value: project.data.installment.label, accent: false }] : []),
     ];
+    const planPreview = getHomepagePlanPreview(project.data.plans);
 
     return (
       <article
@@ -182,12 +232,12 @@ const projects = allProjects
                   Планировки
                 </span>
                 <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-slate-400">
-                  {String(project.data.plans.length).padStart(2, "0")} типов
+                  {String(planPreview.length).padStart(2, "0")} типов
                 </span>
               </div>
               <div class="border-t border-slate-300">
-                {project.data.plans.map((p, i) => (
-                  <div class={`grid grid-cols-1 gap-2 py-4 sm:grid-cols-12 sm:items-baseline sm:gap-4 ${i < project.data.plans.length - 1 ? "border-b border-slate-200/80" : ""}`}>
+                {planPreview.map((p, i) => (
+                  <div class={`grid grid-cols-1 gap-2 py-4 sm:grid-cols-12 sm:items-baseline sm:gap-4 ${i < planPreview.length - 1 ? "border-b border-slate-200/80" : ""}`}>
                     <span class="font-mono text-sm uppercase tracking-[0.06em] text-slate-900 sm:col-span-5">
                       {p.rooms}
                     </span>
