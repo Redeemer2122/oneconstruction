@@ -33,7 +33,7 @@ const privilegeMedia = {
 } as const;
 ---
 
-<section id="privileges" class="privileges-section oc-chapter oc-chapter--technical" aria-label="Стандарт привилегий One Construction">
+<section id="privileges" class="privileges-section oc-chapter oc-chapter--technical" aria-label="Стандарт преимуществ One Construction">
   <div class="section-stitch-top stitch-bone-to-technical" aria-hidden="true"></div>
 
   <div class="privileges-frame">
@@ -41,14 +41,14 @@ const privilegeMedia = {
       <div class="privileges-intro__meta">
         <span>02</span>
         <i aria-hidden="true"></i>
-        <span>Привилегии</span>
+        <span>Преимущества</span>
       </div>
 
       <div class="privileges-intro__copy">
-        <h2 id="privileges-title">
-          Стандарт<br />
-          привилегий<br />
-          <span>One Construction.</span>
+        <h2 id="privileges-title" class="display">
+          <span>СТАНДАРТ</span>
+          <span>ПРЕИМУЩЕСТВ</span>
+          <span>ONE CONSTRUCTION.</span>
         </h2>
 
         <div class="privileges-intro__text">
@@ -66,11 +66,11 @@ const privilegeMedia = {
       <div class="privileges-system">
         <span class="privileges-system__rule" aria-hidden="true"></span>
         <strong>01 <small>/ 07</small></strong>
-        <span>Система привилегий</span>
+        <span>Система преимуществ</span>
       </div>
     </aside>
 
-    <div class="privileges-board" aria-label="Семь стандартов привилегий">
+    <div class="privileges-board" aria-label="Семь стандартов преимуществ">
       <ol class="privileges-wall">
         {
           privileges.map((item) => {
@@ -81,7 +81,7 @@ const privilegeMedia = {
                 <div class="standard-cell__content">
                   <span class="standard-cell__index">{item.index}</span>
                   <div>
-                    <h3>{item.title}</h3>
+                    <h3 class="display">{item.title}</h3>
                     <p>{item.body}</p>
                   </div>
                 </div>
@@ -197,21 +197,18 @@ const privilegeMedia = {
   }
 
   .privileges-intro h2 {
-    max-width: min(100%, 11ch);
+    max-width: 100%;
     margin: 0;
-    font-family: var(--font-display, var(--font-sans, sans-serif));
-    font-size: clamp(3.05rem, 4.05vw, 5.25rem);
-    font-weight: 800;
-    line-height: 1;
+    font-size: clamp(2.54rem, 2.84vw, 4.1rem);
+    font-weight: 500;
+    line-height: 0.92;
     letter-spacing: 0;
     text-transform: uppercase;
-    text-wrap: balance;
   }
 
   .privileges-intro h2 span {
     display: block;
-    font-size: 0.72em;
-    line-height: 1.03;
+    white-space: nowrap;
   }
 
   .privileges-intro__text {
@@ -365,10 +362,10 @@ const privilegeMedia = {
     max-width: 18ch;
     margin: 0;
     color: var(--priv-ink);
-    font-size: clamp(1.3rem, 1.45vw, 1.68rem);
-    font-weight: 800;
-    line-height: 1.08;
+    font-size: clamp(1.18rem, 1.24vw, 1.48rem);
+    line-height: 0.98;
     letter-spacing: 0;
+    text-transform: uppercase;
     text-wrap: balance;
   }
 
@@ -540,7 +537,7 @@ const privilegeMedia = {
     }
 
     .privileges-intro h2 {
-      max-width: 15ch;
+      max-width: 100%;
     }
 
     .privileges-board {
@@ -583,8 +580,8 @@ const privilegeMedia = {
 
     .privileges-intro h2 {
       max-width: 100%;
-      font-size: clamp(2.02rem, 7.95vw, 2.48rem);
-      line-height: 1.02;
+      font-size: clamp(1.86rem, 7.34vw, 2.24rem);
+      line-height: 0.94;
     }
 
     .privileges-intro__text {
@@ -629,7 +626,7 @@ const privilegeMedia = {
 
     .standard-cell h3 {
       max-width: 18ch;
-      font-size: 1rem;
+      font-size: 0.96rem;
     }
 
     .standard-cell p {
