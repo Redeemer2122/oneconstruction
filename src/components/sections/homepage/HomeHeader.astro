@@ -34,14 +34,6 @@ const socialLinks = company.socialLinks;
 
   <div class="header-enter grid grid-cols-[1fr_auto] items-center gap-5 px-5 py-4 md:px-8 lg:grid-cols-[minmax(180px,0.85fr)_minmax(0,1.85fr)_minmax(280px,0.9fr)] lg:px-8 xl:grid-cols-[minmax(190px,0.9fr)_minmax(0,1.9fr)_minmax(310px,0.9fr)] xl:px-10">
     <a href="/#main" class="group flex min-w-0 items-center gap-3" aria-label="One Construction — на главную">
-      <img
-        src="/img/logo-silver.jpeg"
-        alt=""
-        width="32"
-        height="32"
-        class="h-8 w-8 shrink-0 object-contain select-none"
-        draggable="false"
-      />
       <span class="truncate font-mono text-[11px] uppercase tracking-[0.18em] text-slate-900 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-violet-600 lg:tracking-[0.22em]">
         ONE CONSTRUCTION
       </span>
@@ -52,7 +44,7 @@ const socialLinks = company.socialLinks;
         navItems.map((item) => (
           <a
             href={item.href}
-            class="group relative inline-flex items-center whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.13em] text-slate-600 transition-colors duration-300 hover:text-slate-950 xl:text-[11px] xl:tracking-[0.16em]"
+            class="group relative inline-flex items-center whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.13em] text-slate-600 transition-colors duration-300 hover:text-slate-950 xl:text-[12px] xl:tracking-[0.16em]"
           >
             {item.label}
             <span
