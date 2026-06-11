@@ -127,11 +127,11 @@ const privilegeMedia = {
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: minmax(24.5rem, 0.37fr) minmax(0, 0.63fr);
-    column-gap: clamp(1rem, 1.8vw, 2rem);
-    width: min(100%, 1760px);
+    grid-template-columns: minmax(27rem, 0.38fr) minmax(0, 0.62fr);
+    column-gap: clamp(0.75rem, 1.2vw, 1.35rem);
+    width: 100%;
     margin-inline: auto;
-    padding: clamp(6.25rem, 7.55vw, 8.9rem) clamp(0.75rem, 1.65vw, 1.65rem) clamp(6.65rem, 7.95vw, 9.45rem);
+    padding: clamp(6.1rem, 7.25vw, 8.8rem) clamp(1rem, 2.2vw, 2.75rem) clamp(6.45rem, 7.8vw, 9.25rem);
   }
 
   .privileges-intro,
@@ -142,30 +142,45 @@ const privilegeMedia = {
     border: 1px solid var(--priv-line-soft);
     box-shadow:
       0 1px 0 rgba(255, 255, 255, 0.82) inset,
-      0 22px 64px rgba(31, 41, 55, 0.045);
+      0 18px 52px rgba(31, 41, 55, 0.035);
   }
 
   .privileges-intro {
     position: relative;
     display: grid;
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto 1fr auto;
     min-width: 0;
-    min-height: clamp(58rem, 70vw, 68.5rem);
-    align-content: start;
-    padding: clamp(2.9rem, 4.15vw, 4.65rem) clamp(2rem, 2.78vw, 3.1rem);
+    min-height: clamp(55rem, 63vw, 67rem);
+    padding: clamp(3rem, 4.05vw, 4.95rem) clamp(1.9rem, 2.65vw, 3.45rem);
     border-right: 1px solid var(--priv-line-soft);
     overflow: hidden;
   }
 
+  .privileges-intro::before {
+    position: absolute;
+    right: clamp(1.55rem, 2.45vw, 3rem);
+    bottom: clamp(4.7rem, 6.3vw, 6.8rem);
+    width: min(58%, 22.5rem);
+    aspect-ratio: 1.62;
+    content: "";
+    background:
+      linear-gradient(rgba(17, 24, 39, 0.09), rgba(17, 24, 39, 0.09)) 0 100% / 100% 1px no-repeat,
+      linear-gradient(90deg, rgba(17, 24, 39, 0.085) 1px, transparent 1px) 0 0 / 33.333% 100%,
+      linear-gradient(180deg, rgba(17, 24, 39, 0.07) 1px, transparent 1px) 0 0 / 100% 33.333%,
+      linear-gradient(135deg, transparent 49.5%, rgba(93, 58, 196, 0.12) 50%, transparent 50.5%);
+    opacity: 0.28;
+    pointer-events: none;
+  }
+
   .privileges-intro::after {
     position: absolute;
-    left: clamp(2rem, 2.78vw, 3.1rem);
-    right: clamp(2rem, 2.78vw, 3.1rem);
-    bottom: clamp(2.6rem, 3.55vw, 3.95rem);
+    left: clamp(1.9rem, 2.65vw, 3.45rem);
+    right: clamp(1.9rem, 2.65vw, 3.45rem);
+    bottom: clamp(2.95rem, 4vw, 4.5rem);
     height: 1px;
     content: "";
     background: linear-gradient(90deg, rgba(93, 58, 196, 0.32), rgba(17, 24, 39, 0.08) 44%, transparent);
-    opacity: 0.72;
+    opacity: 0.64;
     pointer-events: none;
   }
 
@@ -182,8 +197,8 @@ const privilegeMedia = {
     align-items: center;
     gap: 0.75rem;
     color: #707a88;
-    font-size: clamp(0.7rem, 0.74vw, 0.8rem);
-    font-weight: 700;
+    font-size: clamp(0.68rem, 0.7vw, 0.78rem);
+    font-weight: 600;
   }
 
   .privileges-intro__meta i {
@@ -193,16 +208,17 @@ const privilegeMedia = {
   }
 
   .privileges-intro__copy {
-    margin-top: clamp(3.7rem, 6.2vw, 5.95rem);
+    align-self: start;
+    margin-top: clamp(4.15rem, 5.7vw, 6.35rem);
   }
 
   .privileges-intro h2 {
     max-width: 100%;
     margin: 0;
-    font-size: clamp(2.54rem, 2.84vw, 4.1rem);
+    font-size: clamp(2.8rem, 3.08vw, 4.55rem);
     font-weight: 500;
-    line-height: 0.92;
-    letter-spacing: 0;
+    line-height: 0.9;
+    letter-spacing: -0.035em;
     text-transform: uppercase;
   }
 
@@ -213,27 +229,29 @@ const privilegeMedia = {
 
   .privileges-intro__text {
     display: grid;
-    gap: 1.12rem;
-    max-width: 31.5rem;
-    margin-top: clamp(2.55rem, 3.6vw, 3.65rem);
+    gap: 1.05rem;
+    max-width: 30rem;
+    margin-top: clamp(2.45rem, 3.25vw, 3.7rem);
+    padding-top: clamp(1.6rem, 2.15vw, 2.35rem);
+    border-top: 1px solid rgba(17, 24, 39, 0.12);
   }
 
   .privileges-intro__text p {
     margin: 0;
     color: color-mix(in srgb, var(--priv-muted) 88%, var(--priv-ink));
-    font-size: clamp(1.06rem, 1.12vw, 1.18rem);
-    line-height: 1.78;
+    font-size: clamp(1.02rem, 1.08vw, 1.16rem);
+    line-height: 1.74;
   }
 
   .privileges-system {
     align-self: end;
     display: grid;
-    gap: 1rem;
-    width: min(100%, 19rem);
-    margin-top: clamp(5.4rem, 8.5vw, 9rem);
+    gap: 0.92rem;
+    width: min(100%, 18.5rem);
+    margin-top: clamp(5.25rem, 8vw, 9rem);
     color: var(--priv-quiet);
-    font-size: clamp(0.68rem, 0.72vw, 0.78rem);
-    font-weight: 700;
+    font-size: clamp(0.66rem, 0.7vw, 0.76rem);
+    font-weight: 600;
   }
 
   .privileges-system__rule {
@@ -244,10 +262,10 @@ const privilegeMedia = {
 
   .privileges-system strong {
     color: color-mix(in srgb, var(--priv-violet) 74%, #8c95a5);
-    font-size: clamp(1.96rem, 2.45vw, 2.5rem);
+    font-size: clamp(2rem, 2.42vw, 2.56rem);
     font-weight: 500;
     line-height: 1;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.02em;
   }
 
   .privileges-system small {
@@ -257,17 +275,17 @@ const privilegeMedia = {
 
   .privileges-board {
     min-width: 0;
-    padding: clamp(0.9rem, 1.25vw, 1.15rem);
+    padding: clamp(0.78rem, 0.95vw, 1.05rem);
   }
 
   .privileges-wall {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows:
-      clamp(16.4rem, 17.25vw, 19.2rem)
-      clamp(18.3rem, 19vw, 21.2rem)
-      clamp(15.75rem, 16.35vw, 18.2rem)
-      clamp(15.75rem, 16.35vw, 18.2rem);
+      clamp(15.8rem, 16.75vw, 19.3rem)
+      clamp(17.8rem, 18.75vw, 21.8rem)
+      clamp(15.35rem, 16.25vw, 18.8rem)
+      clamp(15.35rem, 16.25vw, 18.8rem);
     gap: 1px;
     margin: 0;
     padding: 0;
@@ -346,15 +364,15 @@ const privilegeMedia = {
     z-index: 2;
     display: grid;
     box-sizing: border-box;
-    gap: clamp(1.04rem, 1.28vw, 1.38rem);
-    max-width: 24rem;
-    padding: clamp(1.55rem, 2vw, 2.1rem);
+    gap: clamp(1rem, 1.18vw, 1.32rem);
+    max-width: 25.5rem;
+    padding: clamp(1.55rem, 1.95vw, 2.25rem);
   }
 
   .standard-cell__index {
     color: color-mix(in srgb, var(--priv-ink) 90%, var(--priv-violet));
-    font-size: clamp(0.94rem, 1vw, 1.08rem);
-    font-weight: 800;
+    font-size: clamp(0.9rem, 0.94vw, 1.06rem);
+    font-weight: 600;
     line-height: 1;
   }
 
@@ -362,18 +380,19 @@ const privilegeMedia = {
     max-width: 18ch;
     margin: 0;
     color: var(--priv-ink);
-    font-size: clamp(1.18rem, 1.24vw, 1.48rem);
-    line-height: 0.98;
-    letter-spacing: 0;
+    font-size: clamp(1.14rem, 1.24vw, 1.48rem);
+    font-weight: 500;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
     text-transform: uppercase;
     text-wrap: balance;
   }
 
   .standard-cell p {
     max-width: 27ch;
-    margin: 0.66rem 0 0;
+    margin: 0.64rem 0 0;
     color: color-mix(in srgb, #273240 86%, #6f7785);
-    font-size: clamp(0.94rem, 0.99vw, 1.08rem);
+    font-size: clamp(0.9rem, 0.95vw, 1.04rem);
     line-height: 1.5;
   }
 
@@ -386,7 +405,7 @@ const privilegeMedia = {
     margin: 0;
     overflow: hidden;
     background: #e6e3da;
-    opacity: 0.92;
+    opacity: 0.9;
   }
 
   .standard-cell__media::after {
@@ -394,8 +413,8 @@ const privilegeMedia = {
     inset: 0;
     content: "";
     background:
-      linear-gradient(90deg, rgba(244, 245, 241, 0.68), rgba(244, 245, 241, 0.18) 42%, transparent 68%),
-      linear-gradient(180deg, rgba(251, 250, 246, 0.18), rgba(17, 24, 39, 0.055));
+      linear-gradient(90deg, rgba(244, 245, 241, 0.6), rgba(244, 245, 241, 0.16) 42%, transparent 68%),
+      linear-gradient(180deg, rgba(251, 250, 246, 0.14), rgba(17, 24, 39, 0.045));
     pointer-events: none;
   }
 
@@ -437,13 +456,13 @@ const privilegeMedia = {
   }
 
   .standard-cell--01 .standard-cell__content {
-    max-width: min(16.4rem, 53%);
+    max-width: min(17.6rem, 54%);
     min-height: 100%;
     background: linear-gradient(90deg, rgba(244, 245, 241, 0.98), rgba(244, 245, 241, 0.76) 76%, transparent);
   }
 
   .standard-cell--02 .standard-cell__content {
-    max-width: min(18.6rem, 58%);
+    max-width: min(19.2rem, 58%);
     min-height: 100%;
     background: linear-gradient(90deg, rgba(244, 245, 241, 0.98), rgba(244, 245, 241, 0.78) 74%, transparent);
   }
@@ -453,7 +472,7 @@ const privilegeMedia = {
   }
 
   .standard-cell--03 .standard-cell__content {
-    max-width: 29rem;
+    max-width: 31rem;
     min-height: 100%;
     background: linear-gradient(90deg, rgba(244, 245, 241, 0.98), rgba(244, 245, 241, 0.8) 74%, transparent);
   }
@@ -466,7 +485,7 @@ const privilegeMedia = {
   .standard-cell--05 .standard-cell__media {
     width: 100%;
     height: 60%;
-    opacity: 0.84;
+    opacity: 0.82;
   }
 
   .standard-cell--04 .standard-cell__content,
@@ -486,7 +505,7 @@ const privilegeMedia = {
   .standard-cell--06 .standard-cell__content,
   .standard-cell--07 .standard-cell__content {
     min-height: 100%;
-    max-width: min(17.5rem, 53%);
+    max-width: min(18.2rem, 54%);
     align-content: start;
     background: linear-gradient(90deg, rgba(244, 245, 241, 0.98), rgba(244, 245, 241, 0.8) 74%, transparent);
   }
@@ -568,6 +587,13 @@ const privilegeMedia = {
       min-height: 0;
     }
 
+    .privileges-intro::before {
+      right: 1.35rem;
+      bottom: 5.2rem;
+      width: 44%;
+      opacity: 0.18;
+    }
+
     .privileges-intro::after {
       left: 1.35rem;
       right: 1.35rem;
@@ -575,7 +601,7 @@ const privilegeMedia = {
     }
 
     .privileges-intro__copy {
-      margin-top: 2.2rem;
+      margin-top: 1.85rem;
     }
 
     .privileges-intro h2 {
@@ -585,11 +611,19 @@ const privilegeMedia = {
     }
 
     .privileges-intro__text {
-      margin-top: 1.55rem;
+      gap: 0.76rem;
+      margin-top: 1.35rem;
+      padding-top: 1.08rem;
+      max-width: 28rem;
+    }
+
+    .privileges-intro__text p {
+      font-size: 0.92rem;
+      line-height: 1.58;
     }
 
     .privileges-system {
-      margin-top: 3.25rem;
+      margin-top: 2.4rem;
     }
 
     .privileges-board {
@@ -626,12 +660,14 @@ const privilegeMedia = {
 
     .standard-cell h3 {
       max-width: 18ch;
-      font-size: 0.96rem;
+      font-size: 0.9rem;
+      line-height: 1.05;
     }
 
     .standard-cell p {
       max-width: 25ch;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
+      line-height: 1.45;
     }
 
     .standard-cell__media,
