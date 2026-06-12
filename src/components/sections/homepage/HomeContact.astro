@@ -13,8 +13,8 @@ import { company } from "@data/company";
 
   <div class="contact-shell">
     <aside class="contact-info" data-reveal>
-      <p class="contact-kicker">ОФИС · БИШКЕК</p>
-      <h2 class="contact-title">
+      <p class="contact-kicker mono-detail text-slate-500">ОФИС · БИШКЕК</p>
+      <h2 class="contact-title display uppercase text-slate-900">
         Оставьте заявку<span>.</span>
       </h2>
       <div class="contact-rule" aria-hidden="true"></div>
@@ -191,17 +191,17 @@ import { company } from "@data/company";
   }
 
   .contact-kicker {
-    margin: 0 0 clamp(18px, 2vw, 26px); color: rgb(71 85 105 / 0.74);
+    margin: 0 0 clamp(18px, 2vw, 26px); color: #64748b;
     font-family: var(--font-mono, monospace);
-    font-size: 13px; font-weight: 700; line-height: 1.15;
+    font-size: 10px; font-weight: 400; line-height: 1.4;
     letter-spacing: 0.18em; text-transform: uppercase;
   }
 
   .contact-title {
-    max-width: 11ch; margin: 0; color: #151a24;
-    font-family: var(--font-display, var(--font-sans, sans-serif));
-    font-size: clamp(44px, 4.4vw, 72px); font-weight: 700; line-height: 1.02;
-    letter-spacing: -0.01em;
+    max-width: 11ch; margin: 0; color: #0f172a;
+    font-family: var(--font-display);
+    font-size: clamp(44px, 4.4vw, 72px); font-weight: 500; line-height: 0.92;
+    letter-spacing: -0.04em;
   }
   .contact-title span { color: #6d28d9; }
 
@@ -218,9 +218,9 @@ import { company } from "@data/company";
 
   .contact-lede {
     max-width: 38ch; margin: 0 0 clamp(24px, 2.8vw, 36px);
-    color: rgb(51 65 85 / 0.86);
+    color: #475569;
     font-size: clamp(16px, 1.18vw, 19px);
-    line-height: 1.55;
+    line-height: 1.625;
   }
 
   .contact-rows {
@@ -243,24 +243,24 @@ import { company } from "@data/company";
     display: grid; align-items: baseline;
     grid-template-columns: 32px minmax(0, 1fr);
     column-gap: 10px;
-    color: #273240;
+    color: #334155;
     font-family: var(--font-mono, monospace);
-    font-size: 11px; font-weight: 700; line-height: 1.05;
+    font-size: 10px; font-weight: 400; line-height: 1.4;
     letter-spacing: 0.16em; text-transform: uppercase;
   }
   .contact-row__num {
     color: rgb(91 59 196 / 0.66);
-    font-weight: 700;
+    font-weight: 400;
   }
   .contact-row__label { min-width: 0; }
   .contact-row dd { margin: 0; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
 
   .contact-row__primary {
     display: inline-block; max-width: 100%;
-    color: #151a24;
+    color: #0f172a;
     font-family: var(--font-mono, monospace);
-    font-size: clamp(22px, 1.78vw, 28px); font-weight: 700;
-    letter-spacing: -0.01em; text-decoration: none;
+    font-size: clamp(22px, 1.78vw, 28px); font-weight: 500;
+    letter-spacing: -0.035em; text-decoration: none;
     transition: color 260ms cubic-bezier(0.16, 1, 0.3, 1);
     overflow-wrap: anywhere;
     white-space: nowrap;
@@ -268,8 +268,8 @@ import { company } from "@data/company";
   .contact-row__primary:hover { color: #6d28d9; }
 
   .contact-row__secondary {
-    margin: 0; color: #1f2937;
-    font-size: clamp(15px, 1.05vw, 17px); line-height: 1.4; text-decoration: none;
+    margin: 0; color: #475569;
+    font-size: clamp(15px, 1.05vw, 17px); line-height: 1.625; text-decoration: none;
     overflow-wrap: anywhere;
     transition: color 260ms cubic-bezier(0.16, 1, 0.3, 1);
   }
@@ -279,9 +279,9 @@ import { company } from "@data/company";
   }
   .contact-row__hint {
     margin: 0;
-    color: rgb(51 65 85 / 0.7);
+    color: #64748b;
     font-family: var(--font-mono, monospace);
-    font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
   }
 
   /* ── SOCIALS ──────────────────────────────────────────── */
@@ -296,10 +296,10 @@ import { company } from "@data/company";
     padding: 12px 16px;
     border: 1px solid rgb(15 23 42 / 0.22);
     background: rgb(255 255 252 / 0.86);
-    color: #151a24;
+    color: #0f172a;
     font-family: var(--font-mono, monospace);
-    font-size: 12px; font-weight: 700;
-    letter-spacing: 0.18em; text-transform: uppercase;
+    font-size: 11px; font-weight: 400;
+    letter-spacing: 0.16em; text-transform: uppercase;
     text-decoration: none;
     box-shadow: 0 1px 0 rgb(255 255 252 / 0.82) inset;
     transition: border-color 260ms cubic-bezier(0.16, 1, 0.3, 1), color 260ms cubic-bezier(0.16, 1, 0.3, 1), transform 260ms cubic-bezier(0.16, 1, 0.3, 1), background-color 260ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -354,14 +354,14 @@ import { company } from "@data/company";
   .contact-map__pin-label {
     color: #5b3bc4;
     font-family: var(--font-mono, monospace);
-    font-size: 11px; font-weight: 700;
+    font-size: 11px; font-weight: 400;
     letter-spacing: 0.16em; text-transform: uppercase;
     white-space: nowrap;
   }
   .contact-map__meta {
     position: absolute; left: 12px; right: 12px; bottom: 14px;
     display: flex; justify-content: space-between; gap: 10px;
-    color: rgb(51 65 85 / 0.7);
+    color: #64748b;
     font-family: var(--font-mono, monospace);
     font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
   }
@@ -404,25 +404,25 @@ import { company } from "@data/company";
   .contact-form-card__head {
     display: flex; align-items: center; justify-content: space-between;
     gap: 16px;
-    color: rgb(71 85 105 / 0.72);
+    color: #64748b;
     font-family: var(--font-mono, monospace);
-    font-size: 12px; font-weight: 700;
+    font-size: 10px; font-weight: 400;
     letter-spacing: 0.18em; text-transform: uppercase;
   }
-  .contact-form-card__index { color: rgb(51 65 85 / 0.5); }
+  .contact-form-card__index { color: #64748b; }
 
   .contact-form-card__title {
-    max-width: 22ch; margin: clamp(20px, 2vw, 28px) 0 0; color: #151a24;
-    font-family: var(--font-mono, monospace);
-    font-size: clamp(26px, 2.28vw, 37px); font-weight: 800;
-    line-height: 1.08; letter-spacing: 0;
+    max-width: 22ch; margin: clamp(20px, 2vw, 28px) 0 0; color: #0f172a;
+    font-family: var(--font-display);
+    font-size: clamp(26px, 2.28vw, 37px); font-weight: 500;
+    line-height: 0.98; letter-spacing: -0.04em;
   }
 
   .contact-form-card__subtitle {
     max-width: 38ch; margin: 14px 0 0;
-    color: rgb(51 65 85 / 0.82);
+    color: #475569;
     font-size: clamp(15px, 1.05vw, 17px);
-    line-height: 1.5;
+    line-height: 1.625;
   }
 
   .contact-form-card__rule {
@@ -463,10 +463,10 @@ import { company } from "@data/company";
     margin-top: clamp(20px, 2vw, 28px);
     padding-top: clamp(18px, 1.8vw, 22px);
     border-top: 1px dashed rgb(15 23 42 / 0.16);
-    color: rgb(51 65 85 / 0.72);
+    color: #64748b;
     font-family: var(--font-mono, monospace);
     font-size: 11px; line-height: 1.5;
-    letter-spacing: 0.12em; text-transform: uppercase;
+    letter-spacing: 0.14em; text-transform: uppercase;
   }
   .contact-form-card__foot span:first-child { color: #6d28d9; font-size: 14px; line-height: 1; }
 
@@ -485,9 +485,9 @@ import { company } from "@data/company";
     .contact-info { padding-left: 0; }
     .contact-info::before { display: none; }
 
-    .contact-title { max-width: none; font-size: clamp(38px, 11vw, 48px); }
+    .contact-title { max-width: none; font-size: clamp(38px, 11vw, 48px); line-height: 0.94; }
     .contact-rule { margin: 22px 0 20px; }
-    .contact-lede { font-size: 16px; }
+    .contact-lede { font-size: 16px; line-height: 1.625; }
 
     .contact-row {
       grid-template-columns: 1fr;
