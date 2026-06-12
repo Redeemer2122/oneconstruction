@@ -27,9 +27,9 @@ const titleLines = [
 
       <p class="purchase-description">{purchaseSection.intro}</p>
 
-      <a class="purchase-intro__cta" href="#contact">
+      <a class="purchase-intro__cta group transition duration-300 ease-[var(--ease-out-expo)] hover:!bg-violet-700 hover:!text-[#FBFBFA] focus-visible:!bg-violet-700 focus-visible:!text-[#FBFBFA] hover:![transform:none] focus-visible:![transform:none] active:![transform:scale(0.99)]" href="#contact">
         <span>{purchaseSection.cta}</span>
-        <span aria-hidden="true">↗</span>
+        <span class="transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:![transform:translateX(0.25rem)] group-focus-visible:![transform:translateX(0.25rem)]" aria-hidden="true">↗</span>
       </a>
     </aside>
 
