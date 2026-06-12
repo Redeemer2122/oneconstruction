@@ -22,44 +22,6 @@ const activeProject = showcaseProjects[0];
     set:html={JSON.stringify(showcaseProjects)}
   ></script>
 
-  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-blueprint opacity-[0.42]"></div>
-  <div
-    aria-hidden="true"
-    class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_78%_30%,rgba(226,232,240,0.78),transparent_34%),linear-gradient(118deg,rgba(251,251,250,0.94)_0%,rgba(248,247,244,0.72)_44%,rgba(245,244,240,0.9)_100%)]"
-  ></div>
-  <div
-    aria-hidden="true"
-    class="absolute inset-y-0 right-0 -z-10 hidden w-[60vw] border-l border-slate-900/10 bg-[#F5F4F0] shadow-[-56px_0_150px_rgba(15,23,42,0.1)] md:block"
-  ></div>
-  <div
-    aria-hidden="true"
-    class="absolute right-[-9vw] top-[10vh] -z-10 hidden h-[66vh] w-[56vw] border border-slate-900/10 opacity-70 md:block"
-  ></div>
-  <div
-    aria-hidden="true"
-    class="absolute right-[5vw] top-[17vh] -z-10 hidden h-[48vh] w-[34vw] border border-slate-900/10 bg-[#FBFBFA]/20 opacity-55 md:block"
-  ></div>
-  <div
-    aria-hidden="true"
-    class="absolute right-[18vw] top-[15vh] -z-10 hidden h-[62vh] w-px bg-violet-700/24 md:block"
-  ></div>
-  <div
-    aria-hidden="true"
-    class="absolute right-[2vw] top-[8vh] -z-10 hidden h-[78vh] w-[30vw] -skew-x-12 border-x border-slate-900/10 bg-[linear-gradient(120deg,rgba(255,255,255,0.28),rgba(148,163,184,0.1)_45%,transparent)] opacity-65 md:block"
-  ></div>
-  <div
-    aria-hidden="true"
-    class="absolute bottom-[18vh] left-[3vw] -z-10 hidden h-44 w-[34vw] border-y border-slate-900/10 bg-[repeating-linear-gradient(90deg,rgba(15,23,42,0.08)_0_1px,transparent_1px_58px)] opacity-45 md:block"
-  ></div>
-  <div
-    aria-hidden="true"
-    class="absolute inset-x-[-8vw] top-[26vh] -z-10 h-52 rotate-[-10deg] bg-gradient-to-r from-transparent via-slate-900/[0.07] to-transparent"
-  ></div>
-  <div
-    aria-hidden="true"
-    class="absolute left-0 top-0 -z-10 h-40 w-full bg-gradient-to-b from-[#FBFBFA] to-transparent"
-  ></div>
-
   <div class="relative flex-1 px-5 pb-6 pt-24 sm:px-6 md:px-10 md:pt-[4.5rem] lg:px-12 xl:pt-20">
     <div class="grid min-h-[calc(100dvh-14rem)] grid-cols-12 items-end gap-y-10 md:items-center md:gap-x-6 xl:gap-x-10">
       <div class="col-span-12 flex flex-col justify-end md:col-span-6 xl:col-span-6">
@@ -99,27 +61,11 @@ const activeProject = showcaseProjects[0];
 
       <aside class="relative col-span-12 md:col-span-6 md:-mr-4 xl:col-span-6 xl:-mr-8" aria-label="Главный проект">
         <div
-          aria-hidden="true"
-          class="absolute right-0 top-1/2 hidden h-[76%] w-[52vw] -translate-y-1/2 border-y border-slate-900/10 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.38)_18%,rgba(226,232,240,0.3)_100%)] shadow-[0_40px_120px_-90px_rgba(15,23,42,0.95)] md:block"
-        ></div>
-        <div
           class="relative ml-auto grid min-h-[440px] w-full grid-rows-[auto_1fr] border border-slate-900/25 bg-[#F5F4F0] shadow-[0_54px_150px_-82px_rgba(15,23,42,0.95),-42px_34px_110px_-90px_rgba(15,23,42,0.9)] md:min-h-[585px] xl:min-h-[640px]"
           data-hero-showcase
           data-reveal
           style="--reveal-delay: 0.16s"
         >
-          <div
-            aria-hidden="true"
-            class="pointer-events-none absolute -inset-5 -z-10 hidden border border-slate-900/10 bg-[#FBFBFA]/35 md:block"
-          ></div>
-          <div
-            aria-hidden="true"
-            class="pointer-events-none absolute -right-8 top-12 -z-10 hidden h-[72%] w-[30%] border border-slate-900/10 bg-[#FBFBFA]/45 md:block"
-          ></div>
-          <div
-            aria-hidden="true"
-            class="pointer-events-none absolute -inset-x-8 bottom-[-30px] -z-10 hidden h-28 bg-gradient-to-b from-slate-900/[0.075] to-transparent md:block"
-          ></div>
           <div class="grid grid-cols-[1fr_auto] border-b border-slate-900/15 bg-[#FBFBFA]/80">
             <div class="px-4 py-3 sm:px-5 md:px-6 md:py-4">
               <span class="mono-detail text-slate-500">{company.coordinates.display}</span>
