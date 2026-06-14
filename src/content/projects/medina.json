@@ -112,7 +112,7 @@
   ],
   "gallery": [
     {
-      "image": "/img/privileges/green-facade.jpg",
+      "image": "/img/project-details/medina/gallery/1.jpg",
       "alt": "Вертикальный жилой фасад с озелененными террасами",
       "caption": "Зеленый фасад с выразительным вертикальным ритмом и мягким озеленением.",
       "label": "Фасад",
@@ -121,7 +121,7 @@
       "height": 2700
     },
     {
-      "image": "/img/privileges/entrance.jpg",
+      "image": "/img/project-details/medina/gallery/2.jpg",
       "alt": "Входная группа современного жилого комплекса",
       "caption": "Входная группа с теплым светом, прозрачностью и спокойной навигацией.",
       "label": "Входная группа",
@@ -130,7 +130,7 @@
       "height": 1350
     },
     {
-      "image": "/img/privileges/quiet-lobby.jpg",
+      "image": "/img/project-details/medina/gallery/3.jpg",
       "alt": "Спокойное светлое лобби с мягкой посадочной зоной",
       "caption": "Светлое лобби с мягкой посадочной зоной и камерной атмосферой ожидания.",
       "label": "Лобби",
@@ -139,7 +139,7 @@
       "height": 4325
     },
     {
-      "image": "/img/project-details/medina/medina-hero-premium-temp.jpg",
+      "image": "/img/project-details/medina/gallery/4.jpg",
       "alt": "Современный жилой фасад с вертикальным ритмом балконов",
       "caption": "Мягкое архитектурное освещение подчеркивает ритм фасадов и создает атмосферу уюта.",
       "label": "Вечерний вид",
@@ -148,7 +148,7 @@
       "height": 3925
     },
     {
-      "image": "/img/privileges/courtyard-water.jpg",
+      "image": "/img/project-details/medina/gallery/5.jpg",
       "alt": "Дворовое пространство с водой и озеленением",
       "caption": "Дворовая среда с водой, озеленением и спокойными маршрутами для жителей.",
       "label": "Двор",
@@ -157,7 +157,7 @@
       "height": 1467
     },
     {
-      "image": "/img/project-details/medina/benefits-decorative-asset.png",
+      "image": "/img/project-details/medina/gallery/6.jpg",
       "alt": "Деталь благоустройства и архитектурной среды проекта",
       "caption": "Пространство для повседневной жизни, прогулок и семейных сценариев.",
       "label": "Детская площадка",
@@ -166,7 +166,7 @@
       "height": 1086
     },
     {
-      "image": "/img/privileges/facade.jpg",
+      "image": "/img/project-details/medina/gallery/7.jpg",
       "alt": "Фрагмент фасада жилого здания",
       "caption": "Фасадные детали, материалы и регулярный ритм оконных проемов.",
       "label": "Фасадная деталь",
@@ -175,11 +175,119 @@
       "height": 1800
     },
     {
-      "image": "/img/privileges/water.jpg",
+      "image": "/img/project-details/medina/gallery/8.jpg",
       "alt": "Благоустроенная зона с водой и мягким вечерним светом",
       "caption": "Видовая локация с водой, вечерним светом и тихой атмосферой двора.",
       "label": "Видовая зона",
       "category": "Двор",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/medina/gallery/9.jpg",
+      "alt": "ЖК Медина+ — галерея проекта, вид 9",
+      "caption": "Галерея проекта Медина+, вид 9.",
+      "label": "Вид 9",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/medina/gallery/10.jpg",
+      "alt": "ЖК Медина+ — галерея проекта, вид 10",
+      "caption": "Галерея проекта Медина+, вид 10.",
+      "label": "Вид 10",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/medina/gallery/11.jpg",
+      "alt": "ЖК Медина+ — галерея проекта, вид 11",
+      "caption": "Галерея проекта Медина+, вид 11.",
+      "label": "Вид 11",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/medina/gallery/12.jpg",
+      "alt": "ЖК Медина+ — галерея проекта, вид 12",
+      "caption": "Галерея проекта Медина+, вид 12.",
+      "label": "Вид 12",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/medina/gallery/13.jpg",
+      "alt": "ЖК Медина+ — галерея проекта, вид 13",
+      "caption": "Галерея проекта Медина+, вид 13.",
+      "label": "Вид 13",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/medina/gallery/14.jpg",
+      "alt": "ЖК Медина+ — галерея проекта, вид 14",
+      "caption": "Галерея проекта Медина+, вид 14.",
+      "label": "Вид 14",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/medina/gallery/15.jpg",
+      "alt": "ЖК Медина+ — галерея проекта, вид 15",
+      "caption": "Галерея проекта Медина+, вид 15.",
+      "label": "Вид 15",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/medina/gallery/16.jpg",
+      "alt": "ЖК Медина+ — галерея проекта, вид 16",
+      "caption": "Галерея проекта Медина+, вид 16.",
+      "label": "Вид 16",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/medina/gallery/17.jpg",
+      "alt": "ЖК Медина+ — галерея проекта, вид 17",
+      "caption": "Галерея проекта Медина+, вид 17.",
+      "label": "Вид 17",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/medina/gallery/18.jpg",
+      "alt": "ЖК Медина+ — галерея проекта, вид 18",
+      "caption": "Галерея проекта Медина+, вид 18.",
+      "label": "Вид 18",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/medina/gallery/19.jpg",
+      "alt": "ЖК Медина+ — галерея проекта, вид 19",
+      "caption": "Галерея проекта Медина+, вид 19.",
+      "label": "Вид 19",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/medina/gallery/20.jpg",
+      "alt": "ЖК Медина+ — галерея проекта, вид 20",
+      "caption": "Галерея проекта Медина+, вид 20.",
+      "label": "Вид 20",
+      "category": "Галерея",
       "width": 1800,
       "height": 1200
     }

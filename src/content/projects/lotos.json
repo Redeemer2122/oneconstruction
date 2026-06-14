@@ -20,6 +20,125 @@
     { "rooms": "2-комнатные", "area": "от 64.96 м²", "price": "от 6,8 млн сом" },
     { "rooms": "3-комнатные", "area": "от 101.98 м²", "price": "от 10,7 млн сом" }
   ],
+  "gallery": [
+    {
+      "image": "/img/project-details/lotos/gallery/1.jpg",
+      "alt": "ЖК Лотос — галерея проекта, вид 1",
+      "caption": "Галерея проекта Лотос, вид 1.",
+      "label": "Вид 1",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/lotos/gallery/2.jpg",
+      "alt": "ЖК Лотос — галерея проекта, вид 2",
+      "caption": "Галерея проекта Лотос, вид 2.",
+      "label": "Вид 2",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/lotos/gallery/3.jpg",
+      "alt": "ЖК Лотос — галерея проекта, вид 3",
+      "caption": "Галерея проекта Лотос, вид 3.",
+      "label": "Вид 3",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/lotos/gallery/4.jpg",
+      "alt": "ЖК Лотос — галерея проекта, вид 4",
+      "caption": "Галерея проекта Лотос, вид 4.",
+      "label": "Вид 4",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/lotos/gallery/5.jpg",
+      "alt": "ЖК Лотос — галерея проекта, вид 5",
+      "caption": "Галерея проекта Лотос, вид 5.",
+      "label": "Вид 5",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/lotos/gallery/6.jpg",
+      "alt": "ЖК Лотос — галерея проекта, вид 6",
+      "caption": "Галерея проекта Лотос, вид 6.",
+      "label": "Вид 6",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/lotos/gallery/7.jpg",
+      "alt": "ЖК Лотос — галерея проекта, вид 7",
+      "caption": "Галерея проекта Лотос, вид 7.",
+      "label": "Вид 7",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/lotos/gallery/8.jpg",
+      "alt": "ЖК Лотос — галерея проекта, вид 8",
+      "caption": "Галерея проекта Лотос, вид 8.",
+      "label": "Вид 8",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/lotos/gallery/9.jpg",
+      "alt": "ЖК Лотос — галерея проекта, вид 9",
+      "caption": "Галерея проекта Лотос, вид 9.",
+      "label": "Вид 9",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/lotos/gallery/10.jpg",
+      "alt": "ЖК Лотос — галерея проекта, вид 10",
+      "caption": "Галерея проекта Лотос, вид 10.",
+      "label": "Вид 10",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/lotos/gallery/11.jpg",
+      "alt": "ЖК Лотос — галерея проекта, вид 11",
+      "caption": "Галерея проекта Лотос, вид 11.",
+      "label": "Вид 11",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/lotos/gallery/12.jpg",
+      "alt": "ЖК Лотос — галерея проекта, вид 12",
+      "caption": "Галерея проекта Лотос, вид 12.",
+      "label": "Вид 12",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/lotos/gallery/13.jpg",
+      "alt": "ЖК Лотос — галерея проекта, вид 13",
+      "caption": "Галерея проекта Лотос, вид 13.",
+      "label": "Вид 13",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    }
+  ],
   "installment": {
     "label": "Рассрочка до 40 месяцев",
     "maxMonths": 40,

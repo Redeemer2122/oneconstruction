@@ -64,24 +64,85 @@
   ],
   "gallery": [
     {
-      "image": "/img/hero/yacht-village-hero-temp.jpg",
+      "image": "/img/project-details/yacht-village/gallery/1.jpg",
       "alt": "Низкоэтажная резиденция в зеленом окружении",
-      "caption": "Клубный масштаб"
+      "caption": "Клубный масштаб",
+      "label": "Клубный масштаб",
+      "category": "Фасад",
+      "width": 1800,
+      "height": 1200
     },
     {
-      "image": "/img/privileges/courtyard-water.jpg",
+      "image": "/img/project-details/yacht-village/gallery/2.jpg",
       "alt": "Дворовое пространство с водой и озеленением",
-      "caption": "Дворовая среда"
+      "caption": "Дворовая среда",
+      "label": "Дворовая среда",
+      "category": "Двор",
+      "width": 1800,
+      "height": 1200
     },
     {
-      "image": "/img/privileges/green-facade.jpg",
+      "image": "/img/project-details/yacht-village/gallery/3.jpg",
       "alt": "Озелененный фасад жилого здания",
-      "caption": "Зеленая архитектура"
+      "caption": "Зеленая архитектура",
+      "label": "Зеленая архитектура",
+      "category": "Фасад",
+      "width": 1800,
+      "height": 1200
     },
     {
-      "image": "/img/privileges/entrance.jpg",
+      "image": "/img/project-details/yacht-village/gallery/4.jpg",
       "alt": "Современная входная зона жилого комплекса",
-      "caption": "Входная зона"
+      "caption": "Входная зона",
+      "label": "Входная зона",
+      "category": "Вход",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/yacht-village/gallery/5.jpg",
+      "alt": "Yacht Village — галерея проекта, вид 5",
+      "caption": "Галерея проекта Yacht Village, вид 5.",
+      "label": "Вид 5",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/yacht-village/gallery/6.jpg",
+      "alt": "Yacht Village — галерея проекта, вид 6",
+      "caption": "Галерея проекта Yacht Village, вид 6.",
+      "label": "Вид 6",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/yacht-village/gallery/7.jpg",
+      "alt": "Yacht Village — галерея проекта, вид 7",
+      "caption": "Галерея проекта Yacht Village, вид 7.",
+      "label": "Вид 7",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/yacht-village/gallery/8.jpg",
+      "alt": "Yacht Village — галерея проекта, вид 8",
+      "caption": "Галерея проекта Yacht Village, вид 8.",
+      "label": "Вид 8",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "image": "/img/project-details/yacht-village/gallery/9.jpg",
+      "alt": "Yacht Village — галерея проекта, вид 9",
+      "caption": "Галерея проекта Yacht Village, вид 9.",
+      "label": "Вид 9",
+      "category": "Галерея",
+      "width": 1800,
+      "height": 1200
     }
   ],
   "purchaseOptions": [
