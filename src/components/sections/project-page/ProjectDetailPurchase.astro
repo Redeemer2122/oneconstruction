@@ -45,7 +45,7 @@ const getCtaLabel = (option: any, index: number) => ctaByTitle[option.title] ?? 
           <p class="mt-5 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">
             РАССРОЧКА / ОПЛАТА / БАРТЕР / БОНУСЫ
           </p>
-          <h2 id="purchase-title" class="mt-6 max-w-[10.5ch] text-[2.75rem] font-medium leading-[0.98] text-slate-950 [text-wrap:balance] md:text-[3.65rem] xl:text-[4.15rem]">
+          <h2 id="purchase-title" class="project-section-title mt-6 max-w-[10.5ch] [text-wrap:balance]">
             Выберите удобный вариант покупки
           </h2>
           <p class="mt-7 max-w-[46ch] text-[15px] leading-8 text-slate-600 md:text-base md:leading-8">
@@ -113,3 +113,27 @@ const getCtaLabel = (option: any, index: number) => ctaByTitle[option.title] ?? 
     </section>
   )
 }
+
+<style>
+  .project-section-title {
+    font-family: var(--font-display, "Geist Variable", ui-sans-serif, system-ui, sans-serif);
+    font-size: clamp(46px, 3.35vw, 64px);
+    font-weight: 500;
+    line-height: 0.96;
+    letter-spacing: 0;
+    color: #0e214c;
+  }
+
+  @media (max-width: 760px) {
+    .project-section-title {
+      font-size: clamp(34px, 9.8vw, 42px);
+      line-height: 1;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .project-section-title {
+      font-size: 34px;
+    }
+  }
+</style>

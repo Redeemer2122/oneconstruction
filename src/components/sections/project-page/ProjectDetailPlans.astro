@@ -52,7 +52,7 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
               <p class="mono-detail text-violet-700">ПЛАНИРОВКИ</p>
               <span class="h-px w-12 bg-slate-900/15" aria-hidden="true"></span>
             </div>
-            <h2 id="plans-title" class="mt-5 max-w-[11ch] text-5xl font-medium leading-[0.96] text-slate-950 text-balance md:text-6xl">
+            <h2 id="plans-title" class="project-section-title mt-5 max-w-[11ch] text-balance">
               Выберите свой формат
             </h2>
             <p class="mt-6 max-w-[58ch] text-sm leading-7 text-slate-600 md:text-base md:leading-8">
@@ -227,6 +227,15 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
           color: #fbfbfa;
         }
 
+        .project-section-title {
+          font-family: var(--font-display, "Geist Variable", ui-sans-serif, system-ui, sans-serif);
+          font-size: clamp(46px, 3.35vw, 64px);
+          font-weight: 500;
+          line-height: 0.96;
+          letter-spacing: 0;
+          color: #0e214c;
+        }
+
         .plan-filter-button[aria-pressed="false"]:hover {
           background: #f5f4f0;
           color: #020617;
@@ -270,6 +279,19 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
 
         .plan-crop-7 {
           object-position: 56% 56%;
+        }
+
+        @media (max-width: 760px) {
+          .project-section-title {
+            font-size: clamp(34px, 9.8vw, 42px);
+            line-height: 1;
+          }
+        }
+
+        @media (max-width: 420px) {
+          .project-section-title {
+            font-size: 34px;
+          }
         }
       </style>
     </section>
