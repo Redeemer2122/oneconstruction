@@ -61,10 +61,9 @@ const sectionIntro = isMedina
 
             <a
               href="#contact"
-              class="benefits-cta mt-10 inline-grid min-h-16 w-full max-w-[360px] grid-cols-[1fr_auto] items-center px-8 py-5 font-mono text-[11px] uppercase leading-none tracking-[0.16em] text-[#FBFBFA] transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7C66A3]"
+              class="mt-10 inline-flex min-h-14 w-full max-w-[360px] items-center justify-center border-[0.5px] border-slate-950 bg-slate-950 px-6 py-4 font-mono text-[11px] uppercase tracking-[0.16em] text-alabaster transition-colors duration-300 hover:border-violet-700 hover:bg-violet-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700"
             >
-              <span>Оставить заявку</span>
-              <span class="text-3xl leading-none" aria-hidden="true">→</span>
+              Оставить заявку
             </a>
           </div>
 
@@ -189,30 +188,6 @@ const sectionIntro = isMedina
     filter: grayscale(1) contrast(1.22) brightness(0.96);
   }
 
-  .benefits-cta {
-    position: relative;
-    z-index: 10;
-    background: #624294;
-    transition:
-      background-color 260ms var(--ease-out-expo),
-      box-shadow 260ms var(--ease-out-expo);
-  }
-
-  .benefits-cta:hover,
-  .benefits-cta:focus-visible {
-    background: #7651ad;
-    box-shadow: 0 16px 34px rgba(98, 66, 148, 0.18);
-  }
-
-  .benefits-cta span:last-child {
-    transition: transform 260ms var(--ease-out-expo);
-  }
-
-  .benefits-cta:hover span:last-child,
-  .benefits-cta:focus-visible span:last-child {
-    transform: translateX(6px);
-  }
-
   .benefits-matrix {
     display: grid;
     align-self: center;
@@ -329,14 +304,6 @@ const sectionIntro = isMedina
 
     .benefits-decorative-asset {
       display: none;
-    }
-
-    .benefits-cta {
-      margin-top: 34px;
-      max-width: none;
-      min-height: 58px;
-      padding: 18px 22px;
-      letter-spacing: 0.16em;
     }
 
     .benefits-matrix {
