@@ -3,7 +3,11 @@
   "index": "01",
   "sortOrder": 1,
   "showOnHomepage": true,
-  "cover": "https://images.unsplash.com/photo-1758193431393-0aead94a6a1b?ixlib=rb-4.1.0&q=88&fm=jpg&crop=entropy&cs=srgb&w=1800",
+  "cover": "/img/hero/lotos-hero.webp",
+  "hero": {
+    "image": "/img/project-details/lotos/lotos-hero.webp",
+    "imageAlt": "ЖК Лотос Премиальный Фасад"
+  },
   "location": "ул. Молдокулова 100, Бишкек",
   "status": "Строится",
   "delivery": "СДАЧА · IV КВ. 2027",

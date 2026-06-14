@@ -3,7 +3,7 @@
   "index": "02",
   "sortOrder": 2,
   "showOnHomepage": true,
-  "cover": "/img/hero/yacht-village-hero-temp.jpg",
+  "cover": "/img/hero/yacht-village-hero.webp",
   "location": "ул. Юнусалиева 86/1, Бишкек",
   "status": "Готово к сдаче",
   "delivery": "СДАЧА · ГОТОВ",
@@ -15,7 +15,7 @@
   "hero": {
     "eyebrow": "Клубная резиденция",
     "summary": "Камерная резиденция с низкой этажностью, приватным настроением и спокойным жилым масштабом.",
-    "image": "/img/hero/yacht-village-hero-temp.jpg",
+    "image": "/img/project-details/yacht-village/yacht-village-hero.webp",
     "imageAlt": "Низкоэтажная современная резиденция в зеленом окружении",
     "featuredPlanLabel": "Камерный формат"
   },

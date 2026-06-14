@@ -13,7 +13,7 @@ export const hero = {
     meta: "IV кв. 2028 · ул. Мичурина, 163",
     href: "/projects/medina",
   },
-  // Temporary local hero media; replace with approved project renders when available.
+  // Homepage carousel media stays separate from project detail hero assets.
   showcaseProjects: [
     {
       index: "01",
@@ -22,7 +22,7 @@ export const hero = {
       line: "Современный жилой комплекс",
       meta: "ул. Молдокулова 100, Бишкек",
       href: "/projects/lotos",
-      image: "/img/hero/lotos-hero-temp.jpg",
+      image: "/img/hero/lotos-hero.webp",
       imageAlt: "Светлый фасад жилого комплекса с балконами и перспективной геометрией",
     },
     {
@@ -32,7 +32,7 @@ export const hero = {
       line: "Клубная резиденция",
       meta: "ул. Юнусалиева 86/1, Бишкек",
       href: "/projects/yacht-village",
-      image: "/img/hero/yacht-village-hero-temp.jpg",
+      image: "/img/hero/yacht-village-hero.webp",
       imageAlt: "Светлая клубная резиденция с открытой террасой и бассейном",
     },
     {
@@ -42,7 +42,7 @@ export const hero = {
       line: "Современный жилой комплекс",
       meta: "г. Бишкек, Ивана Мичурина 163",
       href: "/projects/medina",
-      image: "/img/hero/medina-hero-temp.jpg",
+      image: "/img/hero/medina-cover.webp",
       imageAlt: "Светлая архитектурная форма с графичной фасадной сеткой",
     },
     {

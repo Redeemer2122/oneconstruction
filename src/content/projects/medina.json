@@ -3,7 +3,7 @@
   "index": "03",
   "sortOrder": 3,
   "showOnHomepage": true,
-  "cover": "/img/privileges/green-facade.jpg",
+  "cover": "/img/hero/medina-cover.webp",
   "location": "г. Бишкек, Ивана Мичурина 163",
   "status": "Строится",
   "delivery": "СДАЧА · IV КВ. 2028",
@@ -15,7 +15,7 @@
   "hero": {
     "eyebrow": "Современный жилой комплекс",
     "summary": "Современный комплекс для тех, кто ценит комфорт без лишнего шума. Закрытая территория, продуманные планировки, спокойный двор и инфраструктура в шаговой доступности!",
-    "image": "/img/project-details/medina/medina-hero-premium-temp.jpg",
+    "image": "/img/project-details/medina/medina-hero.webp",
     "imageAlt": "Современный жилой фасад с балконами и стеклянными ограждениями",
     "featuredPlanLabel": "Популярный формат"
   },
