@@ -6,6 +6,7 @@ interface Props {
 const { project } = Astro.props;
 const data = project.data;
 const plans = data.plans ?? [];
+const section = data.plansSection ?? {};
 
 const getRoomCount = (value: string) => value.match(/\d+/)?.[0] ?? "";
 const getCategory = (value: string) => {
@@ -28,10 +29,12 @@ const minArea = plans.reduce((lowest: number | null, plan: any) => {
   return lowest === null || area < lowest ? area : lowest;
 }, null);
 const minAreaText = minArea ? minArea.toFixed(1).replace(/\.0$/, "") : "";
-const metaText = `${plans.length} планировок${minAreaText ? ` / от ${minAreaText} м²` : ""}`;
+const metaText = section.metaLabel
+  ? `${plans.length} ${section.metaLabel}${minAreaText && section.metaAreaPrefix ? ` / ${section.metaAreaPrefix} ${minAreaText} м²` : ""}`
+  : "";
 const filterOrder = ["1-комнатные", "2-комнатные", "3-комнатные"];
 const availableFilters = filterOrder.filter((filter) => plans.some((plan: any) => getCategory(String(plan.rooms)) === filter));
-const filters = ["Все", ...availableFilters];
+const filters = [section.allFilterLabel, ...availableFilters].filter(Boolean);
 const shouldLimitAll = plans.length > 6;
 const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:grid-cols-2 xl:grid-cols-3";
 ---
@@ -49,28 +52,26 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
         <div class="grid gap-10 border-t-[0.5px] border-slate-900/18 pt-8 lg:grid-cols-[minmax(0,0.46fr)_minmax(560px,0.54fr)] lg:items-end">
           <div>
             <div class="flex items-center gap-4">
-              <p class="mono-detail text-violet-700">ПЛАНИРОВКИ</p>
+              {section.label && <p class="mono-detail text-violet-700">{section.label}</p>}
               <span class="h-px w-12 bg-slate-900/15" aria-hidden="true"></span>
             </div>
-            <h2 id="plans-title" class="project-section-title mt-5 max-w-[11ch] text-balance">
-              Выберите свой формат
-            </h2>
-            <p class="mt-6 max-w-[58ch] text-sm leading-7 text-slate-600 md:text-base md:leading-8">
-              От компактных 1-комнатных до просторных семейных форматов — подберите планировку под свой сценарий жизни.
-            </p>
-            <div class="mt-6 flex max-w-[26rem] items-center gap-4 border-t-[0.5px] border-slate-900/15 pt-3">
-              <span class="h-1.5 w-1.5 bg-violet-700" aria-hidden="true"></span>
-              <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-slate-500">
-                {metaText}
-              </p>
-            </div>
+            {section.title && <h2 id="plans-title" class="project-section-title mt-5 max-w-[11ch] text-balance">{section.title}</h2>}
+            {section.intro && <p class="mt-6 max-w-[58ch] text-sm leading-7 text-slate-600 md:text-base md:leading-8">{section.intro}</p>}
+            {
+              metaText && (
+                <div class="mt-6 flex max-w-[26rem] items-center gap-4 border-t-[0.5px] border-slate-900/15 pt-3">
+                  <span class="h-1.5 w-1.5 bg-violet-700" aria-hidden="true"></span>
+                  <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-slate-500">{metaText}</p>
+                </div>
+              )
+            }
           </div>
 
           <div class="min-w-0 lg:justify-self-end">
             <div
               class="plan-filter-shell flex max-w-full gap-1 overflow-x-auto border-[0.5px] border-slate-900/15 bg-[#FBFBFA] p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:flex-wrap lg:justify-end"
               role="group"
-              aria-label="Фильтр планировок"
+              aria-label={section.filterLabel}
             >
               {filters.map((filter: string, index: number) => (
                 <button
@@ -131,18 +132,24 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
                     <p class="plan-area mt-4 font-mono text-[13px] uppercase tracking-[0.12em] text-slate-600">
                       {plan.area}
                     </p>
-                    <p class="plan-note mt-5 max-w-[36ch] text-sm leading-7 text-slate-600">
-                      {plan.note ?? "Планировка для ежедневного городского сценария."}
-                    </p>
+                    {(plan.note || section.fallbackNote) && (
+                      <p class="plan-note mt-5 max-w-[36ch] text-sm leading-7 text-slate-600">
+                        {plan.note ?? section.fallbackNote}
+                      </p>
+                    )}
                   </div>
 
-                  <a
-                    href="#contact"
-                    class="plan-cta mt-auto flex items-center justify-between gap-4 border-t-[0.5px] border-slate-900/18 pt-6 font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-slate-950 transition-colors duration-300 group-hover:border-slate-950/35 group-hover:text-violet-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700"
-                  >
-                    Выбрать квартиру
-                    <span class="plan-cta-arrow transition-transform duration-300 ease-out" aria-hidden="true">→</span>
-                  </a>
+                  {
+                    section.ctaLabel && (
+                      <a
+                        href="#contact"
+                        class="plan-cta mt-auto flex items-center justify-between gap-4 border-t-[0.5px] border-slate-900/18 pt-6 font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-slate-950 transition-colors duration-300 group-hover:border-slate-950/35 group-hover:text-violet-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700"
+                      >
+                        {section.ctaLabel}
+                        <span class="plan-cta-arrow transition-transform duration-300 ease-out" aria-hidden="true">→</span>
+                      </a>
+                    )
+                  }
                 </div>
               </article>
             );
@@ -157,7 +164,7 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
               data-plan-show-more
               aria-expanded="false"
             >
-              Показать все планировки →
+              {section.showMoreLabel}
             </button>
           </div>
         )}
@@ -172,7 +179,7 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
           const showMoreWrap = selector.querySelector("[data-plan-show-more-wrap]");
           const showMoreButton = selector.querySelector("[data-plan-show-more]");
           const allLimit = Number(selector.getAttribute("data-all-limit") ?? 6);
-          let activeFilter = "Все";
+          let activeFilter = buttons[0]?.getAttribute("data-plan-filter") ?? "";
           let isAllExpanded = false;
 
           const setActiveButton = () => {
@@ -183,7 +190,8 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
           };
 
           const updateCards = () => {
-            const isAll = activeFilter === "Все";
+            const allFilterLabel = selector.querySelector("[data-plan-filter]")?.getAttribute("data-plan-filter") ?? "";
+            const isAll = activeFilter === allFilterLabel;
 
             cards.forEach((card) => {
               const category = card.getAttribute("data-plan-category");
@@ -204,14 +212,14 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
 
           buttons.forEach((button) => {
             button.addEventListener("click", () => {
-              activeFilter = button.getAttribute("data-plan-filter") ?? "Все";
+              activeFilter = button.getAttribute("data-plan-filter") ?? activeFilter;
               isAllExpanded = false;
               updateCards();
             });
           });
 
           showMoreButton?.addEventListener("click", () => {
-            activeFilter = "Все";
+            activeFilter = selector.querySelector("[data-plan-filter]")?.getAttribute("data-plan-filter") ?? activeFilter;
             isAllExpanded = true;
             updateCards();
           });

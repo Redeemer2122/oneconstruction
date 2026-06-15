@@ -13,21 +13,18 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const benefits = project.data.benefits ?? [];
-const projectSlug = project.data.slug ?? project.id;
-const isMedina = projectSlug === "medina";
+const data = project.data;
+const benefits = data.benefits ?? [];
+const section = data.benefitsSection ?? {};
 
 const benefitIcons = [MapPin, Building2, LayoutGrid, ShieldCheck, Gem, Trees];
-const sectionTitle = isMedina ? "Почему именно ЖК «Медина+»" : "Комфорт в каждой детали";
-const sectionIntro = isMedina
-  ? [
-      "ЖК «Медина+» — это гармония комфорта, безопасности и высокого качества.",
-      "Мы продумали каждую деталь, чтобы вы чувствовали себя дома с первого дня.",
-    ]
-  : [
-      "Шесть практичных причин, которые формируют ежедневное качество жизни в этом проекте.",
-      "Каждый сценарий продуман для спокойного, удобного и красивого быта.",
-    ];
+const sectionTitle = section.title ?? data.name;
+const sectionTitleLines = String(sectionTitle).split(/\n+/).filter(Boolean);
+const sectionIntro = section.intro ?? [data.description].filter(Boolean);
+const sectionLabel = section.label;
+const ctaLabel = section.ctaLabel ?? data.contactCta?.form?.submitLabel;
+const decorativeAsset = section.decorativeAsset;
+const decorativeAlt = section.decorativeAlt ?? "";
 ---
 
 {
@@ -36,19 +33,16 @@ const sectionIntro = isMedina
       <div class="mx-auto grid max-w-[1480px] gap-12 lg:grid-cols-[minmax(320px,0.35fr)_minmax(0,0.65fr)] lg:gap-14 xl:gap-20">
         <aside class="benefits-intro relative flex min-h-[620px] flex-col overflow-hidden lg:min-h-[720px]">
           <div class="relative z-10 max-w-[470px]">
-            <div class="benefits-label text-[#7C66A3]">
-              <p class="font-mono text-[12px] uppercase leading-none tracking-[0.18em]">ПРЕИМУЩЕСТВА</p>
-            </div>
+            {
+              sectionLabel && (
+                <div class="benefits-label text-[#7C66A3]">
+                  <p class="font-mono text-[12px] uppercase leading-none tracking-[0.18em]">{sectionLabel}</p>
+                </div>
+              )
+            }
 
             <h2 id="benefits-title" class="benefits-title mt-9 text-[#0E214C]" aria-label={sectionTitle}>
-              {isMedina ? (
-                <>
-                  <span>Почему именно</span>
-                  <span>ЖК «Медина+»</span>
-                </>
-              ) : (
-                <span>{sectionTitle}</span>
-              )}
+              {sectionTitleLines.map((line: string) => <span>{line}</span>)}
             </h2>
 
             <div class="benefits-divider mt-9" aria-hidden="true">
@@ -56,25 +50,28 @@ const sectionIntro = isMedina
             </div>
 
             <div class="mt-8 max-w-[440px] space-y-1 text-[17px] leading-8 text-[#2E3D62] md:text-[18px] md:leading-9">
-              {sectionIntro.map((line) => <p>{line}</p>)}
+              {sectionIntro.map((line: string) => <p>{line}</p>)}
             </div>
 
-            <a
-              href="#contact"
-              class="mt-10 inline-flex min-h-14 w-full max-w-[360px] items-center justify-center border-[0.5px] border-slate-950 bg-slate-950 px-6 py-4 font-mono text-[11px] uppercase tracking-[0.16em] text-alabaster transition-colors duration-300 hover:border-violet-700 hover:bg-violet-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700"
-            >
-              Оставить заявку
-            </a>
+            {
+              ctaLabel && (
+                <a
+                  href="#contact"
+                  class="mt-10 inline-flex min-h-14 w-full max-w-[360px] items-center justify-center border-[0.5px] border-slate-950 bg-slate-950 px-6 py-4 font-mono text-[11px] uppercase tracking-[0.16em] text-alabaster transition-colors duration-300 hover:border-violet-700 hover:bg-violet-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700"
+                >
+                  {ctaLabel}
+                </a>
+              )
+            }
           </div>
 
-          <div class="benefits-decorative-asset" aria-hidden="true">
-            <img
-              src="/img/project-details/medina/benefits-decorative-asset.png"
-              alt=""
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
+          {
+            decorativeAsset && (
+              <div class="benefits-decorative-asset" aria-hidden="true">
+                <img src={decorativeAsset} alt={decorativeAlt} loading="lazy" decoding="async" />
+              </div>
+            )
+          }
         </aside>
 
         <div class="benefits-matrix" role="list">

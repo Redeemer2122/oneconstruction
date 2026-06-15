@@ -30,37 +30,30 @@ type ContactItem = {
 
 const { project } = Astro.props;
 const data = project.data;
-const contact = data.contactCta ?? {
-  label: "КОНСУЛЬТАЦИЯ",
-  title: `Обсудим квартиру в ${data.name}`,
-  body: "Подберём планировку, расскажем о ценах и условиях и поможем принять уверенное решение.",
-};
+const contact = data.contactCta;
+const contactDetails = contact?.contactDetails ?? {};
+const form = contact?.form ?? {};
 
-const phone = contact.contactDetails?.phone ?? company.phones[0]?.display;
+const phone = contactDetails.phone ?? company.phones[0]?.display;
 const phoneHref =
-  contact.contactDetails?.phoneHref ??
+  contactDetails.phoneHref ??
   company.phones[0]?.href ??
   `tel:${String(phone ?? "").replace(/[^\d+]/g, "")}`;
-const email = contact.contactDetails?.email ?? company.email?.display;
-const emailHref = contact.contactDetails?.emailHref ?? company.email?.href ?? `mailto:${email}`;
-const address = contact.contactDetails?.address ?? company.office?.addressDisplayRu;
-const responseNote = contact.contactDetails?.responseNote ?? "Ответим в течение рабочего дня";
-const responseNoteLines = String(responseNote)
-  .split(/\n+/)
-  .map((line) => line.trim())
-  .filter(Boolean);
-const socialLinks: SocialLink[] = contact.contactDetails?.socialLinks ?? [];
-const form = contact.form ?? {
-  title: "Оставьте заявку",
-  intro: "Менеджер свяжется с вами в течение 15 минут",
-  securityNote: "Ваши данные под защитой и не передаются третьим лицам",
-  successMessage:
-    "Спасибо, заявка подготовлена. На следующем этапе мы подключим отправку менеджеру.",
-};
+const email = contactDetails.email ?? company.email?.display;
+const emailHref = contactDetails.emailHref ?? company.email?.href ?? `mailto:${email}`;
+const address = contactDetails.address ?? company.office?.addressDisplayRu;
+const responseNote = contactDetails.responseNote;
+const responseNoteLines = responseNote
+  ? String(responseNote)
+      .split(/\n+/)
+      .map((line) => line.trim())
+      .filter(Boolean)
+  : [];
+const socialLinks: SocialLink[] = contactDetails.socialLinks ?? [];
 
 const contactItems: ContactItem[] = [
-  phone && { label: "Телефон", value: phone, href: phoneHref, Icon: Phone },
-  address && { label: "Адрес", value: address, Icon: MapPin },
+  phone && { label: form.phoneLabel ?? phone, value: phone, href: phoneHref, Icon: Phone },
+  address && { label: address, value: address, Icon: MapPin },
   email && { label: "Email", value: email, href: emailHref, Icon: Mail },
 ].filter(Boolean) as ContactItem[];
 
@@ -79,6 +72,8 @@ const socialItems = socialLinks.map((social) => ({
 }));
 ---
 
+{
+  contact?.title && contact.body && (
 <section
   id="contact"
   class="relative overflow-hidden bg-[#F7F3EC] px-5 pb-24 pt-16 text-[#111827] md:px-8 md:pb-32 md:pt-24 lg:px-10 lg:pb-36"
@@ -86,9 +81,7 @@ const socialItems = socialLinks.map((social) => ({
 >
   <div class="mx-auto grid max-w-[1480px] gap-12 lg:grid-cols-[minmax(0,0.49fr)_minmax(420px,0.51fr)] lg:items-start lg:gap-14 xl:gap-20">
     <div class="max-w-[660px]">
-      <p class="font-mono text-[12px] font-semibold uppercase tracking-[0.16em] text-[#6547B4]">
-        {contact.label ?? "КОНСУЛЬТАЦИЯ"}
-      </p>
+      {contact.label && <p class="font-mono text-[12px] font-semibold uppercase tracking-[0.16em] text-[#6547B4]">{contact.label}</p>}
       <div class="mt-7 h-px w-24 bg-[#6547B4]" aria-hidden="true"></div>
 
       <h2
@@ -137,7 +130,7 @@ const socialItems = socialLinks.map((social) => ({
 
       <div class="mt-7 flex flex-wrap items-center gap-5">
         {socialItems.length > 0 && (
-          <div class="flex flex-wrap gap-4" aria-label="Социальные сети">
+            <div class="flex flex-wrap gap-4">
             {socialItems.map((social) => {
               return (
                 <a
@@ -188,14 +181,18 @@ const socialItems = socialLinks.map((social) => ({
           </div>
         )}
 
-        <p class="flex min-w-[16rem] items-center gap-3 text-[0.9375rem] font-medium leading-6 text-[#626978] md:text-[1.0625rem]">
-          <span class="contact-round-icon flex h-10 w-10 shrink-0 items-center justify-center bg-[#F0EEF2] text-[#6547B4]">
-            <Clock3 class="h-5 w-5" stroke-width="1.75" aria-hidden="true" />
-          </span>
-          <span class="grid gap-1 [font-variant-numeric:tabular-nums]">
-            {responseNoteLines.map((line) => <span>{line}</span>)}
-          </span>
-        </p>
+        {
+          responseNoteLines.length > 0 && (
+            <p class="flex min-w-[16rem] items-center gap-3 text-[0.9375rem] font-medium leading-6 text-[#626978] md:text-[1.0625rem]">
+              <span class="contact-round-icon flex h-10 w-10 shrink-0 items-center justify-center bg-[#F0EEF2] text-[#6547B4]">
+                <Clock3 class="h-5 w-5" stroke-width="1.75" aria-hidden="true" />
+              </span>
+              <span class="grid gap-1 [font-variant-numeric:tabular-nums]">
+                {responseNoteLines.map((line) => <span>{line}</span>)}
+              </span>
+            </p>
+          )
+        }
       </div>
     </div>
 
@@ -222,21 +219,30 @@ const socialItems = socialLinks.map((social) => ({
             <Building2 class="h-9 w-9" stroke-width="1.45" aria-hidden="true" />
           </div>
 
-          <h3 class="mt-7 text-[2.65rem] font-normal leading-none text-[#10172A] [font-family:Georgia,'Times_New_Roman',serif] md:text-[3.55rem]">
-            {form.title}
-          </h3>
-          <p class="mt-4 text-base leading-7 text-[#747987] md:text-[1.0625rem]">{form.intro}</p>
+          {form.title && (
+            <h3 class="mt-7 text-[2.65rem] font-normal leading-none text-[#10172A] [font-family:Georgia,'Times_New_Roman',serif] md:text-[3.55rem]">
+              {form.title}
+            </h3>
+          )}
+          {form.intro && <p class="mt-4 text-base leading-7 text-[#747987] md:text-[1.0625rem]">{form.intro}</p>}
         </div>
 
-        <form class="contact-lead-form relative mt-8 grid gap-5" novalidate data-success-message={form.successMessage}>
+        <form
+          class="contact-lead-form relative mt-8 grid gap-5"
+          novalidate
+          data-success-message={form.successMessage}
+          data-error-name={form.errors?.name}
+          data-error-phone={form.errors?.phone}
+          data-error-privacy={form.errors?.privacy}
+        >
           <div>
-            <label for="lead-name" class="sr-only">Ваше имя</label>
+            <label for="lead-name" class="sr-only">{form.nameLabel}</label>
             <input
               id="lead-name"
               type="text"
               name="name"
               autocomplete="name"
-              placeholder="Ваше имя*"
+              placeholder={form.namePlaceholder}
               required
               class="contact-input h-16 w-full border border-[#171D2D]/12 bg-white/72 px-7 text-[1.0625rem] text-[#10172A] outline-none transition duration-300 placeholder:text-[#8A909E] focus:border-[#6547B4]/55 focus:bg-white focus:ring-4 focus:ring-[#6547B4]/10 md:h-[4.85rem] md:text-[1.2rem]"
             />
@@ -244,7 +250,7 @@ const socialItems = socialLinks.map((social) => ({
           </div>
 
           <div>
-            <label for="lead-phone" class="sr-only">Телефон</label>
+            <label for="lead-phone" class="sr-only">{form.phoneLabel}</label>
             <div class="contact-input grid h-16 grid-cols-[auto_auto_1fr] items-center gap-3 border border-[#171D2D]/12 bg-white/72 px-7 transition duration-300 focus-within:border-[#6547B4]/55 focus-within:bg-white focus-within:ring-4 focus-within:ring-[#6547B4]/10 md:h-[4.85rem]">
               <span class="text-lg leading-none" aria-hidden="true">🇰🇬</span>
               <ChevronDown class="h-4 w-4 text-[#8A909E]" stroke-width="1.75" aria-hidden="true" />
@@ -254,7 +260,7 @@ const socialItems = socialLinks.map((social) => ({
                 name="phone"
                 autocomplete="tel"
                 inputmode="tel"
-                placeholder="+996 (000) 000-000"
+                placeholder={form.phonePlaceholder}
                 required
                 class="min-w-0 border-0 bg-transparent p-0 text-[1.0625rem] text-[#10172A] outline-none placeholder:text-[#8A909E] md:text-[1.2rem]"
               />
@@ -271,25 +277,29 @@ const socialItems = socialLinks.map((social) => ({
                 class="contact-checkbox mt-1 h-[1.65rem] w-[1.65rem] border border-[#6547B4] text-[#6547B4] accent-[#6547B4] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6547B4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FBFAF7]"
               />
               <span>
-                Я соглашаюсь с
+                {form.privacyText}
                 <a
                   href="#"
                   class="text-[#6547B4] underline decoration-[#6547B4]/50 underline-offset-4 transition-colors duration-300 hover:text-[#4F3693] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6547B4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FBFAF7]"
                 >
-                  политикой обработки персональных данных
+                  {form.privacyLinkLabel}
                 </a>
               </span>
             </label>
             <p class="mt-2 hidden text-sm leading-6 text-[#9A3142]" data-error-for="privacy"></p>
           </div>
 
-          <button
-            type="submit"
-            class="contact-submit-button group flex min-h-14 items-center justify-center border-[0.5px] border-slate-950 bg-slate-950 px-6 py-4 font-mono text-[11px] uppercase tracking-[0.16em] text-alabaster transition-colors duration-300 hover:border-violet-700 hover:bg-violet-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-700 focus-visible:ring-offset-4 focus-visible:ring-offset-[#FBFAF7] active:scale-[0.99]"
-          >
-            <span class="flex-1 text-center">Оставить заявку</span>
-            <ArrowRight class="h-6 w-6 transition-transform duration-300 group-hover:translate-x-1" stroke-width="1.75" aria-hidden="true" />
-          </button>
+          {
+            form.submitLabel && (
+              <button
+                type="submit"
+                class="contact-submit-button group flex min-h-14 items-center justify-center border-[0.5px] border-slate-950 bg-slate-950 px-6 py-4 font-mono text-[11px] uppercase tracking-[0.16em] text-alabaster transition-colors duration-300 hover:border-violet-700 hover:bg-violet-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-700 focus-visible:ring-offset-4 focus-visible:ring-offset-[#FBFAF7] active:scale-[0.99]"
+              >
+                <span class="flex-1 text-center">{form.submitLabel}</span>
+                <ArrowRight class="h-6 w-6 transition-transform duration-300 group-hover:translate-x-1" stroke-width="1.75" aria-hidden="true" />
+              </button>
+            )
+          }
 
           <p
             class="contact-status hidden border border-[#6547B4]/25 bg-[#F1ECF8] px-5 py-4 text-sm leading-6 text-[#3F2E5E]"
@@ -299,14 +309,20 @@ const socialItems = socialLinks.map((social) => ({
           ></p>
         </form>
 
-        <p class="relative mt-8 flex items-center gap-3 text-sm leading-6 text-[#8A909E] md:text-base">
-          <ShieldCheck class="h-6 w-6 shrink-0" stroke-width="1.55" aria-hidden="true" />
-          <span>{form.securityNote ?? "Ваши данные под защитой и не передаются третьим лицам"}</span>
-        </p>
+        {
+          form.securityNote && (
+            <p class="relative mt-8 flex items-center gap-3 text-sm leading-6 text-[#8A909E] md:text-base">
+              <ShieldCheck class="h-6 w-6 shrink-0" stroke-width="1.55" aria-hidden="true" />
+              <span>{form.securityNote}</span>
+            </p>
+          )
+        }
       </div>
     </div>
   </div>
 </section>
+  )
+}
 
 <style>
   #contact .contact-form-card {
@@ -405,17 +421,17 @@ const socialItems = socialLinks.map((social) => ({
       setError("privacy", "");
 
       if (!name) {
-        setError("name", "Укажите имя, чтобы менеджер знал, как к вам обращаться.");
+        setError("name", form.dataset.errorName ?? "");
         hasError = true;
       }
 
       if (!phone) {
-        setError("phone", "Укажите номер телефона для связи.");
+        setError("phone", form.dataset.errorPhone ?? "");
         hasError = true;
       }
 
       if (!privacy) {
-        setError("privacy", "Подтвердите согласие на обработку персональных данных.");
+        setError("privacy", form.dataset.errorPrivacy ?? "");
         hasError = true;
       }
 
@@ -432,9 +448,7 @@ const socialItems = socialLinks.map((social) => ({
 
       // TODO: replace frontend stub with POST /api/lead when Telegram/email/CRM destination is confirmed.
       if (status) {
-        status.textContent =
-          form.dataset.successMessage ??
-          "Спасибо, заявка подготовлена. На следующем этапе мы подключим отправку менеджеру.";
+        status.textContent = form.dataset.successMessage ?? "";
         status.classList.remove("hidden");
       }
     });

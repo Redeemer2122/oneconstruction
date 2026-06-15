@@ -26,7 +26,9 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const galleryRaw = (project.data.gallery ?? []) as GalleryItem[];
+const data = project.data;
+const galleryRaw = (data.gallery ?? []) as GalleryItem[];
+const section = data.gallerySection ?? {};
 
 const gallery = galleryRaw
   .map((item, index) => {
@@ -52,12 +54,12 @@ const counterTotal = String(total).padStart(2, "0");
 const counterInitial = String(initialIndex + 1).padStart(2, "0");
 const galleryJson = JSON.stringify(gallery).replace(/</g, "\\u003c");
 
-const features = [
-  { text: "Архитектура в стиле неоклассика", Icon: Sparkles },
-  { text: "Премиальные материалы и технологии", Icon: ShieldCheck },
-  { text: "Пространства для жизни и вдохновения", Icon: Leaf },
-  { text: "Уютный двор и видовые локации", Icon: SunMedium },
-];
+const featureIcons = [Sparkles, ShieldCheck, Leaf, SunMedium];
+const features = section.features ?? [];
+const galleryTitle = section.title ?? data.name;
+const galleryTitleLines = String(galleryTitle).split(/\n+/).filter(Boolean);
+const galleryIntro = section.intro ?? data.description;
+const sectionLabel = section.label;
 ---
 
 {
@@ -71,33 +73,43 @@ const features = [
     >
       <div class="project-gallery-shell">
         <div class="project-gallery-layout">
-          <aside class="gallery-editorial" aria-label="Описание галереи">
-            <p class="gallery-label">
-              <span>ГАЛЕРЕЯ</span>
-              <span aria-hidden="true">+</span>
-            </p>
+          <aside class="gallery-editorial">
+            {
+              sectionLabel && (
+                <p class="gallery-label">
+                  <span>{sectionLabel}</span>
+                  <span aria-hidden="true">+</span>
+                </p>
+              )
+            }
 
             <h2 id="gallery-title">
-              ЖК Медина+ —
-              <br />
-              архитектура света
-              <br />
-              и спокойствия
+              {galleryTitleLines.map((line: string, index: number) => (
+                <>
+                  {index > 0 && <br />}
+                  {line}
+                </>
+              ))}
             </h2>
 
-            <p class="gallery-intro">
-              Каждая деталь проекта создана с вниманием к эстетике, комфорту и гармонии. Фасады,
-              лобби, двор и виды — всё продумано для вашей вдохновляющей повседневности.
-            </p>
+            {galleryIntro && <p class="gallery-intro">{galleryIntro}</p>}
 
-            <ul class="gallery-features" aria-label="Особенности галереи">
-              {features.map(({ text, Icon }) => (
-                <li>
-                  <Icon aria-hidden="true" size={17} stroke-width={1.55} />
-                  <span>{text}</span>
-                </li>
-              ))}
-            </ul>
+            {
+              features.length > 0 && (
+                <ul class="gallery-features">
+                  {features.map((text: string, index: number) => {
+                    const Icon = featureIcons[index % featureIcons.length];
+
+                    return (
+                      <li>
+                        <Icon aria-hidden="true" size={17} stroke-width={1.55} />
+                        <span>{text}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )
+            }
           </aside>
 
           <div class="gallery-showcase">
@@ -107,7 +119,7 @@ const features = [
                   class="gallery-main"
                   type="button"
                   data-gallery-open
-                  aria-label="Открыть изображение в полноэкранной галерее"
+                  aria-label={section.openLabel}
                 >
                   <img
                     src={initial.src}
@@ -128,19 +140,19 @@ const features = [
                   <span class="gallery-main__pill" data-gallery-main-label>{initial.category}</span>
                   <span class="gallery-main__affordance" aria-hidden="true">
                     <Expand size={16} stroke-width={1.45} />
-                    <span>Открыть изображение</span>
+                    {section.openAffordanceLabel && <span>{section.openAffordanceLabel}</span>}
                   </span>
                 </button>
 
               </div>
             </div>
 
-            <div class="gallery-rail-shell" aria-label="Миниатюры галереи">
+            <div class="gallery-rail-shell" aria-label={section.thumbnailRailLabel}>
               <button
                 class="rail-nav rail-nav--prev"
                 type="button"
                 data-gallery-rail-prev
-                aria-label="Прокрутить миниатюры назад"
+                aria-label={section.previousLabel}
                 aria-disabled="true"
                 disabled
               >
@@ -153,7 +165,7 @@ const features = [
                     class="gallery-thumb"
                     type="button"
                     data-gallery-thumb={index}
-                    aria-label={`Показать изображение: ${item.label}`}
+                    aria-label={`${section.thumbnailLabelPrefix ?? data.name}: ${item.label}`}
                     aria-selected={index === initialIndex ? "true" : "false"}
                   >
                     <span class="gallery-thumb__image">
@@ -175,7 +187,7 @@ const features = [
                 class="rail-nav rail-nav--next"
                 type="button"
                 data-gallery-rail-next
-                aria-label="Прокрутить миниатюры вперед"
+                aria-label={section.nextLabel}
               >
                 <ChevronRight aria-hidden="true" size={19} stroke-width={1.55} />
               </button>

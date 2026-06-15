@@ -64,6 +64,16 @@ const projects = defineCollection({
         })
       )
       .optional(),
+    benefitsSection: z
+      .object({
+        label: z.string().optional(),
+        title: z.string().optional(),
+        intro: z.array(z.string()).optional(),
+        ctaLabel: z.string().optional(),
+        decorativeAsset: z.string().optional(),
+        decorativeAlt: z.string().optional(),
+      })
+      .optional(),
     plans: z.array(
       z.object({
         rooms: z.string(),
@@ -73,6 +83,20 @@ const projects = defineCollection({
         note: z.string().optional(),
       })
     ),
+    plansSection: z
+      .object({
+        label: z.string().optional(),
+        title: z.string().optional(),
+        intro: z.string().optional(),
+        filterLabel: z.string().optional(),
+        allFilterLabel: z.string().optional(),
+        metaLabel: z.string().optional(),
+        metaAreaPrefix: z.string().optional(),
+        showMoreLabel: z.string().optional(),
+        ctaLabel: z.string().optional(),
+        fallbackNote: z.string().optional(),
+      })
+      .optional(),
     gallery: z
       .array(
         z.object({
@@ -86,6 +110,20 @@ const projects = defineCollection({
         })
       )
       .optional(),
+    gallerySection: z
+      .object({
+        label: z.string().optional(),
+        title: z.string().optional(),
+        intro: z.string().optional(),
+        features: z.array(z.string()).optional(),
+        openLabel: z.string().optional(),
+        openAffordanceLabel: z.string().optional(),
+        thumbnailRailLabel: z.string().optional(),
+        previousLabel: z.string().optional(),
+        nextLabel: z.string().optional(),
+        thumbnailLabelPrefix: z.string().optional(),
+      })
+      .optional(),
     purchaseOptions: z
       .array(
         z.object({
@@ -93,8 +131,21 @@ const projects = defineCollection({
           body: z.string(),
           meta: z.string().optional(),
           status: z.enum(["confirmed", "needs_verification"]).optional(),
+          ctaLabel: z.string().optional(),
         })
       )
+      .optional(),
+    purchaseSection: z
+      .object({
+        label: z.string().optional(),
+        kicker: z.string().optional(),
+        title: z.string().optional(),
+        intro: z.string().optional(),
+        noteLabel: z.string().optional(),
+        note: z.string().optional(),
+        fallbackCtas: z.array(z.string()).optional(),
+        verificationLabel: z.string().optional(),
+      })
       .optional(),
     constructionStatus: z
       .object({
@@ -128,6 +179,15 @@ const projects = defineCollection({
               note: z.string().optional(),
             })
           )
+          .optional(),
+        uiLabels: z
+          .object({
+            activeStageLabel: z.string().optional(),
+            statusLabel: z.string().optional(),
+            periodLabel: z.string().optional(),
+            roadmapTitle: z.string().optional(),
+            roadmapHint: z.string().optional(),
+          })
           .optional(),
       })
       .optional(),
@@ -163,6 +223,20 @@ const projects = defineCollection({
             intro: z.string().optional(),
             securityNote: z.string().optional(),
             successMessage: z.string().optional(),
+            submitLabel: z.string().optional(),
+            nameLabel: z.string().optional(),
+            namePlaceholder: z.string().optional(),
+            phoneLabel: z.string().optional(),
+            phonePlaceholder: z.string().optional(),
+            privacyText: z.string().optional(),
+            privacyLinkLabel: z.string().optional(),
+            errors: z
+              .object({
+                name: z.string().optional(),
+                phone: z.string().optional(),
+                privacy: z.string().optional(),
+              })
+              .optional(),
           })
           .optional(),
       })

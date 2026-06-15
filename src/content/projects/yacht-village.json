@@ -188,19 +188,22 @@
       "title": "Индивидуальные условия",
       "body": "Финальные условия покупки нужно подтвердить с отделом продаж.",
       "meta": "по консультации",
-      "status": "needs_verification"
+      "status": "needs_verification",
+      "ctaLabel": "Уточнить доступность"
     },
     {
       "title": "Полная оплата",
       "body": "Доступность квартир и итоговая стоимость подтверждаются перед бронированием.",
       "meta": "по запросу",
-      "status": "needs_verification"
+      "status": "needs_verification",
+      "ctaLabel": "Оставить заявку"
     },
     {
       "title": "Trade-in",
       "body": "Возможность зачета недвижимости требует индивидуальной оценки.",
       "meta": "индивидуально",
-      "status": "needs_verification"
+      "status": "needs_verification",
+      "ctaLabel": "Обсудить trade-in"
     }
   ],
   "constructionStatus": {
@@ -267,7 +270,14 @@
         "image": "/img/project-details/yacht-village/yacht-village-hero.webp",
         "imageAlt": "Yacht Village как готовая клубная резиденция"
       }
-    ]
+    ],
+    "uiLabels": {
+      "activeStageLabel": "Активный этап",
+      "statusLabel": "Статус",
+      "periodLabel": "Период",
+      "roadmapTitle": "Дорожная карта этапов",
+      "roadmapHint": "Нажмите на этап, чтобы посмотреть детали"
+    }
   },
   "contactCta": {
     "title": "Уточните доступность в Yacht Village",
@@ -290,12 +300,78 @@
       "title": "Оставьте заявку",
       "intro": "Менеджер проверит доступность квартир в Yacht Village",
       "securityNote": "Ваши данные под защитой и не передаются третьим лицам",
-      "successMessage": "Спасибо, заявка по Yacht Village подготовлена. Менеджер свяжется с вами после подключения отправки."
+      "successMessage": "Спасибо, заявка по Yacht Village подготовлена. Менеджер свяжется с вами после подключения отправки.",
+      "submitLabel": "Оставить заявку",
+      "nameLabel": "Ваше имя",
+      "namePlaceholder": "Ваше имя*",
+      "phoneLabel": "Телефон",
+      "phonePlaceholder": "+996 (000) 000-000",
+      "privacyText": "Я соглашаюсь с",
+      "privacyLinkLabel": "политикой обработки персональных данных",
+      "errors": {
+        "name": "Укажите имя, чтобы менеджер знал, как к вам обращаться.",
+        "phone": "Укажите номер телефона для связи.",
+        "privacy": "Подтвердите согласие на обработку персональных данных."
+      }
     }
   },
   "installment": {
     "label": "Индивидуальные условия покупки",
     "status": "needs_verification",
     "note": "Срок рассрочки не подтверждён на старом сайте"
+  },
+  "benefitsSection": {
+    "label": "ПРЕИМУЩЕСТВА",
+    "title": "Клубный масштаб\nYacht Village",
+    "intro": [
+      "Камерный формат, низкая этажность и готовность объекта формируют приватную жилую атмосферу.",
+      "Страница Yacht Village использует собственные тексты и визуальные акценты проекта."
+    ],
+    "ctaLabel": "Оставить заявку",
+    "decorativeAsset": "/img/project-details/yacht-village/yacht-village-hero.webp",
+    "decorativeAlt": "Низкоэтажная резиденция Yacht Village"
+  },
+  "plansSection": {
+    "label": "ПЛАНИРОВКИ",
+    "title": "Форматы Yacht Village",
+    "intro": "Камерные 1- и 2-комнатные планировки для резиденции с низкой этажностью и приватным масштабом.",
+    "filterLabel": "Фильтр планировок Yacht Village",
+    "allFilterLabel": "Все",
+    "metaLabel": "планировок",
+    "metaAreaPrefix": "от",
+    "showMoreLabel": "Показать все планировки →",
+    "ctaLabel": "Выбрать формат",
+    "fallbackNote": "Камерный формат Yacht Village."
+  },
+  "gallerySection": {
+    "label": "ГАЛЕРЕЯ",
+    "title": "Yacht Village —\nклубный масштаб\nи тихая среда",
+    "intro": "Галерея раскрывает низкоэтажную архитектуру, двор и приватный характер резиденции Yacht Village.",
+    "features": [
+      "Камерная резиденция на 40 квартир",
+      "Низкоэтажная архитектура",
+      "Дворовая среда с озеленением",
+      "Готовый статус объекта"
+    ],
+    "openLabel": "Открыть изображение в полноэкранной галерее",
+    "openAffordanceLabel": "Открыть изображение",
+    "thumbnailRailLabel": "Миниатюры галереи",
+    "previousLabel": "Прокрутить миниатюры назад",
+    "nextLabel": "Прокрутить миниатюры вперед",
+    "thumbnailLabelPrefix": "Показать изображение"
+  },
+  "purchaseSection": {
+    "label": "ВАРИАНТЫ ПОКУПКИ",
+    "kicker": "ОПЛАТА / TRADE-IN / ПРОВЕРКА",
+    "title": "Условия покупки Yacht Village",
+    "intro": "Менеджер проверит свободные форматы, цену и индивидуальные условия для готовой клубной резиденции.",
+    "noteLabel": "Важно",
+    "note": "Доступность квартир, trade-in и финальные условия требуют индивидуального подтверждения.",
+    "fallbackCtas": [
+      "Уточнить доступность",
+      "Оставить заявку",
+      "Обсудить trade-in"
+    ],
+    "verificationLabel": "Уточнить"
   }
 }
