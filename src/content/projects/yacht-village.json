@@ -20,10 +20,26 @@
     "featuredPlanLabel": "Камерный формат"
   },
   "stats": [
-    { "value": "2-3", "label": "этажа", "detail": "низкоэтажная структура" },
-    { "value": "40", "label": "квартир", "detail": "камерный жилой фонд" },
-    { "value": "готово", "label": "статус", "detail": "готово к сдаче" },
-    { "value": "от 24 м²", "label": "планировки", "detail": "стартовая площадь" }
+    {
+      "value": "2-3",
+      "label": "этажа",
+      "detail": "низкоэтажная структура"
+    },
+    {
+      "value": "40",
+      "label": "квартир",
+      "detail": "камерный жилой фонд"
+    },
+    {
+      "value": "готово",
+      "label": "статус",
+      "detail": "готово к сдаче"
+    },
+    {
+      "value": "от 24 м²",
+      "label": "планировки",
+      "detail": "стартовая площадь"
+    }
   ],
   "benefits": [
     {
@@ -49,17 +65,39 @@
   ],
   "plans": [
     {
-      "rooms": "1-комнатные",
-      "area": "от 24 м²",
+      "rooms": "1-комнатная квартира",
+      "area": "25,73 м²",
       "price": "от 4,2 млн сом",
-      "image": "/img/privileges/plan.jpg",
-      "note": "стартовый формат"
+      "image": "/img/project-details/yacht-village/plans/1room-25-73.png",
+      "note": "Стартовый формат"
     },
     {
-      "rooms": "2-комнатные",
-      "area": "от 62.47 м²",
+      "rooms": "1-комнатная квартира",
+      "area": "36.33 м²",
+      "price": "от 4,2 млн сом",
+      "image": "/img/project-details/yacht-village/plans/1room-36-33.png",
+      "note": "Стартовый формат"
+    },
+    {
+      "rooms": "1-комнатная квартира",
+      "area": "45,41 м²",
+      "price": "от 4,2 млн сом",
+      "image": "/img/project-details/yacht-village/plans/1room-45-41.png",
+      "note": "Стартовый формат"
+    },
+    {
+      "rooms": "2-комнатная квартира",
+      "area": "49,15 м²",
       "price": "от 6,8 млн сом",
-      "image": "/img/privileges/plan.jpg"
+      "image": "/img/project-details/yacht-village/plans/2room-49-15.png",
+      "note": "Камерный семейный формат"
+    },
+    {
+      "rooms": "2-комнатная квартира",
+      "area": "62,47 м²",
+      "price": "от 6,8 млн сом",
+      "image": "/img/project-details/yacht-village/plans/2room-62-47.png",
+      "note": "Камерный семейный формат"
     }
   ],
   "gallery": [
@@ -169,14 +207,91 @@
     "title": "Статус объекта",
     "summary": "В текущих данных Yacht Village указан как готовый к сдаче. Детальная история этапов не структурирована.",
     "items": [
-      { "label": "Статус", "value": "Готово к сдаче" },
-      { "label": "Этажность", "value": "2-3 этажа" },
-      { "label": "Детальный график", "value": "Требует проверки", "note": "структурированные этапы не указаны в текущих данных" }
+      {
+        "label": "Статус",
+        "value": "Готово к сдаче"
+      },
+      {
+        "label": "Этажность",
+        "value": "2-3 этажа"
+      },
+      {
+        "label": "Детальный график",
+        "value": "Требует проверки",
+        "note": "структурированные этапы не указаны в текущих данных"
+      }
+    ],
+    "label": "СТАТУС ОБЪЕКТА",
+    "status": "Готово к сдаче",
+    "delivery": "Готов",
+    "verificationNote": "История этапов не структурирована в текущих данных и требует подтверждения.",
+    "activeStageIndex": 3,
+    "stages": [
+      {
+        "title": "Концепция резиденции",
+        "status": "Завершено",
+        "period": "период уточняется",
+        "description": "Формирование камерного клубного формата с низкой этажностью.",
+        "verification": "pending",
+        "state": "completed",
+        "image": "/img/project-details/yacht-village/gallery/1.jpg",
+        "imageAlt": "Клубный масштаб Yacht Village"
+      },
+      {
+        "title": "Строительные работы",
+        "status": "Завершено",
+        "period": "период уточняется",
+        "description": "Реализация основного объема строительных работ по резиденции.",
+        "verification": "pending",
+        "state": "completed",
+        "image": "/img/project-details/yacht-village/gallery/3.jpg",
+        "imageAlt": "Низкоэтажная архитектура Yacht Village"
+      },
+      {
+        "title": "Благоустройство",
+        "status": "Завершено",
+        "period": "период уточняется",
+        "description": "Формирование дворовой среды, озеленения и приватной атмосферы проекта.",
+        "verification": "pending",
+        "state": "completed",
+        "image": "/img/project-details/yacht-village/gallery/2.jpg",
+        "imageAlt": "Дворовая среда Yacht Village"
+      },
+      {
+        "title": "Готовность объекта",
+        "status": "Готово к сдаче",
+        "period": "текущий статус",
+        "description": "Проект указан как готовый к сдаче; доступность квартир и документов нужно уточнить у менеджера.",
+        "verification": "project",
+        "state": "target",
+        "image": "/img/project-details/yacht-village/yacht-village-hero.webp",
+        "imageAlt": "Yacht Village как готовая клубная резиденция"
+      }
     ]
   },
   "contactCta": {
     "title": "Уточните доступность в Yacht Village",
-    "body": "Оставьте контакты, и менеджер проверит свободные форматы, цены и условия покупки."
+    "body": "Оставьте контакты, и менеджер проверит свободные форматы, цены и условия покупки.",
+    "label": "КОНСУЛЬТАЦИЯ",
+    "supportPoints": [
+      "Проверка свободных квартир",
+      "Уточнение условий полной оплаты и trade-in",
+      "Консультация по готовности объекта"
+    ],
+    "contactDetails": {
+      "address": "ул. Юнусалиева 86/1, Бишкек",
+      "responseNote": "пн-сб: 9:00-18:00\nвс: выходные",
+      "schedule": [
+        "ПН-СБ: 9:00-18:00",
+        "ВС: выходной"
+      ]
+    },
+    "form": {
+      "title": "Оставьте заявку",
+      "intro": "Менеджер проверит доступность квартир в Yacht Village",
+      "securityNote": "Ваши данные под защитой и не передаются третьим лицам",
+      "successMessage": "Спасибо, заявка по Yacht Village подготовлена. Менеджер свяжется с вами после подключения отправки."
+    }
   },
   "installment": {
     "label": "Индивидуальные условия покупки",

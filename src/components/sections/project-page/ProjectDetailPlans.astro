@@ -99,11 +99,11 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
                 data-plan-category={category}
                 data-plan-index={index}
               >
-                <div class="plan-media relative aspect-[5/3.55] overflow-hidden bg-blueprint">
+                <div class="plan-media relative aspect-[4/3] overflow-hidden p-3 md:p-4">
                   <img
                     src={plan.image ?? "/img/privileges/plan.jpg"}
                     alt={`Планировка ${getTitle(String(plan.rooms))}, ${plan.area}, ${data.name}`}
-                    class={`plan-image plan-crop-${index % 8} absolute inset-0 h-full w-full object-cover mix-blend-multiply transition-transform duration-[900ms] ease-[cubic-bezier(0.625,0.05,0,1)]`}
+                    class="plan-image h-full w-full object-contain mix-blend-multiply transition-transform duration-[900ms] ease-[cubic-bezier(0.625,0.05,0,1)]"
                     loading="lazy"
                     decoding="async"
                   />
@@ -242,43 +242,11 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
         }
 
         .plan-card:hover .plan-image {
-          transform: scale(1.045);
+          transform: scale(1.01);
         }
 
         .plan-card:hover .plan-cta-arrow {
           transform: translateX(0.35rem);
-        }
-
-        .plan-crop-0 {
-          object-position: 48% 46%;
-        }
-
-        .plan-crop-1 {
-          object-position: 58% 48%;
-        }
-
-        .plan-crop-2 {
-          object-position: 42% 54%;
-        }
-
-        .plan-crop-3 {
-          object-position: 54% 42%;
-        }
-
-        .plan-crop-4 {
-          object-position: 46% 58%;
-        }
-
-        .plan-crop-5 {
-          object-position: 62% 52%;
-        }
-
-        .plan-crop-6 {
-          object-position: 40% 46%;
-        }
-
-        .plan-crop-7 {
-          object-position: 56% 56%;
         }
 
         @media (max-width: 760px) {

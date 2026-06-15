@@ -20,11 +20,26 @@
     "featuredPlanLabel": "Популярный формат"
   },
   "stats": [
-    { "value": "IV кв. 2028", "label": "Статус / сдача" },
-    { "value": "16 этажей", "label": "Этажность" },
-    { "value": "270 квартир", "label": "Количество квартир" },
-    { "value": "от 48.8 м²", "label": "Площадь от" },
-    { "value": "до 70 мес.", "label": "Рассрочка" }
+    {
+      "value": "IV кв. 2028",
+      "label": "Статус / сдача"
+    },
+    {
+      "value": "16 этажей",
+      "label": "Этажность"
+    },
+    {
+      "value": "270 квартир",
+      "label": "Количество квартир"
+    },
+    {
+      "value": "от 48.8 м²",
+      "label": "Площадь от"
+    },
+    {
+      "value": "до 70 мес.",
+      "label": "Рассрочка"
+    }
   ],
   "benefits": [
     {
@@ -55,58 +70,58 @@
   "plans": [
     {
       "rooms": "1-комнатная квартира",
-      "area": "48.8 м²",
+      "area": "48,8 м²",
       "price": "по запросу",
-      "image": "/img/privileges/plan.jpg",
+      "image": "/img/project-details/medina/plans/1room-48-8.png",
       "note": "Компактный формат"
     },
     {
       "rooms": "1-комнатная квартира",
-      "area": "48.8 м²",
+      "area": "48,8 м²",
       "price": "по запросу",
-      "image": "/img/privileges/plan.jpg",
-      "note": "Для пары"
+      "image": "/img/project-details/medina/plans/1room-type-b-48-8.png",
+      "note": "Тип B"
     },
     {
       "rooms": "1-комнатная квартира",
-      "area": "52.6 м²",
+      "area": "52,6 м²",
       "price": "по запросу",
-      "image": "/img/privileges/plan.jpg",
-      "note": "Для пары"
+      "image": "/img/project-details/medina/plans/1room-52-6.png",
+      "note": "Компактный формат"
     },
     {
       "rooms": "2-комнатная квартира",
-      "area": "75.2 м²",
+      "area": "73,2 м²",
       "price": "по запросу",
-      "image": "/img/privileges/plan.jpg",
+      "image": "/img/project-details/medina/plans/2room-73-2.png",
       "note": "Для семьи"
     },
     {
       "rooms": "2-комнатная квартира",
-      "area": "78.6 м²",
+      "area": "75,2 м²",
       "price": "по запросу",
-      "image": "/img/privileges/plan.jpg",
+      "image": "/img/project-details/medina/plans/2room-75-2.png",
       "note": "Для семьи"
     },
     {
       "rooms": "2-комнатная квартира",
-      "area": "73.2 м²",
+      "area": "78,6 м²",
       "price": "по запросу",
-      "image": "/img/privileges/plan.jpg",
+      "image": "/img/project-details/medina/plans/2room-78-6.png",
       "note": "Для семьи"
     },
     {
       "rooms": "2-комнатная квартира",
-      "area": "92.4 м²",
+      "area": "92,4 м²",
       "price": "по запросу",
-      "image": "/img/privileges/plan.jpg",
-      "note": "Просторный сценарий"
+      "image": "/img/project-details/medina/plans/2room-92-4.png",
+      "note": "Для семьи"
     },
     {
       "rooms": "3-комнатная квартира",
-      "area": "115.8 м²",
+      "area": "115,8 м²",
       "price": "по запросу",
-      "image": "/img/privileges/plan.jpg",
+      "image": "/img/project-details/medina/plans/3room-115-8.png",
       "note": "Просторный сценарий"
     }
   ],
@@ -327,8 +342,14 @@
     "verificationNote": "Детализация этапов будет обновляться по мере публикации официальных данных.",
     "activeStageIndex": 2,
     "items": [
-      { "label": "Статус", "value": "Строится" },
-      { "label": "Ориентир сдачи", "value": "IV кв. 2028" }
+      {
+        "label": "Статус",
+        "value": "Строится"
+      },
+      {
+        "label": "Ориентир сдачи",
+        "value": "IV кв. 2028"
+      }
     ],
     "stages": [
       {
