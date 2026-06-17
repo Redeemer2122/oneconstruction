@@ -73,7 +73,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={isBusy || isDone}
-          className="group relative inline-flex w-full min-h-12 items-center justify-between gap-3 border border-slate-900 bg-slate-900 px-6 py-4 font-mono text-[12px] uppercase tracking-[0.22em] text-alabaster shadow-[0_18px_38px_rgb(15_23_42_/_0.18)] transition-[transform,background-color,color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-violet-600 hover:text-white hover:border-violet-600 hover:shadow-[0_22px_44px_rgb(109_40_217_/_0.28)] active:scale-[0.99] disabled:opacity-60"
+          className="group relative inline-flex w-full min-h-12 items-center justify-between gap-3 border border-slate-900 bg-slate-900 px-6 py-4 font-mono text-[12px] uppercase tracking-[0.22em] text-alabaster shadow-[0_18px_38px_rgb(15_23_42_/_0.18)] transition-[transform,background-color,color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:!bg-violet-700 hover:text-white hover:border-violet-700 hover:shadow-[0_22px_44px_rgb(109_40_217_/_0.28)] active:scale-[0.99] disabled:opacity-60"
         >
           <span>
             {isBusy ? "ОТПРАВЛЯЕМ" : isDone ? "ЗАЯВКА ПРИНЯТА" : "ОСТАВИТЬ ЗАЯВКУ"}
