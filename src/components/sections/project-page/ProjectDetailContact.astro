@@ -134,10 +134,13 @@ const socialItems = socialLinks.map((social) => ({
             {socialItems.map((social) => {
               return (
                 <a
-                  href={social.href ?? "#"}
+                  href={social.type === "telegram" ? "#" : social.href ?? "#"}
+                  onclick={social.type === "telegram" ? "return false;" : undefined}
+                  aria-hidden={social.type === "telegram" ? "true" : undefined}
+                  style={social.type === "telegram" ? "display: none !important;" : undefined}
                   aria-label={social.ariaLabel ?? social.label}
                   title={social.label}
-                  class="contact-social-button flex h-16 w-16 items-center justify-center bg-[#F0EEF2] text-[#6547B4] shadow-[inset_0_1px_0_rgba(255,255,255,0.75)] transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_16px_32px_rgba(91,63,166,0.14)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6547B4] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F7F3EC]"
+                  class={`contact-social-button flex h-16 w-16 items-center justify-center bg-[#F0EEF2] text-[#6547B4] shadow-[inset_0_1px_0_rgba(255,255,255,0.75)] transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_16px_32px_rgba(91,63,166,0.14)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6547B4] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F7F3EC] ${social.type === "telegram" ? "hidden" : ""}`}
                 >
                   {social.type === "instagram" && (
                     <svg class="h-7 w-7" viewBox="0 0 28 28" fill="none" aria-hidden="true">

@@ -75,11 +75,14 @@ import { company } from "@data/company";
       <div class="contact-socials" aria-label="Каналы связи">
         {company.socialLinks.map((link) => (
           <a
-            class="contact-social"
             href={link.href}
+            onclick={link.name === "Telegram" ? "return false;" : undefined}
+            aria-hidden={link.name === "Telegram" ? "true" : undefined}
+            style={link.name === "Telegram" ? "display: none !important;" : undefined}
             target={link.external ? "_blank" : undefined}
             rel={link.external ? "noopener noreferrer" : undefined}
             aria-label={link.name}
+            class={`contact-social ${link.name === "Telegram" ? "hidden" : ""}`}
           >
             <span>{link.label}</span>
             <span aria-hidden="true">↗</span>

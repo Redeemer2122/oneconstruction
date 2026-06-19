@@ -35,8 +35,8 @@ export const company = {
     {
       label: "TG",
       name: "Telegram",
-      href: "https://t.me/vegodes",
-      external: true,
+      href: "#",
+      external: false,
     },
   ],
   office: {
