@@ -29,7 +29,7 @@ const activeProject = showcaseProjects[0];
           {eyebrow}
         </p>
         <h1
-          class="display text-[10.8vw] leading-[0.9] text-slate-900 uppercase sm:text-[11.8vw] md:text-[5.65vw] md:leading-[0.92] xl:text-[4.95vw] 2xl:text-[4.7vw]"
+          class="display text-[10.5vw] leading-[0.94] text-slate-900 uppercase sm:text-[11.2vw] md:text-[5.35vw] md:leading-[0.94] xl:text-[4.75vw] 2xl:text-[4.5vw]"
         >
           <span class="headline-mask"><span>{titleLines[0]}</span></span>
           <span class="headline-mask"><span>{titleLines[1]}</span></span>
@@ -59,9 +59,9 @@ const activeProject = showcaseProjects[0];
         </div>
       </div>
 
-      <aside class="relative col-span-12 md:col-span-6 md:-mr-4 xl:col-span-6 xl:-mr-8" aria-label="Главный проект">
+      <aside class="relative col-span-12 min-w-0 md:col-span-6 xl:col-span-6" aria-label="Главный проект">
         <div
-          class="relative ml-auto grid min-h-[440px] w-full grid-rows-[auto_1fr] border border-slate-900/25 bg-[#F5F4F0] shadow-[0_54px_150px_-82px_rgba(15,23,42,0.95),-42px_34px_110px_-90px_rgba(15,23,42,0.9)] md:min-h-[585px] xl:min-h-[640px]"
+          class="relative ml-auto grid min-h-[440px] w-full grid-rows-[auto_1fr] border border-slate-900/22 bg-[#F5F4F0] md:min-h-[585px] xl:min-h-[640px]"
           data-hero-showcase
           data-reveal
           style="--reveal-delay: 0.16s"
@@ -102,17 +102,17 @@ const activeProject = showcaseProjects[0];
             ></div>
             <div
               aria-hidden="true"
-              class="absolute left-0 top-0 hidden h-full w-12 border-r border-slate-900/10 bg-[repeating-linear-gradient(0deg,rgba(15,23,42,0.11)_0_1px,transparent_1px_42px)] opacity-70 md:block"
+              class="absolute left-0 top-0 hidden h-full w-12 border-r border-slate-900/10 bg-[linear-gradient(0deg,rgba(15,23,42,0.11)_1px,transparent_1px)] bg-[length:100%_42px] opacity-55 md:block"
             ></div>
 
-            <article class="absolute inset-x-4 bottom-4 border border-slate-900/25 bg-[#FBFBFA]/96 shadow-[0_34px_100px_-62px_rgba(15,23,42,0.95)] sm:inset-x-auto sm:right-5 sm:w-[min(500px,calc(100%-2.5rem))] md:bottom-8 md:right-8 md:w-[min(520px,calc(100%-4rem))]">
+            <article class="absolute inset-x-4 bottom-4 border border-slate-900/22 bg-[#FBFBFA]/96 sm:inset-x-auto sm:right-5 sm:w-[min(500px,calc(100%-2.5rem))] md:bottom-8 md:right-8 md:w-[min(520px,calc(100%-4rem))]">
               <div class="grid grid-cols-[1fr_auto] border-b border-slate-900/15">
                 <p class="mono-detail px-4 py-3 text-violet-700 md:px-6 md:py-4" data-hero-eyebrow>{activeProject.eyebrow}</p>
                 <span class="border-l border-slate-900/15 px-4 py-3 font-mono text-[11px] text-slate-500 md:px-6 md:py-4" data-hero-index>{activeProject.index}</span>
               </div>
               <div class="grid gap-5 p-4 sm:p-5 md:p-6">
                 <div>
-                  <h2 class="display text-3xl uppercase leading-none text-slate-900 sm:text-4xl md:text-5xl" data-hero-name>
+                  <h2 class="display text-3xl uppercase leading-[0.96] text-slate-900 sm:text-4xl md:text-5xl" data-hero-name>
                     {activeProject.name}
                   </h2>
                   <p class="mt-5 border-y border-slate-900/15 py-3 text-lg font-medium uppercase leading-tight text-slate-900 sm:text-xl md:text-2xl" data-hero-line>{activeProject.line}</p>
@@ -135,7 +135,7 @@ const activeProject = showcaseProjects[0];
               {showcaseProjects.map((project, index) => (
                 <button
                   type="button"
-                  class="hero-showcase-control min-h-9 border-r border-slate-900/15 px-3 font-mono text-[10px] uppercase tracking-[0.16em] text-slate-500 transition duration-300 ease-[var(--ease-out-expo)] last:border-r-0 hover:bg-[#F5F4F0] hover:text-slate-900 data-[active=true]:bg-slate-900 data-[active=true]:text-[#FBFBFA]"
+                  class="hero-showcase-control min-h-11 min-w-11 border-r border-slate-900/15 px-3 font-mono text-[10px] uppercase tracking-[0.14em] text-slate-500 transition duration-300 ease-[var(--ease-out-expo)] last:border-r-0 hover:bg-[#F5F4F0] hover:text-slate-900 data-[active=true]:bg-slate-900 data-[active=true]:text-[#FBFBFA]"
                   data-hero-control
                   data-index={index}
                   data-active={index === 0 ? "true" : "false"}
@@ -152,7 +152,7 @@ const activeProject = showcaseProjects[0];
     </div>
   </div>
 
-  <div class="relative w-full border-y border-slate-900/20 bg-[#F5F4F0] shadow-[0_-18px_70px_-64px_rgba(15,23,42,0.9)]">
+  <div class="relative w-full border-y border-slate-900/20 bg-[#F5F4F0]">
     <div
       aria-hidden="true"
       class="absolute inset-y-0 left-[25%] hidden w-px bg-slate-900/10 md:block"
@@ -168,7 +168,7 @@ const activeProject = showcaseProjects[0];
     <div class="grid grid-cols-2 gap-0 px-5 py-4 sm:px-6 md:grid-cols-4 md:px-10 md:py-0 lg:px-12">
       {metrics.map((m, i) => (
         <div class={`flex min-h-24 flex-col justify-center border-slate-900/10 px-4 py-4 sm:px-5 ${i % 2 === 1 ? "border-l" : ""} ${i > 1 ? "border-t md:border-t-0" : ""} md:min-h-28 md:border-l-0 ${i === 3 ? "md:pl-9 md:pr-7 xl:pl-10" : "md:px-7"} md:py-7 xl:min-h-32`}>
-          <span class={`block font-mono font-medium uppercase text-slate-900 ${i === 1 || i === 3 ? "text-xl leading-tight tracking-[-0.035em] sm:text-2xl md:text-2xl xl:text-3xl" : "text-3xl leading-none tracking-[-0.05em] sm:text-4xl xl:text-5xl"}`}>
+          <span class={`block font-mono font-medium uppercase text-slate-900 ${i === 1 || i === 3 ? "text-xl leading-tight tracking-[-0.018em] sm:text-2xl md:text-2xl xl:text-3xl" : "text-3xl leading-none tracking-[-0.025em] sm:text-4xl xl:text-5xl"}`}>
             {m.value}
           </span>
           <span class="mt-3 block max-w-[20ch] font-mono text-[11px] uppercase leading-relaxed tracking-[0.14em] text-slate-600 md:mt-4 md:text-[11px] md:tracking-[0.16em]">
@@ -270,7 +270,7 @@ const activeProject = showcaseProjects[0];
 <style>
   .hero-showcase-slide {
     opacity: 0;
-    transform: translateY(12px) scale(1.015);
+    transform: translateY(10px);
     transition:
       opacity 900ms var(--ease-out-expo),
       transform 1200ms var(--ease-out-expo);
@@ -282,17 +282,8 @@ const activeProject = showcaseProjects[0];
     transform: translateY(0) scale(1);
   }
 
-  .hero-showcase-slide > img {
-    transition: transform 6500ms var(--ease-lagom);
-  }
-
-  .hero-showcase-slide[data-active="true"] > img {
-    transform: scale(1.035);
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    .hero-showcase-slide,
-    .hero-showcase-slide > img {
+    .hero-showcase-slide {
       transition: none;
       transform: none;
     }

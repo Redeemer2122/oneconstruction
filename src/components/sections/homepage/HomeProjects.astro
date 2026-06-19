@@ -32,7 +32,7 @@ const summarizeAreas = (areas: string[]) => {
 
   const sorted = parsed.sort((a, b) => a.value - b.value);
   const unit = unique.find((area) => area.includes("м²")) ? " м²" : "";
-  return `${sorted[0].value}–${sorted[sorted.length - 1].value}${unit}`;
+  return `${sorted[0].value}-${sorted[sorted.length - 1].value}${unit}`;
 };
 
 const getHomepagePlanPreview = (plans: ProjectPlan[]) => {
@@ -62,23 +62,23 @@ const getHomepagePlanPreview = (plans: ProjectPlan[]) => {
   <div class="px-6 md:px-10 lg:px-12 pt-[4.5rem] md:pt-24 lg:pt-28 pb-0">
 
     <!-- Section header -->
-    <header class="flex items-baseline justify-between gap-6 pb-6 mb-8 md:mb-10 border-b border-slate-200">
+    <header class="flex flex-col gap-3 pb-6 mb-8 border-b border-slate-200 sm:flex-row sm:items-baseline sm:justify-between md:mb-10">
       <span class="mono-detail" data-reveal>
-        ОБЪЕКТЫ · {String(projects.length).padStart(2, "0")}
+        ОБЪЕКТЫ / {String(projects.length).padStart(2, "0")}
       </span>
       <span class="mono-detail" data-reveal style="--reveal-delay: 0.1s;">
-        Бишкек · актуальный портфель
+        Бишкек / актуальный портфель
       </span>
     </header>
 
     <!-- Section intro -->
-    <div class="mb-12 grid grid-cols-1 gap-6 md:mb-16 md:grid-cols-12 md:items-end md:gap-6" data-reveal style="--reveal-delay: 0.12s;">
-      <h2 class="display text-[2.85rem] md:col-span-6 md:text-[4.25rem] xl:text-[4.9rem] uppercase text-slate-900 leading-[0.92]">
+    <div class="mb-12 grid max-w-[760px] grid-cols-1 gap-5 md:mb-16" data-reveal style="--reveal-delay: 0.12s;">
+      <h2 class="display text-[2.65rem] uppercase leading-[0.96] text-slate-900 md:text-[4.05rem] xl:text-[4.65rem]">
         Наши объекты.
       </h2>
-      <div class="md:col-span-5 md:col-start-8 md:max-w-[54ch] md:border-t md:border-slate-900/15 md:pt-5">
+      <div class="max-w-[58ch] border-t border-slate-900/15 pt-5">
         <p class="text-sm md:text-base text-slate-600 leading-relaxed">
-          Три действующих жилых комплекса в Бишкеке. Каждый — отдельный архитектурный акт с прозрачной экономикой, фиксированной этажностью и понятным графиком сдачи.
+          Три действующих жилых комплекса в Бишкеке. Каждый проект работает как отдельный архитектурный акт с прозрачной экономикой и понятным графиком сдачи.
         </p>
       </div>
     </div>
@@ -110,7 +110,7 @@ const getHomepagePlanPreview = (plans: ProjectPlan[]) => {
             {project.data.location}
           </span>
           <span class="font-mono text-[11px] uppercase tracking-[0.12em] text-slate-500 leading-relaxed md:col-span-4 md:text-right md:text-[10px] md:tracking-[0.2em]">
-            {project.data.status} · {project.data.delivery}
+            {project.data.status} / {project.data.delivery}
           </span>
         </div>
 
@@ -135,7 +135,7 @@ const getHomepagePlanPreview = (plans: ProjectPlan[]) => {
             </div>
             <img
               src={project.data.cover}
-              alt={`${project.data.name} — архитектурный рендер`}
+              alt={`${project.data.name}: архитектурный рендер`}
               loading={idx === 0 ? "eager" : "lazy"}
               decoding="async"
               class="absolute inset-0 z-[1] h-full w-full object-cover saturate-[0.92] contrast-[1.04] transition-transform duration-[1400ms] ease-[cubic-bezier(0.625,0.05,0,1)] group-hover:scale-[1.025]"
@@ -156,7 +156,7 @@ const getHomepagePlanPreview = (plans: ProjectPlan[]) => {
             <span
               class="absolute left-4 top-4 z-[4] max-w-[58%] font-mono text-[11px] uppercase leading-relaxed tracking-[0.12em] text-white/90 md:left-6 md:top-6 md:text-[10px] md:tracking-[0.2em]"
             >
-              {project.data.index} · {project.data.name}
+              {project.data.index} / {project.data.name}
             </span>
 
             <!-- Status badge -->
@@ -178,7 +178,7 @@ const getHomepagePlanPreview = (plans: ProjectPlan[]) => {
                 <span class="mb-4 block font-mono text-[11px] uppercase leading-relaxed tracking-[0.12em] text-slate-500 md:text-[10px] md:tracking-[0.2em]">
                   {project.data.location}
                 </span>
-                <h3 class="display max-w-full text-[14vw] leading-[0.9] tracking-tighter text-slate-900 md:text-[4.8vw] xl:text-[4.1vw]">
+                <h3 class="display max-w-full break-words text-[13vw] leading-[0.96] tracking-[-0.024em] text-slate-900 md:text-[4.55vw] xl:text-[3.95vw]">
                   {project.data.name}
                 </h3>
               </div>

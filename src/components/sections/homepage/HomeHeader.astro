@@ -28,23 +28,23 @@ const socialLinks = company.socialLinks;
 <header class="!fixed top-0 inset-x-0 !z-[80] border-b-[0.5px] border-slate-900/10">
   <div
     aria-hidden="true"
-    class="pointer-events-none absolute inset-0 -z-10 bg-alabaster/90 shadow-[0_1px_0_rgba(15,23,42,0.04),0_14px_42px_rgba(15,23,42,0.055)] backdrop-blur-sm"
+    class="pointer-events-none absolute inset-0 -z-10 bg-alabaster/92 shadow-[0_1px_0_rgba(15,23,42,0.045)] backdrop-blur-sm"
   >
   </div>
 
   <div class="header-enter grid grid-cols-[1fr_auto] items-center gap-5 px-5 py-4 md:px-8 lg:grid-cols-[minmax(180px,0.85fr)_minmax(0,1.85fr)_minmax(280px,0.9fr)] lg:px-8 xl:grid-cols-[minmax(190px,0.9fr)_minmax(0,1.9fr)_minmax(310px,0.9fr)] xl:px-10">
-    <a href="/#main" class="group flex min-w-0 items-center gap-3" aria-label="One Construction — на главную">
+    <a href="/#main" class="group flex min-h-11 min-w-0 items-center gap-3" aria-label="One Construction, на главную">
       <span class="truncate font-mono text-[11px] uppercase tracking-[0.18em] text-slate-900 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-violet-600 lg:tracking-[0.22em]">
         ONE CONSTRUCTION
       </span>
     </a>
 
-    <nav aria-label="Главное меню" class="hidden min-w-0 items-center justify-center gap-5 lg:flex xl:gap-7">
+    <nav aria-label="Главное меню" class="hidden min-w-0 items-center justify-center gap-4 lg:flex xl:gap-5">
       {
         navItems.map((item) => (
           <a
             href={item.href}
-            class="group relative inline-flex items-center whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.13em] text-slate-600 transition-colors duration-300 hover:text-slate-950 xl:text-[12px] xl:tracking-[0.16em]"
+            class="group relative inline-flex min-h-11 items-center whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.11em] text-slate-600 transition-colors duration-300 hover:text-slate-950 xl:text-[11px] xl:tracking-[0.13em]"
           >
             {item.label}
             <span
@@ -59,7 +59,7 @@ const socialLinks = company.socialLinks;
     <div class="hidden min-w-0 items-center justify-end gap-4 lg:flex xl:gap-6">
       <a
         href={primaryPhone.href}
-        class="whitespace-nowrap font-mono text-[12px] uppercase tracking-[0.12em] text-slate-950 transition-colors duration-300 hover:text-violet-600 lg:text-[13px]"
+      class="inline-flex min-h-11 items-center whitespace-nowrap font-mono text-[12px] uppercase tracking-[0.1em] text-slate-950 transition-colors duration-300 hover:text-violet-600 lg:text-[13px]"
       >
         {primaryPhone.display}
       </a>
@@ -71,7 +71,7 @@ const socialLinks = company.socialLinks;
               target={social.external ? "_blank" : undefined}
               rel={social.external ? "noopener noreferrer" : undefined}
               aria-label={`${social.name} One Construction`}
-              class="inline-flex h-8 w-8 items-center justify-center border-[0.5px] border-slate-900/20 font-mono text-[10px] uppercase tracking-[0.08em] text-slate-800 transition-colors duration-300 hover:border-slate-950 hover:text-violet-600"
+              class="inline-flex h-11 w-11 items-center justify-center border-[0.5px] border-slate-900/20 font-mono text-[10px] uppercase tracking-[0.08em] text-slate-800 transition-colors duration-300 hover:border-slate-950 hover:text-violet-600"
             >
               {social.label}
             </a>
@@ -85,7 +85,7 @@ const socialLinks = company.socialLinks;
       id="mobile-menu-trigger"
       aria-controls="mobile-menu"
       aria-expanded="false"
-      class="justify-self-end border-[0.5px] border-slate-900/20 px-3 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-900 lg:hidden"
+      class="min-h-11 justify-self-end border-[0.5px] border-slate-900/20 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-slate-900 lg:hidden"
     >
       МЕНЮ
     </button>
@@ -106,7 +106,7 @@ const socialLinks = company.socialLinks;
         type="button"
         id="mobile-menu-close"
         aria-label="Закрыть меню"
-        class="shrink-0 border-[0.5px] border-slate-900/20 px-3 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-slate-900"
+        class="min-h-11 shrink-0 border-[0.5px] border-slate-900/20 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.14em] text-slate-900"
       >
         Закрыть
       </button>
@@ -131,7 +131,7 @@ const socialLinks = company.socialLinks;
     <div class="mt-auto grid gap-3 border-t-[0.5px] border-slate-900/10 px-5 py-5">
       <a
         href={primaryPhone.href}
-        class="font-mono text-[15px] uppercase tracking-[0.1em] text-slate-950"
+        class="inline-flex min-h-11 items-center font-mono text-[15px] uppercase tracking-[0.1em] text-slate-950"
       >
         {primaryPhone.display}
       </a>
@@ -143,7 +143,7 @@ const socialLinks = company.socialLinks;
               target={social.external ? "_blank" : undefined}
               rel={social.external ? "noopener noreferrer" : undefined}
               aria-label={`${social.name} One Construction`}
-              class="border-[0.5px] border-slate-900/20 px-3 py-3 text-center font-mono text-[11px] uppercase tracking-[0.12em] text-slate-900"
+              class="min-h-11 border-[0.5px] border-slate-900/20 px-3 py-3 text-center font-mono text-[11px] uppercase tracking-[0.12em] text-slate-900"
             >
               {social.label}
             </a>
@@ -152,7 +152,7 @@ const socialLinks = company.socialLinks;
         <a
           href={mobileCtaHref}
           data-mobile-nav-link
-          class="col-span-3 border-[0.5px] border-slate-950 bg-slate-950 px-4 py-3 text-center font-mono text-[11px] uppercase tracking-[0.12em] text-alabaster"
+          class="col-span-3 min-h-11 border-[0.5px] border-slate-950 bg-slate-950 px-4 py-3 text-center font-mono text-[11px] uppercase tracking-[0.12em] text-alabaster"
         >
           Оставить заявку
         </a>

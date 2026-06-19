@@ -57,7 +57,7 @@ const privilegeMedia = {
             качества, которые делают жизнь комфортной, безопасной и вдохновляющей.
           </p>
           <p>
-            Мы заботимся о вашем здоровье, удобстве и эмоциях — от первых минут
+            Мы заботимся о вашем здоровье, удобстве и эмоциях с первых минут
             проживания.
           </p>
         </div>
@@ -140,9 +140,7 @@ const privilegeMedia = {
       linear-gradient(135deg, rgba(251, 251, 250, 0.94), rgba(242, 240, 234, 0.72)),
       var(--priv-panel);
     border: 1px solid var(--priv-line-soft);
-    box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.82) inset,
-      0 18px 52px rgba(31, 41, 55, 0.035);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.82) inset;
   }
 
   .privileges-intro {
@@ -217,8 +215,8 @@ const privilegeMedia = {
     margin: 0;
     font-size: clamp(2.8rem, 3.08vw, 4.55rem);
     font-weight: 500;
-    line-height: 0.9;
-    letter-spacing: -0.035em;
+    line-height: 0.94;
+    letter-spacing: -0.024em;
     text-transform: uppercase;
   }
 
@@ -424,7 +422,6 @@ const privilegeMedia = {
     object-fit: cover;
     object-position: 50% 50%;
     filter: saturate(0.86) contrast(1.01) brightness(1.035);
-    transform: scale(1.015);
     transition:
       transform 900ms var(--ease-out-expo),
       filter 900ms var(--ease-out-expo),
@@ -432,7 +429,7 @@ const privilegeMedia = {
   }
 
   .standard-cell:hover .standard-cell__media img {
-    transform: scale(1.065);
+    transform: scale(1.012);
     filter: saturate(0.94) contrast(1.04) brightness(1.035);
   }
 
@@ -456,13 +453,13 @@ const privilegeMedia = {
   }
 
   .standard-cell--01 .standard-cell__content {
-    max-width: min(17.6rem, 54%);
+      max-width: min(20rem, 62%);
     min-height: 100%;
     background: linear-gradient(90deg, rgba(244, 245, 241, 0.98), rgba(244, 245, 241, 0.76) 76%, transparent);
   }
 
   .standard-cell--02 .standard-cell__content {
-    max-width: min(19.2rem, 58%);
+      max-width: min(21rem, 64%);
     min-height: 100%;
     background: linear-gradient(90deg, rgba(244, 245, 241, 0.98), rgba(244, 245, 241, 0.78) 74%, transparent);
   }
@@ -505,7 +502,7 @@ const privilegeMedia = {
   .standard-cell--06 .standard-cell__content,
   .standard-cell--07 .standard-cell__content {
     min-height: 100%;
-    max-width: min(18.2rem, 54%);
+    max-width: min(20rem, 62%);
     align-content: start;
     background: linear-gradient(90deg, rgba(244, 245, 241, 0.98), rgba(244, 245, 241, 0.8) 74%, transparent);
   }
@@ -579,7 +576,7 @@ const privilegeMedia = {
 
     .privileges-intro,
     .privileges-board {
-      box-shadow: 0 18px 48px rgba(31, 41, 55, 0.045);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.72) inset;
     }
 
     .privileges-intro {
@@ -606,8 +603,9 @@ const privilegeMedia = {
 
     .privileges-intro h2 {
       max-width: 100%;
-      font-size: clamp(1.86rem, 7.34vw, 2.24rem);
-      line-height: 0.94;
+      font-size: clamp(1.78rem, 7vw, 2.18rem);
+      line-height: 0.98;
+      letter-spacing: -0.018em;
     }
 
     .privileges-intro__text {
@@ -654,14 +652,14 @@ const privilegeMedia = {
     .standard-cell--02 .standard-cell__content,
     .standard-cell--03 .standard-cell__content,
     .standard-cell--07 .standard-cell__content {
-      max-width: calc(60% - 0.25rem);
+      max-width: calc(64% - 0.25rem);
       padding: 1rem;
     }
 
     .standard-cell h3 {
       max-width: 18ch;
-      font-size: 0.9rem;
-      line-height: 1.05;
+      font-size: 0.92rem;
+      line-height: 1.1;
     }
 
     .standard-cell p {

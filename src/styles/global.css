@@ -76,9 +76,7 @@ body {
   max-width: 100%;
   overflow-x: hidden;
   background-color: #FBFBFA;
-  background-image:
-    radial-gradient(circle at 82% 6%, rgba(203, 213, 225, 0.28), transparent 28rem),
-    linear-gradient(180deg, #FBFBFA 0%, #F5F4F0 100%);
+  background-image: linear-gradient(180deg, #FBFBFA 0%, #F5F4F0 100%);
 }
 
 /* Noise overlay — матовая бумага верже, очень тихий */
@@ -149,8 +147,9 @@ canvas {
 .display {
   font-family: var(--font-display);
   font-weight: 500;
-  letter-spacing: -0.04em;
-  line-height: 0.92;
+  letter-spacing: -0.028em;
+  line-height: 0.94;
+  text-wrap: balance;
 }
 
 /* ── Mono micro-detail ───────────────────────────────────────────────────── */
@@ -166,6 +165,7 @@ canvas {
 
 /* Shared safety treatment for architectural remote media while it loads/fails. */
 .oc-media-fallback {
+  contain: paint;
   background-color: #F5F4F0;
   background-image:
     linear-gradient(to right,  #e2e8f0 0.5px, transparent 0.5px),
@@ -278,13 +278,8 @@ canvas {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image: repeating-linear-gradient(
-    to right,
-    currentColor 0px,
-    currentColor 1px,
-    transparent 1px,
-    transparent 10px
-  );
+  background-image: linear-gradient(to right, currentColor 1px, transparent 1px);
+  background-size: 10px 100%;
   opacity: 0.05;
 }
 

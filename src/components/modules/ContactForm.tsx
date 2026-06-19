@@ -87,7 +87,7 @@ export default function ContactForm() {
         </button>
 
         <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-slate-500 max-w-[44ch] leading-relaxed">
-          И наш менеджер свяжется с вами в течении 15 минут!
+          И наш менеджер свяжется с вами в течение 15 минут.
         </p>
       </div>
     </form>

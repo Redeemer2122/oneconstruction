@@ -8,7 +8,7 @@ export const company = {
   cityRu: "Бишкек",
   founded: "2014",
   coordinates: {
-    display: "42.8746° N · 74.5698° E",
+    display: "42.8746° N / 74.5698° E",
     lat: 42.8746,
     lng: 74.5698,
   },
@@ -45,7 +45,7 @@ export const company = {
     streetRu: "ул. Юнусалиева 86/1",
   },
   hours: {
-    display: "пн-сб: 9:00–18:00",
+    display: "пн-сб: 9:00-18:00",
     sunday: "вс: выходные",
   },
   legal: {
