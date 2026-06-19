@@ -29,7 +29,7 @@ const decorativeAlt = section.decorativeAlt ?? "";
 
 {
   benefits.length > 0 && (
-    <section id="benefits" class="benefits-section bg-[#FBFBFA] px-5 py-16 md:px-8 md:py-24 lg:px-10" aria-labelledby="benefits-title">
+    <section id="benefits" class="benefits-section bg-[#FBFBFA] px-5 py-[4.5rem] md:px-8 md:py-24 lg:px-10" aria-labelledby="benefits-title">
       <div class="mx-auto grid max-w-[1480px] gap-12 lg:grid-cols-[minmax(320px,0.35fr)_minmax(0,0.65fr)] lg:gap-14 xl:gap-20">
         <aside class="benefits-intro relative flex min-h-[620px] flex-col overflow-hidden lg:min-h-[720px]">
           <div class="relative z-10 max-w-[470px]">
@@ -121,8 +121,9 @@ const decorativeAlt = section.decorativeAlt ?? "";
     max-width: 620px;
     font-size: clamp(46px, 3.35vw, 64px);
     font-weight: 500;
-    line-height: 0.96;
+    line-height: 1.04;
     letter-spacing: 0;
+    padding-bottom: 0.12em;
   }
 
   .benefits-title span {
@@ -188,6 +189,7 @@ const decorativeAlt = section.decorativeAlt ?? "";
   .benefits-matrix {
     display: grid;
     align-self: center;
+    grid-auto-rows: 1fr;
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
@@ -195,6 +197,8 @@ const decorativeAlt = section.decorativeAlt ?? "";
     min-height: 342px;
     padding: clamp(30px, 2.9vw, 46px) clamp(26px, 2.8vw, 46px);
     color: #0e214c;
+    display: flex;
+    flex-direction: column;
   }
 
   .benefits-item:nth-child(3n + 2),
@@ -232,7 +236,7 @@ const decorativeAlt = section.decorativeAlt ?? "";
     max-width: 13.5ch;
     font-size: clamp(25px, 1.62vw, 30px);
     font-weight: 500;
-    line-height: 1.14;
+    line-height: 1.24;
     letter-spacing: 0;
     color: currentColor;
   }
@@ -296,7 +300,7 @@ const decorativeAlt = section.decorativeAlt ?? "";
       margin-top: 28px;
       max-width: 100%;
       font-size: clamp(34px, 9.8vw, 42px);
-      line-height: 1;
+      line-height: 1.18;
     }
 
     .benefits-decorative-asset {
@@ -340,7 +344,7 @@ const decorativeAlt = section.decorativeAlt ?? "";
       margin-top: 20px;
       max-width: 18ch;
       font-size: clamp(24px, 7.2vw, 31px);
-      line-height: 1.14;
+      line-height: 1.24;
     }
 
     .benefits-item p {

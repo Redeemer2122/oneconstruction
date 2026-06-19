@@ -87,7 +87,7 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
           </div>
         </div>
 
-        <div class={`plans-grid mt-14 grid gap-4 md:gap-5 ${gridColumns}`} data-plan-grid>
+        <div class={`plans-grid mt-16 grid gap-5 md:gap-6 ${gridColumns}`} data-plan-grid>
           {plans.map((plan: any, index: number) => {
             const category = getCategory(String(plan.rooms));
             const compactCategory = getCompactCategory(String(plan.rooms));
@@ -95,12 +95,12 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
 
             return (
               <article
-                class={`plan-card group grid min-h-[540px] border-[0.5px] border-slate-900/10 bg-[#FBFBFA] transition duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-950/35 hover:bg-[#F8F7F4] ${isInitiallyHidden ? "hidden" : ""}`}
+                class={`plan-card group grid min-h-[520px] grid-rows-[auto_1fr] border-[0.5px] border-slate-900/12 bg-[#FBFBFA] transition duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-950/30 hover:bg-[#F8F7F4] ${isInitiallyHidden ? "hidden" : ""}`}
                 data-plan-card
                 data-plan-category={category}
                 data-plan-index={index}
               >
-                <div class="plan-media relative aspect-[4/3] overflow-hidden p-3 md:p-4">
+                <div class="plan-media relative aspect-[16/11] overflow-hidden p-3 md:aspect-[4/3] md:p-4">
                   <img
                     src={plan.image ?? "/img/privileges/plan.jpg"}
                     alt={`Планировка ${getTitle(String(plan.rooms))}, ${plan.area}, ${data.name}`}
@@ -113,7 +113,7 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
                   </div>
                 </div>
 
-                <div class="plan-content flex min-h-0 flex-col p-7 md:p-8">
+                <div class="plan-content flex min-h-0 flex-col p-6 md:p-8">
                   <div class="flex items-start justify-between gap-5">
                     <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-violet-700">
                       {compactCategory}
@@ -125,15 +125,15 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
                     )}
                   </div>
 
-                  <div class="plan-body mt-12">
-                    <h3 class="plan-title text-3xl font-medium leading-tight text-slate-950">
+                  <div class="plan-body mt-9 md:mt-12">
+                    <h3 class="plan-title text-3xl font-medium leading-[1.18] text-slate-950">
                       {getTitle(String(plan.rooms))}
                     </h3>
-                    <p class="plan-area mt-4 font-mono text-[13px] uppercase tracking-[0.12em] text-slate-600">
+                    <p class="plan-area mt-4 font-mono text-[13px] uppercase leading-relaxed tracking-[0.12em] text-slate-600">
                       {plan.area}
                     </p>
                     {(plan.note || section.fallbackNote) && (
-                      <p class="plan-note mt-5 max-w-[36ch] text-sm leading-7 text-slate-600">
+                      <p class="plan-note mt-5 max-w-[36ch] text-sm leading-relaxed text-slate-600">
                         {plan.note ?? section.fallbackNote}
                       </p>
                     )}
@@ -239,8 +239,9 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
           font-family: var(--font-display, "Geist Variable", ui-sans-serif, system-ui, sans-serif);
           font-size: clamp(46px, 3.35vw, 64px);
           font-weight: 500;
-          line-height: 0.96;
+          line-height: 1.04;
           letter-spacing: 0;
+          padding-bottom: 0.12em;
           color: #0e214c;
         }
 
@@ -260,7 +261,7 @@ const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:g
         @media (max-width: 760px) {
           .project-section-title {
             font-size: clamp(34px, 9.8vw, 42px);
-            line-height: 1;
+            line-height: 1.18;
           }
         }
 

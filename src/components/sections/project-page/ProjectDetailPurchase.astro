@@ -24,7 +24,7 @@ const getCtaLabel = (option: any, index: number) => option.ctaLabel ?? section.f
         <div class="border-t-[0.5px] border-slate-900/15 pt-8 lg:self-start">
           {section.label && <p class="mono-detail text-violet-700">{section.label}</p>}
           {section.kicker && <p class="mt-5 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">{section.kicker}</p>}
-          {section.title && <h2 id="purchase-title" class="project-section-title mt-6 max-w-[10.5ch] [text-wrap:balance]">{section.title}</h2>}
+          {section.title && <h2 id="purchase-title" class="project-section-title mt-6 max-w-[10.5ch] !leading-[1.18] [text-wrap:balance] md:!leading-[1.04]">{section.title}</h2>}
           {section.intro && <p class="mt-7 max-w-[46ch] text-[15px] leading-8 text-slate-600 md:text-base md:leading-8">{section.intro}</p>}
           {
             (section.noteLabel || section.note) && (
@@ -36,7 +36,7 @@ const getCtaLabel = (option: any, index: number) => option.ctaLabel ?? section.f
           }
         </div>
 
-        <div class="grid gap-3 md:grid-cols-2">
+        <div class="grid gap-4 md:grid-cols-2 md:gap-5">
           {options.map((option: any, index: number) => {
             const isAccent = index === accentIndex;
 
@@ -44,8 +44,8 @@ const getCtaLabel = (option: any, index: number) => option.ctaLabel ?? section.f
               <article
                 class={`group/card flex min-h-[260px] flex-col border-[0.5px] p-6 transition duration-300 ease-out hover:-translate-y-0.5 md:min-h-[286px] lg:p-7 ${
                   isAccent
-                    ? "border-slate-950 bg-slate-950 text-alabaster shadow-[0_16px_42px_rgba(15,23,42,0.08)]"
-                    : "border-slate-900/10 bg-[#FBFBFA] text-slate-950 hover:border-violet-700/35 hover:bg-[#F8F7F4]"
+                    ? "border-slate-950 bg-slate-950 text-alabaster"
+                    : "border-slate-900/12 bg-[#FBFBFA] text-slate-950 hover:border-violet-700/30 hover:bg-[#F8F7F4]"
                 }`}
               >
                 <div class="flex items-start justify-between gap-4">
@@ -66,7 +66,7 @@ const getCtaLabel = (option: any, index: number) => option.ctaLabel ?? section.f
                       {option.meta}
                     </p>
                   )}
-                  <p class={`mt-5 max-w-[34ch] text-sm leading-7 ${isAccent ? "text-slate-200" : "text-slate-600"}`}>{option.body}</p>
+                  <p class={`mt-5 max-w-[34ch] text-sm leading-relaxed ${isAccent ? "text-slate-200" : "text-slate-600"}`}>{option.body}</p>
                 </div>
 
                 {
@@ -100,15 +100,16 @@ const getCtaLabel = (option: any, index: number) => option.ctaLabel ?? section.f
     font-family: var(--font-display, "Geist Variable", ui-sans-serif, system-ui, sans-serif);
     font-size: clamp(46px, 3.35vw, 64px);
     font-weight: 500;
-    line-height: 0.96;
+    line-height: 1.04;
     letter-spacing: 0;
+    padding-bottom: 0.12em;
     color: #0e214c;
   }
 
   @media (max-width: 760px) {
     .project-section-title {
       font-size: clamp(34px, 9.8vw, 42px);
-      line-height: 1;
+      line-height: 1.18;
     }
   }
 

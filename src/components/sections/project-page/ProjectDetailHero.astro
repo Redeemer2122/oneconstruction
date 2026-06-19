@@ -50,7 +50,7 @@ const heroDisplayTitleLines = slug === "medina" ? ["ЖК", "МЕДИНА+"] : [d
           <p class="w-fit border-[0.5px] border-violet-700/25 bg-[#FBFBFA]/68 px-3 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-violet-700 backdrop-blur-sm">
             {hero.eyebrow ?? data.status}
           </p>
-          <h1 class="display max-w-[8ch] text-[clamp(3rem,11.2vw,5.2rem)] font-medium leading-[0.92] tracking-normal text-slate-950 md:text-[clamp(4.2rem,5.7vw,6.9rem)]">
+          <h1 class="display max-w-[8ch] pb-1 text-[clamp(3rem,11.2vw,5.2rem)] font-medium !leading-[1.08] tracking-normal text-slate-950 md:text-[clamp(4.2rem,5.7vw,6rem)] md:!leading-[1.02]">
             {heroDisplayTitleLines.map((line, index) => <span class="block">{line}{index === 0 ? " " : ""}</span>)}
           </h1>
           {data.location && (
