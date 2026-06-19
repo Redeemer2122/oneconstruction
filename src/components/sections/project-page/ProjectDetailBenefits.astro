@@ -68,7 +68,15 @@ const decorativeAlt = section.decorativeAlt ?? "";
           {
             decorativeAsset && (
               <div class="benefits-decorative-asset" aria-hidden="true">
-                <img src={decorativeAsset} alt={decorativeAlt} loading="lazy" decoding="async" />
+                <img
+                  src={decorativeAsset}
+                  width="1448"
+                  height="1086"
+                  alt={decorativeAlt}
+                  loading="lazy"
+                  decoding="async"
+                  fetchpriority="low"
+                />
               </div>
             )
           }

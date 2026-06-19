@@ -1,4 +1,10 @@
 ---
+import { Picture } from "astro:assets";
+import lotosHeroImage from "../../../../public/img/project-details/lotos/lotos-hero.webp";
+import medinaHeroImage from "../../../../public/img/project-details/medina/medina-hero.webp";
+import yachtVillageHeroImage from "../../../../public/img/project-details/yacht-village/yacht-village-hero.webp";
+import oneOrdoFallbackImage from "../../../../public/img/privileges/entrance.jpg";
+
 interface Props {
   project: any;
   slug: string;
@@ -11,16 +17,43 @@ const image = hero.image ?? data.cover;
 const imageAlt = hero.imageAlt ?? `${data.name} - архитектурный образ проекта`;
 const slugLabel = slug === "medina" ? "Medina" : slug;
 const heroDisplayTitleLines = slug === "medina" ? ["ЖК", "МЕДИНА+"] : [data.name.replace(/[«»]/g, "")];
+const heroImageAssets = {
+  "/img/project-details/lotos/lotos-hero.webp": lotosHeroImage,
+  "/img/project-details/medina/medina-hero.webp": medinaHeroImage,
+  "/img/project-details/yacht-village/yacht-village-hero.webp": yachtVillageHeroImage,
+  "/img/privileges/entrance.jpg": oneOrdoFallbackImage,
+};
+const optimizedHeroImage = heroImageAssets[image as keyof typeof heroImageAssets];
 ---
 
 <section id="hero" class="relative isolate overflow-hidden bg-[#F5F4F0]">
-  <img
-    src={image}
-    alt={imageAlt}
-    class="absolute inset-0 -z-20 h-full w-full object-cover"
-    loading="eager"
-    decoding="async"
-  />
+  {
+    optimizedHeroImage ? (
+      <Picture
+        src={optimizedHeroImage}
+        formats={["avif", "webp"]}
+        fallbackFormat="webp"
+        alt={imageAlt}
+        width={optimizedHeroImage.width}
+        height={optimizedHeroImage.height}
+        sizes="100vw"
+        class="absolute inset-0 -z-20 h-full w-full object-cover"
+        pictureAttributes={{ class: "contents" }}
+        fetchpriority="high"
+        loading="eager"
+        decoding="async"
+      />
+    ) : (
+      <img
+        src={image}
+        alt={imageAlt}
+        class="absolute inset-0 -z-20 h-full w-full object-cover"
+        fetchpriority="high"
+        loading="eager"
+        decoding="async"
+      />
+    )
+  }
   <div
     class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(251,251,250,0.88)_0%,rgba(251,251,250,0.7)_30%,rgba(251,251,250,0.25)_55%,rgba(15,23,42,0.25)_100%)]"
     aria-hidden="true"
