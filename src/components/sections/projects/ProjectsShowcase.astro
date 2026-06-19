@@ -87,7 +87,7 @@ const getFallbackImage = (project: CollectionEntry<"projects">) =>
   </div>
 
   {featured && (
-    <article class="mb-6 grid border border-slate-900/10 bg-[#FBFBFA] lg:grid-cols-[1.18fr_0.82fr]">
+    <article class="mb-7 grid border border-slate-900/10 bg-[#FBFBFA] md:mb-8 lg:grid-cols-[1.18fr_0.82fr]">
       <a
         href={`/projects/${getSlug(featured)}`}
         class="oc-media-fallback group relative block min-h-[26rem] overflow-hidden bg-[#F5F4F0] bg-cover bg-center md:min-h-[36rem] lg:min-h-[44rem]"
@@ -109,7 +109,7 @@ const getFallbackImage = (project: CollectionEntry<"projects">) =>
         </span>
       </a>
 
-      <div class="grid content-between gap-10 border-t border-slate-900/10 p-5 md:p-8 lg:border-l lg:border-t-0 lg:p-10 xl:p-12">
+      <div class="grid content-between gap-11 border-t border-slate-900/10 p-6 md:gap-12 md:p-8 lg:border-l lg:border-t-0 lg:p-10 xl:p-12">
         <div>
           <div class="mb-9 flex items-start justify-between gap-5">
             <span class="font-mono text-[10px] uppercase leading-relaxed tracking-[0.18em] text-violet-700">
@@ -127,7 +127,7 @@ const getFallbackImage = (project: CollectionEntry<"projects">) =>
             {getLocationLine(featured.data.location)}
           </p>
           {featured.data.description && (
-            <p class="mt-7 max-w-[35rem] text-sm leading-7 text-slate-600 md:text-base">
+            <p class="mt-7 max-w-[35rem] text-sm leading-relaxed text-slate-600 md:text-base md:leading-relaxed">
               {featured.data.description}
             </p>
           )}
@@ -136,7 +136,7 @@ const getFallbackImage = (project: CollectionEntry<"projects">) =>
         <div>
           <dl class="mb-8 grid border-t border-slate-900/10 sm:grid-cols-2">
             {getFeaturedSpecs(featured).map((item, index) => (
-              <div class={`border-b border-slate-900/10 py-5 ${index % 2 === 0 ? "sm:border-r sm:pr-5" : "sm:pl-5"}`}>
+              <div class={`border-b border-slate-900/10 py-5 ${index % 2 === 0 ? "sm:border-r sm:pr-6" : "sm:pl-6"}`}>
                 <dt class="font-mono text-[10px] uppercase leading-relaxed tracking-[0.16em] text-slate-700">
                   {item.label}
                 </dt>
@@ -161,7 +161,7 @@ const getFallbackImage = (project: CollectionEntry<"projects">) =>
     </article>
   )}
 
-  <div class="grid items-stretch gap-5 md:auto-rows-fr md:grid-cols-3">
+  <div class="grid items-stretch gap-6 md:auto-rows-fr md:grid-cols-3 lg:gap-7">
     {restProjects.map((project) => (
       <article class="flex h-full flex-col border border-slate-900/10 bg-[#FBFBFA]">
         <a
@@ -185,7 +185,7 @@ const getFallbackImage = (project: CollectionEntry<"projects">) =>
           </span>
         </a>
 
-        <div class="flex min-h-[34.25rem] flex-1 flex-col justify-between gap-10 p-6 md:p-7 xl:p-8">
+        <div class="flex min-h-[35.5rem] flex-1 flex-col justify-between gap-11 p-6 md:p-7 xl:p-8">
           <div>
             <span class="mb-5 block font-mono text-[10px] uppercase leading-relaxed tracking-[0.18em] text-violet-700">
               {getObjectType(project)}
@@ -197,7 +197,7 @@ const getFallbackImage = (project: CollectionEntry<"projects">) =>
               {getLocationLine(project.data.location)}
             </p>
             {project.data.description && (
-              <p class="mt-6 max-w-[31rem] text-[15px] leading-7 text-slate-700 md:text-sm md:leading-7">
+              <p class="mt-6 max-w-[31rem] text-[15px] leading-relaxed text-slate-700 md:text-[15px] md:leading-relaxed">
                 {project.data.description}
               </p>
             )}
