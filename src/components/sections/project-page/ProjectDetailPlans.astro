@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
 interface Props {
   project: any;
 }
@@ -37,6 +40,10 @@ const availableFilters = filterOrder.filter((filter) => plans.some((plan: any) =
 const filters = [section.allFilterLabel, ...availableFilters].filter(Boolean);
 const shouldLimitAll = plans.length > 6;
 const gridColumns = plans.length === 2 ? "md:grid-cols-2 xl:grid-cols-2" : "md:grid-cols-2 xl:grid-cols-3";
+const optimizedImageModules = import.meta.glob<ImageMetadata>(
+  "../../../../public/img/**/*.{jpg,jpeg,png,webp}",
+  { eager: true, import: "default" }
+);
 const planImageDimensions: Record<string, { width: number; height: number }> = {
   "/img/project-details/medina/plans/1room-48-8.png": { width: 2020, height: 1394 },
   "/img/project-details/medina/plans/1room-52-6.png": { width: 1916, height: 1382 },
@@ -47,6 +54,7 @@ const planImageDimensions: Record<string, { width: number; height: number }> = {
   "/img/project-details/medina/plans/2room-92-4.png": { width: 2296, height: 1404 },
   "/img/project-details/medina/plans/3room-115-8.png": { width: 2284, height: 1342 },
 };
+const getOptimizedImage = (src: string) => optimizedImageModules[`../../../../public${src}`];
 ---
 
 {
@@ -103,7 +111,13 @@ const planImageDimensions: Record<string, { width: number; height: number }> = {
             const compactCategory = getCompactCategory(String(plan.rooms));
             const isInitiallyHidden = shouldLimitAll && index >= 6;
             const planImage = plan.image ?? "/img/privileges/plan.jpg";
-            const dimensions = planImageDimensions[planImage] ?? { width: 1600, height: 1200 };
+            const optimizedPlanImage = getOptimizedImage(planImage);
+            const dimensions = planImageDimensions[planImage] ?? {
+              width: optimizedPlanImage?.width ?? 1600,
+              height: optimizedPlanImage?.height ?? 1200,
+            };
+            const renderWidth = Math.min(dimensions.width, 1400);
+            const renderHeight = Math.round((dimensions.height / dimensions.width) * renderWidth);
 
             return (
               <article
@@ -113,16 +127,28 @@ const planImageDimensions: Record<string, { width: number; height: number }> = {
                 data-plan-index={index}
               >
                 <div class="plan-media relative aspect-[16/11] overflow-hidden p-3 md:aspect-[4/3] md:p-4">
-                  <img
-                    src={planImage}
-                    width={dimensions.width}
-                    height={dimensions.height}
-                    alt={`Планировка ${getTitle(String(plan.rooms))}, ${plan.area}, ${data.name}`}
-                    class="plan-image h-full w-full object-contain mix-blend-multiply transition-transform duration-[900ms] ease-[cubic-bezier(0.625,0.05,0,1)]"
-                    loading="lazy"
-                    decoding="async"
-                    fetchpriority="low"
-                  />
+                  {
+                    optimizedPlanImage ? (
+                      <Image
+                        src={optimizedPlanImage}
+                        format="webp"
+                        width={renderWidth}
+                        height={renderHeight}
+                        alt={`Планировка ${getTitle(String(plan.rooms))}, ${plan.area}, ${data.name}`}
+                        class="plan-image h-full w-full object-contain mix-blend-multiply transition-transform duration-[900ms] ease-[cubic-bezier(0.625,0.05,0,1)]"
+                        decoding="sync"
+                      />
+                    ) : (
+                      <img
+                        src={planImage}
+                        width={dimensions.width}
+                        height={dimensions.height}
+                        alt={`Планировка ${getTitle(String(plan.rooms))}, ${plan.area}, ${data.name}`}
+                        class="plan-image h-full w-full object-contain mix-blend-multiply transition-transform duration-[900ms] ease-[cubic-bezier(0.625,0.05,0,1)]"
+                        decoding="sync"
+                      />
+                    )
+                  }
                   <div class="plan-index absolute left-0 top-0 bg-[#FBFBFA]/94 px-4 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-500 backdrop-blur-sm">
                     {String(index + 1).padStart(2, "0")}
                   </div>
