@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
 const statementRows = [
   {
     index: "01",
@@ -50,6 +53,13 @@ const metricItems = [
       "Планировки, фасады и инфраструктура продуманы.",
   },
 ] as const;
+
+const optimizedImageModules = import.meta.glob<ImageMetadata>(
+  "../../../../public/img/**/*.{jpg,jpeg,png,webp}",
+  { eager: true, import: "default" }
+);
+const aboutImage = "/img/about/about-main.jpg";
+const optimizedAboutImage = optimizedImageModules[`../../../../public${aboutImage}`];
 ---
 
 <section id="about" class="about-chapter oc-chapter oc-chapter--about relative overflow-hidden border-t border-slate-900/10">
@@ -120,14 +130,27 @@ const metricItems = [
 
       <figure class="about-chapter__media-wrap" data-reveal style="--reveal-delay: 0.1s;">
         <div class="about-chapter__media oc-media-fallback">
-          <img
-            src="/img/about/about-main.jpg"
-            alt="Современный жилой фасад с бетонными, стеклянными и теплыми панелями"
-            loading="lazy"
-            decoding="async"
-            class="h-full w-full object-cover"
-            onerror="this.dataset.failed='true'"
-          />
+          {
+            optimizedAboutImage ? (
+              <Image
+                src={optimizedAboutImage}
+                format="webp"
+                alt="Современный жилой фасад с бетонными, стеклянными и теплыми панелями"
+                loading="eager"
+                decoding="sync"
+                class="h-full w-full object-cover"
+                onerror="this.dataset.failed='true'"
+              />
+            ) : (
+              <img
+                src={aboutImage}
+                alt="Современный жилой фасад с бетонными, стеклянными и теплыми панелями"
+                decoding="sync"
+                class="h-full w-full object-cover"
+                onerror="this.dataset.failed='true'"
+              />
+            )
+          }
           <div class="about-chapter__image-shade" aria-hidden="true"></div>
         </div>
       </figure>

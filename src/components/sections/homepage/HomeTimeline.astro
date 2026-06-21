@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import { privileges } from "@data/privileges";
 
 const privilegeMedia = {
@@ -31,6 +33,11 @@ const privilegeMedia = {
     alt: "Современный двор с водой и архитектурной фактурой",
   },
 } as const;
+const optimizedImageModules = import.meta.glob<ImageMetadata>(
+  "../../../../public/img/**/*.{jpg,jpeg,png,webp}",
+  { eager: true, import: "default" }
+);
+const getOptimizedImage = (src: string) => optimizedImageModules[`../../../../public${src}`];
 ---
 
 <section id="privileges" class="privileges-section oc-chapter oc-chapter--technical" aria-label="Стандарт преимуществ One Construction">
@@ -75,6 +82,7 @@ const privilegeMedia = {
         {
           privileges.map((item) => {
             const media = privilegeMedia[item.index as keyof typeof privilegeMedia];
+            const optimizedMediaImage = media ? getOptimizedImage(media.src) : undefined;
 
             return (
               <li class:list={["standard-cell", `standard-cell--${item.index}`]}>
@@ -88,7 +96,19 @@ const privilegeMedia = {
 
                 {media && (
                   <figure class="standard-cell__media" aria-hidden="true">
-                    <img src={media.src} alt={media.alt} loading="lazy" decoding="async" />
+                    {
+                      optimizedMediaImage ? (
+                        <Image
+                          src={optimizedMediaImage}
+                          format="webp"
+                          alt={media.alt}
+                          loading="eager"
+                          decoding="sync"
+                        />
+                      ) : (
+                        <img src={media.src} alt={media.alt} decoding="sync" />
+                      )
+                    }
                   </figure>
                 )}
 

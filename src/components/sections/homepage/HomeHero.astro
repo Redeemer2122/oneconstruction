@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import { hero } from "@data/homepage";
 import { company } from "@data/company";
 const {
@@ -9,6 +11,11 @@ const {
   showcaseProjects,
 } = hero;
 const activeProject = showcaseProjects[0];
+const optimizedImageModules = import.meta.glob<ImageMetadata>(
+  "../../../../public/img/**/*.{jpg,jpeg,png,webp}",
+  { eager: true, import: "default" }
+);
+const getOptimizedImage = (src: string) => optimizedImageModules[`../../../../public${src}`];
 ---
 
 <section
@@ -83,13 +90,27 @@ const activeProject = showcaseProjects[0];
                 data-active={index === 0 ? "true" : "false"}
                 aria-hidden={index === 0 ? "false" : "true"}
               >
-                <img
-                  src={project.image}
-                  alt={project.imageAlt}
-                  class="h-full w-full object-cover object-center saturate-[0.82] contrast-[1.08]"
-                  loading={index === 0 ? "eager" : "lazy"}
-                  onerror="this.dataset.failed='true'"
-                />
+                {
+                  getOptimizedImage(project.image) ? (
+                    <Image
+                      src={getOptimizedImage(project.image)}
+                      format="webp"
+                      alt={project.imageAlt}
+                      class="h-full w-full object-cover object-center saturate-[0.82] contrast-[1.08]"
+                      loading="eager"
+                      decoding="sync"
+                      onerror="this.dataset.failed='true'"
+                    />
+                  ) : (
+                    <img
+                      src={project.image}
+                      alt={project.imageAlt}
+                      class="h-full w-full object-cover object-center saturate-[0.82] contrast-[1.08]"
+                      decoding="sync"
+                      onerror="this.dataset.failed='true'"
+                    />
+                  )
+                }
               </figure>
             ))}
             <div
