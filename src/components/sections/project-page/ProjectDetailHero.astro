@@ -31,7 +31,7 @@ const optimizedHeroImage = heroImageAssets[image as keyof typeof heroImageAssets
     optimizedHeroImage ? (
       <Picture
         src={optimizedHeroImage}
-        formats={["avif", "webp"]}
+        formats={["webp"]}
         fallbackFormat="webp"
         alt={imageAlt}
         width={optimizedHeroImage.width}
