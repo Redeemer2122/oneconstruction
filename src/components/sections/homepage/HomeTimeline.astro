@@ -145,7 +145,7 @@ const advantages = privileges.map((item) => ({
     --priv-line: rgba(17, 27, 47, 0.14);
     --priv-line-strong: rgba(17, 27, 47, 0.22);
     --priv-violet: #4e28d8;
-    --standard-row: clamp(6.25rem, 7.35vw, 7.55rem);
+    --standard-row: clamp(6.7rem, 7.85vw, 8rem);
     position: relative;
     overflow-x: clip;
     background: var(--priv-bg);
@@ -157,19 +157,19 @@ const advantages = privileges.map((item) => ({
     position: relative;
     z-index: 1;
     width: 100%;
-    padding: clamp(2.85rem, 4vw, 4.75rem) clamp(1.15rem, 2.8vw, 2.65rem) clamp(3.05rem, 4.2vw, 4.95rem);
+    padding: clamp(3.1rem, 4.35vw, 5.15rem) clamp(1rem, 2.45vw, 2.35rem) clamp(3.25rem, 4.45vw, 5.25rem);
   }
 
   .standards-board {
     display: grid;
     grid-template-areas: "manifest gutter register strips";
     grid-template-columns:
-      minmax(22rem, 0.35fr)
-      clamp(1.7rem, 2.25vw, 2.9rem)
-      minmax(23rem, 0.36fr)
-      minmax(16.5rem, 0.29fr);
+      minmax(25rem, 0.41fr)
+      clamp(2.05rem, 3vw, 3.65rem)
+      minmax(22rem, 0.33fr)
+      minmax(16rem, 0.26fr);
     align-items: stretch;
-    width: min(100%, 93rem);
+    width: min(100%, 100rem);
     margin-inline: auto;
     border-top: 1px solid var(--priv-line-strong);
   }
@@ -186,8 +186,8 @@ const advantages = privileges.map((item) => ({
     display: flex;
     flex-direction: column;
     min-width: 0;
-    min-height: clamp(41.3rem, 48.65vw, 49.7rem);
-    padding: clamp(1.85rem, 2.65vw, 2.7rem) clamp(1.85rem, 2.85vw, 2.7rem) clamp(1.85rem, 2.65vw, 2.7rem) clamp(1.1rem, 1.65vw, 1.65rem);
+    min-height: clamp(45rem, 52.5vw, 54rem);
+    padding: clamp(2rem, 2.85vw, 2.95rem) clamp(2.4rem, 3.35vw, 3.45rem) clamp(2rem, 2.85vw, 2.95rem) clamp(0.65rem, 1.05vw, 1.15rem);
   }
 
   .privileges-label {
@@ -215,7 +215,7 @@ const advantages = privileges.map((item) => ({
     max-width: 12.2ch;
     margin: 0;
     color: var(--priv-ink);
-    font-size: clamp(2.65rem, 3.55vw, 3.75rem);
+    font-size: clamp(2.95rem, 3.9vw, 4.15rem);
     font-weight: 520;
     line-height: 0.98;
     letter-spacing: -0.028em;
@@ -235,7 +235,7 @@ const advantages = privileges.map((item) => ({
   .privileges-lead p {
     margin: 0;
     color: var(--priv-muted);
-    font-size: clamp(0.92rem, 0.98vw, 1.04rem);
+    font-size: clamp(0.98rem, 1.05vw, 1.12rem);
     line-height: 1.56;
     text-wrap: pretty;
   }
@@ -299,7 +299,7 @@ const advantages = privileges.map((item) => ({
     align-self: center;
     color: color-mix(in srgb, var(--priv-violet) 72%, #788091);
     font-family: var(--font-display, "Geist Variable", ui-sans-serif, system-ui, sans-serif);
-    font-size: clamp(1.02rem, 1.16vw, 1.22rem);
+    font-size: clamp(1.08rem, 1.22vw, 1.3rem);
     font-weight: 560;
     line-height: 1;
     letter-spacing: 0;
@@ -315,7 +315,7 @@ const advantages = privileges.map((item) => ({
   .standards-row h3 {
     margin: 0;
     color: var(--priv-ink);
-    font-size: clamp(1.03rem, 1.13vw, 1.21rem);
+    font-size: clamp(1.1rem, 1.2vw, 1.28rem);
     font-weight: 620;
     line-height: 1.1;
     letter-spacing: -0.008em;
@@ -326,7 +326,7 @@ const advantages = privileges.map((item) => ({
     max-width: 33ch;
     margin: 0;
     color: var(--priv-muted);
-    font-size: clamp(0.85rem, 0.93vw, 1rem);
+    font-size: clamp(0.9rem, 0.98vw, 1.05rem);
     line-height: 1.46;
     text-wrap: pretty;
   }
@@ -397,15 +397,15 @@ const advantages = privileges.map((item) => ({
 
   @media (max-width: 1180px) {
     .privileges-section {
-      --standard-row: clamp(5.6rem, 7.5vw, 6.65rem);
+      --standard-row: clamp(5.95rem, 7.9vw, 7rem);
     }
 
     .standards-board {
       grid-template-columns:
-        minmax(20rem, 0.38fr)
-        clamp(1.35rem, 1.9vw, 2.15rem)
-        minmax(20rem, 0.38fr)
-        minmax(13rem, 0.24fr);
+        minmax(21.5rem, 0.42fr)
+        clamp(1.5rem, 2.2vw, 2.45rem)
+        minmax(19rem, 0.34fr)
+        minmax(12.5rem, 0.24fr);
     }
 
     .standards-row {
