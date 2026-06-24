@@ -1,60 +1,73 @@
 ---
 import { purchaseOptions, purchaseSection } from "@data/purchase";
 
+const label = `${purchaseSection.label} / ${String(purchaseOptions.length).padStart(2, "0")}`;
 const titleWords = purchaseSection.title.toLocaleUpperCase("ru-RU").split(" ");
 const titleLines = [
-  titleWords.slice(0, 2).join(" "),
+  titleWords[0],
+  titleWords[1],
   titleWords.slice(2, 4).join(" "),
   titleWords.slice(4).join(" "),
 ].filter(Boolean);
 ---
 
-<section id="purchase" class="purchase-section oc-chapter oc-chapter--commercial" aria-label={purchaseSection.title}>
+<section id="purchase" class="purchase-section oc-chapter oc-chapter--commercial" aria-labelledby="purchase-title">
   <div class="section-stitch-top stitch-technical-to-commercial" aria-hidden="true"></div>
 
   <div class="purchase-shell">
     <aside class="purchase-intro" data-reveal>
-      <p class="purchase-label mono-detail text-violet-700">{purchaseSection.label}</p>
+      <div class="purchase-kicker">
+        <span class="purchase-kicker__rule" aria-hidden="true"></span>
+        <p class="purchase-label mono-detail text-violet-700">{label}</p>
+      </div>
 
-      <h2 class="display uppercase text-slate-900" aria-label={purchaseSection.title}>
-        {titleLines.map((line, index) => (
-          <span>{line}{index < titleLines.length - 1 ? " " : ""}</span>
+      <h2 id="purchase-title" class="purchase-title display uppercase text-slate-950" aria-label={purchaseSection.title}>
+        {titleLines.map((line) => (
+          <span>{line}</span>
         ))}
-        <span aria-hidden="true" class="purchase-title-dot">.</span>
       </h2>
-
-      <div class="purchase-intro__rule" aria-hidden="true"></div>
 
       <p class="purchase-description">{purchaseSection.intro}</p>
 
-      <a class="purchase-intro__cta group transition duration-300 ease-[var(--ease-out-expo)] hover:!bg-violet-700 hover:!text-[#FBFBFA] focus-visible:!bg-violet-700 focus-visible:!text-[#FBFBFA] hover:![transform:none] focus-visible:![transform:none] active:![transform:scale(0.99)]" href="#contact">
+      <a class="purchase-cta" href="#contact">
         <span>{purchaseSection.cta}</span>
-        <span class="transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:![transform:translateX(0.25rem)] group-focus-visible:![transform:translateX(0.25rem)]" aria-hidden="true">↗</span>
+        <span aria-hidden="true">↗</span>
       </a>
     </aside>
 
-    <div class="purchase-grid" data-reveal style="--reveal-delay: 0.08s;">
-      {purchaseOptions.map((option, index) => (
-        <article class="purchase-card" data-reveal style={`--reveal-delay: ${0.12 + 0.05 * index}s;`}>
-          <div class="purchase-card__top">
-            <span>{option.index}.</span>
-            <strong>{option.metric}</strong>
-          </div>
+    <div class="purchase-board" data-reveal style="--reveal-delay: 0.08s;">
+      <ol class="purchase-matrix" aria-label="Варианты покупки">
+        {purchaseOptions.map((option, index) => (
+          <li
+            class:list={["purchase-matrix__item", { "purchase-matrix__item--accent": option.index === "02" }]}
+            data-reveal
+            style={`--reveal-delay: ${0.12 + 0.05 * index}s;`}
+          >
+            <article class="purchase-option">
+              <header class="purchase-option__header">
+                <span class="purchase-option__number" aria-hidden="true">{option.index}</span>
+                <span class="purchase-option__mark" aria-hidden="true"></span>
+              </header>
 
-          <div class="purchase-card__rule" aria-hidden="true"></div>
+              <div class="purchase-option__body">
+                <h3>{option.title}</h3>
+                <p class="purchase-option__text">{option.body}</p>
+              </div>
 
-          <div class="purchase-card__content">
-            <h3>{option.title}</h3>
-            <span class="purchase-card__accent" aria-hidden="true"></span>
-            <p>{option.body}</p>
-          </div>
+              <footer class="purchase-option__footer">
+                {option.metric && <p class="purchase-option__metric">{option.metric}</p>}
 
-          <a class="purchase-card__cta" href="#contact">
-            <span>{option.cta}</span>
-            <span aria-hidden="true">↗</span>
-          </a>
-        </article>
-      ))}
+                {option.cta && (
+                  <a class="purchase-option__cta" href="#contact">
+                    <span>{option.cta}</span>
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                )}
+              </footer>
+            </article>
+          </li>
+        ))}
+      </ol>
     </div>
   </div>
 </section>
@@ -66,506 +79,462 @@ const titleLines = [
     isolation: isolate;
     border-top: 1px solid rgb(15 23 42 / 0.1);
     border-bottom: 1px solid rgb(15 23 42 / 0.1);
-    background:
-      linear-gradient(180deg, #f9f7f1 0%, #f2efe6 100%);
+    background: #f7f5ef;
+    color: #101827;
   }
 
   .purchase-section::before {
     position: absolute;
-    inset: 0;
-    z-index: -2;
-    pointer-events: none;
-    content: "";
-    background:
-      linear-gradient(90deg, rgb(15 23 42 / 0.024) 1px, transparent 1px) 50% 0 / min(24vw, 380px) 100%,
-      linear-gradient(180deg, rgb(255 255 252 / 0.38), transparent 43%, rgb(15 23 42 / 0.02));
-  }
-
-  .purchase-section::after {
-    position: absolute;
-    inset: clamp(36px, 4vw, 64px) clamp(18px, 3vw, 48px);
+    inset: clamp(2.25rem, 4vw, 4rem) clamp(1.1rem, 3vw, 3rem);
     z-index: -1;
     pointer-events: none;
     content: "";
-    border-top: 1px solid rgb(15 23 42 / 0.055);
-    border-bottom: 1px solid rgb(15 23 42 / 0.045);
-    opacity: 0.78;
+    border-top: 1px solid rgb(15 23 42 / 0.07);
+    border-bottom: 1px solid rgb(15 23 42 / 0.06);
   }
 
   .purchase-shell {
     position: relative;
     display: grid;
-    grid-template-columns: minmax(300px, 0.61fr) minmax(0, 1fr);
-    gap: clamp(48px, 5vw, 82px);
-    max-width: 1510px;
+    grid-template-columns: minmax(18rem, 0.68fr) minmax(0, 1.32fr);
+    gap: clamp(3.25rem, 5.7vw, 6.8rem);
+    max-width: 1620px;
     margin: 0 auto;
-    padding: clamp(84px, 7.6vw, 122px) clamp(22px, 5.4vw, 88px) clamp(86px, 7.3vw, 116px);
+    padding: clamp(5.45rem, 7.4vw, 7.85rem) clamp(1.15rem, 4.4vw, 4.65rem) clamp(5.85rem, 7.65vw, 8.15rem);
   }
 
   .purchase-intro {
-    position: relative;
+    display: flex;
     min-width: 0;
-    padding-top: clamp(12px, 1.5vw, 24px);
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: clamp(0.35rem, 1vw, 0.95rem);
+  }
+
+  .purchase-kicker {
+    display: grid;
+    grid-template-columns: clamp(2.9rem, 4.6vw, 4.75rem) auto;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: clamp(2rem, 3vw, 3.15rem);
+  }
+
+  .purchase-kicker__rule {
+    height: 1px;
+    background: rgb(93 58 196 / 0.72);
   }
 
   .purchase-label {
-    position: relative;
-    display: inline-block;
-    margin: 0 0 clamp(42px, 5.6vw, 74px);
-    padding-right: clamp(62px, 7vw, 112px);
+    margin: 0;
     font-family: var(--font-mono, monospace);
     font-size: 10px;
     font-weight: 400;
     line-height: 1.4;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
   }
 
-  .purchase-label::after {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    width: clamp(44px, 5.6vw, 86px);
-    height: 1px;
-    content: "";
-    background: linear-gradient(90deg, rgb(81 55 189 / 0.48), transparent);
-    transform: translateY(-50%);
-  }
-
-  .purchase-intro h2 {
+  .purchase-title {
     display: grid;
-    gap: 0.015em;
-    max-width: 8.9em;
+    max-width: 8.7em;
     margin: 0;
     color: #0f172a;
     font-family: var(--font-display);
-    font-size: clamp(54px, 5.16vw, 88px);
+    font-size: clamp(3.02rem, 4.74vw, 5.45rem);
     font-weight: 500;
-    line-height: 0.96;
-    letter-spacing: -0.026em;
-    text-shadow: 0 1px 0 rgb(255 255 252 / 0.72);
+    line-height: 0.955;
+    letter-spacing: 0;
+    text-wrap: balance;
   }
 
-  .purchase-title-dot {
-    display: inline;
-    color: #5137bd;
-  }
-
-  .purchase-intro__rule {
-    position: relative;
-    width: min(100%, 380px);
-    height: 1px;
-    margin: clamp(30px, 3.1vw, 40px) 0 clamp(28px, 3vw, 38px);
-    background: linear-gradient(90deg, rgb(81 55 189 / 0.48), rgb(15 23 42 / 0.13) 74%, transparent);
-  }
-
-  .purchase-intro__rule::after {
-    position: absolute;
-    right: 0;
-    top: -9px;
-    color: #6547d5;
-    content: "+";
-    font-family: var(--font-mono, monospace);
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1;
+  .purchase-title span {
+    display: block;
   }
 
   .purchase-description {
-    max-width: 34ch;
-    margin: 0;
+    max-width: 34rem;
+    margin: clamp(2rem, 3.2vw, 3rem) 0 0;
+    padding-top: clamp(1.45rem, 2.2vw, 2.1rem);
+    border-top: 1px solid rgb(15 23 42 / 0.14);
     color: #475569;
-    font-size: clamp(16px, 1.05vw, 18px);
-    line-height: 1.625;
+    font-size: clamp(1rem, 1.05vw, 1.12rem);
+    line-height: 1.68;
   }
 
-  .purchase-intro__cta {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 70px;
-    width: min(100%, 340px);
-    position: relative;
-    overflow: hidden;
-    margin-top: clamp(36px, 4.1vw, 52px);
-    border: 1px solid rgb(15 23 42 / 0.94);
-    background:
-      linear-gradient(135deg, rgb(255 255 255 / 0.08), transparent 34%),
-      #0d1422;
+  .purchase-cta {
+    display: inline-grid;
+    grid-template-columns: minmax(0, 1fr) 3.9rem;
+    align-items: stretch;
+    min-width: min(100%, 21rem);
+    margin-top: clamp(2rem, 3.4vw, 3rem);
+    border: 1px solid #0d1422;
+    background: #0d1422;
     color: #f8f7f2;
     font-family: var(--font-mono, monospace);
     font-size: 11px;
     font-weight: 400;
     line-height: 1.4;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     text-decoration: none;
-    box-shadow:
-      0 1px 0 rgb(255 255 252 / 0.14) inset,
-      0 -1px 0 rgb(0 0 0 / 0.24) inset;
-    transition:
-      transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
-      background 280ms cubic-bezier(0.16, 1, 0.3, 1),
-      box-shadow 280ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition: background-color 240ms cubic-bezier(0.16, 1, 0.3, 1), border-color 240ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .purchase-intro__cta::before {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    content: "";
-    background: linear-gradient(90deg, transparent, rgb(116 85 231 / 0.16), transparent);
-    opacity: 0;
-    transform: translateX(-42%);
-    transition:
-      opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
-      transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .purchase-intro__cta span:first-child {
+  .purchase-cta span:first-child {
     min-width: 0;
-    padding: 23px 28px;
+    padding: 1.32rem 1.55rem;
   }
 
-  .purchase-intro__cta span:last-child {
+  .purchase-cta span:last-child {
     display: grid;
-    position: relative;
     place-items: center;
     border-left: 1px solid rgb(248 247 242 / 0.2);
-    background: rgb(255 255 252 / 0.035);
-    color: #8568ef;
-    font-size: 25px;
-    transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+    color: #8b74e8;
+    font-size: 1.45rem;
+    line-height: 1;
+    transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1), color 240ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .purchase-intro__cta:hover,
-  .purchase-intro__cta:focus-visible {
-    background:
-      linear-gradient(135deg, rgb(255 255 255 / 0.1), transparent 35%),
-      #0a111e;
-    box-shadow:
-      0 1px 0 rgb(255 255 252 / 0.16) inset,
-      0 -1px 0 rgb(0 0 0 / 0.26) inset;
-    transform: translateY(-1px);
+  .purchase-cta:hover,
+  .purchase-cta:focus-visible {
+    border-color: #5137bd;
+    background: #5137bd;
   }
 
-  .purchase-intro__cta:hover::before,
-  .purchase-intro__cta:focus-visible::before {
-    opacity: 1;
-    transform: translateX(42%);
+  .purchase-cta:hover span:last-child,
+  .purchase-cta:focus-visible span:last-child {
+    color: #f8f7f2;
+    transform: translate(0.16rem, -0.16rem);
   }
 
-  .purchase-intro__cta:hover span:last-child,
-  .purchase-intro__cta:focus-visible span:last-child {
-    transform: translate(4px, -4px);
+  .purchase-cta:active {
+    transform: scale(0.99);
   }
 
-  .purchase-intro__cta:active {
-    transform: translateY(0);
+  .purchase-board {
+    min-width: 0;
+    align-self: center;
   }
 
-  .purchase-grid {
-    position: relative;
+  .purchase-matrix {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-auto-rows: 1fr;
-    gap: clamp(18px, 1.7vw, 24px);
-    min-width: 0;
-    padding: clamp(2px, 0.35vw, 5px);
-    background:
-      linear-gradient(90deg, transparent, rgb(81 55 189 / 0.1), transparent) 50% 0 / 1px 100% no-repeat,
-      linear-gradient(180deg, transparent, rgb(15 23 42 / 0.08), transparent) 0 50% / 100% 1px no-repeat;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid rgb(15 23 42 / 0.17);
+    background: rgb(15 23 42 / 0.12);
+    list-style: none;
   }
 
-  .purchase-card {
-    position: relative;
-    display: flex;
+  .purchase-matrix__item {
     min-width: 0;
-    min-height: clamp(308px, 24.4vw, 382px);
+    margin: 0;
+    background: #f7f5ef;
+  }
+
+  .purchase-matrix__item--accent {
+    background: #0d1422;
+    color: #f8f7f2;
+  }
+
+  .purchase-option {
+    display: flex;
+    min-height: clamp(18.35rem, 21.6vw, 22.65rem);
+    min-width: 0;
     flex-direction: column;
-    overflow: hidden;
-    border: 1px solid rgb(15 23 42 / 0.16);
-    background:
-      linear-gradient(135deg, rgb(255 255 252 / 0.9), rgb(255 255 252 / 0) 38%),
-      linear-gradient(180deg, rgb(255 255 252 / 0.82), rgb(244 242 236 / 0.9)),
-      #f8f7f2;
-    box-shadow:
-      0 1px 0 rgb(255 255 252 / 0.9) inset,
-      0 -1px 0 rgb(15 23 42 / 0.04) inset;
-    transition:
-      transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
-      border-color 280ms cubic-bezier(0.16, 1, 0.3, 1),
-      background 280ms cubic-bezier(0.16, 1, 0.3, 1),
-      box-shadow 280ms cubic-bezier(0.16, 1, 0.3, 1);
+    padding: clamp(1.7rem, 2.35vw, 2.75rem) clamp(1.5rem, 2.35vw, 2.8rem) clamp(1.45rem, 1.95vw, 2.25rem);
   }
 
-  .purchase-card::before,
-  .purchase-card::after {
-    position: absolute;
-    pointer-events: none;
-    content: "";
-    opacity: 0.72;
-    transition:
-      opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
-      transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  .purchase-option__header {
+    display: grid;
+    justify-items: start;
+    gap: 0.95rem;
+    margin-bottom: clamp(1.65rem, 2.45vw, 2.9rem);
   }
 
-  .purchase-card::before {
-    top: -1px;
-    right: -1px;
-    width: 42px;
-    height: 42px;
-    border-top: 1px solid rgb(81 55 189 / 0.28);
-    border-right: 1px solid rgb(81 55 189 / 0.28);
-  }
-
-  .purchase-card::after {
-    inset: 0;
-    background:
-      linear-gradient(180deg, transparent 66%, rgb(15 23 42 / 0.018));
-    opacity: 0;
-  }
-
-  .purchase-card:hover,
-  .purchase-card:focus-within {
-    border-color: rgb(81 55 189 / 0.38);
-    background:
-      linear-gradient(135deg, rgb(255 255 252 / 0.96), rgb(255 255 252 / 0.14) 42%),
-      linear-gradient(180deg, rgb(255 255 252 / 0.94), rgb(246 244 239 / 0.96)),
-      #fbfaf6;
-    box-shadow:
-      0 1px 0 rgb(255 255 252 / 0.96) inset,
-      0 -1px 0 rgb(15 23 42 / 0.05) inset;
-    transform: translateY(-1px);
-  }
-
-  .purchase-card:hover::before,
-  .purchase-card:focus-within::before {
-    opacity: 1;
-    transform: translate(-4px, 4px);
-  }
-
-  .purchase-card:hover::after,
-  .purchase-card:focus-within::after {
-    opacity: 1;
-  }
-
-  .purchase-card__top {
-    display: flex;
-    position: relative;
-    z-index: 1;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 18px;
-    padding: clamp(27px, 2.5vw, 38px) clamp(27px, 2.9vw, 42px) 0;
+  .purchase-option__number {
     color: #5137bd;
     font-family: var(--font-mono, monospace);
-    font-size: clamp(18px, 1.45vw, 25px);
-    font-weight: 500;
-    line-height: 1.1;
+    font-size: clamp(1.05rem, 1.5vw, 1.55rem);
+    line-height: 1;
     letter-spacing: 0.04em;
+    font-variant-numeric: tabular-nums;
   }
 
-  .purchase-card__top strong {
-    font: inherit;
-    letter-spacing: 0;
-    text-align: right;
-  }
-
-  .purchase-card__rule {
-    position: relative;
-    z-index: 1;
+  .purchase-option__mark {
+    display: block;
+    width: clamp(2.2rem, 3vw, 3.05rem);
     height: 1px;
-    margin: clamp(18px, 1.8vw, 26px) clamp(27px, 2.9vw, 42px) 0;
-    background: linear-gradient(90deg, rgb(15 23 42 / 0.17), rgb(15 23 42 / 0.09), transparent);
+    background: rgb(93 58 196 / 0.62);
   }
 
-  .purchase-card__content {
+  .purchase-matrix__item--accent .purchase-option__number,
+  .purchase-matrix__item--accent .purchase-option__metric,
+  .purchase-matrix__item--accent .purchase-option__cta span:last-child {
+    color: #a892ff;
+  }
+
+  .purchase-matrix__item--accent .purchase-option__mark,
+  .purchase-matrix__item--accent .purchase-option__metric::before {
+    background: rgb(168 146 255 / 0.68);
+  }
+
+  .purchase-option__body {
     display: grid;
-    position: relative;
-    z-index: 1;
-    gap: clamp(18px, 1.8vw, 24px);
-    padding: clamp(36px, 4.25vw, 60px) clamp(27px, 2.9vw, 42px) clamp(30px, 3vw, 40px);
+    gap: clamp(1.1rem, 1.45vw, 1.55rem);
+    min-width: 0;
   }
 
-  .purchase-card h3 {
-    max-width: 13ch;
+  .purchase-option h3 {
+    max-width: 12.5ch;
     margin: 0;
     color: #0f172a;
     font-family: var(--font-display);
-    font-size: clamp(32px, 2.9vw, 50px);
+    font-size: clamp(1.8rem, 2.6vw, 3.15rem);
     font-weight: 500;
-    line-height: 0.96;
-    letter-spacing: -0.026em;
+    line-height: 0.98;
+    letter-spacing: 0;
     text-wrap: balance;
   }
 
-  .purchase-card__accent {
-    width: 76px;
-    height: 3px;
-    background: linear-gradient(90deg, #5137bd, #7455e7);
-    box-shadow: 0 1px 0 rgb(255 255 252 / 0.74);
+  .purchase-matrix__item--accent .purchase-option h3,
+  .purchase-matrix__item--accent .purchase-option__cta {
+    color: #f8f7f2;
   }
 
-  .purchase-card p {
-    max-width: 33ch;
+  .purchase-option__text {
+    max-width: 20.5rem;
     margin: 0;
     color: #475569;
-    font-size: clamp(15px, 1vw, 16px);
-    line-height: 1.625;
+    font-size: clamp(0.94rem, 0.98vw, 1rem);
+    line-height: 1.64;
   }
 
-  .purchase-card__cta {
+  .purchase-matrix__item--accent .purchase-option__text {
+    color: rgb(248 247 242 / 0.82);
+  }
+
+  .purchase-option__footer {
     display: grid;
-    position: relative;
-    z-index: 1;
-    grid-template-columns: minmax(0, 1fr) 56px;
-    align-items: center;
-    min-height: 70px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: clamp(1rem, 2vw, 2rem);
+    align-items: end;
     margin-top: auto;
-    border-top: 1px solid rgb(15 23 42 / 0.14);
-    background: rgb(255 255 252 / 0.24);
+    padding-top: clamp(1.55rem, 2.2vw, 2.65rem);
+  }
+
+  .purchase-option__metric {
+    position: relative;
+    width: fit-content;
+    margin: 0;
+    padding-top: 0.95rem;
+    color: #5137bd;
+    font-family: var(--font-mono, monospace);
+    font-size: clamp(0.88rem, 1.05vw, 1.05rem);
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .purchase-option__metric::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: clamp(2.8rem, 4.1vw, 4.1rem);
+    height: 1px;
+    content: "";
+    background: rgb(93 58 196 / 0.62);
+  }
+
+  .purchase-option__cta {
+    display: inline-grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.65rem;
+    align-items: start;
+    justify-self: end;
+    max-width: 13rem;
     color: #0f172a;
     font-family: var(--font-mono, monospace);
-    font-size: 11px;
-    font-weight: 400;
-    line-height: 1.4;
+    font-size: 10px;
+    line-height: 1.45;
     letter-spacing: 0.14em;
-    text-transform: uppercase;
+    text-align: right;
     text-decoration: none;
+    text-transform: uppercase;
+    transition: color 220ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .purchase-card__cta span:first-child {
+  .purchase-option__cta span:first-child {
     min-width: 0;
-    padding: 20px clamp(27px, 2.9vw, 42px);
   }
 
-  .purchase-card__cta span:last-child {
-    display: grid;
-    place-items: center;
-    height: 100%;
-    border-left: 1px solid rgb(15 23 42 / 0.1);
+  .purchase-option__cta span:last-child {
     color: #5137bd;
-    font-size: 28px;
-    line-height: 1;
-    transition:
-      transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
-      color 280ms cubic-bezier(0.16, 1, 0.3, 1);
+    font-size: 1.2rem;
+    line-height: 0.9;
+    transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .purchase-card:hover .purchase-card__cta span:last-child,
-  .purchase-card:focus-within .purchase-card__cta span:last-child {
-    color: #6547d5;
-    transform: translate(4px, -4px);
+  .purchase-option__cta:hover,
+  .purchase-option__cta:focus-visible {
+    color: #5137bd;
   }
 
-  .purchase-card__cta:focus-visible,
-  .purchase-intro__cta:focus-visible {
+  .purchase-option__cta:hover span:last-child,
+  .purchase-option__cta:focus-visible span:last-child {
+    transform: translate(0.14rem, -0.14rem);
+  }
+
+  .purchase-cta:focus-visible,
+  .purchase-option__cta:focus-visible {
     outline: 2px solid rgb(79 54 189 / 0.52);
     outline-offset: 4px;
   }
 
-  @media (max-width: 1080px) {
+  @media (max-width: 1180px) {
     .purchase-shell {
       grid-template-columns: 1fr;
+      gap: 3.6rem;
     }
 
-    .purchase-intro h2 {
+    .purchase-title {
+      max-width: 11em;
+    }
+
+    .purchase-description {
+      max-width: 44rem;
+    }
+
+    .purchase-board {
+      align-self: auto;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .purchase-matrix {
+      grid-template-columns: 1fr;
+      gap: 0;
+      background: transparent;
+    }
+
+    .purchase-matrix__item:nth-child(n + 2) {
+      border-top: 1px solid rgb(15 23 42 / 0.15);
+    }
+
+    .purchase-option__cta {
+      justify-self: start;
       max-width: 100%;
+      text-align: left;
+    }
+
+    .purchase-matrix__item--accent + .purchase-matrix__item {
+      border-top-color: rgb(15 23 42 / 0.15);
     }
   }
 
   @media (max-width: 767px) {
+    .purchase-section::before {
+      inset: 1.5rem 1.25rem;
+    }
+
     .purchase-shell {
-      gap: 34px;
-      padding: 62px 20px 70px;
+      gap: 2.7rem;
+      padding: 4.45rem 1.25rem 4.9rem;
+    }
+
+    .purchase-kicker {
+      grid-template-columns: 2.65rem auto;
+      gap: 0.85rem;
+      margin-bottom: 1.55rem;
     }
 
     .purchase-label {
-      margin-bottom: 30px;
-      font-size: 11px;
+      font-size: 10px;
+      letter-spacing: 0.14em;
     }
 
-    .purchase-intro h2 {
-      max-width: 8.6em;
-      font-size: clamp(38px, 11.6vw, 46px);
-      line-height: 0.94;
-    }
-
-    .purchase-intro__rule {
-      width: calc(100% - 22px);
-      margin: 26px 0 24px;
+    .purchase-title {
+      max-width: 100%;
+      font-size: clamp(2.45rem, 11vw, 3.25rem);
+      line-height: 0.98;
+      overflow-wrap: break-word;
     }
 
     .purchase-description {
       max-width: 100%;
-      font-size: 16px;
-      line-height: 1.625;
+      margin-top: 1.75rem;
+      padding-top: 1.3rem;
+      font-size: 1rem;
+      line-height: 1.65;
     }
 
-    .purchase-intro__cta {
-      grid-template-columns: minmax(0, 1fr) 58px;
+    .purchase-cta {
       width: 100%;
-      margin-top: 30px;
-      font-size: 11px;
+      min-width: 0;
+      grid-template-columns: minmax(0, 1fr) 3.45rem;
+      margin-top: 1.85rem;
     }
 
-    .purchase-intro__cta span:first-child {
-      padding: 21px 22px;
+    .purchase-cta span:first-child {
+      padding: 1.2rem 1.22rem;
     }
 
-    .purchase-grid {
-      grid-template-columns: 1fr;
-      grid-auto-rows: auto;
-      gap: 18px;
-      padding: 0;
-      background: none;
-    }
-
-    .purchase-card {
+    .purchase-option {
       min-height: 0;
+      padding: 1.55rem 1.25rem 1.45rem;
     }
 
-    .purchase-card__top {
-      padding: 24px 24px 0;
-      font-size: clamp(18px, 5.4vw, 22px);
+    .purchase-option__header {
+      gap: 0.8rem;
+      margin-bottom: 1.8rem;
     }
 
-    .purchase-card__rule {
-      margin: 18px 24px 0;
+    .purchase-option__number {
+      font-size: 1rem;
     }
 
-    .purchase-card__content {
-      gap: 16px;
-      padding: 30px 24px 28px;
-    }
-
-    .purchase-card h3 {
+    .purchase-option h3 {
       max-width: 100%;
-      font-size: clamp(30px, 8.2vw, 36px);
+      font-size: clamp(1.62rem, 7.4vw, 2.15rem);
+      line-height: 1.03;
+      overflow-wrap: break-word;
     }
 
-    .purchase-card p {
+    .purchase-option__metric {
+      padding-top: 0.64rem;
+      font-size: 0.82rem;
+    }
+
+    .purchase-option__text {
       max-width: 100%;
-      font-size: 16px;
-      line-height: 1.625;
+      font-size: 0.96rem;
+      line-height: 1.62;
+      overflow-wrap: break-word;
     }
 
-    .purchase-card__accent {
-      width: 64px;
-      height: 2px;
+    .purchase-option__footer {
+      grid-template-columns: 1fr;
+      gap: 1.05rem;
+      justify-items: start;
+      padding-top: 1.75rem;
     }
 
-    .purchase-card__cta {
-      grid-template-columns: minmax(0, 1fr) 50px;
-      min-height: 62px;
-      font-size: 11px;
+    .purchase-option__cta {
+      font-size: 10px;
+      overflow-wrap: anywhere;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .purchase-shell {
+      padding-right: 1rem;
+      padding-left: 1rem;
     }
 
-    .purchase-card__cta span:first-child {
-      padding: 18px 24px;
-    }
-
-    .purchase-card__cta span:last-child {
-      font-size: 25px;
+    .purchase-cta {
+      font-size: 10px;
+      letter-spacing: 0.12em;
     }
   }
 </style>
