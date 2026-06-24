@@ -6,116 +6,130 @@ import { privileges } from "@data/privileges";
 const privilegeMedia = {
   "01": {
     src: "/img/privileges/facade.jpg",
-    alt: "Фрагмент современного фасада с остеклением",
+    alt: "Современный фасад жилого комплекса с чистой архитектурной геометрией",
   },
   "02": {
-    src: "/img/privileges/quiet-lobby.jpg",
-    alt: "Тихое современное лобби с мягким светом",
+    src: "/img/privileges/entrance.jpg",
+    alt: "Закрытая входная группа жилого комплекса",
   },
   "03": {
-    src: "/img/privileges/plan.jpg",
-    alt: "Фрагмент архитектурной планировки",
+    src: "/img/privileges/green-facade.jpg",
+    alt: "Зеленый фасад жилого дома с естественным светом",
   },
   "04": {
-    src: "/img/privileges/water.jpg",
-    alt: "Фактура чистой воды",
+    src: "/img/privileges/quiet-lobby.jpg",
+    alt: "Спокойное интерьерное пространство жилого комплекса",
   },
   "05": {
-    src: "/img/privileges/green-facade.jpg",
-    alt: "Фасад с озелененными балконами",
+    src: "/img/privileges/water.jpg",
+    alt: "Чистая вода как часть инженерного стандарта дома",
   },
   "06": {
-    src: "/img/privileges/entrance.jpg",
-    alt: "Современная входная группа жилого комплекса",
+    src: "/img/privileges/plan.jpg",
+    alt: "Архитектурная планировка и инженерная точность",
   },
   "07": {
     src: "/img/privileges/courtyard-water.jpg",
-    alt: "Современный двор с водой и архитектурной фактурой",
+    alt: "Дворовая среда с водой и современной инфраструктурой",
   },
 } as const;
+
 const optimizedImageModules = import.meta.glob<ImageMetadata>(
   "../../../../public/img/**/*.{jpg,jpeg,png,webp}",
   { eager: true, import: "default" }
 );
 const getOptimizedImage = (src: string) => optimizedImageModules[`../../../../public${src}`];
+
+const advantages = privileges.map((item) => ({
+  ...item,
+  media: privilegeMedia[item.index as keyof typeof privilegeMedia],
+}));
 ---
 
-<section id="privileges" class="privileges-section oc-chapter oc-chapter--technical" aria-label="Стандарт преимуществ One Construction">
+<section id="privileges" class="privileges-section oc-chapter oc-chapter--technical" aria-labelledby="privileges-title">
   <div class="section-stitch-top stitch-bone-to-technical" aria-hidden="true"></div>
 
-  <div class="privileges-frame">
-    <aside class="privileges-intro" aria-labelledby="privileges-title">
-      <div class="privileges-intro__meta">
-        <span>02</span>
-        <i aria-hidden="true"></i>
-        <span>Преимущества</span>
-      </div>
-
-      <div class="privileges-intro__copy">
-        <h2 id="privileges-title" class="display">
-          <span>СТАНДАРТ</span>
-          <span>ПРЕИМУЩЕСТВ</span>
-          <span>ONE CONSTRUCTION.</span>
-        </h2>
-
-        <div class="privileges-intro__text">
-          <p>
-            Каждый наш жилой комплекс создан с учётом 7 ключевых стандартов
-            качества, которые делают жизнь комфортной, безопасной и вдохновляющей.
-          </p>
-          <p>
-            Мы заботимся о вашем здоровье, удобстве и эмоциях с первых минут
-            проживания.
-          </p>
+  <div class="privileges-shell">
+    <div class="standards-board">
+      <header class="standards-manifest">
+        <div class="privileges-label">
+          <span class="privileges-label__rule" aria-hidden="true"></span>
+          <span class="mono-detail oc-section-label">ПРЕИМУЩЕСТВА / 07</span>
         </div>
-      </div>
 
-      <div class="privileges-system">
-        <span class="privileges-system__rule" aria-hidden="true"></span>
-        <strong>01 <small>/ 07</small></strong>
-        <span>Система преимуществ</span>
-      </div>
-    </aside>
+        <div class="standards-heading">
+          <h2 id="privileges-title" class="privileges-title display">
+            <span>СТАНДАРТ</span>
+            <span>ПРЕИМУЩЕСТВ</span>
+            <span>ONE CONSTRUCTION.</span>
+          </h2>
 
-    <div class="privileges-board" aria-label="Семь стандартов преимуществ">
-      <ol class="privileges-wall">
+          <div class="privileges-lead">
+            <p>
+              Каждый наш жилой комплекс создан с учётом 7 ключевых стандартов
+              качества, которые делают жизнь комфортной, безопасной и вдохновляющей.
+            </p>
+            <p>
+              Мы заботимся о вашем здоровье, удобстве и эмоциях с первых минут
+              проживания.
+            </p>
+          </div>
+        </div>
+
+        <div class="standards-notation" aria-hidden="true">
+          <span class="standards-notation__rule"></span>
+          <span class="standards-notation__index">01 <small>/ 07</small></span>
+          <span class="mono-detail">СТАНДАРТЫ<br />КАЧЕСТВА</span>
+        </div>
+
+      </header>
+
+      <div class="standards-strips" aria-hidden="true">
         {
-          privileges.map((item) => {
-            const media = privilegeMedia[item.index as keyof typeof privilegeMedia];
-            const optimizedMediaImage = media ? getOptimizedImage(media.src) : undefined;
+          advantages.map((item, index) => {
+            const optimizedMediaImage = item.media ? getOptimizedImage(item.media.src) : undefined;
 
             return (
-              <li class:list={["standard-cell", `standard-cell--${item.index}`]}>
-                <div class="standard-cell__content">
-                  <span class="standard-cell__index">{item.index}</span>
-                  <div>
-                    <h3 class="display">{item.title}</h3>
-                    <p>{item.body}</p>
-                  </div>
-                </div>
-
-                {media && (
-                  <figure class="standard-cell__media" aria-hidden="true">
-                    {
-                      optimizedMediaImage ? (
-                        <Image
-                          src={optimizedMediaImage}
-                          format="webp"
-                          alt={media.alt}
-                          loading="eager"
-                          decoding="sync"
-                        />
-                      ) : (
-                        <img src={media.src} alt={media.alt} decoding="sync" />
-                      )
-                    }
-                  </figure>
-                )}
-
-                <span class="standard-cell__arrow" aria-hidden="true">↗</span>
-              </li>
+              item.media && (
+                <figure class="standards-strip">
+                  {
+                    optimizedMediaImage ? (
+                      <Image
+                        src={optimizedMediaImage}
+                        format="webp"
+                        alt=""
+                        loading={index < 3 ? "eager" : "lazy"}
+                        decoding="async"
+                        onerror="this.dataset.failed='true'"
+                      />
+                    ) : (
+                      <img
+                        src={item.media.src}
+                        alt=""
+                        loading={index < 3 ? "eager" : "lazy"}
+                        decoding="async"
+                        onerror="this.dataset.failed='true'"
+                      />
+                    )
+                  }
+                </figure>
+              )
             );
           })
+        }
+      </div>
+
+      <ol class="standards-register" aria-label="Семь преимуществ One Construction">
+        {
+          advantages.map((item) => (
+            <li class="standards-row">
+              <span class="standards-row__number">{item.index}</span>
+              <div class="standards-row__content">
+                <h3 class="display">{item.title}</h3>
+                <p>{item.body}</p>
+              </div>
+            </li>
+          ))
         }
       </ol>
     </div>
@@ -124,588 +138,412 @@ const getOptimizedImage = (src: string) => optimizedImageModules[`../../../../pu
 
 <style>
   .privileges-section {
-    --priv-bg: #f4f5f1;
-    --priv-panel: #fbfaf6;
-    --priv-panel-soft: #f3f1eb;
-    --priv-ink: #111827;
-    --priv-muted: #485466;
-    --priv-quiet: #788292;
-    --priv-line: rgba(17, 24, 39, 0.13);
-    --priv-line-soft: rgba(17, 24, 39, 0.075);
-    --priv-violet: #5d3ac4;
+    --priv-bg: #f6f5ef;
+    --priv-ink: #111b2f;
+    --priv-muted: #5d6672;
+    --priv-soft: #747d86;
+    --priv-line: rgba(17, 27, 47, 0.14);
+    --priv-line-strong: rgba(17, 27, 47, 0.22);
+    --priv-violet: #4e28d8;
+    --standard-row: clamp(6.25rem, 7.35vw, 7.55rem);
     position: relative;
-    overflow: hidden;
-    background:
-      linear-gradient(90deg, rgba(17, 24, 39, 0.008) 1px, transparent 1px) 0 0 / 8.5rem 8.5rem,
-      linear-gradient(180deg, rgba(17, 24, 39, 0.007) 1px, transparent 1px) 0 0 / 8.5rem 8.5rem,
-      var(--priv-bg);
+    overflow-x: clip;
+    background: var(--priv-bg);
     color: var(--priv-ink);
-    border-top: 1px solid var(--priv-line-soft);
+    border-top: 1px solid rgba(17, 27, 47, 0.1);
   }
 
-  .privileges-frame {
+  .privileges-shell {
     position: relative;
     z-index: 1;
-    display: grid;
-    grid-template-columns: minmax(27rem, 0.38fr) minmax(0, 0.62fr);
-    column-gap: clamp(0.75rem, 1.2vw, 1.35rem);
     width: 100%;
+    padding: clamp(2.85rem, 4vw, 4.75rem) clamp(1.15rem, 2.8vw, 2.65rem) clamp(3.05rem, 4.2vw, 4.95rem);
+  }
+
+  .standards-board {
+    display: grid;
+    grid-template-areas: "manifest gutter register strips";
+    grid-template-columns:
+      minmax(22rem, 0.35fr)
+      clamp(1.7rem, 2.25vw, 2.9rem)
+      minmax(23rem, 0.36fr)
+      minmax(16.5rem, 0.29fr);
+    align-items: stretch;
+    width: min(100%, 93rem);
     margin-inline: auto;
-    padding: clamp(6.1rem, 7.25vw, 8.8rem) clamp(1rem, 2.2vw, 2.75rem) clamp(6.45rem, 7.8vw, 9.25rem);
+    border-top: 1px solid var(--priv-line-strong);
   }
 
-  .privileges-intro,
-  .privileges-board {
-    background:
-      linear-gradient(135deg, rgba(251, 251, 250, 0.94), rgba(242, 240, 234, 0.72)),
-      var(--priv-panel);
-    border: 1px solid var(--priv-line-soft);
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.82) inset;
+  .standards-board::before {
+    grid-area: gutter;
+    content: "";
+    border-left: 1px solid var(--priv-line-strong);
   }
 
-  .privileges-intro {
+  .standards-manifest {
     position: relative;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    min-width: 0;
-    min-height: clamp(55rem, 63vw, 67rem);
-    padding: clamp(3rem, 4.05vw, 4.95rem) clamp(1.9rem, 2.65vw, 3.45rem);
-    border-right: 1px solid var(--priv-line-soft);
-    overflow: hidden;
-  }
-
-  .privileges-intro::before {
-    position: absolute;
-    right: clamp(1.55rem, 2.45vw, 3rem);
-    bottom: clamp(4.7rem, 6.3vw, 6.8rem);
-    width: min(58%, 22.5rem);
-    aspect-ratio: 1.62;
-    content: "";
-    background:
-      linear-gradient(rgba(17, 24, 39, 0.09), rgba(17, 24, 39, 0.09)) 0 100% / 100% 1px no-repeat,
-      linear-gradient(90deg, rgba(17, 24, 39, 0.085) 1px, transparent 1px) 0 0 / 33.333% 100%,
-      linear-gradient(180deg, rgba(17, 24, 39, 0.07) 1px, transparent 1px) 0 0 / 100% 33.333%,
-      linear-gradient(135deg, transparent 49.5%, rgba(93, 58, 196, 0.12) 50%, transparent 50.5%);
-    opacity: 0.28;
-    pointer-events: none;
-  }
-
-  .privileges-intro::after {
-    position: absolute;
-    left: clamp(1.9rem, 2.65vw, 3.45rem);
-    right: clamp(1.9rem, 2.65vw, 3.45rem);
-    bottom: clamp(2.95rem, 4vw, 4.5rem);
-    height: 1px;
-    content: "";
-    background: linear-gradient(90deg, rgba(93, 58, 196, 0.32), rgba(17, 24, 39, 0.08) 44%, transparent);
-    opacity: 0.64;
-    pointer-events: none;
-  }
-
-  .privileges-intro__meta,
-  .privileges-system,
-  .standard-cell__index {
-    font-family: var(--font-mono, "Geist Mono", monospace);
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-  }
-
-  .privileges-intro__meta {
+    grid-area: manifest;
     display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: clamp(41.3rem, 48.65vw, 49.7rem);
+    padding: clamp(1.85rem, 2.65vw, 2.7rem) clamp(1.85rem, 2.85vw, 2.7rem) clamp(1.85rem, 2.65vw, 2.7rem) clamp(1.1rem, 1.65vw, 1.65rem);
+  }
+
+  .privileges-label {
+    display: grid;
+    grid-template-columns: clamp(2.25rem, 2.85vw, 3.25rem) auto;
     align-items: center;
-    gap: 0.75rem;
-    color: #707a88;
-    font-size: clamp(0.68rem, 0.7vw, 0.78rem);
-    font-weight: 600;
+    gap: 0.8rem;
+    color: var(--priv-soft);
   }
 
-  .privileges-intro__meta i {
-    width: 2.7rem;
+  .privileges-label__rule {
+    display: block;
+    width: 100%;
     height: 1px;
-    background: color-mix(in srgb, var(--priv-violet) 38%, var(--priv-line));
+    background: var(--priv-violet);
   }
 
-  .privileges-intro__copy {
-    align-self: start;
-    margin-top: clamp(4.15rem, 5.7vw, 6.35rem);
+  .standards-heading {
+    display: grid;
+    gap: clamp(1.15rem, 1.55vw, 1.55rem);
+    margin-top: clamp(2rem, 3.05vw, 3.35rem);
   }
 
-  .privileges-intro h2 {
-    max-width: 100%;
+  .privileges-title {
+    max-width: 12.2ch;
     margin: 0;
-    font-size: clamp(2.8rem, 3.08vw, 4.55rem);
-    font-weight: 500;
-    line-height: 0.94;
-    letter-spacing: -0.024em;
+    color: var(--priv-ink);
+    font-size: clamp(2.65rem, 3.55vw, 3.75rem);
+    font-weight: 520;
+    line-height: 0.98;
+    letter-spacing: -0.028em;
     text-transform: uppercase;
   }
 
-  .privileges-intro h2 span {
+  .privileges-title span {
     display: block;
-    white-space: nowrap;
   }
 
-  .privileges-intro__text {
+  .privileges-lead {
     display: grid;
-    gap: 1.05rem;
-    max-width: 30rem;
-    margin-top: clamp(2.45rem, 3.25vw, 3.7rem);
-    padding-top: clamp(1.6rem, 2.15vw, 2.35rem);
-    border-top: 1px solid rgba(17, 24, 39, 0.12);
+    gap: 0.54rem;
+    max-width: 38ch;
   }
 
-  .privileges-intro__text p {
+  .privileges-lead p {
     margin: 0;
-    color: color-mix(in srgb, var(--priv-muted) 88%, var(--priv-ink));
-    font-size: clamp(1.02rem, 1.08vw, 1.16rem);
-    line-height: 1.74;
+    color: var(--priv-muted);
+    font-size: clamp(0.92rem, 0.98vw, 1.04rem);
+    line-height: 1.56;
+    text-wrap: pretty;
   }
 
-  .privileges-system {
+  .standards-notation {
     align-self: end;
     display: grid;
-    gap: 0.92rem;
-    width: min(100%, 18.5rem);
-    margin-top: clamp(5.25rem, 8vw, 9rem);
-    color: var(--priv-quiet);
-    font-size: clamp(0.66rem, 0.7vw, 0.76rem);
-    font-weight: 600;
+    gap: 0.72rem;
+    width: max-content;
+    margin-top: clamp(2.25rem, 4.8vw, 5rem);
+    color: var(--priv-soft);
   }
 
-  .privileges-system__rule {
-    width: 5.4rem;
+  .standards-notation__rule {
+    display: block;
+    width: clamp(2.4rem, 3vw, 3.4rem);
     height: 1px;
-    background: color-mix(in srgb, var(--priv-violet) 42%, var(--priv-line));
+    background: var(--priv-violet);
   }
 
-  .privileges-system strong {
-    color: color-mix(in srgb, var(--priv-violet) 74%, #8c95a5);
-    font-size: clamp(2rem, 2.42vw, 2.56rem);
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: 0.02em;
+  .standards-notation__index {
+    color: color-mix(in srgb, var(--priv-violet) 72%, #778091);
+    font-family: var(--font-display, "Geist Variable", ui-sans-serif, system-ui, sans-serif);
+    font-size: clamp(1.7rem, 2.25vw, 2.45rem);
+    font-weight: 520;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
   }
 
-  .privileges-system small {
-    color: var(--priv-quiet);
-    font-size: 0.56em;
+  .standards-notation__index small {
+    color: var(--priv-soft);
+    font-size: 0.34em;
+    letter-spacing: 0;
   }
 
-  .privileges-board {
-    min-width: 0;
-    padding: clamp(0.78rem, 0.95vw, 1.05rem);
-  }
-
-  .privileges-wall {
+  .standards-register {
+    grid-area: register;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows:
-      clamp(15.8rem, 16.75vw, 19.3rem)
-      clamp(17.8rem, 18.75vw, 21.8rem)
-      clamp(15.35rem, 16.25vw, 18.8rem)
-      clamp(15.35rem, 16.25vw, 18.8rem);
-    gap: 1px;
     margin: 0;
     padding: 0;
     list-style: none;
-    background: rgba(17, 24, 39, 0.105);
-    border: 1px solid rgba(17, 24, 39, 0.105);
+    border-right: 1px solid var(--priv-line-strong);
   }
 
-  .standard-cell {
-    position: relative;
-    isolation: isolate;
-    min-width: 0;
-    overflow: hidden;
-    background:
-      linear-gradient(135deg, rgba(251, 250, 246, 0.62), rgba(241, 239, 233, 0.5)),
-      var(--priv-panel-soft);
-    transition:
-      border-color 260ms var(--ease-out-expo),
-      opacity 260ms var(--ease-out-expo),
-      transform 260ms var(--ease-out-expo);
-  }
-
-  .standard-cell::before {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    content: "";
-    background:
-      linear-gradient(90deg, rgba(93, 58, 196, 0.055), transparent 18%),
-      linear-gradient(180deg, rgba(17, 24, 39, 0.02), transparent 42%);
-    opacity: 0;
-    transition: opacity 260ms var(--ease-out-expo);
-  }
-
-  .standard-cell:hover {
-    transform: translateY(-1px);
-  }
-
-  .standard-cell:hover::before {
-    opacity: 1;
-  }
-
-  .standard-cell--01 {
-    grid-column: auto;
-    grid-row: 1;
-  }
-
-  .standard-cell--02 {
-    grid-column: auto;
-    grid-row: 1;
-  }
-
-  .standard-cell--03 {
-    grid-column: 1 / -1;
-    grid-row: 2;
-  }
-
-  .standard-cell--04,
-  .standard-cell--05 {
-    grid-column: auto;
-    grid-row: 3;
-  }
-
-  .standard-cell--06 {
-    grid-column: auto;
-    grid-row: 4;
-  }
-
-  .standard-cell--07 {
-    grid-column: auto;
-    grid-row: 4;
-  }
-
-  .standard-cell__content {
-    position: relative;
-    z-index: 2;
+  .standards-row {
     display: grid;
-    box-sizing: border-box;
-    gap: clamp(1rem, 1.18vw, 1.32rem);
-    max-width: 25.5rem;
-    padding: clamp(1.55rem, 1.95vw, 2.25rem);
+    grid-template-columns: clamp(2.7rem, 3.7vw, 4.1rem) minmax(0, 1fr);
+    gap: clamp(1.05rem, 1.5vw, 1.65rem);
+    align-items: center;
+    min-height: var(--standard-row);
+    padding: clamp(0.82rem, 1.12vw, 1.12rem) clamp(1.35rem, 2.35vw, 2.4rem);
+    border-bottom: 1px solid var(--priv-line);
   }
 
-  .standard-cell__index {
-    color: color-mix(in srgb, var(--priv-ink) 90%, var(--priv-violet));
-    font-size: clamp(0.9rem, 0.94vw, 1.06rem);
-    font-weight: 600;
+  .standards-row:last-child {
+    border-bottom: 0;
+  }
+
+  .standards-row__number {
+    align-self: center;
+    color: color-mix(in srgb, var(--priv-violet) 72%, #788091);
+    font-family: var(--font-display, "Geist Variable", ui-sans-serif, system-ui, sans-serif);
+    font-size: clamp(1.02rem, 1.16vw, 1.22rem);
+    font-weight: 560;
     line-height: 1;
+    letter-spacing: 0;
+    font-variant-numeric: tabular-nums;
   }
 
-  .standard-cell h3 {
-    max-width: 18ch;
+  .standards-row__content {
+    display: grid;
+    gap: 0.42rem;
+    min-width: 0;
+  }
+
+  .standards-row h3 {
     margin: 0;
     color: var(--priv-ink);
-    font-size: clamp(1.14rem, 1.24vw, 1.48rem);
-    font-weight: 500;
-    line-height: 1.04;
-    letter-spacing: -0.02em;
-    text-transform: uppercase;
+    font-size: clamp(1.03rem, 1.13vw, 1.21rem);
+    font-weight: 620;
+    line-height: 1.1;
+    letter-spacing: -0.008em;
     text-wrap: balance;
   }
 
-  .standard-cell p {
-    max-width: 27ch;
-    margin: 0.64rem 0 0;
-    color: color-mix(in srgb, #273240 86%, #6f7785);
-    font-size: clamp(0.9rem, 0.95vw, 1.04rem);
-    line-height: 1.5;
+  .standards-row p {
+    max-width: 33ch;
+    margin: 0;
+    color: var(--priv-muted);
+    font-size: clamp(0.85rem, 0.93vw, 1rem);
+    line-height: 1.46;
+    text-wrap: pretty;
   }
 
-  .standard-cell__media {
-    position: absolute;
-    inset: auto 0 0 auto;
-    z-index: 1;
-    width: 54%;
-    height: 100%;
+  .standards-strips {
+    grid-area: strips;
+    display: grid;
+    grid-template-rows: repeat(7, var(--standard-row));
+    min-width: 0;
+  }
+
+  .standards-strip {
+    position: relative;
+    min-height: var(--standard-row);
     margin: 0;
     overflow: hidden;
-    background: #e6e3da;
-    opacity: 0.9;
+    background: #e7e6e0;
+    border-bottom: 3px solid var(--priv-bg);
   }
 
-  .standard-cell__media::after {
+  .standards-strip:last-child {
+    border-bottom: 0;
+  }
+
+  .standards-strip::after {
     position: absolute;
     inset: 0;
     content: "";
-    background:
-      linear-gradient(90deg, rgba(244, 245, 241, 0.6), rgba(244, 245, 241, 0.16) 42%, transparent 68%),
-      linear-gradient(180deg, rgba(251, 250, 246, 0.14), rgba(17, 24, 39, 0.045));
     pointer-events: none;
+    background-color: rgba(15, 23, 42, 0.045);
+    mix-blend-mode: multiply;
   }
 
-  .standard-cell__media img {
+  .standards-strip img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: saturate(0.86) contrast(1.04) brightness(1.02);
+  }
+
+  .standards-strip:nth-child(1) img {
+    object-position: 52% 36%;
+  }
+
+  .standards-strip:nth-child(2) img {
+    object-position: 48% 50%;
+  }
+
+  .standards-strip:nth-child(3) img {
+    object-position: 52% 45%;
+  }
+
+  .standards-strip:nth-child(4) img {
+    object-position: 48% 48%;
+  }
+
+  .standards-strip:nth-child(5) img {
     object-position: 50% 50%;
-    filter: saturate(0.86) contrast(1.01) brightness(1.035);
-    transition:
-      transform 900ms var(--ease-out-expo),
-      filter 900ms var(--ease-out-expo),
-      opacity 900ms var(--ease-out-expo);
   }
 
-  .standard-cell:hover .standard-cell__media img {
-    transform: scale(1.012);
-    filter: saturate(0.94) contrast(1.04) brightness(1.035);
+  .standards-strip:nth-child(6) img {
+    object-position: 48% 44%;
   }
 
-  .standard-cell__arrow {
-    position: absolute;
-    right: 0.78rem;
-    top: 0.7rem;
-    z-index: 3;
-    color: rgba(93, 58, 196, 0.2);
-    font-family: var(--font-mono, "Geist Mono", monospace);
-    font-size: 0.94rem;
-    line-height: 1;
-    transition:
-      color 260ms var(--ease-out-expo),
-      transform 260ms var(--ease-out-expo);
-  }
-
-  .standard-cell:hover .standard-cell__arrow {
-    color: rgba(93, 58, 196, 0.58);
-    transform: translate(2px, -2px);
-  }
-
-  .standard-cell--01 .standard-cell__content {
-      max-width: min(20rem, 62%);
-    min-height: 100%;
-    background: linear-gradient(90deg, rgba(244, 245, 241, 0.98), rgba(244, 245, 241, 0.76) 76%, transparent);
-  }
-
-  .standard-cell--02 .standard-cell__content {
-      max-width: min(21rem, 64%);
-    min-height: 100%;
-    background: linear-gradient(90deg, rgba(244, 245, 241, 0.98), rgba(244, 245, 241, 0.78) 74%, transparent);
-  }
-
-  .standard-cell--02 .standard-cell__media {
-    width: 47%;
-  }
-
-  .standard-cell--03 .standard-cell__content {
-    max-width: 31rem;
-    min-height: 100%;
-    background: linear-gradient(90deg, rgba(244, 245, 241, 0.98), rgba(244, 245, 241, 0.8) 74%, transparent);
-  }
-
-  .standard-cell--03 .standard-cell__media {
-    width: 61%;
-  }
-
-  .standard-cell--04 .standard-cell__media,
-  .standard-cell--05 .standard-cell__media {
-    width: 100%;
-    height: 60%;
-    opacity: 0.82;
-  }
-
-  .standard-cell--04 .standard-cell__content,
-  .standard-cell--05 .standard-cell__content {
-    min-height: 100%;
-    align-content: start;
-    background: linear-gradient(180deg, rgba(244, 245, 241, 0.98), rgba(244, 245, 241, 0.9) 54%, rgba(244, 245, 241, 0.34) 78%, transparent);
-  }
-
-  .standard-cell--06 .standard-cell__media,
-  .standard-cell--07 .standard-cell__media {
-    width: 54%;
-    height: 100%;
-    opacity: 0.9;
-  }
-
-  .standard-cell--06 .standard-cell__content,
-  .standard-cell--07 .standard-cell__content {
-    min-height: 100%;
-    max-width: min(20rem, 62%);
-    align-content: start;
-    background: linear-gradient(90deg, rgba(244, 245, 241, 0.98), rgba(244, 245, 241, 0.8) 74%, transparent);
-  }
-
-  .standard-cell--07 {
-    background:
-      linear-gradient(105deg, rgba(93, 58, 196, 0.04), transparent 22%),
-      linear-gradient(135deg, rgba(251, 250, 246, 0.58), rgba(236, 234, 226, 0.46)),
-      var(--priv-panel-soft);
-  }
-
-  .standard-cell--07::after {
-    display: none;
-  }
-
-  .standard-cell--07 .standard-cell__media::after {
-    background:
-      linear-gradient(90deg, rgba(244, 245, 241, 0.66), rgba(244, 245, 241, 0.16) 42%, transparent 68%),
-      linear-gradient(180deg, rgba(17, 24, 39, 0), rgba(17, 24, 39, 0.045));
-  }
-
-  .standard-cell--06 .standard-cell__media::after {
-    background:
-      linear-gradient(90deg, rgba(244, 245, 241, 0.64), rgba(244, 245, 241, 0.14) 42%, transparent 68%),
-      linear-gradient(180deg, rgba(17, 24, 39, 0), rgba(17, 24, 39, 0.045));
-  }
-
-  .standard-cell--06 .standard-cell__media img {
-    object-position: 44% 50%;
-    filter: saturate(0.9) contrast(1.02) brightness(1.035);
-  }
-
-  .standard-cell--07 .standard-cell__media img {
-    object-position: 38% 56%;
-    filter: saturate(0.9) contrast(1.04) brightness(1.01);
+  .standards-strip:nth-child(7) img {
+    object-position: 54% 54%;
   }
 
   @media (max-width: 1180px) {
-    .privileges-frame {
-      grid-template-columns: 1fr;
-      width: min(100%, 980px);
+    .privileges-section {
+      --standard-row: clamp(5.6rem, 7.5vw, 6.65rem);
     }
 
-    .privileges-intro {
-      min-height: 0;
-      border-right: 1px solid var(--priv-line-soft);
+    .standards-board {
+      grid-template-columns:
+        minmax(20rem, 0.38fr)
+        clamp(1.35rem, 1.9vw, 2.15rem)
+        minmax(20rem, 0.38fr)
+        minmax(13rem, 0.24fr);
+    }
+
+    .standards-row {
+      padding-inline: clamp(1rem, 1.65vw, 1.55rem);
+    }
+  }
+
+  @media (max-width: 920px) {
+    .standards-board {
+      grid-template-areas:
+        "manifest manifest"
+        "strips strips"
+        "register register";
+      grid-template-columns: 1fr;
+      border-top: 0;
       border-bottom: 0;
     }
 
-    .privileges-intro h2 {
-      max-width: 100%;
+    .standards-manifest {
+      min-height: 0;
+      padding: 0;
+      border-right: 0;
     }
 
-    .privileges-board {
-      border-top: 0;
+    .standards-notation {
+      display: none;
     }
 
+    .standards-board::before {
+      display: none;
+    }
+
+    .standards-strips {
+      grid-template-columns: repeat(7, minmax(8rem, 1fr));
+      grid-template-rows: none;
+      gap: 1px;
+      margin-top: clamp(2rem, 5vw, 2.9rem);
+      overflow-x: auto;
+      border-top: 1px solid var(--priv-line-strong);
+      border-bottom: 1px solid var(--priv-line-strong);
+      scrollbar-width: none;
+    }
+
+    .standards-strips::-webkit-scrollbar {
+      display: none;
+    }
+
+    .standards-strip {
+      aspect-ratio: 1.55;
+      min-height: 0;
+      border-bottom: 0;
+    }
+
+    .standards-register {
+      margin-top: clamp(2.2rem, 5.4vw, 3.05rem);
+      border-top: 1px solid var(--priv-line-strong);
+      border-right: 0;
+      border-bottom: 1px solid var(--priv-line-strong);
+    }
   }
 
-  @media (max-width: 760px) {
-    .privileges-section {
-      background:
-        linear-gradient(90deg, rgba(17, 24, 39, 0.012) 1px, transparent 1px) 0 0 / 6.25rem 6.25rem,
-        linear-gradient(180deg, rgba(17, 24, 39, 0.011) 1px, transparent 1px) 0 0 / 6.25rem 6.25rem,
-        var(--priv-bg);
+  @media (max-width: 860px) {
+    .privileges-shell {
+      padding: 4.25rem 1rem 4.6rem;
     }
 
-    .privileges-frame {
-      padding: 3.8rem 0.95rem 4rem;
+    .privileges-label {
+      grid-template-columns: 42px auto;
+      gap: 0.85rem;
     }
 
-    .privileges-intro,
-    .privileges-board {
-      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.72) inset;
+    .privileges-label__rule {
+      width: 42px;
     }
 
-    .privileges-intro {
-      padding: 1.35rem;
-      min-height: 0;
+    .standards-heading {
+      gap: 1.3rem;
+      margin-top: 1.45rem;
     }
 
-    .privileges-intro::before {
-      right: 1.35rem;
-      bottom: 5.2rem;
-      width: 44%;
-      opacity: 0.18;
-    }
-
-    .privileges-intro::after {
-      left: 1.35rem;
-      right: 1.35rem;
-      bottom: 1.35rem;
-    }
-
-    .privileges-intro__copy {
-      margin-top: 1.85rem;
-    }
-
-    .privileges-intro h2 {
+    .privileges-title {
       max-width: 100%;
-      font-size: clamp(1.78rem, 7vw, 2.18rem);
-      line-height: 0.98;
-      letter-spacing: -0.018em;
+      font-size: clamp(2.04rem, 9.6vw, 3.08rem);
+      line-height: 1;
+      letter-spacing: -0.016em;
+      overflow-wrap: break-word;
     }
 
-    .privileges-intro__text {
-      gap: 0.76rem;
-      margin-top: 1.35rem;
+    .privileges-lead {
+      gap: 0.72rem;
       padding-top: 1.08rem;
-      max-width: 28rem;
     }
 
-    .privileges-intro__text p {
-      font-size: 0.92rem;
+    .privileges-lead p {
+      font-size: 0.94rem;
       line-height: 1.58;
     }
 
-    .privileges-system {
-      margin-top: 2.4rem;
+    .standards-row {
+      grid-template-columns: 3.65rem minmax(0, 1fr);
+      gap: 0.72rem;
+      min-height: auto;
+      padding: 1.15rem 0;
     }
 
-    .privileges-board {
-      padding: 0.55rem;
+    .standards-row__number {
+      font-size: clamp(1.25rem, 5.8vw, 1.8rem);
+      line-height: 0.95;
     }
 
-    .privileges-wall {
-      grid-template-columns: 1fr;
-      grid-template-rows: none;
-      grid-auto-rows: auto;
+    .standards-row__content {
+      gap: 0.48rem;
     }
 
-    .standard-cell,
-    .standard-cell--01,
-    .standard-cell--02,
-    .standard-cell--03,
-    .standard-cell--04,
-    .standard-cell--05,
-    .standard-cell--06,
-    .standard-cell--07 {
-      grid-column: auto;
-      grid-row: auto;
-      min-height: 9.4rem;
+    .standards-row h3 {
+      font-size: clamp(0.98rem, 4vw, 1.12rem);
+      line-height: 1.13;
+      overflow-wrap: break-word;
     }
 
-    .standard-cell__content,
-    .standard-cell--01 .standard-cell__content,
-    .standard-cell--02 .standard-cell__content,
-    .standard-cell--03 .standard-cell__content,
-    .standard-cell--07 .standard-cell__content {
-      max-width: calc(64% - 0.25rem);
-      padding: 1rem;
+    .standards-row p {
+      max-width: 100%;
+      font-size: 0.93rem;
+      line-height: 1.54;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .privileges-shell {
+      padding-inline: 0.9rem;
     }
 
-    .standard-cell h3 {
-      max-width: 18ch;
-      font-size: 0.92rem;
-      line-height: 1.1;
+    .standards-strips {
+      grid-template-columns: repeat(7, minmax(7.4rem, 1fr));
     }
 
-    .standard-cell p {
-      max-width: 25ch;
-      font-size: 0.8rem;
-      line-height: 1.45;
-    }
-
-    .standard-cell__media,
-    .standard-cell--03 .standard-cell__media,
-    .standard-cell--04 .standard-cell__media,
-    .standard-cell--05 .standard-cell__media,
-    .standard-cell--06 .standard-cell__media,
-    .standard-cell--07 .standard-cell__media {
-      width: 40%;
-      height: 100%;
-      opacity: 0.66;
-    }
-
-    .standard-cell--04 .standard-cell__content,
-    .standard-cell--05 .standard-cell__content,
-    .standard-cell--06 .standard-cell__content,
-    .standard-cell--07 .standard-cell__content {
-      min-height: 9.4rem;
-      align-content: start;
-      background: linear-gradient(90deg, rgba(244, 245, 241, 0.98), rgba(244, 245, 241, 0.82) 74%, transparent);
+    .standards-row {
+      grid-template-columns: 3.3rem minmax(0, 1fr);
     }
   }
 </style>
