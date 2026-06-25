@@ -1,5 +1,6 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import BrandLayer from "@sections/homepage/BrandLayer.astro";
 import HomeHeader from "@sections/homepage/HomeHeader.astro";
 import HomeHero from "@sections/homepage/HomeHero.astro";
 import HomeProjects from "@sections/homepage/HomeProjects.astro";
@@ -11,6 +12,7 @@ import SiteFooter from "@components/layout/SiteFooter.astro";
 ---
 
 <Layout>
+  <BrandLayer />
   <HomeHeader />
   <main id="main" class="homepage-flow overflow-x-hidden">
     <HomeHero />

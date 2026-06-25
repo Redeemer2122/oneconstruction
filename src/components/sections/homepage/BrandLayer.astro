@@ -1,0 +1,235 @@
+<div class="brand-layer" data-brand-layer aria-hidden="true">
+  <div class="brand-layer__surface">
+    <img
+      src="/img/branding/one-logo-metal.png"
+      alt=""
+      class="brand-layer__logo"
+      decoding="async"
+      fetchpriority="high"
+    />
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    const layer = document.querySelector("[data-brand-layer]");
+    if (!layer) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let isExiting = false;
+    const originalHtmlScrollbarGutter = document.documentElement.style.scrollbarGutter;
+    const originalHtmlOverflow = document.documentElement.style.overflow;
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalHtmlOverscroll = document.documentElement.style.overscrollBehavior;
+    const originalBodyOverscroll = document.body.style.overscrollBehavior;
+    const lenis = window.lenis;
+    const hasLenis = Boolean(lenis?.stop && lenis?.start);
+
+    layer.classList.add("is-controlled");
+    window.scrollTo(0, 0);
+    document.documentElement.style.scrollbarGutter = "stable";
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overscrollBehavior = "none";
+    document.body.style.overscrollBehavior = "none";
+    if (hasLenis) lenis.stop();
+
+    const finish = () => {
+      layer.setAttribute("hidden", "");
+      layer.classList.remove("is-exiting");
+      layer.style.pointerEvents = "none";
+      cleanup();
+      document.documentElement.style.scrollbarGutter = originalHtmlScrollbarGutter || "stable";
+      document.documentElement.style.overflow = originalHtmlOverflow;
+      document.body.style.overflow = originalBodyOverflow;
+      document.documentElement.style.overscrollBehavior = originalHtmlOverscroll;
+      document.body.style.overscrollBehavior = originalBodyOverscroll;
+      if (hasLenis) lenis.start();
+    };
+
+    const exit = () => {
+      if (isExiting) return;
+      isExiting = true;
+
+      if (reduceMotion) {
+        finish();
+        return;
+      }
+
+      layer.classList.add("is-exiting");
+    };
+
+    const swallowEvent = (event) => {
+      if (event.cancelable) event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation?.();
+    };
+
+    const onIntent = (event) => {
+      swallowEvent(event);
+      exit();
+    };
+
+    const onKeyDown = (event) => {
+      const keys = ["Space", "PageDown", "PageUp", "ArrowDown", "ArrowUp", "Home", "End"];
+      if (!keys.includes(event.code)) return;
+      swallowEvent(event);
+      exit();
+    };
+
+    const cleanup = () => {
+      window.removeEventListener("wheel", onIntent, true);
+      window.removeEventListener("touchmove", onIntent, true);
+      window.removeEventListener("touchend", onIntent, true);
+      layer.removeEventListener("wheel", onIntent, true);
+      layer.removeEventListener("touchmove", onIntent, true);
+      layer.removeEventListener("touchend", onIntent, true);
+      window.removeEventListener("keydown", onKeyDown, true);
+      layer.removeEventListener("transitionend", onTransitionEnd);
+    };
+
+    const onTransitionEnd = (event) => {
+      if (event.target === layer && event.propertyName === "transform") finish();
+    };
+
+    if (reduceMotion) {
+      window.setTimeout(finish, 350);
+      return;
+    }
+
+    window.addEventListener("wheel", onIntent, { capture: true, passive: false });
+    window.addEventListener("touchmove", onIntent, { capture: true, passive: false });
+    window.addEventListener("touchend", onIntent, { capture: true, passive: false });
+    layer.addEventListener("wheel", onIntent, { capture: true, passive: false });
+    layer.addEventListener("touchmove", onIntent, { capture: true, passive: false });
+    layer.addEventListener("touchend", onIntent, { capture: true, passive: false });
+    window.addEventListener("keydown", onKeyDown, { capture: true });
+    layer.addEventListener("transitionend", onTransitionEnd);
+  })();
+</script>
+
+<style>
+  .brand-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 120;
+    min-height: 100svh;
+    min-height: 100dvh;
+    overflow: hidden;
+    background-color: #f6f2ea;
+    background-image:
+      radial-gradient(circle at 50% 46%, rgba(255, 255, 255, 0.64), rgba(255, 255, 255, 0) 38rem),
+      radial-gradient(circle at 24% 22%, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0) 28rem),
+      linear-gradient(135deg, #fbfaf7 0%, #f5f1e8 48%, #f8f5ee 100%);
+    color: #0f172a;
+    pointer-events: auto;
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+    transition:
+      transform 1050ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 850ms linear,
+      visibility 0ms linear 1050ms;
+    animation: brand-layer-fallback 900ms cubic-bezier(0.22, 1, 0.36, 1) 2300ms forwards;
+    will-change: transform, opacity;
+  }
+
+  .brand-layer::before,
+  .brand-layer::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+  }
+
+  .brand-layer::before {
+    opacity: 0.34;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0), rgba(120, 108, 88, 0.045) 74%, rgba(72, 61, 46, 0.075) 100%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(237, 231, 219, 0.12));
+  }
+
+  .brand-layer::after {
+    opacity: 0.028;
+    background-image:
+      repeating-radial-gradient(circle at 17% 23%, rgba(15, 23, 42, 0.34) 0 0.45px, transparent 0.45px 3px);
+    mix-blend-mode: multiply;
+  }
+
+  .brand-layer.is-controlled {
+    animation: none;
+  }
+
+  .brand-layer.is-exiting {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate3d(0, -100%, 0);
+    visibility: hidden;
+  }
+
+  .brand-layer__surface {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: clamp(1.5rem, 5vw, 5rem);
+  }
+
+  .brand-layer__surface::after {
+    display: none;
+  }
+
+  .brand-layer__logo {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: clamp(280px, 42vw, 760px);
+    max-width: calc(100vw - 3rem);
+    height: auto;
+    opacity: 0;
+    filter: blur(4px);
+    transform: scale(1.02);
+    animation: brand-logo-reveal 1050ms cubic-bezier(0.22, 1, 0.36, 1) 120ms forwards;
+  }
+
+  @keyframes brand-logo-reveal {
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: scale(1);
+    }
+  }
+
+  @keyframes brand-layer-fallback {
+    to {
+      opacity: 0;
+      pointer-events: none;
+      transform: translate3d(0, -100%, 0);
+      visibility: hidden;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .brand-layer__logo {
+      width: clamp(220px, 72vw, 310px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .brand-layer {
+      transition: none;
+      animation: brand-layer-fallback 1ms linear 350ms forwards;
+      will-change: auto;
+    }
+
+    .brand-layer.is-controlled {
+      animation: none;
+    }
+
+    .brand-layer__logo {
+      opacity: 1;
+      filter: none;
+      transform: none;
+      animation: none;
+    }
+  }
+</style>
