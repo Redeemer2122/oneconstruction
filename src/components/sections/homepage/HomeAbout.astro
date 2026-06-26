@@ -58,7 +58,7 @@ const optimizedImageModules = import.meta.glob<ImageMetadata>(
   "../../../../public/img/**/*.{jpg,jpeg,png,webp}",
   { eager: true, import: "default" }
 );
-const aboutImage = "/img/about/about-main.jpg";
+const aboutImage = "/img/about/about-main.webp";
 const optimizedAboutImage = optimizedImageModules[`../../../../public${aboutImage}`];
 ---
 
