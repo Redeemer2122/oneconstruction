@@ -5,7 +5,6 @@ import "photoswipe/style.css";
 import {
   ChevronLeft,
   ChevronRight,
-  Expand,
   Leaf,
   ShieldCheck,
   Sparkles,
@@ -143,28 +142,29 @@ const sectionLabel = section.label;
                     <span class="gallery-count__divider" aria-hidden="true">/</span>
                     <span class="gallery-count__total">{counterTotal}</span>
                   </span>
-                  <span class="gallery-main__pill" data-gallery-main-label>{initial.category}</span>
-                  <span class="gallery-main__affordance" aria-hidden="true">
-                    <Expand size={16} stroke-width={1.45} />
-                    {section.openAffordanceLabel && <span>{section.openAffordanceLabel}</span>}
-                  </span>
                 </button>
 
+                <button
+                  class="gallery-main-nav gallery-main-nav--prev"
+                  type="button"
+                  data-gallery-prev
+                  aria-label={section.previousLabel}
+                >
+                  <ChevronLeft aria-hidden="true" size={22} stroke-width={1.55} />
+                </button>
+
+                <button
+                  class="gallery-main-nav gallery-main-nav--next"
+                  type="button"
+                  data-gallery-next
+                  aria-label={section.nextLabel}
+                >
+                  <ChevronRight aria-hidden="true" size={24} stroke-width={1.55} />
+                </button>
               </div>
             </div>
 
             <div class="gallery-rail-shell" aria-label={section.thumbnailRailLabel}>
-              <button
-                class="rail-nav rail-nav--prev"
-                type="button"
-                data-gallery-rail-prev
-                aria-label={section.previousLabel}
-                aria-disabled="true"
-                disabled
-              >
-                <ChevronLeft aria-hidden="true" size={17} stroke-width={1.55} />
-              </button>
-
               <div class="gallery-rail" data-gallery-rail>
                 {gallery.map((item, index) => {
                   const optimizedThumbImage = getOptimizedImage(item.src);
@@ -204,15 +204,6 @@ const sectionLabel = section.label;
                   );
                 })}
               </div>
-
-              <button
-                class="rail-nav rail-nav--next"
-                type="button"
-                data-gallery-rail-next
-                aria-label={section.nextLabel}
-              >
-                <ChevronRight aria-hidden="true" size={19} stroke-width={1.55} />
-              </button>
             </div>
           </div>
         </div>
@@ -247,18 +238,15 @@ const sectionLabel = section.label;
 
       const payload = galleryRoot.querySelector("[data-gallery-payload]");
       const openButtons = Array.from(galleryRoot.querySelectorAll("[data-gallery-open]"));
+      const previousButtons = Array.from(galleryRoot.querySelectorAll("[data-gallery-prev]"));
+      const nextButtons = Array.from(galleryRoot.querySelectorAll("[data-gallery-next]"));
       const mainImage = galleryRoot.querySelector("[data-gallery-main-image]");
-      const mainLabel = galleryRoot.querySelector("[data-gallery-main-label]");
       const currentCounter = galleryRoot.querySelector("[data-gallery-current]");
-      const rail = galleryRoot.querySelector("[data-gallery-rail]");
-      const railPrevious = galleryRoot.querySelector("[data-gallery-rail-prev]");
-      const railNext = galleryRoot.querySelector("[data-gallery-rail-next]");
       const thumbButtons = Array.from(galleryRoot.querySelectorAll("[data-gallery-thumb]"));
 
       if (
         !(payload instanceof HTMLScriptElement) ||
         !(mainImage instanceof HTMLImageElement) ||
-        !(mainLabel instanceof HTMLElement) ||
         !(currentCounter instanceof HTMLElement)
       ) {
         return;
@@ -273,31 +261,6 @@ const sectionLabel = section.label;
       galleryRoot.dataset.galleryReady = "true";
       let currentIndex = Number(galleryRoot.dataset.galleryInitialIndex || 0);
 
-      const updateRailControls = () => {
-        if (
-          !(rail instanceof HTMLElement) ||
-          !(railPrevious instanceof HTMLButtonElement) ||
-          !(railNext instanceof HTMLButtonElement)
-        ) {
-          return;
-        }
-
-        const maxScroll = rail.scrollWidth - rail.clientWidth;
-        const isAtStart = rail.scrollLeft <= 1;
-        const isAtEnd = maxScroll <= 1 || rail.scrollLeft >= maxScroll - 1;
-
-        railPrevious.disabled = isAtStart;
-        railNext.disabled = isAtEnd;
-        railPrevious.setAttribute("aria-disabled", String(isAtStart));
-        railNext.setAttribute("aria-disabled", String(isAtEnd));
-      };
-
-      const queueRailControlsUpdate = (delay = 0) => {
-        window.setTimeout(() => {
-          window.requestAnimationFrame(updateRailControls);
-        }, delay);
-      };
-
       const syncRailPosition = (behavior: ScrollBehavior = "smooth") => {
         const activeThumb = thumbButtons[currentIndex];
 
@@ -307,8 +270,6 @@ const sectionLabel = section.label;
             block: "nearest",
             inline: "center",
           });
-
-          queueRailControlsUpdate(behavior === "smooth" ? 360 : 0);
         }
       };
 
@@ -324,7 +285,6 @@ const sectionLabel = section.label;
         mainImage.width = item.width;
         mainImage.height = item.height;
         mainImage.alt = item.alt;
-        mainLabel.textContent = item.category || item.label || "";
         currentCounter.textContent = formatGalleryNumber(currentIndex + 1);
 
         thumbButtons.forEach((button, index) => {
@@ -408,28 +368,13 @@ const sectionLabel = section.label;
         });
       });
 
-      const scrollRail = (direction: number) => {
-        if (rail instanceof HTMLElement) {
-          rail.scrollBy({
-            left: direction * Math.max(rail.clientWidth * 0.72, 220),
-            behavior: "smooth",
-          });
+      previousButtons.forEach((button) => {
+        button.addEventListener("click", () => renderCurrentImage(currentIndex - 1));
+      });
 
-          queueRailControlsUpdate(360);
-        }
-      };
-
-      railPrevious?.addEventListener("click", () => scrollRail(-1));
-      railNext?.addEventListener("click", () => scrollRail(1));
-      rail?.addEventListener("scroll", updateRailControls, { passive: true });
-      window.addEventListener("resize", updateRailControls, { passive: true });
-
-      if (rail instanceof HTMLElement && "ResizeObserver" in window) {
-        const railObserver = new ResizeObserver(updateRailControls);
-        railObserver.observe(rail);
-      }
-
-      updateRailControls();
+      nextButtons.forEach((button) => {
+        button.addEventListener("click", () => renderCurrentImage(currentIndex + 1));
+      });
     });
   };
 
@@ -577,7 +522,7 @@ const sectionLabel = section.label;
     border: 1px solid rgba(16, 37, 76, 0.16);
     border-radius: 2px;
     color: inherit;
-    cursor: zoom-in;
+    cursor: pointer;
     display: block;
     height: clamp(420px, 34vw, 580px);
     max-height: 580px;
@@ -612,56 +557,58 @@ const sectionLabel = section.label;
     position: absolute;
   }
 
-  .gallery-main__pill {
+  .gallery-main-nav {
     align-items: center;
-    background: rgba(15, 19, 24, 0.38);
-    border: 1px solid rgba(255, 255, 255, 0.68);
+    appearance: none;
+    background: rgba(250, 247, 239, 0.78);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.46);
     border-radius: 2px;
-    color: #fffaf0;
-    display: inline-flex;
-    font-size: 0.86rem;
-    font-weight: 650;
-    left: 1.25rem;
-    line-height: 1;
-    min-height: 2.5rem;
-    padding: 0.62rem 1.22rem;
-    position: absolute;
-    top: 1.25rem;
-  }
-
-  .gallery-main__affordance {
-    align-items: center;
-    background: rgba(250, 247, 239, 0.82);
-    border: 1px solid rgba(255, 255, 255, 0.48);
-    bottom: 1.15rem;
+    box-shadow: 0 18px 46px rgba(16, 37, 76, 0.16);
     color: #10254c;
-    display: inline-flex;
-    font-size: 0.76rem;
-    font-weight: 650;
-    gap: 0.55rem;
-    letter-spacing: 0.02em;
-    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    height: 3.2rem;
+    justify-content: center;
     opacity: 0;
-    padding: 0.72rem 0.86rem;
+    padding: 0;
     pointer-events: none;
     position: absolute;
-    right: 1.15rem;
-    transform: translateY(0.25rem);
+    top: 50%;
+    transform: translateY(-50%) scale(0.98);
     transition:
+      background-color 220ms ease,
+      border-color 220ms ease,
+      color 220ms ease,
       opacity 220ms ease,
       transform 220ms ease;
+    width: 3.2rem;
+    z-index: 12;
   }
 
-  .gallery-main:hover .gallery-main__affordance,
-  .gallery-main:focus-visible .gallery-main__affordance {
+  .gallery-main-nav--prev {
+    left: clamp(0.85rem, 1.4vw, 1.35rem);
+  }
+
+  .gallery-main-nav--next {
+    right: clamp(0.85rem, 1.4vw, 1.35rem);
+  }
+
+  .gallery-main-frame:hover .gallery-main-nav,
+  .gallery-main-nav:focus-visible {
     opacity: 1;
-    transform: translateY(0);
+    pointer-events: auto;
+    transform: translateY(-50%) scale(1);
   }
 
-  .rail-nav:hover {
+  .gallery-main-nav:hover {
     background: #10254c;
     border-color: #10254c;
     color: #fffaf0;
+  }
+
+  .gallery-main-nav:active {
+    transform: translateY(-50%) scale(0.96);
   }
 
   .gallery-count {
@@ -697,7 +644,7 @@ const sectionLabel = section.label;
     align-items: start;
     display: grid;
     gap: clamp(0.62rem, 0.95vw, 0.9rem);
-    grid-template-columns: 2.65rem minmax(0, 1fr) 2.65rem;
+    grid-template-columns: minmax(0, 1fr);
     margin-top: clamp(1.25rem, 2.2vw, 1.9rem);
     max-width: 100%;
   }
@@ -784,53 +731,9 @@ const sectionLabel = section.label;
     opacity: 1;
   }
 
-  .rail-nav {
-    align-items: center;
-    appearance: none;
-    background: rgba(250, 247, 239, 0.82);
-    border: 1px solid rgba(16, 37, 76, 0.12);
-    border-radius: 2px;
-    color: #10254c;
-    cursor: pointer;
-    display: inline-flex;
-    height: 2.65rem;
-    justify-content: center;
-    margin-top: 0.32rem;
-    padding: 0;
-    transition:
-      background-color 220ms ease,
-      border-color 220ms ease,
-      color 220ms ease,
-      transform 220ms ease;
-    width: 2.65rem;
-  }
-
-  .rail-nav:disabled {
-    background: rgba(250, 247, 239, 0.48);
-    border-color: rgba(16, 37, 76, 0.08);
-    color: rgba(16, 37, 76, 0.24);
-    cursor: not-allowed;
-    opacity: 0.46;
-  }
-
-  .rail-nav:disabled:hover {
-    background: rgba(250, 247, 239, 0.48);
-    border-color: rgba(16, 37, 76, 0.08);
-    color: rgba(16, 37, 76, 0.24);
-    transform: none;
-  }
-
-  .rail-nav:disabled:active {
-    transform: none;
-  }
-
-  .rail-nav:active {
-    transform: scale(0.97);
-  }
-
   .gallery-main:focus-visible,
   .gallery-thumb:focus-visible,
-  .rail-nav:focus-visible {
+  .gallery-main-nav:focus-visible {
     outline: 2px solid #7e70bd;
     outline-offset: 4px;
   }
@@ -928,21 +831,8 @@ const sectionLabel = section.label;
       border-radius: 2px;
     }
 
-    .gallery-main__pill {
-      font-size: 0.72rem;
-      left: 0.8rem;
-      min-height: 2rem;
-      padding: 0.48rem 0.86rem;
-      top: 0.8rem;
-    }
-
-    .gallery-main__affordance {
-      bottom: 0.78rem;
-      font-size: 0.68rem;
-      opacity: 0.62;
-      padding: 0.58rem 0.68rem;
-      right: 0.78rem;
-      transform: none;
+    .gallery-main-nav {
+      display: none;
     }
 
     .gallery-count {
@@ -962,10 +852,6 @@ const sectionLabel = section.label;
 
     .gallery-thumb__label {
       font-size: 0.78rem;
-    }
-
-    .rail-nav {
-      display: none;
     }
 
     :global(.pswp__custom-caption) {
