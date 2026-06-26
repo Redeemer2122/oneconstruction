@@ -145,6 +145,9 @@ const advantages = privileges.map((item) => ({
     --priv-line: rgba(17, 27, 47, 0.14);
     --priv-line-strong: rgba(17, 27, 47, 0.22);
     --priv-violet: #4e28d8;
+    --priv-violet-active: #5a31e6;
+    --priv-ease: cubic-bezier(.22,.61,.36,1);
+    --standards-gutter: clamp(2.05rem, 3vw, 3.65rem);
     --standard-row: clamp(6.7rem, 7.85vw, 8rem);
     position: relative;
     overflow-x: clip;
@@ -165,7 +168,7 @@ const advantages = privileges.map((item) => ({
     grid-template-areas: "manifest gutter register strips";
     grid-template-columns:
       minmax(25rem, 0.41fr)
-      clamp(2.05rem, 3vw, 3.65rem)
+      var(--standards-gutter)
       minmax(22rem, 0.33fr)
       minmax(16rem, 0.26fr);
     align-items: stretch;
@@ -282,6 +285,7 @@ const advantages = privileges.map((item) => ({
   }
 
   .standards-row {
+    position: relative;
     display: grid;
     grid-template-columns: clamp(2.7rem, 3.7vw, 4.1rem) minmax(0, 1fr);
     gap: clamp(1.05rem, 1.5vw, 1.65rem);
@@ -291,8 +295,23 @@ const advantages = privileges.map((item) => ({
     border-bottom: 1px solid var(--priv-line);
   }
 
+  .standards-row::before {
+    position: absolute;
+    bottom: -1px;
+    left: calc(-1 * var(--standards-gutter));
+    width: var(--standards-gutter);
+    height: 1px;
+    content: "";
+    pointer-events: none;
+    background: var(--priv-line);
+  }
+
   .standards-row:last-child {
     border-bottom: 0;
+  }
+
+  .standards-row:last-child::before {
+    content: none;
   }
 
   .standards-row__number {
@@ -367,6 +386,97 @@ const advantages = privileges.map((item) => ({
     filter: saturate(0.86) contrast(1.04) brightness(1.02);
   }
 
+  @media (hover: hover) and (pointer: fine) {
+    .standards-row,
+    .standards-row::before,
+    .standards-row__number,
+    .standards-row h3,
+    .standards-strip,
+    .standards-strip img {
+      transition-duration: 320ms;
+      transition-timing-function: var(--priv-ease);
+    }
+
+    .standards-row {
+      transition-property: border-color;
+    }
+
+    .standards-row::before {
+      transition-property: background-color;
+    }
+
+    .standards-row__number,
+    .standards-row h3 {
+      transition-property: color;
+    }
+
+    .standards-strip {
+      transition-property: border-color;
+    }
+
+    .standards-strip img {
+      transition-property: filter, transform;
+      transform: scale(1);
+    }
+
+    .standards-row:hover {
+      border-bottom-color: var(--priv-line-strong);
+    }
+
+    .standards-row:hover::before {
+      background-color: var(--priv-line-strong);
+    }
+
+    .standards-row:hover .standards-row__number {
+      color: color-mix(in srgb, var(--priv-violet-active) 86%, #6d7480);
+    }
+
+    .standards-row:hover h3 {
+      color: #0d1729;
+    }
+
+    .standards-board:has(.standards-row:nth-child(1):hover) .standards-strip:nth-child(1),
+    .standards-board:has(.standards-row:nth-child(2):hover) .standards-strip:nth-child(2),
+    .standards-board:has(.standards-row:nth-child(3):hover) .standards-strip:nth-child(3),
+    .standards-board:has(.standards-row:nth-child(4):hover) .standards-strip:nth-child(4),
+    .standards-board:has(.standards-row:nth-child(5):hover) .standards-strip:nth-child(5),
+    .standards-board:has(.standards-row:nth-child(6):hover) .standards-strip:nth-child(6) {
+      border-bottom-color: color-mix(in srgb, var(--priv-bg) 82%, var(--priv-line-strong));
+    }
+
+    .standards-board:has(.standards-row:nth-child(1):hover) .standards-strip:nth-child(1) img,
+    .standards-board:has(.standards-row:nth-child(2):hover) .standards-strip:nth-child(2) img,
+    .standards-board:has(.standards-row:nth-child(3):hover) .standards-strip:nth-child(3) img,
+    .standards-board:has(.standards-row:nth-child(4):hover) .standards-strip:nth-child(4) img,
+    .standards-board:has(.standards-row:nth-child(5):hover) .standards-strip:nth-child(5) img,
+    .standards-board:has(.standards-row:nth-child(6):hover) .standards-strip:nth-child(6) img,
+    .standards-board:has(.standards-row:nth-child(7):hover) .standards-strip:nth-child(7) img {
+      filter: saturate(0.9) contrast(1.055) brightness(1.035);
+      transform: scale(1.012);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .standards-row,
+      .standards-row::before,
+      .standards-row__number,
+      .standards-row h3,
+      .standards-strip,
+      .standards-strip img {
+        transition-duration: 1ms;
+      }
+
+      .standards-board:has(.standards-row:nth-child(1):hover) .standards-strip:nth-child(1) img,
+      .standards-board:has(.standards-row:nth-child(2):hover) .standards-strip:nth-child(2) img,
+      .standards-board:has(.standards-row:nth-child(3):hover) .standards-strip:nth-child(3) img,
+      .standards-board:has(.standards-row:nth-child(4):hover) .standards-strip:nth-child(4) img,
+      .standards-board:has(.standards-row:nth-child(5):hover) .standards-strip:nth-child(5) img,
+      .standards-board:has(.standards-row:nth-child(6):hover) .standards-strip:nth-child(6) img,
+      .standards-board:has(.standards-row:nth-child(7):hover) .standards-strip:nth-child(7) img {
+        transform: none;
+      }
+    }
+  }
+
   .standards-strip:nth-child(1) img {
     object-position: 52% 36%;
   }
@@ -397,13 +507,14 @@ const advantages = privileges.map((item) => ({
 
   @media (max-width: 1180px) {
     .privileges-section {
+      --standards-gutter: clamp(1.5rem, 2.2vw, 2.45rem);
       --standard-row: clamp(5.95rem, 7.9vw, 7rem);
     }
 
     .standards-board {
       grid-template-columns:
         minmax(21.5rem, 0.42fr)
-        clamp(1.5rem, 2.2vw, 2.45rem)
+        var(--standards-gutter)
         minmax(19rem, 0.34fr)
         minmax(12.5rem, 0.24fr);
     }
@@ -436,6 +547,10 @@ const advantages = privileges.map((item) => ({
 
     .standards-board::before {
       display: none;
+    }
+
+    .standards-row::before {
+      content: none;
     }
 
     .standards-strips {
